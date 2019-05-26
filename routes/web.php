@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//purchases
+Route::get('/purchases','PurchasesController@index')->name('purchases');
+
+
+//users
+Route::get('/user-registration','UserRegistrationController@create')->name('user registration');
