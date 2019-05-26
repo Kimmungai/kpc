@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUser;
 
 class UserRegistrationController extends Controller
 {
@@ -14,7 +16,8 @@ class UserRegistrationController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return $users;
     }
 
     /**
@@ -33,9 +36,13 @@ class UserRegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
+        $newUser = User::create($validated);
+        Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
+        return redirect('/');
     }
 
     /**
@@ -44,9 +51,10 @@ class UserRegistrationController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        //
+        $user = User::find($id);
+        return $user;
     }
 
     /**
@@ -55,9 +63,10 @@ class UserRegistrationController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
-        //
+      $user = User::find($id);
+      return $user;
     }
 
     /**

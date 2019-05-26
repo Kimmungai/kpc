@@ -1,11 +1,12 @@
-@extends('layouts.kpc')
+@extends('layouts.app')
 
 @section('content')
 
   <h1>User registration</h1>
 
 
-  <form class="" action="/" method="post">
+  <form class="" action="{{url('/user-registration')}}" method="post" enctype="multipart/form-data">
+    @csrf
 
     @component( 'components.user-reg-form' )
 

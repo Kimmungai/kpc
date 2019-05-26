@@ -15,7 +15,7 @@ class UserRegistrationTest extends TestCase
      */
     public function testUserRegistrationForm()
     {
-        $response = $this->get('/user-registration');
+        $response = $this->get('user-registration/create');
 
         $response->assertSeeTextInOrder(["User registration","Save"]);
 
