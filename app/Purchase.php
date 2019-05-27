@@ -21,8 +21,8 @@ class Purchase extends Model
     $this->hasMany('App\Expense');
   }
 
-  public function Product()
+  /*public function Product()
   {
     $this->hasMany('App\Product');
-  }
+  }*/
 }

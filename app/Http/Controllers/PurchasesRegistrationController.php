@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Purchase;
-use App\Dept;
 use Illuminate\Http\Request;
 
-class PurchasesController extends Controller
+class PurchasesRegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class PurchasesController extends Controller
      */
     public function index()
     {
-        $depts = Dept::all();
-        $purchases = Purchase::all();
-        return view('purchases.index',compact('depts','purchases'));
+        //
     }
 
     /**

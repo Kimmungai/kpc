@@ -15,4 +15,9 @@ class Expense extends Model
     {
       $this->belongsTo('App\Report');
     }
+
+    public function Product()
+    {
+      $this->belongsTo('App\Product');
+    }
 }
