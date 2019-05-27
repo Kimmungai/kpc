@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+
 
 class StoreUser extends FormRequest
 {
@@ -23,13 +25,13 @@ class StoreUser extends FormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'type' => 'required|numeric',
             'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'DOB' => 'required|date|max:255',
-            'email' => 'required|email|unique:users|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.\Request::segment(2),
             'phoneNumber' => 'required|numeric|digits_between:10,15',
             'gender' => 'required|numeric',
             'address' => 'required|max:255',
@@ -39,6 +41,13 @@ class StoreUser extends FormRequest
             'passportImage' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'password' => 'required|min:8|max:255',
         ];
+
+        if( Request::isMethod('PUT') )
+        {
+          $data['password'] = 'nullable|min:8|max:255';
+        }
+
+        return $data;
     }
 
     /**

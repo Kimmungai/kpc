@@ -1,3 +1,7 @@
+@if( count($errors) )
+  <h2 class="red-text">There are some errors, please correct them first.</h2>
+@endif
+
 <div class="form-group">
 <label for="selector1" class="col-sm-2 control-label">User type <span class="red-text">*</span></label>
 <div class="col-sm-8">
@@ -19,7 +23,7 @@
 <label for="focusedinput" class="col-sm-2 control-label">Picture</label>
 <div class="col-sm-8">
 <img src="@if( isset($user) ){{$user->avatar}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
-<input name="avatar" id="avatar" type="file"  onblur="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
+<input name="avatar" id="avatar" type="file"  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
 </div>
 <div class="col-sm-2">
 <p class="help-block red-text" id="avatarHelper">
@@ -83,7 +87,7 @@
 <div class="form-group">
 <label for="focusedinput" class="col-sm-2 control-label">DOB<span class="red-text">*</span></label>
 <div class="col-sm-8">
-<input name="DOB" id="DOB" type="text" class="form-control1" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onblur="validate(this.id,{required:1,min:3,max:255},this.value)"/>
+<input name="DOB" id="DOB" type="text" class="form-control1" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onchange="validate(this.id,{required:1,min:3,max:255},this.value)"/>
 </div>
 <div class="col-sm-2">
 <p class="help-block red-text" id="DOBHelper">
@@ -99,7 +103,7 @@
 <div class="form-group">
 <label for="focusedinput" class="col-sm-2 control-label">Email <span class="red-text">*</span></label>
 <div class="col-sm-8">
-<input name="email" id="email" type="text" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)"/>
+<input name="email" id="email" type="email" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)"/>
 </div>
 <div class="col-sm-2">
 <p class="help-block red-text" id="emailHelper">
@@ -181,7 +185,7 @@
 <label for="focusedinput" class="col-sm-2 control-label">Id Scan</label>
 <div class="col-sm-8">
 <img src="@if( isset($user) ){{$user->idImage}} @endif" alt="" class="img-thumbnail" height="50px" width="50px">
-<input name="idImage" id="idImage" type="file" value=""  onblur="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)"/>
+<input name="idImage" id="idImage" type="file" value=""  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)"/>
 </div>
 <div class="col-sm-2">
 <p class="help-block red-text" id="idImageHelper">
@@ -214,7 +218,7 @@
 <label for="focusedinput" class="col-sm-2 control-label">Passport Scan</label>
 <div class="col-sm-8">
 <img src="@if( isset($user) ){{$user->passportImage}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
-<input name="passportImage" id="passportImage" type="file"   onblur="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)"/>
+<input name="passportImage" id="passportImage" type="file"   onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)"/>
 </div>
 <div class="col-sm-2">
 <p class="help-block red-text" id="passportImageHelper">
@@ -228,7 +232,7 @@
 </div>
 
 <div class="form-group">
-<label for="focusedinput" class="col-sm-2 control-label">Password <span class="red-text">*</span></label>
+<label for="focusedinput" class="col-sm-2 control-label">Password @if( !isset($user) )<span class="red-text">*</span> @endif</label>
 <div class="col-sm-8">
 <input name="password" id="password" type="text" class="form-control1" value="@if( old('password') ) {{old('password')}}  @endif" placeholder="Password..." onblur="validate(this.id,{required:1,min:8,max:255},this.value)" />
 </div>
