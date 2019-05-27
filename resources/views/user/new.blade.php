@@ -15,7 +15,7 @@
 
     @endcomponent
 
-    <button type="button" data-toggle="modal" data-target="#confirmModal">Save</button>
+    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmModal">Save</button>
 
   </form>
 

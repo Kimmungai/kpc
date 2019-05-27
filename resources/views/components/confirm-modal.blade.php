@@ -19,7 +19,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">@if( isset($closeBtn) ) {{$closeBtn}} @else Cancel @endif</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit_form('newUserForm')">@if( isset($saveBtn) ) {{$saveBtn}} @else Procced @endif</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="submit_form('{{$formId}}')">@if( isset($saveBtn) ) {{$saveBtn}} @else Procced @endif</button>
         </div>
       </div>
     </div>

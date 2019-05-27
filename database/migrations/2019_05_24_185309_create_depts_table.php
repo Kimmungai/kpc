@@ -16,7 +16,11 @@ class CreateDeptsTable extends Migration
         Schema::create('depts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('org_id')->unsigned()->index()->nullable();
-
+            $table->string('name')->nullable();
+            $table->tinyInteger('type')->nullable();
+            $table->string('avatar')->nullable();
+            $table->mediumText('address')->nullable();
+            $table->mediumText('deptDetails')->nullable();
             $table->timestamps();
         });
     }

@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
-use App\User;
-use App\Http\Requests\StoreUser;
 
-class UserRegistrationController extends Controller
+use App\Dept;
+use App\Http\Requests\StoreDept;
+
+class DepartmentRegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class UserRegistrationController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return $users;
+        $depts = Dept::all();
+        return $depts;
     }
 
     /**
@@ -28,7 +29,7 @@ class UserRegistrationController extends Controller
      */
     public function create()
     {
-        return view('user.new');
+        return view('dept.new');
     }
 
     /**
@@ -37,12 +38,11 @@ class UserRegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUser $request)
+    public function store(StoreDept $request)
     {
         $validated = $request->validated();
         $validated = $this->uploads($request,$validated);
-        $validated['password'] = Hash::make($validated['password']);
-        $newUser = User::create($validated);
+        $newUser = Dept::create($validated);
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
         return redirect('/');
     }
@@ -50,46 +50,39 @@ class UserRegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Dept  $dept
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, $id)
+    public function show(Dept $dept,$id)
     {
-        $user = User::find($id);
-        return $user;
+      $dept = Dept::find($id);
+      return $dept;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Dept  $dept
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, $id)
+    public function edit(Dept $dept,$id)
     {
-      $user = User::find($id);
-      return view('user.edit',compact('user'));
+      $dept = Dept::find($id);
+      return view('dept.edit',compact('dept'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Dept  $dept
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, User $user, $id)
+    public function update(StoreDept $request, Dept $dept, $id)
     {
       $validated = $request->validated();
       $validated = $this->uploads($request,$validated);
-      if( $request->input('password') != null )
-      {
-        $validated['password'] = Hash::make($validated['password']);
-      }
-      else{
-        unset($validated['password']);
-      }
-      $updatedUser = User::where('id',$id)->update($validated);
+      $updatedDept = Dept::where('id',$id)->update($validated);
       Session::flash('message', env("SAVE_SUCCESS_MSG","Details updated succesfully!"));
       return back();
     }
@@ -97,41 +90,31 @@ class UserRegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Dept  $dept
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user,$id)
+    public function destroy(Dept $dept, $id)
     {
-        $user = User::find($id);
-        $user->delete();
-        Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
-        return redirect('/');
+      $dept = Dept::find($id);
+      $dept->delete();
+      Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
+      return redirect('/');
     }
 
     /**
      * Upload new user files.
      *
-     * @param  \App\User  $user
+     * @param  \App\Dept  $dept
      * @return validated user with image urls
      */
-    private function uploads($request,$userData)
+    private function uploads($request,$deptData)
     {
       if( $request->hasFile('avatar') )
       {
-        $storageLoc = env('AVATAR_STORAGE_LOC','public/users/'.$request->input('type').'/pictures');
-        $userData['avatar'] = $this->handleFileUpload($storageLoc,$request);
+        $storageLoc = env('AVATAR_STORAGE_LOC','public/depts/'.$request->input('type').'/pictures');
+        $deptData['avatar'] = $this->handleFileUpload($storageLoc,$request);
       }
-      if( $request->hasFile('idImage') )
-      {
-        $storageLoc = env('ID_STORAGE_LOC','public/users/'.$request->input('type').'/ids');
-        $userData['idImage'] = $this->handleFileUpload($storageLoc,$request,'idImage');
-      }
-      if( $request->hasFile('passportImage') )
-      {
-        $storageLoc = env('PASSPORT_STORAGE_LOC','public/users/'.$request->input('type').'/passports');
-        $userData['passportImage'] = $this->handleFileUpload($storageLoc,$request,'passportImage');
-      }
-      return $userData;
+      return $deptData;
     }
 
     /*
@@ -144,4 +127,5 @@ class UserRegistrationController extends Controller
       $image->move($storageLoc, $name);
       return asset($storageLoc.'/'.$name);
     }
+
 }

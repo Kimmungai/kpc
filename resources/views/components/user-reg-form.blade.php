@@ -1,6 +1,19 @@
 @if( count($errors) )
   <h2 class="red-text">There are some errors, please correct them first.</h2>
 @endif
+<div class="form-group">
+<label for="selector1" class="col-sm-2 control-label">Organisation<span class="red-text">*</span></label>
+<div class="col-sm-8">
+<select name="org_id" id="org_id" class="form-control1">
+  <option value="1" @if( old('org_id') == 1 || ( isset($user) && $user->org_id == 1 ) ) selected @endif> Kitui Pastoral center </option>
+</select>
+@if ($errors->has('org_id'))
+<span  role="alert" class="red-text">
+    <strong>{{ $errors->first('org_id') }}</strong>
+</span>
+@endif
+</div>
+</div>
 
 <div class="form-group">
 <label for="selector1" class="col-sm-2 control-label">User type <span class="red-text">*</span></label>

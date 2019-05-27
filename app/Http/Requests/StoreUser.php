@@ -27,6 +27,7 @@ class StoreUser extends FormRequest
     {
         $data = [
             'type' => 'required|numeric',
+            'org_id' => 'required|numeric',
             'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
