@@ -78,7 +78,7 @@
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
-              <a href="{{url('/user-registration')}}" class="dropdown-toggle"  aria-expanded="true" title="See all users"><i class="fa fa-users" aria-hidden="true"></i> </a>
+              <a href="{{url('/users')}}" class="dropdown-toggle"  aria-expanded="true" title="See all users"><i class="fa fa-users" aria-hidden="true"></i> </a>
 
             </li>
 
@@ -87,8 +87,11 @@
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
-              <a href="{{url('/dept-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Add new department"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
-
+              @if( Request::is('home') )
+                <a href="{{url('/dept-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Add new department"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+              @elseif( Request::is('user-registration') || Request::is('users') || Request::is('users/*'))
+                <a href="{{url('/user-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Create new user"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+              @endif
             </li>
 
       </ul>

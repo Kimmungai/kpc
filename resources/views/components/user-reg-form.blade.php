@@ -30,6 +30,7 @@
         <option value="1" @if( old('type') == 1 || ( isset($user) && $user->type == 1 ) ) selected @endif>Staff</option>
         <option value="2" @if( old('type') == 2 || ( isset($user) && $user->type == 2 ) ) selected @endif>Customer</option>
         <option value="3" @if( old('type') == 3 || ( isset($user) && $user->type == 3 ) ) selected @endif>Administrator</option>
+        <option value="4" @if( old('type') == 4 || ( isset($user) && $user->type == 4 ) ) selected @endif>Casuals</option>
       </select>
     </div>
   </div>
@@ -222,7 +223,7 @@
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
-        <i class="fa fa-columns"></i>
+        <i class="fas fa-id-card"></i>
       </span>
       <input name="idNo" id="idNo" type="text" class="form-control" value="@if( old('idNo') ) {{old('idNo')}} @elseif( isset($user) ) {{$user->idNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
     </div>
@@ -261,7 +262,7 @@
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
-        <i class="fa fa-book"></i>
+        <i class="fas fa-passport"></i>
       </span>
       <input name="passport" id="passport" type="text" class="form-control" value="@if( old('passport') ) {{old('passport')}} @elseif( isset($user) ) {{$user->passport}} @endif" placeholder="Passport No..." onblur="validate(this.id,{required:0,min:5,max:20},this.value)"/>
     </div>

@@ -15,10 +15,10 @@ class UserRegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type=0)
     {
-        $users = User::all();
-        return $users;
+        if( $type ){ $users = User::where('type',$type)->get(); }else{ $user = User::all(); }
+        return view('user.all',compact('users','type'));
     }
 
     /**

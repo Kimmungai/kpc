@@ -24,6 +24,9 @@ Route::get('/purchases','PurchasesController@index')->name('purchases');
 
 
 //users
+Route::get('users','UserController@users_top')->name('users');
+Route::get('users/{type}','UserRegistrationController@index')->name('usersByType');
+
 Route::resource('user-registration','UserRegistrationController');
 
 //depts
