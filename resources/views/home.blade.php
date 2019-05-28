@@ -4,104 +4,129 @@
 
 		<!-- /inner_content-->
 				<div class="inner_content">
+					<!-- breadcrumbs -->
+	          <div class="w3l_agileits_breadcrumbs">
+	            <div class="w3l_agileits_breadcrumbs_inner">
+	              <ul>
+	                <li><a href="/home">Home</a></li>
+
+	              </ul>
+	            </div>
+	          </div>
+	        <!-- //breadcrumbs -->
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
 					<!-- /departments start-->
           @if( isset($depts) )
-            @foreach( $depts as $dept )
+
 					   <div class="agile_top_w3_grids">
-					          <ul class="ca-menu">
+					       <ul class="ca-menu">
+									@foreach( $depts as $dept )
 
-                    @if ( $dept->name == 'kitchen' )
-                    <li>
-                      <a href="#">
+										@if( strtolower($dept->name) == 'hospitality' )
+										<li>
+										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
+											 <i class="fa fa-hotel" aria-hidden="true"></i>
+											 <div class="ca-content">
+												 <h4 class="ca-main one">26,808</h4>
+												 <h3 class="ca-sub one">{{$dept->name}}</h3>
+											 </div>
+										 </a>
+									 </li>
+ 										@endif
 
-                        <i class="fas fa-utensils" aria-hidden="true"></i>
-                        <div class="ca-content">
-                          <h4 class="ca-main">16,808</h4>
-                          <h3 class="ca-sub">Kitchen</h3>
-                        </div>
-                      </a>
-                    </li>
-                    @endif
 
-                  @if ( $dept->name == 'hospitality' )
-									<li>
-										<a href="#">
-										  <i class="fa fa-hotel" aria-hidden="true"></i>
-											<div class="ca-content">
-												<h4 class="ca-main one">26,808</h4>
-												<h3 class="ca-sub one">Hospitality</h3>
-											</div>
-										</a>
-									</li>
-                  @endif
-                  @if ( $dept->name == 'store' )
-									<li>
-										<a href="#">
-											<i class="fa fa-database" aria-hidden="true"></i>
-											<div class="ca-content">
-											<h4 class="ca-main two">29,008</h4>
-												<h3 class="ca-sub two">Store</h3>
-											</div>
-										</a>
-									</li>
-                  @endif
+										@if( strtolower($dept->name) == 'store' )
+										<li>
+										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
+											 <i class="fa fa-database" aria-hidden="true"></i>
+											 <div class="ca-content">
+											 <h4 class="ca-main two">29,008</h4>
+												 <h3 class="ca-sub two">{{$dept->name}}</h3>
+											 </div>
+										 </a>
+									 </li>
+ 										@endif
+
+
+										@if( strtolower($dept->name) == 'compound' )
+										<li>
+											<a href="{{url('dept-registration')}}/{{$dept->id}}">
+												<i class="fas fa-umbrella-beach" aria-hidden="true"></i>
+												<div class="ca-content">
+													<h4 class="ca-main three">49,436</h4>
+													<h3 class="ca-sub three">{{$dept->name}}</h3>
+												</div>
+											</a>
+										</li>
+ 										@endif
+
+								 @endforeach
 
 									<div class="clearfix"></div>
+
 								</ul>
-                <ul class="ca-menu">
-                  @if ( $dept->name == 'administration' )
-                  <li>
-										<a href="#">
-											<i class="fa fa-tasks" aria-hidden="true"></i>
+
+								<ul class="ca-menu">
+								 @foreach( $depts as $dept )
+									@if( strtolower($dept->name) == 'kitchen' )
+									 <li>
+										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
+
+											 <i class="fas fa-utensils" aria-hidden="true"></i>
+											 <div class="ca-content">
+												 <h4 class="ca-main">16,808</h4>
+												 <h3 class="ca-sub text-capitalize">{{$dept->name}}</h3>
+											 </div>
+										 </a>
+									 </li>
+									 @endif
+
+									 @if( strtolower($dept->name) == 'chapel' )
+									 <li>
+										<a href="{{url('dept-registration')}}/{{$dept->id}}">
+											<i class="fas fa-church" aria-hidden="true"></i>
 											<div class="ca-content">
-												<h4 class="ca-main">49,436</h4>
-												<h3 class="ca-sub">Administration</h3>
+												<h4 class="ca-main one">26,808</h4>
+												<h3 class="ca-sub one">{{$dept->name}}</h3>
 											</div>
 										</a>
 									</li>
-                  @endif
-                  @if ( $dept->name == 'chapel' )
-                  <li>
-                  <a href="#">
-                    <i class="fas fa-church" aria-hidden="true"></i>
-                    <div class="ca-content">
-                      <h4 class="ca-main one">30,808</h4>
-                      <h3 class="ca-sub one">Chapel</h3>
-                    </div>
-                  </a>
-                </li>
-                @endif
-                @if ( $dept->name == 'shamba' )
-                <li>
-                <a href="#">
-                  <i class="fas fa-tractor" aria-hidden="true"></i>
-                  <div class="ca-content">
-                    <h4 class="ca-main two">30,808</h4>
-                    <h3 class="ca-sub two">Shamba/ dairy/ poultry</h3>
-                  </div>
-                </a>
-              </li>
-              @endif
-                  <div class="clearfix"></div>
-                </ul>
-                <ul class="ca-menu">
-                  @if ( $dept->name == 'compound' )
-                  <li>
-                  <a href="#">
-                    <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
-                    <div class="ca-content">
-                      <h4 class="ca-main">30,808</h4>
-                      <h3 class="ca-sub">Compund</h3>
-                    </div>
-                  </a>
-                </li>
-                @endif
-                <div class="clearfix"></div>
-                </ul>
+									 @endif
+
+
+									 @if( strtolower($dept->name) == 'shamba' )
+									 <li>
+										<a href="{{url('dept-registration')}}/{{$dept->id}}">
+											<i class="fas fa-tractor" aria-hidden="true"></i>
+											<div class="ca-content">
+											<h4 class="ca-main two">29,008</h4>
+												<h3 class="ca-sub two">{{$dept->name}}</h3>
+											</div>
+										</a>
+									</li>
+									 @endif
+
+									 @if( strtolower($dept->name) == 'administration' )
+									 <li>
+										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
+											 <i class="fas fa-user-tie" aria-hidden="true"></i>
+											 <div class="ca-content">
+												 <h4 class="ca-main four">49,436</h4>
+												 <h3 class="ca-sub four">{{$dept->name}}</h3>
+											 </div>
+										 </a>
+									 </li>
+									 @endif
+
+
+								@endforeach
+
+								 <div class="clearfix"></div>
+
+							 </ul>
+
 					   </div>
-             @endforeach
            @endif
 					 <!-- //departments end-->
 						<!-- /agile_top_w3_post_sections-->
@@ -132,7 +157,7 @@
 
 											</div>
 									   </div>
-									    <div class="col-md-6 agile_top_w3_post_info agile_info_shadow">
+									    <!--<div class="col-md-6 agile_top_w3_post_info agile_info_shadow">
 										    <div class="img_wthee_post1">
 											<h3 class="w3_inner_tittle"> Flip Clock</h3>
 										       	<div class="main-example">
@@ -141,7 +166,7 @@
 
 												</div>
 											</div>
-							            </div>
+										</div>-->
 								       <div class="clearfix"></div>
 							     </div>
 
@@ -275,221 +300,8 @@
 							</div>
 
 							  <!--//prograc-blocks_agileits-->
-						<!-- /bottom_agileits_grids-->
-						<div class="bottom_agileits_grids">
-						<div class="col-md-4 profile-main">
-						    <div class="profile_bg_agile">
-								<div class="profile-pic wthree">
-									<h2>Bason Durel</h2>
-									<img src="images/profile.jpg" alt="Image">
-									<p>Web Designer</p>
-								</div>
-								<div class="profile-ser">
-										<div class="follow-grids-agileits-w3layouts">
-											<div class="profile-ser-grids">
-												<h3>Followers</h3>
-												<h4>2486</h4>
-											</div>
-											<div class="profile-ser-grids agileinfo">
-												<h3>Following</h3>
-												<h4>1582</h4>
-											</div>
-											<div class="profile-ser-grids no-border">
-												<h3>Tweets</h3>
-												<h4>1468</h4>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-										<div class="w3l_social_icons w3l_social_icons1">
-											<ul>
-												<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-												<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-												<li><a href="#" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
 
-						        </div>
-								</div>
-					        </div>
-							<div class="col-md-8 chart_agile agile_info_shadow">
-							 <h3 class="w3_inner_tittle two">Stacked Bar Chart</h3>
-							    <div id="chartdiv1"></div>
-							</div>
-
-
-							 <div class="clearfix"></div>
-						</div>
-						<!-- //bottom_agileits_grids-->
-												<!-- /weather_w3_agile_info-->
-						<div class="weather_w3_agile_info agile_info_shadow">
-						  <div class="weather_w3_inner_info">
-
-							     <div class="over_lay_agile">
-								  <h3 class="w3_inner_tittle">Weather Report</h3>
-						       	  <ul>
-									<li>
-										<figure class="icons">
-											<canvas id="partly-cloudy-day" width="60" height="60"></canvas>
-										</figure>
-										<h3>25 °C</h3>
-										<div class="clearfix"></div>
-									</li>
-									<li>
-										<figure class="icons">
-											<canvas id="clear-day" width="60" height="60"></canvas>
-										</figure>
-										<div class="weather-text">
-											<h4>WED</h4>
-											<h5>27 °C</h5>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li>
-										<figure class="icons">
-											<canvas id="snow" width="60" height="60"></canvas>
-										</figure>
-										<div class="weather-text">
-											<h4>THU</h4>
-											<h5>13 °C</h5>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li>
-										<figure class="icons">
-											<canvas id="partly-cloudy-night" width="60" height="60"></canvas>
-										</figure>
-										<div class="weather-text">
-											<h4>FRI</h4>
-											<h5>18 °C</h5>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li>
-										<figure class="icons">
-											<canvas id="cloudy" width="60" height="60"></canvas>
-										</figure>
-										<div class="weather-text">
-											<h4>SAT</h4>
-											<h5>15 °C</h5>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									<li>
-										<figure class="icons">
-											<canvas id="fog" width="60" height="60"></canvas>
-										</figure>
-										<div class="weather-text">
-											<h4>SUN</h4>
-											<h5>11 °C</h5>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-								</ul>
-								</div>
-							</div>
-						</div>
-						<!-- //weather_w3_agile_info-->
-						<!-- /social_media-->
-						  <div class="social_media_w3ls">
-
-						      <div class="col-md-3 socail_grid_agile facebook">
-                                     <ul class="icon_w3_info">
-									   <li><a href="#" class="wthree_facebook"> <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									   <li>Facebook</li>
-									 </ul>
-									  <ul class="icon_w3_social">
-									    <li><i class="fa fa-comment-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-envelope-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-user" aria-hidden="true"></i></li>
-                                      </ul>
-									 <div class="clearfix"></div>
-									  <div class="bottom_info_social">
-									 <div class="col-md-4 agile_w3l_social_media_text_img">
-									    <img src="images/admin.jpg" alt="">
-									 </div>
-									  <div class="col-md-8 agile_w3l_social_media_text">
-									    <h4>Hurisa Joe</h4>
-										<p>Lorem ipsum dolor sit amet</p>
-									 </div>
-
-									 <div class="clearfix"></div>
-									 </div>
-                              </div>
-							  <div class="col-md-3 socail_grid_agile twitter">
-                                         <ul class="icon_w3_info">
-									   <li><a href="#" class="wthree_facebook"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									   <li>Twitter</li>
-									 </ul>
-									  <ul class="icon_w3_social">
-									    <li><i class="fa fa-comment-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-envelope-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-user" aria-hidden="true"></i></li>
-                                      </ul>
-									 <div class="clearfix"></div>
-									  <div class="bottom_info_social">
-									 <div class="col-md-4 agile_w3l_social_media_text_img">
-									    <img src="images/a1.jpg" alt="">
-									 </div>
-									  <div class="col-md-8 agile_w3l_social_media_text">
-									    <h4>Jasmin Joe</h4>
-										<p>Lorem ipsum dolor sit amet</p>
-									 </div>
-
-									 <div class="clearfix"></div>
-									 </div>
-                              </div>
-							  <div class="col-md-3 socail_grid_agile gmail">
-                                     <ul class="icon_w3_info">
-									   <li><a href="#" class="wthree_facebook"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									   <li>Google+</li>
-									 </ul>
-									  <ul class="icon_w3_social">
-									    <li><i class="fa fa-comment-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-envelope-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-user" aria-hidden="true"></i></li>
-                                      </ul>
-									 <div class="clearfix"></div>
-									  <div class="bottom_info_social">
-									 <div class="col-md-4 agile_w3l_social_media_text_img">
-									    <img src="images/a2.jpg" alt="">
-									 </div>
-									  <div class="col-md-8 agile_w3l_social_media_text">
-									    <h4>John Pal</h4>
-										<p>Lorem ipsum dolor sit amet</p>
-									 </div>
-
-									 <div class="clearfix"></div>
-									 </div>
-                              </div>
-							  <div class="col-md-3 socail_grid_agile dribble">
-
-							     <ul class="icon_w3_info">
-									  <li><a href="#" class="wthree_facebook"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-									   <li>Dribbble</li>
-									 </ul>
-									  <ul class="icon_w3_social">
-									    <li><i class="fa fa-comment-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-envelope-o" aria-hidden="true"></i></li>
-										<li><i class="fa fa-user" aria-hidden="true"></i></li>
-                                      </ul>
-									 <div class="clearfix"></div>
-									  <div class="bottom_info_social">
-									 <div class="col-md-4 agile_w3l_social_media_text_img">
-									    <img src="images/a4.jpg" alt="">
-									 </div>
-									  <div class="col-md-8 agile_w3l_social_media_text">
-									    <h4>Honey Pal</h4>
-										<p>Lorem ipsum dolor sit amet</p>
-									 </div>
-
-									 <div class="clearfix"></div>
-									 </div>
-
-                              </div>
-							  <div class="clearfix"></div>
-
-						</div>
-						<!-- //social_media-->
+					
 				    </div>
 					<!-- //inner_content_w3_agile_info-->
 				</div>

@@ -9,7 +9,7 @@
           <div class="w3l_agileits_breadcrumbs">
             <div class="w3l_agileits_breadcrumbs_inner">
               <ul>
-                <li><a href="main-page.html">Home</a><span>«</span></li>
+                <li><a href="/home">Home</a><span>«</span></li>
                 @if( isset($type) )
                   <li>@if($type==1) Staff @elseif($type==2) Customers @elseif($type==3) Administrators @elseif($type==4) Casuals @endif</li>
                 @else

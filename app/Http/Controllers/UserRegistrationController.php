@@ -44,7 +44,7 @@ class UserRegistrationController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         $newUser = User::create($validated);
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
-        return redirect('/');
+        return redirect('/home');
     }
 
     /**
@@ -105,7 +105,7 @@ class UserRegistrationController extends Controller
         $user = User::find($id);
         $user->delete();
         Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
-        return redirect('/');
+        return redirect('/home');
     }
 
     /**

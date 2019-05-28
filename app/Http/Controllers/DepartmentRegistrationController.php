@@ -44,7 +44,7 @@ class DepartmentRegistrationController extends Controller
         $validated = $this->uploads($request,$validated);
         $newUser = Dept::create($validated);
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
-        return redirect('/');
+        return redirect('/home');
     }
 
     /**
@@ -56,7 +56,7 @@ class DepartmentRegistrationController extends Controller
     public function show(Dept $dept,$id)
     {
       $dept = Dept::find($id);
-      return $dept;
+      return view('dept.single',compact('dept'));
     }
 
     /**
@@ -98,7 +98,7 @@ class DepartmentRegistrationController extends Controller
       $dept = Dept::find($id);
       $dept->delete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
-      return redirect('/');
+      return redirect('/home');
     }
 
     /**
