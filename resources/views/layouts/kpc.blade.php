@@ -18,10 +18,8 @@
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //site-theme styles-->
 <link href="{{url('site-theme/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-@if( Request::is('users/*') )
 <link rel="stylesheet" type="text/css" href="{{url('site-theme/css/table-style.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{url('site-theme/css/basictable.css') }}" />
-@endif
 <link href="{{url('site-theme/css/component.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{url('site-theme/css/export.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{url('site-theme/css/flipclock.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -51,7 +49,7 @@
 
 		@endif
 
-		
+
 
 
 		@yield('content')

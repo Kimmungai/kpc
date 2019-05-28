@@ -43,6 +43,33 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-2 control-label">User department</label>
+  <div class="col-md-8">
+    <div class="input-group input-icon right">
+      <span class="input-group-addon">
+        <i class="fas fa-layer-group"></i>
+      </span>
+      <select name="type" id="type" class="form-control1">
+        <option value="1" @if( old('dept') == 1 || ( isset($user) && $user->dept == 1 ) ) selected @endif>Kitchen</option>
+        <option value="2" @if( old('dept') == 2 || ( isset($user) && $user->dept == 2 ) ) selected @endif>Store</option>
+        <option value="3" @if( old('dept') == 3 || ( isset($user) && $user->dept == 3 ) ) selected @endif>Hospitality</option>
+        <option value="4" @if( old('dept') == 4 || ( isset($user) && $user->dept == 4 ) ) selected @endif>Chapel</option>
+        <option value="5" @if( old('dept') == 5 || ( isset($user) && $user->dept == 5 ) ) selected @endif>Shamba/ dairy/ poultry</option>
+        <option value="6" @if( old('dept') == 6 || ( isset($user) && $user->dept == 6 ) ) selected @endif>Compound</option>
+        <option value="7" @if( old('dept') == 7 || ( isset($user) && $user->dept == 7 ) ) selected @endif>Administration</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <p class="help-block red-text">
+      @if ($errors->has('dept'))
+        {{ $errors->first('dept') }}
+      @endif
+    </p>
+  </div>
+</div>
+
 <div class="form-group" id="avatarTitle">
   <label class="col-md-2 control-label">Picture</label>
   <div class="col-md-8">

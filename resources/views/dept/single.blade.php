@@ -16,6 +16,40 @@
 	            </div>
 	          </div>
 	        <!-- //breadcrumbs -->
+					<!--stock options buttons-->
+					<div class="container" >
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="button" style="background:#f0ad4e" data-toggle="modal" data-target="#recordPurchasesModal">
+								 <p class="btnText">Purchases</p>
+								 <div class="btnTwo">
+									 <p class="btnText2"><i class="fas fa-money-check-alt"></i></p>
+								 </div>
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="button" style="background:#5bc0de" data-toggle="modal" data-target="#recordBookingsModal">
+								 <p class="btnText">Bookings</p>
+								 <div class="btnTwo">
+									 <p class="btnText2"><i class="fas fa-gift"></i></p>
+								 </div>
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="button" style="background:#337ab7" data-toggle="modal" data-target="#recordTransfersModal">
+								 <p class="btnText">Transfers</p>
+								 <div class="btnTwo">
+									 <p class="btnText2"><i class="fas fa-external-link-alt"></i></p>
+								 </div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+					<!--end stock options buttons-->
           <!-- /w3ls_agile_circle_progress-->
           <div class="w3ls_agile_circle_progress agile_info_shadow">
 
@@ -190,5 +224,17 @@
 					<!-- //inner_content_w3_agile_info-->
 				</div>
 		<!-- //inner_content-->
+
+		@component( 'components.purchases-modal' )
+
+		@endcomponent
+
+		@component( 'components.bookings-modal' )
+
+		@endcomponent
+
+		@component( 'components.transfers-modal' )
+
+		@endcomponent
 
 @endsection
