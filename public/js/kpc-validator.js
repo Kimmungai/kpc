@@ -37,16 +37,16 @@ function validate(id,rules,val)
 
     if( errors )
     {
-      $("#"+id).css('border-color','#d9534f');
+      //$("#"+id).css('border-color','#d9534f');
     }
     else
     {
       if( val.length != 0 )
       {
-        $("#"+id).css('border-color','#5cb85c');
+        //$("#"+id).css('border-color','#5cb85c');
       }
       else{
-        $("#"+id).css('border-color','');
+        //$("#"+id).css('border-color','');
       }
       $("#"+id+"Helper").text('');
     }
@@ -61,8 +61,10 @@ function testBlank(id,rules,val)
   if(val == '' && rules.required == 1)
   {
     $("#"+id+"Helper").text('This is a required field');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
     return 1;
   }
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
   return 0;
 }
 
@@ -72,8 +74,11 @@ function testMinLength(id,rules,val)
   if(rules.min > val.length && val.length != 0)
   {
     $("#"+id+"Helper").text('Please type atleast '+rules.min+' characters.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
   return 0;
 }
 
@@ -83,8 +88,12 @@ function testMaxLength(id,rules,val)
   if(rules.max < val.length)
   {
     $("#"+id+"Helper").text('Too long text for this field.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
+
   return 0;
 }
 
@@ -95,8 +104,12 @@ function testEmail(id,rules,val)
   if(!pattern.test(val))
   {
     $("#"+id+"Helper").text('This email is invalid.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
+
   return 0;
 }
 
@@ -106,8 +119,12 @@ function testNumeric(id,rules,val)
   if(isNaN(val))
   {
     $("#"+id+"Helper").text('Please enter valid digits only.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
+
   return 0;
 }
 
@@ -121,14 +138,18 @@ function testImage(id,rules,val)
   if( !val.match(reg) )
   {
     $("#"+id+"Helper").text('Invalid image. Select a jpeg, png or gif files only.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
 
   if( fileSize > rules.size )
   {
     $("#"+id+"Helper").text('Invalid size. Select a file of less than '+ rules.size+'MB.');
+    $("#"+id+"Title").removeClass('has-success').addClass('has-error');
+
     return 1;
   }
-
+  $("#"+id+"Title").addClass('has-success').removeClass('has-error');
   return 0;
 }
