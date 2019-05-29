@@ -229,12 +229,12 @@
 
 		@endcomponent
 
-		@component( 'components.bookings-modal' )
+		@component( 'components.bookings-modal',['dept' => $dept] )
 
 		@endcomponent
 
-		@component( 'components.transfers-modal' )
+		@component( 'components.transfers-modal',['dept' => $dept] )
 
 		@endcomponent
-
+		
 @endsection

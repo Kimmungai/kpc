@@ -22,13 +22,22 @@
                             <input type="email" class="form-control" id="exampleInputPassword3" placeholder="Email">
                           </div>
                           <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Phone Number">
+                            <input type="number" min="0" class="form-control" id="exampleInputEmail3" placeholder="Phone Number">
+                          </div>
+                          <div class="form-group">
+                            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="Amount Payable">
+                          </div>
+                          <div class="form-group">
+                            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="Amount Paid">
                           </div>
                           <div class="form-group">
                             <select >
-                              <option>Type 1</option>
+                              <option>Paid by cash</option>
+                              <option>Paid by cheque</option>
+                              <option>Paid by bank transfer</option>
                             </select>
                           </div>
+
                           </form>
                         </div>
 											</div>

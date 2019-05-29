@@ -13,6 +13,9 @@
 <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
 <script src="{{ asset('js/kpc-datepicker.js') }}" defer></script>
 <script src="{{ asset('js/kpc-forms.js') }}" defer></script>
+<script src="{{ asset('js/kpc-stock-transfer.js') }}" defer></script>
+<script src="{{ asset('js/kpc-booking-types.js') }}" defer></script>
+
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
