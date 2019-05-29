@@ -52,10 +52,23 @@
 
 		@endif
 
-
+		@if (session('message'))
+			<div style="position:absolute;top:7em;width:100%;" class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>{{ session('message') }}</strong>
+			</div>
+		@endif
+		@if (session('error'))
+			<div style="position:absolute;top:7em;width:100%;" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>{{ session('error') }}</strong>
+			</div>
+		@endif
 
 
 		@yield('content')
+
+
 	</div>
  <!-- banner -->
 <!--copy rights start here-->

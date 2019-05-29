@@ -27,7 +27,7 @@ class StoreDept extends FormRequest
           'type' => 'required|numeric',
           'org_id' => 'required|numeric',
           'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
-          'name' => 'required|max:255',
+          'name' => 'required|max:255|unique:depts,name,'.\Request::segment(2),
           'address' => 'nullable|max:255',
           'deptDetails' => 'nullable',
         ];
@@ -42,6 +42,7 @@ class StoreDept extends FormRequest
     {
         return [
             'name.required' => 'The department name is required',
+            'name.unique' => 'The department already exists!',
         ];
     }
 
