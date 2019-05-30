@@ -63,7 +63,9 @@
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
-                  <span class="prfil-img"><img src="{{Auth::user()->avatar}}" alt="" height="50" width="50"> </span>
+                  @if(Auth::check())
+                    <span class="prfil-img"><img src="{{Auth::user()->avatar}}" alt="" height="50" width="50"> </span>
+                  @endif
                 </div>
               </a>
               <ul class="dropdown-menu drp-mnu">

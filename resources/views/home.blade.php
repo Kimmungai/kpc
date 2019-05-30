@@ -131,7 +131,7 @@
 					 <!-- //departments end-->
 						<!-- /agile_top_w3_post_sections-->
 							<div class="agile_top_w3_post_sections">
-							       <div class="col-md-6 agile_top_w3_post agile_info_shadow">
+							       <div class="col-md-6 agile_top_w3_post agile_info_shadow" style="width:100%">
 										   <div class="img_wthee_post">
 										         <h3 class="w3_inner_tittle">Latest Report</h3>
 												<div class="stats-wrap">
@@ -301,7 +301,7 @@
 
 							  <!--//prograc-blocks_agileits-->
 
-					
+
 				    </div>
 					<!-- //inner_content_w3_agile_info-->
 				</div>

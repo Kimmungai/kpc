@@ -61,7 +61,7 @@
 
         <!--/start goods-->
         <div class="set-1_w3ls">
-            <div class="col-md-6 button_set_one two agile_info_shadow graph-form">
+            <div class="col-md-6 button_set_one two agile_info_shadow grapha-aform" style="width:100%">
              <h3 class="w3_inner_tittle two">Goods to transfer  </h3>
 
              <div class="input-group">

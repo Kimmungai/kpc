@@ -9,17 +9,17 @@
         <div class="modal-body">
           <!--/start supplier-->
 					<div class="set-1_w3ls">
-							<div class="col-md-6 button_set_one two agile_info_shadow graph-form">
+							<div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
 							 <h3 class="w3_inner_tittle two">Supplier  </h3>
 										<div class="grid-1">
 											<div class="form-body">
 												<div data-example-id="simple-form-inline">
                           <form class="form-inline">
                           <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Name">
+                            <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Name" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
                           </div>
                           <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputPassword3" placeholder="Email">
+                            <input type="email" class="form-control" id="exampleInputPassword3" placeholder="Email" onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)">
                           </div>
                           <div class="form-group">
                             <input type="number" min="0" class="form-control" id="exampleInputEmail3" placeholder="Phone Number">
@@ -49,7 +49,7 @@
 
         <!--/start goods-->
         <div class="set-1_w3ls">
-            <div class="col-md-6 button_set_one two agile_info_shadow graph-form">
+            <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
              <h3 class="w3_inner_tittle two">Goods supplied  </h3>
 
              <div class="input-group">

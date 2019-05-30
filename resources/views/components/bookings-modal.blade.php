@@ -14,7 +14,7 @@
            <div class="wthree_general">
 
              <!--general form start-->
-             <div class="grid-1 graph-form agile_info_shadow">
+             <div class="grid-1 graph-form agile_info_shadow" style="width:100%">
 
                 <h3 class="w3_inner_tittle two">Basic Information </h3>
                 <form class="form-horizontal">
