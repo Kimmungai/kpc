@@ -10,26 +10,61 @@
           <!--/start supplier-->
 					<div class="set-1_w3ls">
 							<div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
-							 <h3 class="w3_inner_tittle two">Supplier  </h3>
+							 <h3 class="w3_inner_tittle two">Supplier</h3>
+                 <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                  <input  type="text" class="form-control" name="search" placeholder="Search from records">
+                 </div>
 										<div class="grid-1">
 											<div class="form-body">
 												<div data-example-id="simple-form-inline">
                           <form class="form-inline">
-                          <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Name" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
-                          </div>
-                          <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputPassword3" placeholder="Email" onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)">
-                          </div>
-                          <div class="form-group">
-                            <input type="number" min="0" class="form-control" id="exampleInputEmail3" placeholder="Phone Number">
-                          </div>
-                          <div class="form-group">
-                            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="Amount Payable">
-                          </div>
-                          <div class="form-group">
-                            <input type="number" class="form-control" id="exampleInputEmail3" placeholder="Amount Paid">
-                          </div>
+
+                            <div class="form-group" id="firstNameTitle">
+                                <div class="input-group input-icon right">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-info"></i>
+                                  </span>
+                                  <input name="firstName" id="firstName" type="text" class="form-control1" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                              </div>
+                            </div>
+
+                            <div class="form-group" id="emailTitle">
+                                <div class="input-group input-icon right">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                  </span>
+                                  <input name="email" id="email" type="text" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                              </div>
+                            </div>
+
+                            <div class="form-group" id="phoneNumberTitle">
+                                <div class="input-group input-icon right">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                  </span>
+                                  <input name="phoneNumber" id="phoneNumber" min="0" type="number" class="form-control1" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                              </div>
+                            </div>
+
+                            <div class="form-group" id="amountDueTitle">
+                                <div class="input-group input-icon right">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-dollar"></i>
+                                  </span>
+                                  <input name="amountDue" id="amountDue" min="0" type="number" class="form-control1" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Amount Owed..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                              </div>
+                            </div>
+
+                            <div class="form-group" id="amountPaidTitle">
+                                <div class="input-group input-icon right">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-dollar"></i>
+                                  </span>
+                                  <input name="amountPaid" id="amountPaid" min="0" type="number" class="form-control1" value="@if( old('amountPaid') ) {{old('amountPaid')}} @elseif( isset($user) ) {{$user->amountPaid}} @endif" placeholder="Amount Paid..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                              </div>
+                            </div>
+
                           <div class="form-group">
                             <select >
                               <option>Paid by cash</option>
@@ -37,7 +72,9 @@
                               <option>Paid by bank transfer</option>
                             </select>
                           </div>
-
+                          <div class="form-group">
+                            <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
+                          </div>
                           </form>
                         </div>
 											</div>
@@ -61,18 +98,39 @@
                     <div class="form-body">
                       <div data-example-id="simple-form-inline">
                         <form class="form-inline">
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="sku" placeholder="SKU"  >
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control"  placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                          <input type="number" class="form-control"  placeholder="Quantity">
-                        </div>
-                        <div class="form-group">
-                          <input type="number" class="form-control"  placeholder="Cost">
-                        </div>
+                          <div class="form-group" id="skuTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="sku" id="sku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="prodNameTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="prodName" id="prodName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="quantityTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="quantity" id="quantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="costTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-dollar"></i>
+                                </span>
+                                <input name="cost" id="cost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                      
                         <div class="form-group">
                           <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
                         </div>

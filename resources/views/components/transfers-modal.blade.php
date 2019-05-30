@@ -73,18 +73,39 @@
                     <div class="form-body">
                       <div data-example-id="simple-form-inline">
                         <form class="form-inline">
-                        <div class="form-group">
-                          <input type="text" class="form-control" name="sku" placeholder="SKU"  >
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control"  placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                          <input type="number" class="form-control"  placeholder="Quantity">
-                        </div>
-                        <div class="form-group">
-                          <input type="number" class="form-control"  placeholder="Cost">
-                        </div>
+                          <div class="form-group" id="skuTransferTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="skuTransfer" id="skuTransfer"  type="text" class="form-control1" value="@if( old('skuTransfer') ) {{old('skuTransfer')}} @elseif( isset($user) ) {{$user->skuTransfer}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="prodTransferNameTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="prodTransferName" id="prodTransferName"  type="text" class="form-control1" value="@if( old('prodTransferName') ) {{old('prodTransferName')}} @elseif( isset($user) ) {{$user->prodTransferName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="quantityTransferTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-info"></i>
+                                </span>
+                                <input name="quantityTransfer" id="quantityTransfer" min="0"  type="number" class="form-control1" value="@if( old('quantityTransfer') ) {{old('quantityTransfer')}} @elseif( isset($user) ) {{$user->quantityTransfer}} @endif" placeholder="Product quantity..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+                          <div class="form-group" id="costTransferTitle">
+                              <div class="input-group input-icon right">
+                                <span class="input-group-addon">
+                                  <i class="fa fa-dollar"></i>
+                                </span>
+                                <input name="costTransfer" id="costTransfer" min="0"  type="number" class="form-control1" value="@if( old('costTransfer') ) {{old('costTransfer')}} @elseif( isset($user) ) {{$user->costTransfer}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                            </div>
+                          </div>
+
                         <div class="form-group">
                           <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
                         </div>
@@ -106,10 +127,10 @@
         <table id="table-two-axis" class="two-axis">
         <thead>
           <tr>
-          <th>SKU</th>
+          <th>skuTransfer</th>
           <th>Name</th>
-          <th>Quantity</th>
-          <th>Cost</th>
+          <th>quantityTransfer</th>
+          <th>costTransfer</th>
           </tr>
         </thead>
         <tbody>
