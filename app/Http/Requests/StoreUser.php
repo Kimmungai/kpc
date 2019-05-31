@@ -34,8 +34,8 @@ class StoreUser extends FormRequest
             'DOB' => 'required|date|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.\Request::segment(2),
             'phoneNumber' => 'required|numeric|digits_between:10,15',
-            'gender' => 'required|numeric',
-            'address' => 'required|max:255',
+            'gender' => 'nullable|numeric',
+            'address' => 'nullable|max:255',
             'idNo' => 'nullable|numeric|digits_between:5,10',
             'passport' => 'nullable|max:255',
             'idImage' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
@@ -63,7 +63,6 @@ class StoreUser extends FormRequest
             'lastName.required' => 'The last name is required',
             'DOB.required' => 'The date of birth (DOB) is required',
             'email' => 'Please enter a valid email address',
-
         ];
     }
 

@@ -34,3 +34,4 @@ Route::resource('dept-registration','DepartmentRegistrationController');
 
 //purchases
 Route::resource('purchases-registration','PurchasesRegistrationController');
+Route::post('create-supplier','PurchasesAjaxController@create_supplier');

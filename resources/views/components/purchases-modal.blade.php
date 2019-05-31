@@ -52,7 +52,7 @@
                                   <span class="input-group-addon">
                                     <i class="fa fa-dollar"></i>
                                   </span>
-                                  <input name="amountDue" id="amountDue" min="0" type="number" class="form-control1" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Amount Owed..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                                  <input name="amountDue" id="amountDue" min="0" type="number" class="form-control1" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Amount Owed..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                               </div>
                             </div>
 
@@ -61,19 +61,21 @@
                                   <span class="input-group-addon">
                                     <i class="fa fa-dollar"></i>
                                   </span>
-                                  <input name="amountPaid" id="amountPaid" min="0" type="number" class="form-control1" value="@if( old('amountPaid') ) {{old('amountPaid')}} @elseif( isset($user) ) {{$user->amountPaid}} @endif" placeholder="Amount Paid..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                                  <input name="amountPaid" id="amountPaid" min="0" type="number" class="form-control1" value="@if( old('amountPaid') ) {{old('amountPaid')}} @elseif( isset($user) ) {{$user->amountPaid}} @endif" placeholder="Amount Paid..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                               </div>
                             </div>
 
                           <div class="form-group">
-                            <select >
-                              <option>Paid by cash</option>
-                              <option>Paid by cheque</option>
-                              <option>Paid by bank transfer</option>
+                            <select id="paymentMethod">
+                              <option value="1">Paid by cash</option>
+                              <option value="2">Paid by cheque</option>
+                              <option value="3">Paid by bank transfer</option>
+                              <option value="4">MPESA</option>
                             </select>
+                            <input id="deptID" type="hidden" name="deptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
                           </div>
                           <div class="form-group">
-                            <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
+                            <button type="button" class="btn btn-default btn-sm" name="button" onclick="create_purchase()">Add</button>
                           </div>
                           </form>
                         </div>
@@ -83,6 +85,44 @@
 							 <div class="clearfix"> </div>
 				</div>
 				<!--end supplier-->
+
+        <!--supplier table-->
+        <!-- tables -->
+
+        <div class="agile-tables">
+
+        <div class="w3l-table-info agile_info_shadow">
+          <table   class="two-axis">
+          <thead>
+            <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Amount Owed</th>
+            <th>Amount Paid</th>
+            <th>Payment Method</th>
+            </tr>
+          </thead>
+          <tbody id="table-supplier-info">
+
+            <tr>
+              <td>Jill Smith</td>
+  						<td>25</td>
+  						<td>Female</td>
+  						<td>5'4</td>
+              <td>5'4</td>
+              <td>5'4</td>
+            </tr>
+
+          </tbody>
+          </table>
+
+
+        </div>
+     </div>
+    <!-- //tables -->
+
+        <!--end supplier table-->
 
         <!--/start goods-->
         <div class="set-1_w3ls">
@@ -130,7 +170,7 @@
                                 <input name="cost" id="cost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                             </div>
                           </div>
-                      
+
                         <div class="form-group">
                           <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
                         </div>
@@ -149,7 +189,8 @@
       <div class="agile-tables">
 
       <div class="w3l-table-info agile_info_shadow">
-        <table id="table-two-axis" class="two-axis">
+        <table id="purcases-table" class="two-axis">
+          <input id="purchasesID" type="hidden" name="" value="">
         <thead>
           <tr>
           <th>SKU</th>
@@ -180,7 +221,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-success btn-lg" onclick="save_purchases()">Save</button>
         </div>
       </div>
     </div>

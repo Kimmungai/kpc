@@ -225,7 +225,7 @@
 				</div>
 		<!-- //inner_content-->
 
-		@component( 'components.purchases-modal' )
+		@component( 'components.purchases-modal',['dept' => $dept] )
 
 		@endcomponent
 
@@ -236,5 +236,5 @@
 		@component( 'components.transfers-modal',['dept' => $dept] )
 
 		@endcomponent
-		
+
 @endsection
