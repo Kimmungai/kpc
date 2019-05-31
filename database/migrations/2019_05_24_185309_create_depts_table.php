@@ -21,6 +21,7 @@ class CreateDeptsTable extends Migration
             $table->string('avatar')->nullable();
             $table->mediumText('address')->nullable();
             $table->mediumText('deptDetails')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

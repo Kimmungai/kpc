@@ -16,7 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('dept_id')->unsigned()->index()->nullable();
-
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

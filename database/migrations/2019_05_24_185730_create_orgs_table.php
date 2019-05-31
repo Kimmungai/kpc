@@ -15,6 +15,7 @@ class CreateOrgsTable extends Migration
     {
         Schema::create('orgs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

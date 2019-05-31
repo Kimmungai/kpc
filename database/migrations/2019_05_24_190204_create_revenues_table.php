@@ -17,7 +17,7 @@ class CreateRevenuesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('booking_id')->unsigned()->index()->nullable();
             $table->integer('report_id')->unsigned()->index()->nullable();
-
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

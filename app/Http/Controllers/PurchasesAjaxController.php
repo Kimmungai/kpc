@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 use Validator;
 use App\User;
@@ -53,7 +54,22 @@ class PurchasesAjaxController extends Controller
       $purchase->amountDue = $data['amountDue'];
       $purchase->amountPaid = $data['amountPaid'];
       $purchase->user_id = $userID;
+      $purchase->deleted_at = Carbon::now();
       $purchase->save();
       return $purchase;
+    }
+
+    public function restore_purchase( Request $request )//restore deleted user
+    {
+      $id = $request->purchases_id;
+      if( $id )
+      {
+        if( $user = Purchase::withTrashed()->where('id',$id)->first() )
+        {
+          $user->restore();
+          return 1;
+        }
+      }
+      return 0;
     }
 }

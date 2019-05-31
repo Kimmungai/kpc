@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->integer('dept_id')->unsigned()->index()->nullable();
-
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
