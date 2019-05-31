@@ -81,14 +81,21 @@ function create_products()//products details (products table)
 
 
 
-function update_supplier_table(data,amountDue,amountPaid,method)//refresh supplier table
+function update_supplier_table(data,amountDue=0,amountPaid=0,method=0)//refresh supplier table
 {
   var responseObj = JSON.stringify(data);
   var response = JSON.parse(responseObj);
 
+
+
   if( response.length )//means it is an array
   {
-    $("#table-supplier-info").html('<tr id="supplier-'+response[0].id+'"><td>'+response[0].firstName+'</td><td>'+response[0].email+'</td><td>'+response[0].phoneNumber+'</td><td>'+amountDue+'</td><td>'+amountPaid+'</td><td>'+method+'</td></tr>');
+    if( method == 0 )
+    {
+      method = '<select id="supplier-'+response[1].id+'-payment-method" onchange="update_amount_due('+response[1].id+',this.value,\'paymentMethod\')"><option value="0" disabled>select one</option><option value="1">Paid by cash</option><option value="2">Paid by cheque</option><option value="3">Paid by bank transfer</option><option value="4">MPESA</option></select>'
+    }
+
+    $("#table-supplier-info").html('<tr id="supplier-'+response[0].id+'"><td>'+response[0].firstName+'</td><td>'+response[0].email+'</td><td>'+response[0].phoneNumber+'</td><td class="text-info cursor" id="supplier-'+response[0].id+'-amount-due" onclick="update_amount_due('+response[1].id+',this.id,\'amountDue\')"> '+amountDue+'</td><td class="text-info cursor" id="supplier-'+response[0].id+'-amount-paid" onclick="update_amount_due('+response[1].id+',this.id,\'amountPaid\')">'+amountPaid+'</td><td>'+method+'</td></tr>');
     $("#purchasesID").val(response[1].id);
   }else{
 

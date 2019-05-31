@@ -39,7 +39,6 @@ class PurchasesAjaxController extends Controller
 
     //create purchase
     $purchase = $this->create_purchase($user->id,$request->only(['dept_id','paymentMethod','amountDue','amountPaid']));
-
     $data[0] = $user;
     $data[1] = $purchase;
     return $data;
@@ -64,12 +63,30 @@ class PurchasesAjaxController extends Controller
       $id = $request->purchases_id;
       if( $id )
       {
-        if( $user = Purchase::withTrashed()->where('id',$id)->first() )
+        if( $purchase = Purchase::withTrashed()->where('id',$id)->first() )
         {
-          $user->restore();
+          $purchase->restore();
           return 1;
         }
       }
       return 0;
+    }
+
+    public function update_purchase( Request $request )
+    {
+      $id = $request->purchases_id;
+      if( $purchase = Purchase::withTrashed()->where('id',$id)->first() )
+      {
+        $purchase->restore();
+      }
+
+      $field = $request->field;
+      $value = $request->value;
+      if( $id )
+      {
+        Purchase::where('id',$id)->update([
+          $field => $value
+        ]);
+      }
     }
 }

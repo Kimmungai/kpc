@@ -1,3 +1,24 @@
 .red-text{
   color: #d9534f!important;
 }
+.search-box-results{
+  max-height: 100px;
+  overflow-y: scroll;
+  width: 100%;
+  background: #eee;
+  border: 1px solid #eee;
+  padding: 5px;
+}
+.search-box-results p{
+  cursor: pointer;
+  padding: 10px;
+}
+.search-box .loading{
+  position: absolute;
+  right: 35%;
+  padding: 10px;
+  z-index: 10000;
+}
+.cursor{
+  cursor: pointer;
+}
