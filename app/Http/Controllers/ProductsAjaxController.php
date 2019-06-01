@@ -60,10 +60,15 @@ class ProductsAjaxController extends Controller
       if( $id && $purchase_id)
       {
         $product = Product::find($id);
-        $expense = Expense::where('purchase_id',$purchase_id)->first();
+        //$expense = Expense::where('purchase_id',$purchase_id)->first();
         //$expense->purchase_id = $purchase_id;
 
-        //$expense->save();
+        //$expense->update(['product_id'=>$product->id]);
+        $expense = new Expense;
+        $expense->purchase_id = $purchase_id;
+        $expense->product_id = $product->id;
+        $expense->save();
+
         $data[0] = $product;
         $data[1] = $expense;
         return $data;

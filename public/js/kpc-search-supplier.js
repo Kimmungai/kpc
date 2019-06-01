@@ -19,10 +19,11 @@ $('#search-supplier-box').on('keyup', function() {
 
 function update_supplier_results(data)
 {
+  $("#supplier-results-box").html('');
+  $("#supplier-results-box").removeClass('d-none').removeClass('hidden');
+
   if( data.length )
   {
-    $("#supplier-results-box").html('');
-    $("#supplier-results-box").removeClass('d-none').removeClass('hidden');
     for ( var x=0;x<data.length;x++ )
     {
       if( !$("#sup-result-"+data[x].id).length )
@@ -30,6 +31,8 @@ function update_supplier_results(data)
         $("#supplier-results-box").append('<p  id="sup-result-'+data[x].id+'" onclick="update_sup_table(this.id)">'+data[x].firstName+'<a class="pull-right" href="#" >select</a></p>');
       }
     }
+  }else{
+    $("#supplier-results-box").append('<p> No records found!</p>');
   }
 }
 
@@ -103,10 +106,3 @@ function update_amount_due(purchaseID,tdId,field)
   }
   //alert(userID);
 }
-$(document).ajaxStart(function(){
-  //$(".search-box .loading").removeClass('hidden').removeClass('d-none');
-});
-
-$(document).ajaxStop(function(){
-  //$(".search-box .loading").addClass('hidden').addClass('d-none');
-});

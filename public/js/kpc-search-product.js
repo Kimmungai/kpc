@@ -18,10 +18,10 @@ $('#search-product-box').on('keyup', function() {
 
 function update_product_results(data)
 {
+  $("#product-results-box").html('');
+  $("#product-results-box").removeClass('d-none').removeClass('hidden');
   if( data.length )
   {
-    $("#product-results-box").html('');
-    $("#product-results-box").removeClass('d-none').removeClass('hidden');
     for ( var x=0;x<data.length;x++ )
     {
       if( !$("#prod-result-"+data[x].id).length )
@@ -29,6 +29,8 @@ function update_product_results(data)
         $("#product-results-box").append('<p  id="prod-result-'+data[x].id+'" onclick="update_prod_table(this.id)">'+data[x].name+'<a class="pull-right" href="#" >select</a></p>');
       }
     }
+  }else{
+    $("#product-results-box").append('<p>No product found!</p>');
   }
 }
 
