@@ -126,17 +126,16 @@
             <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
              <h3 class="w3_inner_tittle two">Goods supplied  </h3>
 
-             <div class="input-group">
+             <div class="input-group search-box">
               <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-              <input  type="text" class="form-control" name="search" placeholder="Search by name....">
-            </div>
-            <div class="search-box-results border-1">
-              <p>nyau <a class="pull-right" href="#">select</a></p>
-              <p>nyau</p>
-              <p>nyau</p>
-              <p>nyau</p>
-              <p>nyau</p>
-            </div>
+              <div class="loading hidden d-none">
+                <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
+              </div>
+              <input id="search-product-box"  type="text" class="form-control" name="search" placeholder="Search by name...">
+             </div>
+             <div id="product-results-box" class="search-box-results border-1 hidden d-none">
+
+             </div>
 
                   <div class="grid-1">
                     <div class="form-body">

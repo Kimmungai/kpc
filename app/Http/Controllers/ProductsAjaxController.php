@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Product;
+use App\Expense;
+use Carbon\Carbon;
 
 class ProductsAjaxController extends Controller
 {
@@ -27,11 +29,79 @@ class ProductsAjaxController extends Controller
       $product->sku = $request->sku;
       $product->name = $request->name;
       $product->quantity = $request->quantity;
-      $product->cost = $request->cost;
       $product->purchases_id = $request->purchases_id;
       $product->dept_id = $request->dept_id;
       $product->save();
+      /*Expense::where('purchase_id',$request->purchases_id)->update([
+        'product_id' => $product->id,
+        'cost' => $request->cost
+      ]);*/
+      $expense = new Expense;
+      $expense->purchase_id = $request->purchases_id;
+      $expense->product_id = $product->id;
+      $expense->cost = $request->cost;
+      $expense->save();
       $data[0] = $product;
       return $data;
+    }
+
+    public function search_product( Request $request )
+    {
+      $string = $request->string;
+      $products = Product::where('name', 'LIKE',  $string . '%')->get();
+      //$users = User::where('firstName', 'LIKE',  $string . '%')->get();
+      return $products;
+    }
+
+    public function get_product(Request $request)
+    {
+      $id = $request->prodID;
+      $purchase_id = $request->purchaseID;
+      if( $id && $purchase_id)
+      {
+        $product = Product::find($id);
+        $expense = Expense::where('purchase_id',$purchase_id)->first();
+        //$expense->purchase_id = $purchase_id;
+
+        //$expense->save();
+        $data[0] = $product;
+        $data[1] = $expense;
+        return $data;
+      }
+    }
+
+    public function update_product( Request $request )
+    {
+      $id = $request->product_id;
+
+      $field = $request->field;
+      $value = $request->value;
+      $purchase_id = $request->purchaseID;
+
+
+      if( $id )
+      {
+        $product = Product::find($id);
+        if( ($field ==='quantity') && ($product->quantity < $value) )
+        {
+          return 0;
+        }
+        if( $field ==='quantity' )
+        {
+          return Product::where('id',$id)->update([
+            $field => ($product->quantity + $value)
+          ]);
+        }else if($field === 'cost'){
+          return Expense::where('purchase_id',$purchase_id)->update([
+            $field => $value
+          ]);
+       }else{
+         return Product::where('id',$id)->update([
+           $field => $value
+         ]);
+       }
+
+      }
+      return 0;
     }
 }

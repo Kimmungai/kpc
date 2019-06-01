@@ -43,3 +43,6 @@ Route::post('update-purchase','PurchasesAjaxController@update_purchase');
 
 //products
 Route::post('create-product','ProductsAjaxController@create_product');
+Route::post('search-product','ProductsAjaxController@search_product');
+Route::post('get-product','ProductsAjaxController@get_product');
+Route::post('update-product','ProductsAjaxController@update_product');

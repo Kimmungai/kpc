@@ -74,7 +74,7 @@ function create_products()//products details (products table)
       "_token": $('meta[name="csrf-token"]').attr('content'),
     },
     function(data,status){
-      update_products_table(data);
+      update_products_table(data,cost);
     });
 }
 
@@ -108,14 +108,15 @@ function update_supplier_table(data,amountDue=0,amountPaid=0,method=0)//refresh 
 
 }
 
-function update_products_table(data)//refresh products table
+function update_products_table(data,cost=0)//refresh products table
 {
   var responseObj = JSON.stringify(data);
   var response = JSON.parse(responseObj);
 
   if( response.length )//means it is an array
   {
-    $("#purchases-table").append('<tr><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td>'+response[0].quantity+'</td><td>'+response[0].cost+'</td></tr>')
+    var purchaseID = $("#purchasesID").val();
+    $("#purchases-table").append('<tr><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'quantity\')">'+response[0].quantity+'</td><td class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
 
   }else{
 

@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->integer('purchase_id')->unsigned()->index()->nullable();
             $table->integer('report_id')->unsigned()->index()->nullable();
             $table->integer('product_id')->unsigned()->index()->nullable();
+            $table->float('cost')->default(0.00);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

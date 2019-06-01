@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Validator;
 use App\User;
 use App\Purchase;
-
+use App\Expense;
 class PurchasesAjaxController extends Controller
 {
     public function create_supplier(Request $request)
@@ -55,6 +55,9 @@ class PurchasesAjaxController extends Controller
       $purchase->user_id = $userID;
       $purchase->deleted_at = Carbon::now();
       $purchase->save();
+      /*$expense = new Expense;
+      $expense->purchase_id = $purchase->id;
+      $expense->save();*/
       return $purchase;
     }
 

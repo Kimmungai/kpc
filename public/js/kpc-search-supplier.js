@@ -51,7 +51,7 @@ function update_sup_table(id)
     });
 }
 
-function update_amount_due(purchaseID,tdId)
+/*function update_amount_due(purchaseID,tdId)
 {
   var amount = prompt("please enter amount in  digits only");
   if( isNaN(amount) )
@@ -74,7 +74,7 @@ function update_amount_due(purchaseID,tdId)
     $("#"+tdId).html(amount);
   }
   //alert(userID);
-}
+}*/
 function update_amount_due(purchaseID,tdId,field)
 {
   if( field === 'paymentMethod' ){

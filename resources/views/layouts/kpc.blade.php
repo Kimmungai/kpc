@@ -15,7 +15,8 @@
 <script src="{{ asset('js/kpc-forms.js') }}" defer></script>
 <script src="{{ asset('js/kpc-stock-transfer.js') }}" defer></script>
 <script src="{{ asset('js/kpc-booking-types.js') }}" defer></script>
-<script src="{{ asset('js/kpc-search.js') }}" defer></script>
+<script src="{{ asset('js/kpc-search-supplier.js') }}" defer></script>
+<script src="{{ asset('js/kpc-search-product.js') }}" defer></script>
 <script src="{{ asset('js/kpc-save-purchases.js') }}" defer></script>
 
 
