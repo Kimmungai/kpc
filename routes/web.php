@@ -46,3 +46,6 @@ Route::post('create-product','ProductsAjaxController@create_product');
 Route::post('search-product','ProductsAjaxController@search_product');
 Route::post('get-product','ProductsAjaxController@get_product');
 Route::post('update-product','ProductsAjaxController@update_product');
+
+//Bookings
+Route::post('save-booking','BookingsAjaxController@save_booking');

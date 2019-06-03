@@ -1,38 +1,74 @@
 function save_booking()
 {
+  var con = confirm( "Are you sure you want to save the booking details?" );
+  if( !con ){ return; }
   //get form inputs
-  bookingType = $("#bookingType").val();
-  roomType = $("#roomType").val();
-  numPple = $("#numPple").val();
-  chkInDate = $("#chk_in_date").val();
-  chkOutDate = $("#chk_out_date").val();
-  bookingAmountDue = $("#bookingAmountDue").val();
-  modeOfPayment = $("#modeOfPayment").val();
-  bookingAmountReceived = $("#bookingAmountReceived").val();
-  paymentStatus = $("#paymentStatus").val();
-  paymentDueDate = $("#paymentDueDate").val();
-  board = $('input[name=board]:checked').val();
-  menu = $('input[name=menu]:checked').val();
-  menuDetailsDate = $("#menuDetailsDate").val();
-  meetingHall = true ? $("#meetingHall").is(":checked") : false;
-  tent = true ? $("#tent").is(":checked") : false;
-  paSystem = true ? $("#paSystem").is(":checked") : false;
-  projector = true ? $("#projector").is(":checked") : false;
+  var deptID = $("#bookingDeptID").val();
+  var bookingType = $("#bookingType").val();
+  var roomType = $("#roomType").val();
+  var numPple = $("#numPple").val();
+  var chkInDate = $("#chk_in_date").val();
+  var chkOutDate = $("#chk_out_date").val();
+  var bookingAmountDue = $("#bookingAmountDue").val();
+  var modeOfPayment = $("#modeOfPayment").val();
+  var bookingAmountReceived = $("#bookingAmountReceived").val();
+  var paymentStatus = $("#paymentStatus").val();
+  var paymentDueDate = $("#paymentDueDate").val();
+  var board = $('input[name=board]:checked').val();
+  var menu = $('input[name=menu]:checked').val();
+  var menuDetails = $("#menuDetails").val();
+  var meetingHall = true ? $("#meetingHall").is(":checked") : false;
+  var tent = true ? $("#tent").is(":checked") : false;
+  var paSystem = true ? $("#paSystem").is(":checked") : false;
+  var projector = true ? $("#projector").is(":checked") : false;
 
-  contactPsnName = $("#contactPsnName").val();
-  contactPsnIdNo = $("#contactPsnIdNo").val();
-  contactPsnPhoneNumber = $("#contactPsnPhoneNumber").val();
-  contactPsnEmail = $("#contactPsnEmail").val();
+  //var contactPsnName = $("#contactPsnName").val();
+  //var contactPsnIdNo = $("#contactPsnIdNo").val();
+  //var contactPsnPhoneNumber = $("#contactPsnPhoneNumber").val();
+//  var contactPsnEmail = $("#contactPsnEmail").val();
+var customerID = $("#customerID").val();
 
-  var bookedProds = {};
+  var bookedProds = [];
 
   $('#booked-products-table tr').each(function(){
-    prodID = this.id.substring(12);
-    prodQty = $("#booked-prod-qty-"+prodID).text();
-    prodPrice = $("#booked-prod-price-"+prodID).text();
-    bookedProds += {id:prodID, qty:prodQty, price:prodPrice};
+    var prodID = this.id.substring(12);
+    var prodQty = $("#booked-prod-qty-"+prodID).text();
+    var prodPrice = $("#booked-prod-price-"+prodID).text();
+    bookedProds.push({id:prodID,qty:prodQty,price:prodPrice});
   });
 
-  
+
+  $.post("/save-booking",//send details to server
+    {
+      dept_id:deptID,
+      user_id:customerID,
+      bookingType:bookingType,
+      roomType:roomType,
+      numPple:numPple,
+      chkInDate:chkInDate,
+      chkOutDate:chkOutDate,
+      bookingAmountDue:bookingAmountDue,
+      modeOfPayment:modeOfPayment,
+      bookingAmountReceived:bookingAmountReceived,
+      paymentStatus:paymentStatus,
+      paymentDueDate:paymentDueDate,
+      board:board,
+      menu:menu,
+      menuDetails:menuDetails,
+      meetingHall:meetingHall,
+      tent:tent,
+      paSystem:paSystem,
+      projector:projector,
+      bookedProds:bookedProds,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      if( data == 1 )
+        alert("Success!")
+      else
+        alert("Failed!")
+    });
+
+    $('#recordBookingsModal').modal('hide');
 
 }

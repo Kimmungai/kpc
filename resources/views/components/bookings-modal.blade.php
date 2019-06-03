@@ -51,7 +51,7 @@
                         <span class="input-group-addon">
                           <i class="fas fa-hotel"></i>
                         </span>
-                        <select name="roomType" id="roomType" class="form-control1" onchange="select_booking_type()">
+                        <select name="roomType" id="roomType" class="form-control1">
                           <option value="1" @if( old('roomType') == 1 || ( isset($user) && $user->roomType == 1 ) ) selected @endif> Single </option>
                           <option value="2" @if( old('roomType') == 2 || ( isset($user) && $user->roomType == 2 ) ) selected @endif> Double </option>
                           <option value="3" @if( old('roomType') == 3 || ( isset($user) && $user->roomType == 3 ) ) selected @endif> Delux </option>
@@ -74,7 +74,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-users"></i>
                         </span>
-                        <input name="numPple" id="numPple" type="text" class="form-control1" value="@if( old('numPple') ) {{old('numPple')}} @elseif( isset($user) ) {{$user->numPple}} @endif" placeholder="Number of People" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="numPple" id="numPple" type="text" class="form-control1" value="@if( old('numPple') ) {{old('numPple')}} @elseif( isset($user) ) {{$user->numPple}} @endif" placeholder="Number of People" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -244,20 +244,20 @@
                     </div>
                   </div>
 
-                  <div class="form-group" id="menuDetailsDateTitle">
+                  <div class="form-group" id="menuDetailsTitle">
                     <label class="col-md-2 control-label">Menu details</label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
                           <i class="fas fa-utensils"></i>
                         </span>
-                        <textarea name="menuDetailsDate" id="menuDetailsDate" class="form-control" rows="5"  placeholder="Enter any details about the menu" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">@if( old('menuDetailsDate') ) {{old('menuDetailsDate')}} @elseif( isset($user) ) {{$user->menuDetailsDate}} @endif</textarea>
+                        <textarea name="menuDetails" id="menuDetails" class="form-control" rows="5"  placeholder="Enter any details about the menu" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">@if( old('menuDetails') ) {{old('menuDetails')}} @elseif( isset($user) ) {{$user->menuDetails}} @endif</textarea>
                       </div>
                     </div>
                     <div class="col-sm-2">
-                      <p class="help-block red-text" id="menuDetailsDateHelper">
-                        @if ($errors->has('menuDetailsDate'))
-                          {{ $errors->first('menuDetailsDate') }}
+                      <p class="help-block red-text" id="menuDetailsHelper">
+                        @if ($errors->has('menuDetails'))
+                          {{ $errors->first('menuDetails') }}
                         @endif
                       </p>
                     </div>
@@ -377,95 +377,101 @@
      <!-- //tables -->
          <!--goods table-->
 
-<!--contact person start-->
-         <div class="grid-1 graph-form agile_info_shadow">
-
-            <h3 class="w3_inner_tittle two">Contact person </h3>
-            <form class="form-horizontal">
-
-              <div class="form-group" id="contactPsnNameTitle">
-                <label class="col-md-2 control-label">Name</label>
-                <div class="col-md-8">
-                  <div class="input-group input-icon right">
-                    <span class="input-group-addon">
-                      <i class="fa fa-user"></i>
-                    </span>
-                    <input name="contactPsnName" id="contactPsnName" type="text" class="form-control1" value="@if( old('contactPsnName') ) {{old('contactPsnName')}} @elseif( isset($user) ) {{$user->contactPsnName}} @endif" placeholder="Contact person name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
-                  </div>
+         <!--/start Customer-->
+         <div class="set-1_w3ls">
+             <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
+              <h3 class="w3_inner_tittle two">Contact person</h3>
+                <div class="input-group search-box">
+                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                 <div class="loading hidden d-none">
+                   <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
+                 </div>
+                 <input id="search-supplier-box"  type="text" class="form-control" name="search" placeholder="Search by name...">
                 </div>
-                <div class="col-sm-2">
-                  <p class="help-block red-text" id="contactPsnNameHelper">
-                    @if ($errors->has('contactPsnName'))
-                      {{ $errors->first('contactPsnName') }}
-                    @endif
-                  </p>
+                <div id="supplier-results-box" class="search-box-results border-1 hidden d-none">
+
                 </div>
-              </div>
+                   <div class="grid-1">
+                     <div class="form-body">
+                       <div data-example-id="simple-form-inline">
+                         <form class="form-inline">
+
+                           <div class="form-group" id="contactPsnNameTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-user"></i>
+                                 </span>
+                                 <input name="contactPsnName" id="contactPsnName" type="text" class="form-control1" value="@if( old('contactPsnName') ) {{old('contactPsnName')}} @elseif( isset($user) ) {{$user->contactPsnName}} @endif" placeholder="Name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
+                             </div>
+                           </div>
+
+                           <div class="form-group" id="contactPsnEmailTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-envelope"></i>
+                                 </span>
+                                 <input name="contactPsnEmail" id="contactPsnEmail" type="email" class="form-control1" value="@if( old('contactPsnEmail') ) {{old('contactPsnEmail')}} @elseif( isset($user) ) {{$user->contactPsnEmail}} @endif" placeholder="Email..." onblur="validate(this.id,{required:0,min:3,max:255,type:'email'},this.value)"/>
+                             </div>
+                           </div>
+
+                           <div class="form-group" id="contactPsnPhoneNumberTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-phone"></i>
+                                 </span>
+                                 <input name="contactPsnPhoneNumber" id="contactPsnPhoneNumber" type="text" class="form-control1" value="@if( old('contactPsnPhoneNumber') ) {{old('contactPsnPhoneNumber')}} @elseif( isset($user) ) {{$user->contactPsnPhoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
+                             </div>
+                           </div>
+
+                           <div class="form-group" id="contactPsnIdNoTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fas fa-id-card"></i>
+                                 </span>
+                                 <input name="contactPsnIdNo" id="contactPsnIdNo" type="text" class="form-control" value="@if( old('contactPsnIdNo') ) {{old('contactPsnIdNo')}} @elseif( isset($user) ) {{$user->contactPsnIdNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
+                             </div>
+                           </div>
+
+                         <div class="form-group">
+                           <button type="button" class="btn btn-default btn-sm" name="button" onclick="create_purchase()">Add</button>
+                         </div>
+                         </form>
+                       </div>
+                     </div>
+                    </div>
+               </div>
+              <div class="clearfix"> </div>
+       </div>
+       <!--end customer-->
+
+       <!--customer table-->
+       <!-- tables -->
+
+       <div class="agile-tables">
+
+       <div class="w3l-table-info agile_info_shadow">
+         <table   class="two-axis">
+         <thead>
+           <tr>
+           <th>Name</th>
+           <th>Email</th>
+           <th>Phone</th>
+           <th>ID No.</th>
+           </tr>
+         </thead>
+         <tbody id="table-contact-psn-info">
+
+         </tbody>
+         </table>
 
 
+       </div>
+    </div>
+   <!-- //tables -->
+   <input id="bookingDeptID" type="hidden" name="bookingDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
+   <input id="customerID" type="hidden" name="customerID" value="1">
 
-
-              <div class="form-group" id="contactPsnIdNoTitle">
-                <label class="col-md-2 control-label">ID No</label>
-                <div class="col-md-8">
-                  <div class="input-group input-icon right">
-                    <span class="input-group-addon">
-                      <i class="fas fa-id-card"></i>
-                    </span>
-                    <input name="contactPsnIdNo" id="contactPsnIdNo" type="text" class="form-control" value="@if( old('contactPsnIdNo') ) {{old('contactPsnIdNo')}} @elseif( isset($user) ) {{$user->contactPsnIdNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <p class="help-block red-text" id="contactPsnIdNoHelper">
-                    @if ($errors->has('contactPsnIdNo'))
-                      {{ $errors->first('contactPsnIdNo') }}
-                    @endif
-                  </p>
-                </div>
-              </div>
-
-
-
-              <div class="form-group" id="contactPsnPhoneNumberTitle">
-                <label class="col-md-2 control-label">Phone Number</label>
-                <div class="col-md-8">
-                  <div class="input-group input-icon right">
-                    <span class="input-group-addon">
-                      <i class="fa fa-phone"></i>
-                    </span>
-                    <input name="contactPsnPhoneNumber" id="contactPsnPhoneNumber" type="text" class="form-control1" value="@if( old('contactPsnPhoneNumber') ) {{old('contactPsnPhoneNumber')}} @elseif( isset($user) ) {{$user->contactPsnPhoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <p class="help-block red-text" id="phoneNumberHelper">
-                    @if ($errors->has('contactPsnPhoneNumber'))
-                      {{ $errors->first('contactPsnPhoneNumber') }}
-                    @endif
-                  </p>
-                </div>
-              </div>
-
-              <div class="form-group" id="contactPsnEmailTitle">
-                <label class="col-md-2 control-label">Email</label>
-                <div class="col-md-8">
-                  <div class="input-group input-icon right">
-                    <span class="input-group-addon">
-                      <i class="fa fa-envelope"></i>
-                    </span>
-                    <input name="contactPsnEmail" id="contactPsnEmail" type="email" class="form-control1" value="@if( old('contactPsnEmail') ) {{old('contactPsnEmail')}} @elseif( isset($user) ) {{$user->contactPsnEmail}} @endif" placeholder="Email..." onblur="validate(this.id,{required:0,min:3,max:255,type:'email'},this.value)"/>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <p class="help-block red-text" id="contactPsnEmailHelper">
-                    @if ($errors->has('contactPsnEmail'))
-                      {{ $errors->first('contactPsnEmail') }}
-                    @endif
-                  </p>
-                </div>
-              </div>
-
-             </form>
-     </div><!--contact person end-->
+       <!--end customer table-->
 
          </div>
          <!--//booking form-->
