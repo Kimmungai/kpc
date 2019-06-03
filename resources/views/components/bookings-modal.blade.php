@@ -273,8 +273,101 @@
                     </div>
                   </div>
 
+
+
                  </form>
+
          </div><!--general form end-->
+
+         <!--/start goods-->
+         <div class="set-1_w3ls">
+             <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
+              <h3 class="w3_inner_tittle two">Other products booked  </h3>
+
+              <div class="input-group search-box">
+               <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+               <div class="loading hidden d-none">
+                 <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
+               </div>
+               <input id="search-product-box"  type="text" class="form-control" name="search" placeholder="Search by name from records...">
+              </div>
+              <div id="product-results-box" class="search-box-results border-1 hidden d-none">
+
+              </div>
+
+                   <div class="grid-1">
+                     <div class="form-body">
+                       <div data-example-id="simple-form-inline">
+                         <form class="form-inline">
+                           <div class="form-group" id="skuTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-info"></i>
+                                 </span>
+                                 <input name="sku" id="sku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                             </div>
+                           </div>
+                           <div class="form-group" id="prodNameTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-info"></i>
+                                 </span>
+                                 <input name="prodName" id="prodName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                             </div>
+                           </div>
+                           <div class="form-group" id="quantityTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-info"></i>
+                                 </span>
+                                 <input name="quantity" id="quantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                             </div>
+                           </div>
+                           <div class="form-group" id="costTitle">
+                               <div class="input-group input-icon right">
+                                 <span class="input-group-addon">
+                                   <i class="fa fa-dollar"></i>
+                                 </span>
+                                 <input name="cost" id="cost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                             </div>
+                           </div>
+
+                         <div class="form-group">
+                           <button type="button" class="btn btn-default btn-sm" name="button" onclick="create_products()">Add</button>
+                         </div>
+                         </form>
+                       </div>
+                     </div>
+                    </div>
+               </div>
+              <div class="clearfix"> </div>
+         </div>
+         <!--end goods-->
+         <!-- tables -->
+
+         <div class="agile-tables">
+
+         <div class="w3l-table-info agile_info_shadow">
+           <table  class="two-axis">
+             <input id="purchasesID" type="hidden" name="purchasesID">
+           <thead>
+             <tr>
+             <th>SKU</th>
+             <th>Name</th>
+             <th>Quantity booked</th>
+             <th>Cost</th>
+             </tr>
+           </thead>
+           <tbody id="purchases-table">
+
+           </tbody>
+           </table>
+
+
+         </div>
+      </div>
+     <!-- //tables -->
+         <!--goods table-->
 
 <!--contact person start-->
          <div class="grid-1 graph-form agile_info_shadow">

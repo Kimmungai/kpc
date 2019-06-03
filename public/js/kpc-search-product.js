@@ -50,6 +50,7 @@ function update_prod_table(id)
       //show result box
       update_products_table(response);
       $("#product-results-box").addClass('d-none').addClass('hidden');
+      $("#product-"+response[0].id).text("0");
     });
 }
 
@@ -62,14 +63,14 @@ function update_product_quantity(purchaseID,tdId,field)
     var amount = prompt("Only digits can be entered!");
 
   }else{
-    if( field ==='quantity' ){
-      var current_val = parseInt($("#"+tdId).text());
-      var new_val = current_val + parseInt(amount);
-      if(new_val < 0){alert("Not enough items in stock!");return;}
-      $("#"+tdId).html(new_val);
-    }else{
+    //if( field ==='quantity' ){
+      //var current_val = parseInt($("#"+tdId).text());
+      //var new_val = current_val + parseInt(amount);
+      //if(new_val < 0){alert("Not enough items in stock!");return;}
+      //$("#"+tdId).html(new_val);
+    //}else{
       $("#"+tdId).html(amount);
-    }
+    //}
 
     //send details to server
     $.post("/update-product",

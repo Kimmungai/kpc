@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('dept_id')->unsigned()->index()->nullable();
             $table->integer('purchases_id')->unsigned()->index()->nullable();
-            $table->integer('booking_id')->unsigned()->index()->nullable();
             $table->integer('report_id')->unsigned()->index()->nullable();
             $table->string('name')->nullable();
             $table->string('sku')->nullable();

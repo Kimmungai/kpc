@@ -40,6 +40,7 @@ class ProductsAjaxController extends Controller
       $expense->purchase_id = $request->purchases_id;
       $expense->product_id = $product->id;
       $expense->cost = $request->cost;
+      $expense->suppliedQuantity = $request->quantity;
       $expense->save();
       $data[0] = $product;
       return $data;
@@ -87,14 +88,17 @@ class ProductsAjaxController extends Controller
       if( $id )
       {
         $product = Product::find($id);
-        if( ($field ==='quantity') && ($product->quantity < $value) )
+        if( ($field ==='bookedQuantity') && ($product->quantity < $value) )
         {
           return 0;
         }
-        if( $field ==='quantity' )
+        if( $field ==='suppliedQuantity' )
         {
-          return Product::where('id',$id)->update([
-            $field => ($product->quantity + $value)
+          Product::where('id',$id)->update([
+            'quantity' => ($product->quantity + $value)
+          ]);
+          return Expense::where('purchase_id',$purchase_id)->update([
+            $field => $value
           ]);
         }else if($field === 'cost'){
           return Expense::where('purchase_id',$purchase_id)->update([

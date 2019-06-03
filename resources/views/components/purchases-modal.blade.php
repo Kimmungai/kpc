@@ -198,7 +198,7 @@
           <tr>
           <th>SKU</th>
           <th>Name</th>
-          <th>Quantity</th>
+          <th>Quantity supplied</th>
           <th>Cost</th>
           </tr>
         </thead>

@@ -28,9 +28,9 @@ class UserAjaxController extends Controller
         $purchase->user_id = $user->id;
         $purchase->deleted_at = Carbon::now();
         $purchase->save();
-        $expense = new Expense;
+        /*$expense = new Expense;
         $expense->purchase_id = $purchase->id;
-        $expense->save();
+        $expense->save();*/
         $data[0] = $user;
         $data[1] = $purchase;
         return $data;
