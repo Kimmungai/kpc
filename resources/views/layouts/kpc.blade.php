@@ -18,6 +18,7 @@
 <script src="{{ asset('js/kpc-search-supplier.js') }}" defer></script>
 <script src="{{ asset('js/kpc-search-product.js') }}" defer></script>
 <script src="{{ asset('js/kpc-save-purchases.js') }}" defer></script>
+<script src="{{ asset('js/kpc-save-booking.js') }}" defer></script>
 
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);

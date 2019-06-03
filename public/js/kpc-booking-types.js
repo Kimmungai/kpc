@@ -1,5 +1,6 @@
 function select_booking_type(bookingType)
 {
+  $("#roomTypeSec").addClass('hidden').addClass('d-none');
   switch(bookingType){
     case '1':
       $("#chk_out_dateTitle").addClass('hidden').addClass('d-none');
@@ -9,6 +10,7 @@ function select_booking_type(bookingType)
 
     case '2':
     $("#chk_out_dateTitle").removeClass('hidden').removeClass('d-none');
+    $("#roomTypeSec").removeClass('hidden').removeClass('d-none');
     $(".chk_in_dateName").text("Check in");
     $(".chk_out_dateName").text("Check out");
     $("#formTitle").text("Room Booking Form ");

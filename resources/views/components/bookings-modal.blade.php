@@ -26,25 +26,25 @@
                         <span class="input-group-addon">
                           <i class="fa fa-gift"></i>
                         </span>
-                        <select name="boookingType" id="boookingType" class="form-control1" onchange="select_booking_type(this.value)">
-                          <option value="1" @if( old('boookingType') == 1 || ( isset($user) && $user->boookingType == 1 ) ) selected @endif> Food ordering </option>
-                          <option value="2" @if( old('boookingType') == 2 || ( isset($user) && $user->boookingType == 2 ) ) selected @endif> Room booking </option>
-                          <option value="3" @if( old('boookingType') == 3 || ( isset($user) && $user->boookingType == 3 ) ) selected @endif> Tent Hiring </option>
-                          <option value="4" @if( old('boookingType') == 4 || ( isset($user) && $user->boookingType == 4 ) ) selected @endif> Meeting hall booking </option>
-                          <option value="5" @if( old('boookingType') == 5 || ( isset($user) && $user->boookingType == 5 ) ) selected @endif> Compound booking </option>
+                        <select name="bookingType" id="bookingType" class="form-control1" onchange="select_booking_type(this.value)">
+                          <option value="1" @if( old('bookingType') == 1 || ( isset($user) && $user->bookingType == 1 ) ) selected @endif> Food ordering </option>
+                          <option value="2" @if( old('bookingType') == 2 || ( isset($user) && $user->bookingType == 2 ) ) selected @endif> Room booking </option>
+                          <option value="3" @if( old('bookingType') == 3 || ( isset($user) && $user->bookingType == 3 ) ) selected @endif> Tent Hiring </option>
+                          <option value="4" @if( old('bookingType') == 4 || ( isset($user) && $user->bookingType == 4 ) ) selected @endif> Meeting hall booking </option>
+                          <option value="5" @if( old('bookingType') == 5 || ( isset($user) && $user->bookingType == 5 ) ) selected @endif> Compound booking </option>
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-2">
                       <p class="help-block red-text">
-                        @if ($errors->has('boookingType'))
-                          {{ $errors->first('boookingType') }}
+                        @if ($errors->has('bookingType'))
+                          {{ $errors->first('bookingType') }}
                         @endif
                       </p>
                     </div>
                   </div>
 
-                  <div class="form-group hidden d-none">
+                  <div id="roomTypeSec" class="form-group hidden d-none">
                     <label class="col-md-2 control-label">Room type</label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
@@ -124,20 +124,20 @@
                     </div>
                   </div>
 
-                  <div class="form-group" id="amountDueTitle">
+                  <div class="form-group" id="bookingAmountDueTitle">
                     <label class="col-md-2 control-label">Amount due</label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="amountDue" id="amountDue" type="number" min="0" class="form-control1" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control1" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
-                      <p class="help-block red-text" id="amountDueHelper">
-                        @if ($errors->has('amountDue'))
-                          {{ $errors->first('amountDue') }}
+                      <p class="help-block red-text" id="bookingAmountDueHelper">
+                        @if ($errors->has('bookingAmountDue'))
+                          {{ $errors->first('bookingAmountDue') }}
                         @endif
                       </p>
                     </div>
@@ -152,10 +152,10 @@
                           <i class="fa fa-info"></i>
                         </span>
                         <select name="modeOfPayment" id="modeOfPayment"  class="form-control1">
-                          <option value="1" @if( old('modeOfPayment') == 1 || ( isset($user) && $user->modeOfPayment == 1 ) ) selected @endif>Cheque</option>
-                          <option value="2" @if( old('modeOfPayment') == 2 || ( isset($user) && $user->modeOfPayment == 2 ) ) selected @endif>Mpesa</option>
-                          <option value="3" @if( old('modeOfPayment') == 3 || ( isset($user) && $user->modeOfPayment == 3 ) ) selected @endif>Bank transfer</option>
-                          <option value="4" @if( old('modeOfPayment') == 4 || ( isset($user) && $user->modeOfPayment == 4 ) ) selected @endif>Cash</option>
+                          <option value="1" @if( old('modeOfPayment') == 1 || ( isset($user) && $user->modeOfPayment == 1 ) ) selected @endif>Paid by cash</option>
+                          <option value="2" @if( old('modeOfPayment') == 2 || ( isset($user) && $user->modeOfPayment == 2 ) ) selected @endif>Paid by cheque</option>
+                          <option value="3" @if( old('modeOfPayment') == 3 || ( isset($user) && $user->modeOfPayment == 3 ) ) selected @endif>Paid by bank transfer</option>
+                          <option value="4" @if( old('modeOfPayment') == 4 || ( isset($user) && $user->modeOfPayment == 4 ) ) selected @endif>MPESA</option>
                         </select>
                       </div>
                     </div>
@@ -168,20 +168,20 @@
                     </div>
                   </div>
 
-                  <div class="form-group" id="amountReceivedTitle">
+                  <div class="form-group" id="bookingAmountReceivedTitle">
                     <label class="col-md-2 control-label">Amount Received</label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="amountReceived" id="amountReceived" type="number" min="0" class="form-control1" value="@if( old('amountReceived') ) {{old('amountReceived')}} @elseif( isset($user) ) {{$user->amountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control1" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
-                      <p class="help-block red-text" id="amountReceivedHelper">
-                        @if ($errors->has('amountReceived'))
-                          {{ $errors->first('amountReceived') }}
+                      <p class="help-block red-text" id="bookingAmountReceivedHelper">
+                        @if ($errors->has('bookingAmountReceived'))
+                          {{ $errors->first('bookingAmountReceived') }}
                         @endif
                       </p>
                     </div>
@@ -231,16 +231,16 @@
                   <div class="form-group">
                     <label for="checkbox" class="col-sm-2 control-label">Board</label>
                     <div class="col-sm-8">
+                      <div class="checkbox-inline"><label><input value="2" name="board" type="radio" checked> Full board</label></div>
                       <div class="checkbox-inline"><label><input value="1" name="board" type="radio"> Half board</label></div>
-                      <div class="checkbox-inline"><label><input value="1" name="board" type="radio"> Full board</label></div>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="checkbox" class="col-sm-2 control-label">Menu</label>
                     <div class="col-sm-8">
-                      <div class="checkbox-inline"><label><input value="1" name="board" type="radio"> Ordinary</label></div>
-                      <div class="checkbox-inline"><label><input value="1" name="board" type="radio"> Special</label></div>
+                      <div class="checkbox-inline"><label><input value="1" name="menu" type="radio" checked> Ordinary</label></div>
+                      <div class="checkbox-inline"><label><input value="2" name="menu" type="radio"> Special</label></div>
                     </div>
                   </div>
 
@@ -266,10 +266,10 @@
                   <div class="form-group">
                     <label for="checkbox" class="col-sm-2 control-label">Other services</label>
                     <div class="col-sm-8">
-                      <div class="checkbox-inline"><label><input value="1" name="meetingHall" type="checkbox"> Meeting hall</label></div>
-                      <div class="checkbox-inline"><label><input value="1" name="tent" type="checkbox"> Tent</label></div>
-                      <div class="checkbox-inline"><label><input value="1" name="paSystem" type="checkbox"> PA system</label></div>
-                      <div class="checkbox-inline"><label><input value="1" name="projector" type="checkbox"> Projector</label></div>
+                      <div class="checkbox-inline"><label><input value="1" name="meetingHall" id="meetingHall" type="checkbox"> Meeting hall</label></div>
+                      <div class="checkbox-inline"><label><input value="1" name="tent" id="tent" type="checkbox"> Tent</label></div>
+                      <div class="checkbox-inline"><label><input value="1" name="paSystem" id="paSystem" type="checkbox"> PA system</label></div>
+                      <div class="checkbox-inline"><label><input value="1" name="projector" id="projector" type="checkbox"> Projector</label></div>
                     </div>
                   </div>
 
@@ -355,10 +355,18 @@
              <th>SKU</th>
              <th>Name</th>
              <th>Quantity booked</th>
-             <th>Cost</th>
+             <th>Price</th>
              </tr>
            </thead>
-           <tbody id="purchases-table">
+           <tbody id="booked-products-table">
+
+             <tr id="booked-prod-1">
+               <td>fish001</td><td>Fish</td><td id="booked-prod-qty-1">52</td><td id="booked-prod-price-1">100</td>
+             </tr>
+
+             <tr id="booked-prod-2">
+               <td>fish001</td><td>Fish</td><td id="booked-prod-qty-2">5252</td><td id="booked-prod-price-2">100</td>
+             </tr>
 
            </tbody>
            </table>
@@ -375,20 +383,20 @@
             <h3 class="w3_inner_tittle two">Contact person </h3>
             <form class="form-horizontal">
 
-              <div class="form-group" id="firstNameTitle">
+              <div class="form-group" id="contactPsnNameTitle">
                 <label class="col-md-2 control-label">Name</label>
                 <div class="col-md-8">
                   <div class="input-group input-icon right">
                     <span class="input-group-addon">
                       <i class="fa fa-user"></i>
                     </span>
-                    <input name="firstName" id="firstName" type="text" class="form-control1" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="Contact person name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
+                    <input name="contactPsnName" id="contactPsnName" type="text" class="form-control1" value="@if( old('contactPsnName') ) {{old('contactPsnName')}} @elseif( isset($user) ) {{$user->contactPsnName}} @endif" placeholder="Contact person name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <p class="help-block red-text" id="firstNameHelper">
-                    @if ($errors->has('firstName'))
-                      {{ $errors->first('firstName') }}
+                  <p class="help-block red-text" id="contactPsnNameHelper">
+                    @if ($errors->has('contactPsnName'))
+                      {{ $errors->first('contactPsnName') }}
                     @endif
                   </p>
                 </div>
@@ -397,20 +405,20 @@
 
 
 
-              <div class="form-group" id="idNoTitle">
+              <div class="form-group" id="contactPsnIdNoTitle">
                 <label class="col-md-2 control-label">ID No</label>
                 <div class="col-md-8">
                   <div class="input-group input-icon right">
                     <span class="input-group-addon">
                       <i class="fas fa-id-card"></i>
                     </span>
-                    <input name="idNo" id="idNo" type="text" class="form-control" value="@if( old('idNo') ) {{old('idNo')}} @elseif( isset($user) ) {{$user->idNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
+                    <input name="contactPsnIdNo" id="contactPsnIdNo" type="text" class="form-control" value="@if( old('contactPsnIdNo') ) {{old('contactPsnIdNo')}} @elseif( isset($user) ) {{$user->contactPsnIdNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <p class="help-block red-text" id="idNoHelper">
-                    @if ($errors->has('idNo'))
-                      {{ $errors->first('idNo') }}
+                  <p class="help-block red-text" id="contactPsnIdNoHelper">
+                    @if ($errors->has('contactPsnIdNo'))
+                      {{ $errors->first('contactPsnIdNo') }}
                     @endif
                   </p>
                 </div>
@@ -418,39 +426,39 @@
 
 
 
-              <div class="form-group" id="phoneNumberTitle">
+              <div class="form-group" id="contactPsnPhoneNumberTitle">
                 <label class="col-md-2 control-label">Phone Number</label>
                 <div class="col-md-8">
                   <div class="input-group input-icon right">
                     <span class="input-group-addon">
                       <i class="fa fa-phone"></i>
                     </span>
-                    <input name="phoneNumber" id="phoneNumber" type="text" class="form-control1" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
+                    <input name="contactPsnPhoneNumber" id="contactPsnPhoneNumber" type="text" class="form-control1" value="@if( old('contactPsnPhoneNumber') ) {{old('contactPsnPhoneNumber')}} @elseif( isset($user) ) {{$user->contactPsnPhoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
                   </div>
                 </div>
                 <div class="col-sm-2">
                   <p class="help-block red-text" id="phoneNumberHelper">
-                    @if ($errors->has('phoneNumber'))
-                      {{ $errors->first('phoneNumber') }}
+                    @if ($errors->has('contactPsnPhoneNumber'))
+                      {{ $errors->first('contactPsnPhoneNumber') }}
                     @endif
                   </p>
                 </div>
               </div>
 
-              <div class="form-group" id="emailTitle">
+              <div class="form-group" id="contactPsnEmailTitle">
                 <label class="col-md-2 control-label">Email</label>
                 <div class="col-md-8">
                   <div class="input-group input-icon right">
                     <span class="input-group-addon">
                       <i class="fa fa-envelope"></i>
                     </span>
-                    <input name="email" id="email" type="email" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:0,min:3,max:255,type:'email'},this.value)"/>
+                    <input name="contactPsnEmail" id="contactPsnEmail" type="email" class="form-control1" value="@if( old('contactPsnEmail') ) {{old('contactPsnEmail')}} @elseif( isset($user) ) {{$user->contactPsnEmail}} @endif" placeholder="Email..." onblur="validate(this.id,{required:0,min:3,max:255,type:'email'},this.value)"/>
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <p class="help-block red-text" id="emailHelper">
-                    @if ($errors->has('email'))
-                      {{ $errors->first('email') }}
+                  <p class="help-block red-text" id="contactPsnEmailHelper">
+                    @if ($errors->has('contactPsnEmail'))
+                      {{ $errors->first('contactPsnEmail') }}
                     @endif
                   </p>
                 </div>
@@ -464,7 +472,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-success btn-lg"  onclick="save_booking()">Save</button>
         </div>
       </div>
     </div>
