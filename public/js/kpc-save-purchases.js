@@ -116,7 +116,7 @@ function update_products_table(data,cost=0)//refresh products table
   if( response.length )//means it is an array
   {
     var purchaseID = $("#purchasesID").val();
-    $("#purchases-table").append('<tr><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">'+response[0].quantity+'</td><td class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
+    $("#purchases-table").append('<tr><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">1</td><td class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
 
   }else{
 

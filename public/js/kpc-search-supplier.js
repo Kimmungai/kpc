@@ -84,6 +84,7 @@ function update_amount_due(purchaseID,tdId,field)
     amount = parseInt(tdId);//any no.
   }else{
     var amount = prompt("please enter amount in  digits only");
+    if( amount == '' ){ amount=0; }
   }
   if( isNaN(amount) )
   {

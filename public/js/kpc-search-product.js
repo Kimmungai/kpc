@@ -60,9 +60,10 @@ function update_product_quantity(purchaseID,tdId,field)
   var productID = tdId.substring(8);
   if( isNaN(amount) )
   {
-    var amount = prompt("Only digits can be entered!");
+    amount = prompt("Only digits can be entered!");
 
   }else{
+    if( amount == '' ){ amount = 0; }
     //if( field ==='quantity' ){
       //var current_val = parseInt($("#"+tdId).text());
       //var new_val = current_val + parseInt(amount);

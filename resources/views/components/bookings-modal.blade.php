@@ -289,9 +289,9 @@
                <div class="loading hidden d-none">
                  <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
                </div>
-               <input id="search-product-box"  type="text" class="form-control" name="search" placeholder="Search by name from records...">
+               <input id="search-booked-product"  type="text" class="form-control" name="search" placeholder="Search by name from records..." onkeyup="std_search_product(this.id,this.value,'booked-products-table')">
               </div>
-              <div id="product-results-box" class="search-box-results border-1 hidden d-none">
+              <div id="search-booked-product-results" class="search-box-results border-1 hidden d-none">
 
               </div>
 
@@ -304,7 +304,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="sku" id="sku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="sku" id="bookingSku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="prodNameTitle">
@@ -312,7 +312,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="prodName" id="prodName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="prodName" id="bookingProdName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="quantityTitle">
@@ -320,7 +320,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="quantity" id="quantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="quantity" id="bookingQuantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="costTitle">
@@ -328,12 +328,12 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-dollar"></i>
                                  </span>
-                                 <input name="cost" id="cost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="cost" id="bookingCost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
 
                          <div class="form-group">
-                           <button type="button" class="btn btn-default btn-sm" name="button" onclick="create_products()">Add</button>
+                           <button type="button" class="btn btn-default btn-sm" name="button" onclick="booking_create_products()">Add</button>
                          </div>
                          </form>
                        </div>
@@ -360,13 +360,6 @@
            </thead>
            <tbody id="booked-products-table">
 
-             <tr id="booked-prod-1">
-               <td>fish001</td><td>Fish</td><td id="booked-prod-qty-1">52</td><td id="booked-prod-price-1">100</td>
-             </tr>
-
-             <tr id="booked-prod-2">
-               <td>fish001</td><td>Fish</td><td id="booked-prod-qty-2">5252</td><td id="booked-prod-price-2">100</td>
-             </tr>
 
            </tbody>
            </table>

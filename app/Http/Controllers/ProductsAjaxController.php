@@ -73,6 +73,11 @@ class ProductsAjaxController extends Controller
         $data[0] = $product;
         $data[1] = $expense;
         return $data;
+
+      }elseif( $id ){
+
+        return $product = Product::find($id);
+
       }
     }
 
