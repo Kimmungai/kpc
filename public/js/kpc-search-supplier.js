@@ -1,6 +1,6 @@
 $('#search-supplier-box').on('keyup', function() {
 
-     if (this.value.length > 3) {
+     if (this.value.length > 2) {
 
        //send details to server
        $.post("/search-user",
@@ -41,7 +41,7 @@ function update_sup_table(id)
   var userID = id.substring(11);
   var deptID = $("#deptID").val();
   //get user from server
-  $.post("/get-user",
+  $.post("/get-purchases-user",
     {
       userID:userID,
       dept_id:deptID,

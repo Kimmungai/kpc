@@ -26,8 +26,12 @@ Route::get('/purchases','PurchasesController@index')->name('purchases');
 //users
 Route::get('users','UserController@users_top')->name('users');
 Route::get('users/{type}','UserRegistrationController@index')->name('usersByType');
-Route::post('search-user','UserAjaxController@search_user');
+Route::post('search-user/{type?}','UserAjaxController@search_user');
+Route::post('search-any-user/','UserAjaxController@search_any_user');
+Route::post('get-purchases-user','UserAjaxController@get_purchases_user');
 Route::post('get-user','UserAjaxController@get_user');
+Route::post('create-user','UserAjaxController@create_user');
+
 
 
 Route::resource('user-registration','UserRegistrationController');

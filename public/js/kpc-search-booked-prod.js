@@ -43,7 +43,7 @@ function std_update_products_table(data,cost=0,tableID='booked-products-table')/
   {
     if( !$("#prod-result-"+response.id).length )
     {
-      $("#"+tableID).append('<tr id="prod-result-'+response.id+'"><td>'+response.sku+'</td><td>'+response.name+'</td><td class="text-info cursor" id="result-prod-qty-'+response.id+'" onclick="std_update_amount_due(this.id)">1</td><td id="result-prod-price-'+response.id+'" class="text-info cursor" onclick="std_update_amount_due(this.id)">'+response.price+'</td></tr>');
+      $("#"+tableID).append('<tr data-prod="'+response.id+'" id="prod-result-'+response.id+'"><td>'+response.sku+'</td><td>'+response.name+'</td><td class="text-info cursor" id="booked-prod-qty-'+response.id+'" onclick="std_update_amount_due(this.id,'+response.quantity+')">1</td><td id="booked-prod-price-'+response.id+'" class="text-info cursor" onclick="std_update_amount_due(this.id)">'+response.price+'</td></tr>');
     }else{
       alert("Item already added!")
     }
@@ -80,7 +80,7 @@ function std_update_prod_table(id)
     });
 }
 
-function std_update_amount_due(tdId)
+function std_update_amount_due(tdId,qty=0)
 {
     var amount = prompt("please enter amount in  digits only");
     if( amount == '' ){ amount=0; }
@@ -90,13 +90,14 @@ function std_update_amount_due(tdId)
     alert("Only digits can be entered! Please try again.");
 
   }else{
+    if( qty != 0 && ( qty < amount)){ alert("Not enough in stock. Maximum available is "+qty);return; }
 
     $("#"+tdId).html(amount);
   }
   //alert(userID);
 }
 
-function booking_create_products()//products details (products table)
+/*function booking_create_products()//products details (products table)
 {
   //grab form inputs
   var sku = $("#bookingSku").val();
@@ -119,4 +120,118 @@ function booking_create_products()//products details (products table)
     function(data,status){
       //update_products_table(data,cost);
     });
+}*/
+
+function std_search_user(value,tableID)
+{
+  if (value.length > 2) {
+
+    //send details to server
+    $.post("/search-any-user",
+      {
+        string:value,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        //show result box
+        std_update_user_results(data,tableID);
+      });
+
+  }
+}
+
+function std_update_user_results(data,tableID)
+{
+
+  $("#"+tableID+"-results-box").html('');
+  $("#"+tableID+"-results-box").removeClass('d-none').removeClass('hidden');
+  if( data.length )
+  {
+    for ( var x=0;x<data.length;x++ )
+    {
+      if( !$("#"+tableID+"user-result-"+data[x].id).length )
+      {
+        $("#"+tableID+"-results-box").append('<p data-user="'+data[x].id+'" id="'+tableID+'user-result-'+data[x].id+'" onclick="std_update_user_table(this.id,\''+tableID+'\')">'+data[x].firstName+'<a class="pull-right" href="#" >select</a></p>');
+      }
+    }
+  }else{
+    $("#"+tableID+"-results-box").append('<p> No records found!</p>');
+  }
+}
+
+function std_update_user_table(id,tableID)
+{
+  var userID = $("#"+id).data('user');
+  //get user from server
+  $.post("/get-user",
+    {
+      userID:userID,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //show result box
+      std_update_users_table(data,tableID);
+      $("#"+tableID+"-results-box").addClass('d-none').addClass('hidden');
+      $("#"+tableID+"-input").val('');
+    });
+}
+
+
+function std_update_users_table(data,tableID)//refresh users table
+{
+
+  if( isObject(data) )//means it is an object
+  {
+    $("#customerID").val(data.id);
+    $("#"+tableID).html('<tr id="user-'+data.id+'"><td>'+data.firstName+'</td><td>'+data.email+'</td><td>'+data.phoneNumber+'</td><td> '+data.idNo+'</td></tr>');
+
+  }
+
+}
+
+
+function std_create_user(formID,tableID)
+{
+  event.preventDefault();
+  //grab form inputs
+  var firstName = $("#"+formID).find('input[name="firstName"]').val();
+  var email = $("#"+formID).find('input[name="email"]').val();
+  var phoneNumber = $("#"+formID).find('input[name="phoneNumber"]').val();
+  var idNo = $("#"+formID).find('input[name="idNo"]').val();
+  var deptID = $("#deptID").val();
+  //send details to server
+  $.post("/create-user",
+    {
+      type:2,
+      org_id:1,
+      firstName: firstName,
+      email: email,
+      phoneNumber: phoneNumber,
+      idNo:idNo,
+      dept: deptID,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      if( data.id )
+      {
+        std_update_users_table(data,tableID);
+        std_clear_inputs(formID);
+      }
+      else{
+
+        if( data.firstName != null){ alert(data.firstName); }
+        if( data.email != null){ alert(data.email); }
+        if( data.phoneNumber != null){ alert(data.phoneNumber); }
+        if( data.idNo != null){ alert(data.idNo); }
+
+      }
+    });
+
+  function  std_clear_inputs(formID)
+    {
+      $("#"+formID).find('input[name="firstName"]').val('');
+      $("#"+formID).find('input[name="email"]').val('');
+      $("#"+formID).find('input[name="phoneNumber"]').val('');
+      $("#"+formID).find('input[name="idNo"]').val('');
+    }
 }

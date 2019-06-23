@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookingAjax;
 use App\Booking;
 use App\Revenue;
-
+use App\Product;
 class BookingsAjaxController extends Controller
 {
     public function save_booking( StoreBookingAjax $request )
@@ -22,6 +22,7 @@ class BookingsAjaxController extends Controller
 
       //create revenue
       $revenueData = $request->bookedProds;
+      if($revenueData == ''){$revenueData=[];}
       //return $revenueData[0]['id'];
       foreach( $revenueData as $revenueDatum )
       {
@@ -29,13 +30,26 @@ class BookingsAjaxController extends Controller
         $revenue = new Revenue;
         $revenue->booking_id = $booking->id;
         $revenue->product_id = $revenueDatum['id'];
-        $revenue->bookedQuantity = $revenueDatum['price'];
-        $revenue->price = $revenueDatum['qty'];
+        $revenue->bookedQuantity = $revenueDatum['qty'];
+        //reduce stock
+        $this->reduceStock( $revenueDatum['id'], $revenueDatum['qty']);
+        $revenue->price = $revenueDatum['price'];
         $revenue->save();
       }
 
       if( $booking )
         return 1;
       return 0;
+    }
+
+    protected function reduceStock($prodId, $reduceQty)
+    {
+      $product = Product::find($prodId);
+      $newQuantity = $product->quantity - $reduceQty;
+      if(Product::where('id',$prodId)->update(['quantity'=>$newQuantity]))
+      {
+        return true;
+      }
+      return false;
     }
 }

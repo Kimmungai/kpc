@@ -68,7 +68,7 @@
                   </div>
 
                   <div class="form-group" id="numPpleTitle">
-                    <label class="col-md-2 control-label">No of People</label>
+                    <label class="col-md-2 control-label">No of People <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
@@ -87,7 +87,7 @@
                   </div>
 
                   <div class="form-group" id="chk_in_dateTitle">
-                    <label class="col-md-2 control-label chk_in_dateName">Date</label>
+                    <label class="col-md-2 control-label chk_in_dateName">Date <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
@@ -106,7 +106,7 @@
                   </div>
 
                   <div class="form-group hidden d-none" id="chk_out_dateTitle">
-                    <label class="col-md-2 control-label chk_out_dateName">Date</label>
+                    <label class="col-md-2 control-label chk_out_dateName">Date <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
@@ -125,13 +125,13 @@
                   </div>
 
                   <div class="form-group" id="bookingAmountDueTitle">
-                    <label class="col-md-2 control-label">Amount due</label>
+                    <label class="col-md-2 control-label">Amount due <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control1" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control1" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -169,13 +169,13 @@
                   </div>
 
                   <div class="form-group" id="bookingAmountReceivedTitle">
-                    <label class="col-md-2 control-label">Amount Received</label>
+                    <label class="col-md-2 control-label">Amount Received <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control1" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control1" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -295,7 +295,7 @@
 
               </div>
 
-                   <div class="grid-1">
+                   <!--<div class="grid-1">
                      <div class="form-body">
                        <div data-example-id="simple-form-inline">
                          <form class="form-inline">
@@ -338,7 +338,7 @@
                          </form>
                        </div>
                      </div>
-                    </div>
+                   </div>-->
                </div>
               <div class="clearfix"> </div>
          </div>
@@ -373,65 +373,80 @@
          <!--/start Customer-->
          <div class="set-1_w3ls">
              <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
-              <h3 class="w3_inner_tittle two">Contact person</h3>
-                <div class="input-group search-box">
+              <h3 class="w3_inner_tittle two">Customer details <span class="text-danger">*</span></h3>
+              <div id="booking-search-customer-container">
+                <div class="input-group search-box" >
                  <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                  <div class="loading hidden d-none">
                    <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
                  </div>
-                 <input id="search-supplier-box"  type="text" class="form-control" name="search" placeholder="Search by name...">
-                </div>
-                <div id="supplier-results-box" class="search-box-results border-1 hidden d-none">
+                 <input id="table-booking-contact-input"  type="text" class="form-control" name="search" placeholder="Search by name..." onkeyup="std_search_user(this.value,'table-booking-contact')">
 
                 </div>
-                   <div class="grid-1">
-                     <div class="form-body">
-                       <div data-example-id="simple-form-inline">
-                         <form class="form-inline">
+                <div id="table-booking-contact-results-box" class="search-box-results border-1 hidden d-none">
 
-                           <div class="form-group" id="contactPsnNameTitle">
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
+                </div>
+              </div>
+                   <div class="grid-1 hidden d-none" id="booking-create-user-form-container">
+                     <div class="form-body " >
+                       <div  data-example-id="simple-form-inline">
+                         <form id="booking-create-user-form" class="form-inline " onsubmit="std_create_user(this.id,'table-booking-contact')">
+
+                           <div class="form-group" >
                                <div class="input-group input-icon right">
                                  <span class="input-group-addon">
                                    <i class="fa fa-user"></i>
                                  </span>
-                                 <input name="contactPsnName" id="contactPsnName" type="text" class="form-control1" value="@if( old('contactPsnName') ) {{old('contactPsnName')}} @elseif( isset($user) ) {{$user->contactPsnName}} @endif" placeholder="Name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
+                                 <input  name="firstName"  type="text" class="form-control1" value="" placeholder="Name..." required />
                              </div>
                            </div>
 
-                           <div class="form-group" id="contactPsnEmailTitle">
+                           <div class="form-group" >
                                <div class="input-group input-icon right">
                                  <span class="input-group-addon">
                                    <i class="fa fa-envelope"></i>
                                  </span>
-                                 <input name="contactPsnEmail" id="contactPsnEmail" type="email" class="form-control1" value="@if( old('contactPsnEmail') ) {{old('contactPsnEmail')}} @elseif( isset($user) ) {{$user->contactPsnEmail}} @endif" placeholder="Email..." onblur="validate(this.id,{required:0,min:3,max:255,type:'email'},this.value)"/>
+                                 <input name="email"  type="email"  class="form-control1" value="" placeholder="Email..." required/>
                              </div>
                            </div>
 
-                           <div class="form-group" id="contactPsnPhoneNumberTitle">
+                           <div class="form-group" >
                                <div class="input-group input-icon right">
                                  <span class="input-group-addon">
                                    <i class="fa fa-phone"></i>
                                  </span>
-                                 <input name="contactPsnPhoneNumber" id="contactPsnPhoneNumber" type="text" class="form-control1" value="@if( old('contactPsnPhoneNumber') ) {{old('contactPsnPhoneNumber')}} @elseif( isset($user) ) {{$user->contactPsnPhoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
+                                 <input name="phoneNumber"  type="number" class="form-control1" value=""  placeholder="Phone Number..." required />
                              </div>
                            </div>
 
-                           <div class="form-group" id="contactPsnIdNoTitle">
+                           <div class="form-group" >
                                <div class="input-group input-icon right">
                                  <span class="input-group-addon">
                                    <i class="fas fa-id-card"></i>
                                  </span>
-                                 <input name="contactPsnIdNo" id="contactPsnIdNo" type="text" class="form-control" value="@if( old('contactPsnIdNo') ) {{old('contactPsnIdNo')}} @elseif( isset($user) ) {{$user->contactPsnIdNo}} @endif" placeholder="ID No..." onblur="validate(this.id,{required:0,min:5,max:10,type:'numeric'},this.value)"/>
+                                 <input name="idNo" type="number" class="form-control" value="" placeholder="ID No..." />
                              </div>
                            </div>
 
                          <div class="form-group">
-                           <button type="button" class="btn btn-default btn-sm" name="button" onclick="create_purchase()">Add</button>
+                           <button type="submit" class="btn btn-default btn-sm" name="button" >Add</button>
                          </div>
+
+
                          </form>
+
                        </div>
+
+                     </div>
+                     <div class="form-group">
+                       <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-search-customer-container','booking-create-user-form-container')">Search customer from records instead <i class="fa fa-database"></i></button>
                      </div>
                     </div>
+
+
                </div>
               <div class="clearfix"> </div>
        </div>
@@ -452,7 +467,7 @@
            <th>ID No.</th>
            </tr>
          </thead>
-         <tbody id="table-contact-psn-info">
+         <tbody id="table-booking-contact">
 
          </tbody>
          </table>
@@ -462,7 +477,7 @@
     </div>
    <!-- //tables -->
    <input id="bookingDeptID" type="hidden" name="bookingDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
-   <input id="customerID" type="hidden" name="customerID" value="1">
+   <input id="customerID" type="hidden" name="customerID" value="">
 
        <!--end customer table-->
 

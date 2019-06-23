@@ -11,6 +11,7 @@
 					<div class="set-1_w3ls">
 							<div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
 							 <h3 class="w3_inner_tittle two">Supplier</h3>
+               <div class="" id="search-supplier-form-container">
                  <div class="input-group search-box">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                   <div class="loading hidden d-none">
@@ -21,7 +22,13 @@
                  <div id="supplier-results-box" class="search-box-results border-1 hidden d-none">
 
                  </div>
-										<div class="grid-1">
+                 <div class="form-group">
+                   <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('purchase-create-supplier-form-container','search-supplier-form-container')">Create new supplier record instead <i class="fa fa-database"></i></button>
+                 </div>
+               </div>
+
+
+										<div class="grid-1 hidden d-none" id="purchase-create-supplier-form-container">
 											<div class="form-body">
 												<div data-example-id="simple-form-inline">
                           <form class="form-inline">
@@ -86,6 +93,9 @@
                           </form>
                         </div>
 											</div>
+                      <div class="form-group">
+                        <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('search-supplier-form-container','purchase-create-supplier-form-container')">Search supplier from records instead <i class="fa fa-database"></i></button>
+                      </div>
 										 </div>
 								</div>
 							 <div class="clearfix"> </div>
@@ -126,18 +136,30 @@
             <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
              <h3 class="w3_inner_tittle two">Goods supplied  </h3>
 
-             <div class="input-group search-box">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-              <div class="loading hidden d-none">
-                <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
-              </div>
-              <input id="search-product-box"  type="text" class="form-control" name="search" placeholder="Search by name...">
-             </div>
-             <div id="product-results-box" class="search-box-results border-1 hidden d-none">
+             <div id="purchases-search-product-form-container">
+
+               <div class="input-group search-box">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <div class="loading hidden d-none">
+                  <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
+                </div>
+                <input id="search-product-box"  type="text" class="form-control" name="search" placeholder="Search by name...">
+               </div>
+
+               <div id="product-results-box" class="search-box-results border-1 hidden d-none">
+
+               </div>
+
+               <div class="form-group">
+                 <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('purchases-create-product-form-container','purchases-search-product-form-container')">Create new product record instead <i class="fa fa-database"></i></button>
+               </div>
 
              </div>
 
-                  <div class="grid-1">
+
+
+
+                  <div class="grid-1 d-none hidden" id="purchases-create-product-form-container">
                     <div class="form-body">
                       <div data-example-id="simple-form-inline">
                         <form class="form-inline">
@@ -179,6 +201,9 @@
                         </div>
                         </form>
                       </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('purchases-search-product-form-container','purchases-create-product-form-container')">Search product from records instead <i class="fa fa-database"></i></button>
                     </div>
                    </div>
               </div>

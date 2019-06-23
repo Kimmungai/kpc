@@ -1,7 +1,6 @@
 function save_booking()
 {
-  var con = confirm( "Are you sure you want to save the booking details?" );
-  if( !con ){ return; }
+
   //get form inputs
   var deptID = $("#bookingDeptID").val();
   var bookingType = $("#bookingType").val();
@@ -21,22 +20,33 @@ function save_booking()
   var tent = true ? $("#tent").is(":checked") : false;
   var paSystem = true ? $("#paSystem").is(":checked") : false;
   var projector = true ? $("#projector").is(":checked") : false;
+  var customerID = $("#customerID").val();
+
+  //data validation
+  if( customerID == '' || numPple == '' || chkInDate == '' || bookingAmountDue  == '' || bookingAmountReceived == '' )
+  {
+    alert("Please fill in all required fields *");
+    return;
+  }
+
 
   //var contactPsnName = $("#contactPsnName").val();
   //var contactPsnIdNo = $("#contactPsnIdNo").val();
   //var contactPsnPhoneNumber = $("#contactPsnPhoneNumber").val();
 //  var contactPsnEmail = $("#contactPsnEmail").val();
-var customerID = $("#customerID").val();
+
 
   var bookedProds = [];
 
   $('#booked-products-table tr').each(function(){
-    var prodID = this.id.substring(12);
+    var prodID = $("#"+this.id).data('prod');//this.id.substring(12);
     var prodQty = $("#booked-prod-qty-"+prodID).text();
     var prodPrice = $("#booked-prod-price-"+prodID).text();
     bookedProds.push({id:prodID,qty:prodQty,price:prodPrice});
   });
 
+  var con = confirm( "Are you sure you want to save the booking details?" );
+  if( !con ){ return; }
 
   $.post("/save-booking",//send details to server
     {
@@ -70,5 +80,20 @@ var customerID = $("#customerID").val();
     });
 
     $('#recordBookingsModal').modal('hide');
+    $('#table-booking-contact').html('');
+    $('#booked-products-table').html('');
+    clear_booking_form();
 
+
+}
+function clear_booking_form()
+{
+  $("#numPple").val('');
+  $("#chk_in_date").val('');
+  $("#chk_out_date").val('');
+  $("#bookingAmountDue").val('');
+  $("#bookingAmountReceived").val('');
+  $("#paymentDueDate").val('');
+  $("#menuDetails").val('');
+  $(".form-group").removeClass('has-success').removeClass('has-error');
 }

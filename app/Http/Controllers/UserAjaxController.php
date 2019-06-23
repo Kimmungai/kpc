@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Purchase;
 use App\Expense;
 use Carbon\Carbon;
+use Validator;
 
 class UserAjaxController extends Controller
 {
-    public function search_user( Request $request )
+    public function search_user( Request $request,$type=5 )
     {
       $string = $request->string;
-      $users = User::where('firstName', 'LIKE',  $string . '%')->where('type',5)->get();
+      $users = User::where('firstName', 'LIKE',  $string . '%')->where('type',$type)->get();
       return $users;
     }
 
-    public function get_user(Request $request)
+    public function search_any_user( Request $request )
+    {
+      $string = $request->string;
+      $users = User::where('firstName', 'LIKE',  $string . '%')->get();
+      return $users;
+    }
+
+    public function get_purchases_user(Request $request)
     {
       $id = $request->userID;
       if( $id )
@@ -35,5 +44,46 @@ class UserAjaxController extends Controller
         $data[1] = $purchase;
         return $data;
       }
+    }
+
+    public function get_user(Request $request)
+    {
+      $id = $request->userID;
+      if( $id )
+      {
+        $user = User::find($id);
+        return $user;
+      }
+    }
+
+    public function create_user(Request $request)
+    {
+      $validator = Validator::make($request->all(),[
+        'type' => 'required|numeric',
+        'org_id' => 'required|numeric',
+        'dept' => 'required|numeric',
+        'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
+        'firstName' => 'required|max:255',
+        'lastName' => 'nullable|max:255',
+        'DOB' => 'nullable|date|max:255',
+        'email' => 'required|email|max:255|unique:users,email,'.\Request::segment(2),
+        'phoneNumber' => 'required|numeric|digits_between:10,15',
+        'gender' => 'nullable|numeric',
+        'address' => 'nullable|max:255',
+        'idNo' => 'nullable|numeric|digits_between:5,10',
+        'passport' => 'nullable|max:255',
+        'idImage' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'passportImage' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'password' => 'nullable|min:8|max:255',
+      ]);
+
+      if ($validator->fails()) {
+          return response()->json($validator->errors());
+      }
+      $userData = $request->all();
+      $userData['password'] = Hash::make(env('DEFAULT_PASSWORD','secret'));
+      $user = User::create($userData);
+
+      return $user;
     }
 }

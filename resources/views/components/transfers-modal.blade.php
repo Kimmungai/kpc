@@ -69,7 +69,7 @@
               <input  type="text" class="form-control" name="search" placeholder="Search from records">
             </div>
 
-                  <div class="grid-1">
+                  <!--<div class="grid-1">
                     <div class="form-body">
                       <div data-example-id="simple-form-inline">
                         <form class="form-inline">
@@ -112,7 +112,7 @@
                         </form>
                       </div>
                     </div>
-                   </div>
+                  </div>--->
               </div>
              <div class="clearfix"> </div>
       </div>
