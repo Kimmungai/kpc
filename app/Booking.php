@@ -15,17 +15,17 @@ class Booking extends Model
 
     public function User()
     {
-      $this->belongsTo('App\User');
+      return $this->belongsTo('App\User');
     }
 
     public function Dept()
     {
-      $this->belongsTo('App\Dept');
+      return $this->belongsTo('App\Dept');
     }
 
     public function Revenue()
     {
-      $this->hasOne('App\Revenue');
+      return $this->hasOne('App\Revenue');
     }
 
     public function Product()

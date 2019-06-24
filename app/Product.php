@@ -8,24 +8,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
-    
+
     public function Dept()
     {
-      $this->belongsTo('App\Dept');
+      return $this->belongsTo('App\Dept');
     }
 
     public function Purchase()
     {
-      $this->belongsToMany('App\Purchase');
+      return $this->belongsToMany('App\Purchase');
     }
 
     public function Booking()
     {
-      $this->belongsToMany('App\Booking');
+      return $this->belongsToMany('App\Booking');
     }
 
     public function Report()
     {
-      $this->belongsToMany('App\Report');
+      return $this->belongsToMany('App\Report');
     }
 }

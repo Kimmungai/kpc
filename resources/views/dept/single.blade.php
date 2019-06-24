@@ -17,7 +17,7 @@
 	          </div>
 	        <!-- //breadcrumbs -->
 					<!--stock options buttons-->
-					<div class="container" >
+					<!--<div class="container" >
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="button" style="background:#f0ad4e" data-toggle="modal" data-target="#recordPurchasesModal">
@@ -48,10 +48,11 @@
 
 						</div>
 
-					</div>
+					</div>-->
 					<!--end stock options buttons-->
+					<!--<h1 class="text-uppercase">@if( isset($dept) ) {{$dept->name}} @endif department</h1>-->
           <!-- /w3ls_agile_circle_progress-->
-          <div class="w3ls_agile_circle_progress agile_info_shadow">
+        	<div class="w3ls_agile_circle_progress agile_info_shadow">
 
             <div class="cir_agile_info ">
             <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department</h3>
@@ -145,7 +146,7 @@
 
 							<!-- /w3ls_agile_circle_progress-->
 							<div class="w3ls_agile_cylinder chart agile_info_shadow">
-							<h3 class="w3_inner_tittle two"> General overview</h3>
+							<h3 class="w3_inner_tittle two"> Stock overview</h3>
 
 									 <div id="chartdiv"></div>
 

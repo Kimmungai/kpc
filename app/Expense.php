@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Expense extends Model
 {
     use SoftDeletes;
-    
+
     public function Purchase()
     {
-      $this->belongsTo('App\Purchase');
+      return $this->belongsTo('App\Purchase');
     }
 
     public function Report()
     {
-      $this->belongsTo('App\Report');
+      return $this->belongsTo('App\Report');
     }
 
     public function Product()
     {
-      $this->belongsTo('App\Product');
+      return $this->belongsTo('App\Product');
     }
 }

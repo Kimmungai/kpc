@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Revenue extends Model
 {
   use SoftDeletes;
-  
+
   public function Booking()
   {
-    $this->belongsTo('App\Booking');
+    return $this->belongsTo('App\Booking');
   }
 
   public function Report()
   {
-    $this->belongsTo('App\Report');
+    return $this->belongsTo('App\Report');
   }
 }

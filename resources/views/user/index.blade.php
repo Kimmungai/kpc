@@ -4,9 +4,21 @@
 
 		<!-- /inner_content-->
 				<div class="inner_content">
+					<!-- breadcrumbs -->
+						<div class="w3l_agileits_breadcrumbs">
+							<div class="w3l_agileits_breadcrumbs_inner">
+								<ul>
+									<li><a href="/home">Home</a><span>«</span></li>
+									<li>Users</li>
+								</ul>
+							</div>
+						</div>
+					<!-- //breadcrumbs -->
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
+
 					<!-- /departments start-->
+					<h1 class="text-uppercase">All users</h1>
 					   <div class="agile_top_w3_grids">
 					          <ul class="ca-menu">
                     <li>
@@ -68,7 +80,7 @@
 					   </div>
 					 <!-- //departments end-->
 						<!-- /agile_top_w3_post_sections-->
-							<div class="agile_top_w3_post_sections">
+							<!--<div class="agile_top_w3_post_sections">
 							       <div class="col-md-6 agile_top_w3_post agile_info_shadow">
 										   <div class="img_wthee_post">
 										         <h3 class="w3_inner_tittle">Latest Report</h3>
@@ -106,22 +118,22 @@
 											</div>
 							            </div>
 								       <div class="clearfix"></div>
-							     </div>
+							     </div>-->
 
 						<!-- //agile_top_w3_post_sections-->
 							<!-- /w3ls_agile_circle_progress-->
-							<div class="w3ls_agile_cylinder chart agile_info_shadow">
+							<!--<div class="w3ls_agile_cylinder chart agile_info_shadow">
 							<h3 class="w3_inner_tittle two"> Cylinder chart</h3>
 
 									 <div id="chartdiv"></div>
 
 
-							</div>
+							</div>-->
 						<!-- /w3ls_agile_circle_progress-->
 						<!-- /chart_agile-->
 
 						  <!-- /w3ls_agile_circle_progress-->
-							<div class="w3ls_agile_circle_progress agile_info_shadow">
+							<!--<div class="w3ls_agile_circle_progress agile_info_shadow">
 
 								<div class="cir_agile_info ">
 								<h3 class="w3_inner_tittle">Circular Progress</h3>
@@ -150,10 +162,10 @@
 
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- /w3ls_agile_circle_progress-->
 						 <!--/prograc-blocks_agileits-->
-							<div class="prograc-blocks_agileits">
+							<!--<div class="prograc-blocks_agileits">
 
 
 								 <div class="col-md-6 bars_agileits agile_info_shadow">
@@ -235,11 +247,11 @@
 										</div>
 								</div>
 									 <div class="clearfix"></div>
-							</div>
+							</div>-->
 
 							  <!--//prograc-blocks_agileits-->
 						<!-- /bottom_agileits_grids-->
-						<div class="bottom_agileits_grids">
+						<!--<div class="bottom_agileits_grids">
 						<div class="col-md-4 profile-main">
 						    <div class="profile_bg_agile">
 								<div class="profile-pic wthree">
@@ -281,10 +293,10 @@
 
 
 							 <div class="clearfix"></div>
-						</div>
+						</div>-->
 						<!-- //bottom_agileits_grids-->
 												<!-- /weather_w3_agile_info-->
-						<div class="weather_w3_agile_info agile_info_shadow">
+						<!--<div class="weather_w3_agile_info agile_info_shadow">
 						  <div class="weather_w3_inner_info">
 
 							     <div class="over_lay_agile">
@@ -350,10 +362,10 @@
 								</ul>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- //weather_w3_agile_info-->
 						<!-- /social_media-->
-						  <div class="social_media_w3ls">
+						  <!--<div class="social_media_w3ls">
 
 						      <div class="col-md-3 socail_grid_agile facebook">
                                      <ul class="icon_w3_info">
@@ -451,7 +463,7 @@
                               </div>
 							  <div class="clearfix"></div>
 
-						</div>
+						</div>-->
 						<!-- //social_media-->
 				    </div>
 					<!-- //inner_content_w3_agile_info-->

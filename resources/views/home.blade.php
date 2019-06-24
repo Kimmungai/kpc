@@ -17,120 +17,61 @@
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
 					<!-- /departments start-->
-          @if( isset($depts) )
+					<h1 class="text-uppercase">All departments</h1>
+          
+					 <div class="agile_top_w3_grids">
 
-					   <div class="agile_top_w3_grids">
-					       <ul class="ca-menu">
-									@foreach( $depts as $dept )
+						 <?php $rows = ceil(count($depts) / 3); ?>
+						 <?php $count = 0; $colors=0;?>
+						 <?php $departmentsArr = []; ?>
 
-										@if( strtolower($dept->name) == 'hospitality' )
-										<li>
+						 @for( $x=0;$x<$rows;$x++ )
+							 <ul class="ca-menu">
+								@foreach( $depts as $dept )
+
+									<?php if(!in_array($dept->id, $departmentsArr)) {$departmentsArr [] = $dept->id;}else{continue;}?>
+									<?php if($colors > 3){$colors =0;} ?>
+
+									 <li>
 										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
-											 <i class="fa fa-hotel" aria-hidden="true"></i>
+											 @if( strtolower($dept->name) == 'kitchen' )
+											 <i class="fas fa-utensils" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'chapel' )
+											 <i class="fas fa-church" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'shamba' )
+											 <i class="fas fa-tractor" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'compound' )
+											 <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'administration' )
+											 <i class="fas fa-user-tie" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'store' )
+											 <i class="fas fa-database" aria-hidden="true"></i>
+											 @elseif( strtolower($dept->name) == 'hospitality' )
+											 <i class="fas fa-hotel" aria-hidden="true"></i>
+											 @else
+											 <i class="fas fa-tag" aria-hidden="true"></i>
+											 @endif
 											 <div class="ca-content">
-												 <h4 class="ca-main one">26,808</h4>
-												 <h3 class="ca-sub one">{{$dept->name}}</h3>
+												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{count($dept->booking)}} @if(count($dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
+												 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{$dept->name}}</h3>
 											 </div>
 										 </a>
 									 </li>
- 										@endif
 
-
-										@if( strtolower($dept->name) == 'store' )
-										<li>
-										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
-											 <i class="fa fa-database" aria-hidden="true"></i>
-											 <div class="ca-content">
-											 <h4 class="ca-main two">29,008</h4>
-												 <h3 class="ca-sub two">{{$dept->name}}</h3>
-											 </div>
-										 </a>
-									 </li>
- 										@endif
-
-
-										@if( strtolower($dept->name) == 'compound' )
-										<li>
-											<a href="{{url('dept-registration')}}/{{$dept->id}}">
-												<i class="fas fa-umbrella-beach" aria-hidden="true"></i>
-												<div class="ca-content">
-													<h4 class="ca-main three">49,436</h4>
-													<h3 class="ca-sub three">{{$dept->name}}</h3>
-												</div>
-											</a>
-										</li>
- 										@endif
+									 <?php $count++; $colors++;?>
+									 <?php if( $count % 3 == 0 ){break;} ?>
 
 								 @endforeach
 
-									<div class="clearfix"></div>
+							 <div class="clearfix"></div>
 
-								</ul>
+						 </ul>
+ 					 @endfor
+					 </div>
 
-								<ul class="ca-menu">
-								 @foreach( $depts as $dept )
-									@if( strtolower($dept->name) == 'kitchen' )
-									 <li>
-										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
-
-											 <i class="fas fa-utensils" aria-hidden="true"></i>
-											 <div class="ca-content">
-												 <h4 class="ca-main">16,808</h4>
-												 <h3 class="ca-sub text-capitalize">{{$dept->name}}</h3>
-											 </div>
-										 </a>
-									 </li>
-									 @endif
-
-									 @if( strtolower($dept->name) == 'chapel' )
-									 <li>
-										<a href="{{url('dept-registration')}}/{{$dept->id}}">
-											<i class="fas fa-church" aria-hidden="true"></i>
-											<div class="ca-content">
-												<h4 class="ca-main one">26,808</h4>
-												<h3 class="ca-sub one">{{$dept->name}}</h3>
-											</div>
-										</a>
-									</li>
-									 @endif
-
-
-									 @if( strtolower($dept->name) == 'shamba' )
-									 <li>
-										<a href="{{url('dept-registration')}}/{{$dept->id}}">
-											<i class="fas fa-tractor" aria-hidden="true"></i>
-											<div class="ca-content">
-											<h4 class="ca-main two">29,008</h4>
-												<h3 class="ca-sub two">{{$dept->name}}</h3>
-											</div>
-										</a>
-									</li>
-									 @endif
-
-									 @if( strtolower($dept->name) == 'administration' )
-									 <li>
-										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
-											 <i class="fas fa-user-tie" aria-hidden="true"></i>
-											 <div class="ca-content">
-												 <h4 class="ca-main four">49,436</h4>
-												 <h3 class="ca-sub four">{{$dept->name}}</h3>
-											 </div>
-										 </a>
-									 </li>
-									 @endif
-
-
-								@endforeach
-
-								 <div class="clearfix"></div>
-
-							 </ul>
-
-					   </div>
-           @endif
 					 <!-- //departments end-->
 						<!-- /agile_top_w3_post_sections-->
-							<div class="agile_top_w3_post_sections">
+							<!--<div class="agile_top_w3_post_sections">
 							       <div class="col-md-6 agile_top_w3_post agile_info_shadow" style="width:100%">
 										   <div class="img_wthee_post">
 										         <h3 class="w3_inner_tittle">Latest Report</h3>
@@ -157,33 +98,24 @@
 
 											</div>
 									   </div>
-									    <!--<div class="col-md-6 agile_top_w3_post_info agile_info_shadow">
-										    <div class="img_wthee_post1">
-											<h3 class="w3_inner_tittle"> Flip Clock</h3>
-										       	<div class="main-example">
-													<div class="clock"></div>
-													<div class="message"></div>
 
-												</div>
-											</div>
-										</div>-->
 								       <div class="clearfix"></div>
-							     </div>
+							     </div>-->
 
 						<!-- //agile_top_w3_post_sections-->
 							<!-- /w3ls_agile_circle_progress-->
-							<div class="w3ls_agile_cylinder chart agile_info_shadow">
+							<!--<div class="w3ls_agile_cylinder chart agile_info_shadow">
 							<h3 class="w3_inner_tittle two"> Cylinder chart</h3>
 
 									 <div id="chartdiv"></div>
 
 
-							</div>
+							</div>-->
 						<!-- /w3ls_agile_circle_progress-->
 						<!-- /chart_agile-->
 
 						  <!-- /w3ls_agile_circle_progress-->
-							<div class="w3ls_agile_circle_progress agile_info_shadow">
+							<!--<div class="w3ls_agile_circle_progress agile_info_shadow">
 
 								<div class="cir_agile_info ">
 								<h3 class="w3_inner_tittle">Circular Progress</h3>
@@ -212,10 +144,10 @@
 
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- /w3ls_agile_circle_progress-->
 						 <!--/prograc-blocks_agileits-->
-							<div class="prograc-blocks_agileits">
+							<!--<div class="prograc-blocks_agileits">
 
 
 								 <div class="col-md-6 bars_agileits agile_info_shadow">
@@ -297,7 +229,7 @@
 										</div>
 								</div>
 									 <div class="clearfix"></div>
-							</div>
+							</div>-->
 
 							  <!--//prograc-blocks_agileits-->
 

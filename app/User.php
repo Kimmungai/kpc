@@ -41,16 +41,16 @@ class User extends Authenticatable
 
     public function Booking()
     {
-      $this->hasMany('App\Booking');
+      return $this->hasMany('App\Booking');
     }
 
     public function Purchase()
     {
-      $this->hasMany('App\Purchase');
+      return $this->hasMany('App\Purchase');
     }
 
     public function Org()
     {
-      $this->belongsTo('App\Org');
+      return $this->belongsTo('App\Org');
     }
 }

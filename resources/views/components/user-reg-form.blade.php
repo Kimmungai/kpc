@@ -50,7 +50,7 @@
       <span class="input-group-addon">
         <i class="fas fa-layer-group"></i>
       </span>
-      <select name="type" id="type" class="form-control1">
+      <select name="dept" id="dept" class="form-control1">
         <option value="1" @if( old('dept') == 1 || ( isset($user) && $user->dept == 1 ) ) selected @endif>Kitchen</option>
         <option value="2" @if( old('dept') == 2 || ( isset($user) && $user->dept == 2 ) ) selected @endif>Store</option>
         <option value="3" @if( old('dept') == 3 || ( isset($user) && $user->dept == 3 ) ) selected @endif>Hospitality</option>
