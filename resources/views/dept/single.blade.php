@@ -224,6 +224,7 @@
 					<!-- //inner_content_w3_agile_info-->
 				</div>
 		<!-- //inner_content-->
+		<input id="currentDeptID" type="hidden"  value="@if( isset($dept) ) {{$dept->id}} @endif">
 
 		@component( 'components.purchases-modal',['dept' => $dept] )
 

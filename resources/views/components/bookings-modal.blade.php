@@ -289,7 +289,7 @@
                <div class="loading hidden d-none">
                  <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
                </div>
-               <input id="search-booked-product"  type="text" class="form-control" name="search" placeholder="Search by name from records..." onkeyup="std_search_product(this.id,this.value,'booked-products-table')">
+               <input id="search-booked-product"  type="text" class="form-control search-box" name="search" placeholder="Search by name from records..." onkeyup="std_search_product(this.id,this.value,'booked-products-table')">
               </div>
               <div id="search-booked-product-results" class="search-box-results border-1 hidden d-none">
 

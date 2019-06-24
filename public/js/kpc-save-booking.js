@@ -1,4 +1,4 @@
-function save_booking()
+function save_booking(tableID='booked-products-table')
 {
 
   //get form inputs
@@ -38,10 +38,10 @@ function save_booking()
 
   var bookedProds = [];
 
-  $('#booked-products-table tr').each(function(){
+  $('#'+tableID+' tr').each(function(){
     var prodID = $("#"+this.id).data('prod');//this.id.substring(12);
-    var prodQty = $("#booked-prod-qty-"+prodID).text();
-    var prodPrice = $("#booked-prod-price-"+prodID).text();
+    var prodQty = $("#"+tableID+"-booked-prod-qty-"+prodID).text();
+    var prodPrice = $("#"+tableID+"-booked-prod-price-"+prodID).text();
     bookedProds.push({id:prodID,qty:prodQty,price:prodPrice});
   });
 

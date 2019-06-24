@@ -29,13 +29,11 @@ class ProductsAjaxController extends Controller
       $product->sku = $request->sku;
       $product->name = $request->name;
       $product->quantity = $request->quantity;
+      $product->price = $request->cost;
       $product->purchases_id = $request->purchases_id;
       $product->dept_id = $request->dept_id;
       $product->save();
-      /*Expense::where('purchase_id',$request->purchases_id)->update([
-        'product_id' => $product->id,
-        'cost' => $request->cost
-      ]);*/
+      
       $expense = new Expense;
       $expense->purchase_id = $request->purchases_id;
       $expense->product_id = $product->id;
@@ -49,7 +47,8 @@ class ProductsAjaxController extends Controller
     public function search_product( Request $request )
     {
       $string = $request->string;
-      $products = Product::where('name', 'LIKE',  $string . '%')->get();
+      $deptID = $request->deptID;
+      $products = Product::where('dept_id',$deptID)->where('name', 'LIKE',  $string . '%')->get();
       //$users = User::where('firstName', 'LIKE',  $string . '%')->get();
       return $products;
     }

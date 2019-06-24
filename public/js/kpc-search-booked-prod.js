@@ -1,16 +1,18 @@
-function std_search_product(id,value)
+function std_search_product(id,value,tableID)
 {
   if (value.length > 2) {
+    var deptID = $("#currentDeptID").val();
     //send details to server
     $.post("/search-product",
       {
         string:value,
+        deptID:deptID,
         "_token": $('meta[name="csrf-token"]').attr('content'),
       },
       function(data,status){
         //show result box
         //update_product_results(data);
-        std_update_product_results(data,id+"-results");
+        std_update_product_results(data,id+"-results",tableID);
       });
     }
 }
@@ -25,7 +27,7 @@ function std_update_product_results(data,id,tableID)
     {
       if( !$("#"+id+"-"+data[x].id).length )
       {
-        $("#"+id).append('<p  id="'+id+'-'+data[x].id+'" onclick="std_update_prod_table(this.id)">'+data[x].name+'<a class="pull-right" href="#" >select</a></p>');
+        $("#"+id).append('<p data-prod="'+data[x].id+'"  id="'+id+'-'+data[x].id+'" onclick="std_update_prod_table(this.id,\''+tableID+'\')">'+data[x].name+'<a class="pull-right" href="#" >select</a></p>');
       }
     }
   }else{
@@ -41,13 +43,14 @@ function std_update_products_table(data,cost=0,tableID='booked-products-table')/
 
   if( isObject(response) )
   {
-    if( !$("#prod-result-"+response.id).length )
+    if( !$("#"+tableID+"-prod-result-"+response.id).length )
     {
-      $("#"+tableID).append('<tr data-prod="'+response.id+'" id="prod-result-'+response.id+'"><td>'+response.sku+'</td><td>'+response.name+'</td><td class="text-info cursor" id="booked-prod-qty-'+response.id+'" onclick="std_update_amount_due(this.id,'+response.quantity+')">1</td><td id="booked-prod-price-'+response.id+'" class="text-info cursor" onclick="std_update_amount_due(this.id)">'+response.price+'</td></tr>');
+      $("#"+tableID).append('<tr data-prod="'+response.id+'" id="'+tableID+'-prod-result-'+response.id+'"><td>'+response.sku+'</td><td>'+response.name+'</td><td class="text-info cursor" id="'+tableID+'-booked-prod-qty-'+response.id+'" onclick="std_update_amount_due(this.id,'+response.quantity+')">1</td><td id="'+tableID+'-booked-prod-price-'+response.id+'" class="text-info cursor" onclick="std_update_amount_due(this.id)">'+response.price+'</td></tr>');
     }else{
       alert("Item already added!")
     }
     $(".search-box-results").addClass('d-none').addClass('hidden');
+    $(".search-box").val('');
 
   }else{
 
@@ -59,9 +62,10 @@ function std_update_products_table(data,cost=0,tableID='booked-products-table')/
   }
 }
 
-function std_update_prod_table(id)
+function std_update_prod_table(id,tableID='booked-products-table')
 {
-  var prodID = id.substring(30);
+  //var prodID = id.substring(30);
+  var prodID = $("#"+id).data('prod');
 //  alert(prodID);return;
   //var purchaseID = $("#purchasesID").val();
   //if ( purchaseID == ''){ alert("please fill in supplier details first");return; }
@@ -74,7 +78,7 @@ function std_update_prod_table(id)
     function(response,status){
       //alert(response)
       //show result box
-      std_update_products_table(response);
+      std_update_products_table(response,response.price,tableID);
       //$("#product-results-box").addClass('d-none').addClass('hidden');
       //$("#product-"+response[0].id).text("0");
     });

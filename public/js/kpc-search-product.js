@@ -1,10 +1,12 @@
 $('#search-product-box').on('keyup', function() {
 
      if (this.value.length > 2) {
+       var deptID = $("#currentDeptID").val();
        //send details to server
        $.post("/search-product",
          {
            string:this.value,
+           deptID:deptID,
            "_token": $('meta[name="csrf-token"]').attr('content'),
          },
          function(data,status){

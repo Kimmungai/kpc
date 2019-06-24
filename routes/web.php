@@ -53,3 +53,6 @@ Route::post('update-product','ProductsAjaxController@update_product');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');
+
+//Transfers
+Route::post('save-transfer','TransfersAjaxController@save_transfer');

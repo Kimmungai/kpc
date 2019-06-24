@@ -18,28 +18,34 @@
                        <div class="ca-content">
                          <h4 class="ca-main one">From</h4>
                          <h3 class="ca-sub one">{{$dept->name}}</h3>
+                         <input type="hidden" id="transferFromDept" value="{{$dept->id}}">
                        </div>
                      </a>
                    </li>
                   </ul>
               </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-4 allDepts">
               <h4 class="text-center">Transfer</h4>
               <p class="text-center text-success" style="font-size:50px;"><i class="fas fa-long-arrow-alt-right"></i></p>
               <p>
-                <select name="allDepts" id="allDepts" class="form-control1" onchange="select_dept(this.value)">
-                  @if(strtolower($dept->name) != 'kitchen')<option>Kitchen</option>@endif
+                <select name="allDepts" id="allDepts" class="form-control" onchange="select_dept(this.value)">
+                  <option disabled selected>destination dept</option>
+                  @foreach( $allDepts as $singleDept )
+                    <?php if( $singleDept->id == $dept->id ){continue;} ?>
+                    <option> {{$singleDept->name}} </option>
+                  @endforeach
+                  <!--@if(strtolower($dept->name) != 'kitchen')<option>Kitchen</option>@endif
                   @if(strtolower($dept->name) != 'store')<option>Store</option>@endif
                   @if(strtolower($dept->name) != 'hospitality')<option>Hospitality</option>@endif
                   @if(strtolower($dept->name) != 'chapel')<option>Chapel</option>@endif
                   @if(strtolower($dept->name) != 'shamba')<option>Shamba/ dairy/ poultry</option>@endif
                   @if(strtolower($dept->name) != 'compound')<option>Compound</option>@endif
-                  @if(strtolower($dept->name) != 'administration')<option>Administration</option>@endif
+                  @if(strtolower($dept->name) != 'administration')<option>Administration</option>@endif-->
                 </select>
               </p>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-4 pl-0" >
               <div class="agile_top_w3_grids">
                   <ul class="ca-menu">
                     <li id="destinationDept">
@@ -48,6 +54,7 @@
                        <div class="ca-content">
                          <h4 class="ca-main">To</h4>
                          <h3 class="ca-sub"></h3>
+                         <input type="hidden" id="transferToDept" value="">
                        </div>
                      </a>
                    </li>
@@ -66,59 +73,20 @@
 
              <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-              <input  type="text" class="form-control" name="search" placeholder="Search from records">
+              <input id="search-transfer-product"  type="text" class="form-control search-box" name="search" placeholder="Search from records" onkeyup="std_search_product(this.id,this.value,'transfer-products-table')">
             </div>
 
-                  <!--<div class="grid-1">
-                    <div class="form-body">
-                      <div data-example-id="simple-form-inline">
-                        <form class="form-inline">
-                          <div class="form-group" id="skuTransferTitle">
-                              <div class="input-group input-icon right">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-info"></i>
-                                </span>
-                                <input name="skuTransfer" id="skuTransfer"  type="text" class="form-control1" value="@if( old('skuTransfer') ) {{old('skuTransfer')}} @elseif( isset($user) ) {{$user->skuTransfer}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                            </div>
-                          </div>
-                          <div class="form-group" id="prodTransferNameTitle">
-                              <div class="input-group input-icon right">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-info"></i>
-                                </span>
-                                <input name="prodTransferName" id="prodTransferName"  type="text" class="form-control1" value="@if( old('prodTransferName') ) {{old('prodTransferName')}} @elseif( isset($user) ) {{$user->prodTransferName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                            </div>
-                          </div>
-                          <div class="form-group" id="quantityTransferTitle">
-                              <div class="input-group input-icon right">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-info"></i>
-                                </span>
-                                <input name="quantityTransfer" id="quantityTransfer" min="0"  type="number" class="form-control1" value="@if( old('quantityTransfer') ) {{old('quantityTransfer')}} @elseif( isset($user) ) {{$user->quantityTransfer}} @endif" placeholder="Product quantity..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                            </div>
-                          </div>
-                          <div class="form-group" id="costTransferTitle">
-                              <div class="input-group input-icon right">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-dollar"></i>
-                                </span>
-                                <input name="costTransfer" id="costTransfer" min="0"  type="number" class="form-control1" value="@if( old('costTransfer') ) {{old('costTransfer')}} @elseif( isset($user) ) {{$user->costTransfer}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                            </div>
-                          </div>
+            <div id="search-transfer-product-results" class="search-box-results border-1 hidden d-none">
 
-                        <div class="form-group">
-                          <button type="button" class="btn btn-default btn-sm" name="button">Add</button>
-                        </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>--->
+            </div>
+
               </div>
              <div class="clearfix"> </div>
       </div>
       <!--end goods-->
 
       <!--goods table-->
+
       <!-- tables -->
 
       <div class="agile-tables">
@@ -127,22 +95,17 @@
         <table id="table-two-axis" class="two-axis">
         <thead>
           <tr>
-          <th>skuTransfer</th>
+          <th>sku</th>
           <th>Name</th>
-          <th>quantityTransfer</th>
-          <th>costTransfer</th>
+          <th>Transfer quantity</th>
+          <th>Unit cost</th>
           </tr>
         </thead>
-        <tbody>
 
-          <tr>
-            <td>Jill Smith</td>
-						<td>25</td>
-						<td>Female</td>
-						<td>5'4</td>
-          </tr>
+        <tbody id="transfer-products-table">
 
         </tbody>
+
         </table>
 
 
@@ -155,7 +118,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-success btn-lg" onclick="save_transfer()">Save</button>
         </div>
       </div>
     </div>

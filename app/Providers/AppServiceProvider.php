@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+
+use App\Dept;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $allDepts = Dept::all();
+        View::share('allDepts',$allDepts);
     }
 }
