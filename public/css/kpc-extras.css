@@ -95,3 +95,47 @@
 .bg-casual{
   background-color: #fc3158!important;
 }
+.bg-admin{
+  background-color: #1372bf!important;
+}
+.bg-supplier{
+  background-color: #5bc0de!important;
+}
+/*Action tabs*/
+.action-tab {
+  color: #fff;
+  text-align: center;
+}
+.action-tab .fas{
+  font-size: 5em;
+}
+.action-tab p{
+  font-size: 12px;
+  padding: 5px;
+}
+.action-tab a{
+  color: inherit;
+}
+.text-underline{
+  text-decoration: underline;
+}
+.action-tab dl{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.action-tab dd,dt{
+  margin: 0;
+  padding: 5px;
+  float: left;
+}
+.action-tab dd{
+  width: 60%;
+  margin-top: 5%;
+}
+.action-tab dt{
+  width: 40%;
+}
+.mb-2{
+  margin-bottom: 20px!important;
+}

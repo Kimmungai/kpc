@@ -642,7 +642,7 @@ canvas#chart1 {
 	margin-top: 2em;
 }
 .cir_agile_info {
-    background: url(../images/progress.jpg)no-repeat center;
+	background: linear-gradient(#000, #1372bf);
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;

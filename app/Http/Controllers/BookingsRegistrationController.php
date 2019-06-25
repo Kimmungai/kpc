@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Purchase;
+use App\Booking;
 use Illuminate\Http\Request;
 
-class PurchasesRegistrationController extends Controller
+class BookingsRegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PurchasesRegistrationController extends Controller
      */
     public function index()
     {
-        return "all purchases";
+        return "all bookings";
     }
 
     /**
@@ -41,10 +41,10 @@ class PurchasesRegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Purchase $purchase)
+    public function show(Booking $booking)
     {
         //
     }
@@ -52,10 +52,10 @@ class PurchasesRegistrationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit(Purchase $purchase)
+    public function edit(Booking $booking)
     {
         //
     }
@@ -64,10 +64,10 @@ class PurchasesRegistrationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Purchase  $purchase
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Request $request, Booking $booking)
     {
         //
     }
@@ -75,10 +75,10 @@ class PurchasesRegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Purchase  $purchase
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Purchase $purchase)
+    public function destroy(Booking $booking)
     {
         //
     }

@@ -98,8 +98,8 @@ var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
     "startDuration": 2,
     "dataProvider": [{
-        "country": "USA",
-        "visits": 4025,
+        "country": "Spoons",
+        "visits": 500,
         "color": "#FF0F00"
     }, {
         "country": "China",
@@ -193,7 +193,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 }, 0);
 </script>
 <!-- Chart code -->
-<script>
+<!--<script>
 var chart = AmCharts.makeChart("chartdiv1", {
     "type": "serial",
 	"theme": "light",
@@ -301,7 +301,7 @@ var chart = AmCharts.makeChart("chartdiv1", {
     	"enabled": true
      }
 });
-</script>
+</script>-->
 
 	<!-- //amcharts -->
 		<script src="{{url('site-theme/js/chart1.js') }}"></script>

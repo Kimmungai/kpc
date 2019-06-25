@@ -102,6 +102,19 @@ class DepartmentRegistrationController extends Controller
     }
 
     /**
+     * Show the department reports.
+     *
+     * @param  \App\Dept  $dept
+     * @return \Illuminate\Http\Response
+     */
+    public function report(Dept $dept,$id)
+    {
+      $dept = Dept::find($id);
+      return view('dept.report',compact('dept'));
+    }
+
+
+    /**
      * Upload new user files.
      *
      * @param  \App\Dept  $dept

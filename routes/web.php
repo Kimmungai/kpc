@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 //purchases
 Route::get('/purchases','PurchasesController@index')->name('purchases');
 
@@ -37,6 +36,7 @@ Route::post('create-user','UserAjaxController@create_user');
 Route::resource('user-registration','UserRegistrationController');
 
 //depts
+Route::get('dept-report/{id}','DepartmentRegistrationController@report')->name('dept report');
 Route::resource('dept-registration','DepartmentRegistrationController');
 
 //purchases
@@ -53,6 +53,7 @@ Route::post('update-product','ProductsAjaxController@update_product');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');
+Route::resource('bookings-registration','BookingsRegistrationController');
 
 //Transfers
 Route::post('save-transfer','TransfersAjaxController@save_transfer');
