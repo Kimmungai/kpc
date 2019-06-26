@@ -12,7 +12,7 @@
                   @if( isset($dept) )
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
-									<li>Purchases</li>
+									<li>Bookings</li>
 	              </ul>
 	            </div>
 	          </div>
@@ -20,7 +20,7 @@
 				 <div class="inner_content_w3_agile_info">
 						<div class="container">
 							<div class="row">
-								<form class="" action="sort-purchases" method="get">
+								<form class="" action="sort-bookings" method="get">
 								<div class="col-xs-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
@@ -50,60 +50,27 @@
 							</div>
 						</div>
 	        <!-- //breadcrumbs -->
-					<!--stock options buttons-->
-					<!--<div class="container" >
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="button" style="background:#f0ad4e" >
-								 <p class="btnText">Purchases</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-money-check-alt"></i></p>
-								 </div>
-								</div>
-							</div>
 
-							<div class="col-sm-4">
-								<div class="button" style="background:#5bc0de" >
-								 <p class="btnText">Bookings</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-gift"></i></p>
-								 </div>
-								</div>
-							</div>
-
-							<div class="col-sm-4">
-								<div class="button" style="background:#337ab7" >
-								 <p class="btnText">Transfers</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-external-link-alt"></i></p>
-								 </div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>-->
-					<!--end stock options buttons-->
 
 
 					<div class="container" >
 						<div class="row">
 							@if( isset($dept) )
-							<h1 class="text-capitalize ">{{$dept->name}} Purchases </h1>
-							<h4 class="pull-right  p-1 results-info">Showing: @if(isset($purchases)) {{count($purchases)}} of {{$purchases->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+							<h1 class="text-capitalize ">{{$dept->name}} Bookings </h1>
+							<h4 class="pull-right  p-1 results-info">Showing: @if(isset($bookings)) {{count($bookings)}} of {{$bookings->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
 							@endif
 						</div>
 
 						<div class="row">
 
-							@if(isset($purchases))
-								@foreach($purchases as $purchase)
+							@if(isset($bookings))
+								@foreach($bookings as $booking)
 								<div class="col-sm-4 mb-2">
 									<div class="action-tab bg-admin">
 											<dl>
 												<dt>
-													<a href="{{route('purchases-registration.show',$purchase->id)}}"><i class="fas fa-money-check-alt"></i></a>
-													@if( $purchase->amountDue - $purchase->amountPaid <= 0 )
+													<a href="{{route('bookings-registration.show',$booking->id)}}"><i class="fas fa-gift"></i></a>
+													@if( $booking->bookingAmountDue - $booking->bookingAmountReceived <= 0 )
 													<div class="status-sec">Paid <span class="fa fa-circle text-success"></span></div>
 													@else
 													<div class="status-sec">Pending <span class="fa fa-circle text-danger"></span></div>
@@ -111,14 +78,14 @@
 
 												</dt>
 												<dd>
-													<h3><a href="{{route('purchases-registration.show',$purchase->id)}}">Purchases-{{$purchase->id}}</a></h3>
-													@if( $purchase->user )
-													<p>Supplier: <strong>{{$purchase->user->firstName}}</strong></p>
+													<h3><a href="{{route('bookings-registration.show',$booking->id)}}">Booking-{{$booking->id}}</a></h3>
+													@if( $booking->user )
+													<p>Customer: <strong>{{$booking->user->firstName}}</strong></p>
 													@endif
-													<p>Date: <strong>{{date('d/m/Y',strtotime($purchase->created_at))}}</strong></p>
-													<p>Paid: <strong>Ksh. @if( !$purchase->amountPaid ) 0 @else {{$purchase->amountPaid}} @endif</strong></p>
-													<p>Owed: <strong>Ksh. @if( !$purchase->amountDue ) 0 @else {{$purchase->amountDue - $purchase->amountPaid}} @endif</strong></p>
-													<a href="{{route('purchases-registration.show',$purchase->id)}}" class="btn btn-x-sm  btn-dark" >Open</a>
+													<p>Date: <strong>{{date('d/m/Y',strtotime($booking->created_at))}}</strong></p>
+													<p>Paid: <strong>Ksh. @if( !$booking->bookingAmountReceived ) 0 @else {{$booking->bookingAmountReceived}} @endif</strong></p>
+													<p>Pending: <strong>Ksh. @if( !$booking->bookingAmountDue ) 0 @else {{$booking->bookingAmountDue - $booking->bookingAmountReceived}} @endif</strong></p>
+													<a href="{{route('bookings-registration.show',$booking->id)}}" class="btn btn-x-sm  btn-dark" >Open</a>
 												<dd>
 											</dl>
 										</div>
@@ -128,8 +95,8 @@
 
 						</div>
 						<div class="row">
-							@if(isset($purchases))
-								{{$purchases->appends(request()->except('page'))->links()}}
+							@if(isset($bookings))
+								{{$bookings->appends(request()->except('page'))->links()}}
 							@endif
 						</div>
 					</div>

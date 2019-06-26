@@ -25,7 +25,7 @@ class Booking extends Model
 
     public function Revenue()
     {
-      return $this->hasOne('App\Revenue');
+      return $this->hasMany('App\Revenue');
     }
 
     public function Product()

@@ -25,6 +25,10 @@
 .pl-0{
   padding-left: 0!important;
 }
+.p-1
+{
+  padding: 1em;
+}
 .allDepts select{
   height: 50px;
   border: 1px solid #3c763d;
@@ -138,4 +142,8 @@
 }
 .mb-2{
   margin-bottom: 20px!important;
+}
+.results-info span{
+  font-size: 14px;
+  font-weight: bold;
 }

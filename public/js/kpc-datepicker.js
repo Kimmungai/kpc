@@ -5,3 +5,6 @@ $( function() {
     $( "#DOB" ).datepicker({ maxDate: 0 });
     $( "#paymentDueDate" ).datepicker({ minDate: 0 });
   } );
+//fiter inputs
+$( "#filter_from" ).datepicker();
+$( "#filter_to" ).datepicker();

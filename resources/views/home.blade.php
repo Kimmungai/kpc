@@ -17,8 +17,8 @@
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
 					<!-- /departments start-->
-					<h1 class="text-uppercase">All departments</h1>
-          
+					<h1 class="text-capitalize">All departments</h1>
+
 					 <div class="agile_top_w3_grids">
 
 						 <?php $rows = ceil(count($depts) / 3); ?>
@@ -27,33 +27,33 @@
 
 						 @for( $x=0;$x<$rows;$x++ )
 							 <ul class="ca-menu">
-								@foreach( $depts as $dept )
+								@foreach( $depts as $Dept )
 
-									<?php if(!in_array($dept->id, $departmentsArr)) {$departmentsArr [] = $dept->id;}else{continue;}?>
+									<?php if(!in_array($Dept->id, $departmentsArr)) {$departmentsArr [] = $Dept->id;}else{continue;}?>
 									<?php if($colors > 3){$colors =0;} ?>
 
 									 <li>
-										 <a href="{{url('dept-registration')}}/{{$dept->id}}">
-											 @if( strtolower($dept->name) == 'kitchen' )
+										 <a href="{{url('dept-registration')}}/{{$Dept->id}}">
+											 @if( strtolower($Dept->name) == 'kitchen' )
 											 <i class="fas fa-utensils" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'chapel' )
+											 @elseif( strtolower($Dept->name) == 'chapel' )
 											 <i class="fas fa-church" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'shamba' )
+											 @elseif( strtolower($Dept->name) == 'shamba' )
 											 <i class="fas fa-tractor" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'compound' )
+											 @elseif( strtolower($Dept->name) == 'compound' )
 											 <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'administration' )
+											 @elseif( strtolower($Dept->name) == 'administration' )
 											 <i class="fas fa-user-tie" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'store' )
+											 @elseif( strtolower($Dept->name) == 'store' )
 											 <i class="fas fa-database" aria-hidden="true"></i>
-											 @elseif( strtolower($dept->name) == 'hospitality' )
+											 @elseif( strtolower($Dept->name) == 'hospitality' )
 											 <i class="fas fa-hotel" aria-hidden="true"></i>
 											 @else
 											 <i class="fas fa-tag" aria-hidden="true"></i>
 											 @endif
 											 <div class="ca-content">
-												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{count($dept->booking)}} @if(count($dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
-												 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{$dept->name}}</h3>
+												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{count($Dept->booking)}} @if(count($Dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
+												 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{$Dept->name}}</h3>
 											 </div>
 										 </a>
 									 </li>

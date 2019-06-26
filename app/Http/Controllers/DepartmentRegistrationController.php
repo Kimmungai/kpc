@@ -56,6 +56,7 @@ class DepartmentRegistrationController extends Controller
     public function show(Dept $dept,$id)
     {
       $dept = Dept::find($id);
+      Session(['deptID'=>$id]);
       return view('dept.single',compact('dept'));
     }
 
@@ -68,6 +69,7 @@ class DepartmentRegistrationController extends Controller
     public function edit(Dept $dept,$id)
     {
       $dept = Dept::find($id);
+      Session(['deptID'=>$id]);
       return view('dept.edit',compact('dept'));
     }
 

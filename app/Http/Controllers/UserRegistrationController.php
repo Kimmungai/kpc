@@ -103,9 +103,9 @@ class UserRegistrationController extends Controller
     public function destroy(User $user,$id)
     {
         $user = User::find($id);
-        $user->delete();
+        $user->forceDelete();
         Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
-        return redirect('/home');
+        return redirect('/users');
     }
 
     /**

@@ -450,7 +450,7 @@ li.second.full-screen {
     padding: 10px 16px;
 
 }
-li.second.w3l_search input[type="search"] {
+li.second.w3l_search input[type="search"], select {
       outline: none;
     padding: 10px;
     color: #888;
@@ -588,10 +588,12 @@ h3.w3_inner_tittle {
 	letter-spacing:1px;
 }
 .inner_content_w3_agile_info {
-    margin-top:4.5em;
+    /*margin-top:4.5em;*/
+		margin-top: 2em;
 }
 .inner_content_w3_agile_info.two_in {
-    margin-top: 4em;
+    /*margin-top: 4em;*/
+		margin-top: 1.5em;
 }
 .chart_agile.agile_info_shadow {
     padding: 1em 2em;
@@ -2624,7 +2626,8 @@ li.second.logo.admin {
 		padding-top: 14px;
 	}
 	.inner_content_w3_agile_info {
-		margin-top: 4em;
+		/*margin-top: 4em;*/
+		margin-top: 2.5em;
 	}
 	.main-example {
 		margin: 7em 0em 0 0em;
@@ -2643,7 +2646,7 @@ li.second.logo.admin {
 	li.second.logo {
 		padding: 0 13px;
 	}
-	li.second.w3l_search input[type="search"] {
+	li.second.w3l_search input[type="search"],select {
 		padding: 10px;
 		width: 80%;
 		float: left;
@@ -2725,7 +2728,8 @@ li.second.logo.admin {
 		padding: 12em 0;
 	}
 	.inner_content_w3_agile_info {
-		margin-top: 4.3em;
+		/*margin-top: 4.3em;*/
+		margin-top: 2.5em;
 	}
 	.w3ls_agile_circle_progress.agile_info_shadow {
 		padding: 1em 1em;
@@ -2800,7 +2804,9 @@ li.second.logo.admin {
 		margin: 1em 0;
 	}
 	.inner_content_w3_agile_info.two_in {
-		margin-top: 2.5em;
+		/*margin-top: 2.5em;*/
+		margin-top: 1.5em;
+
 	}
 	.blank_w3ls_agile {
 		padding-bottom: 3em;
@@ -2896,7 +2902,8 @@ li.second.logo.admin {
 		padding: 7em 0em 4em 0em;
 	}
 	.inner_content_w3_agile_info {
-		margin-top: 8.7em;
+		/*margin-top: 8.7em;*/
+		margin-top: 3em;
 	}
 		li.second.w3l_search form {
 		margin-top: 9px;
@@ -2925,7 +2932,8 @@ li.second.logo.admin {
 		top: 56px;
 	}
 	.inner_content_w3_agile_info.two_in {
-		margin-top: 3.5em;
+		/*margin-top: 3.5em;*/
+		margin-top: 2.5em;
 	}
 	.top_chart {
 		display: inline-block;
@@ -3142,7 +3150,7 @@ li.second.logo.admin {
 		font-size: 0.9em;
 		line-height: 1.9em;
 	}
-	li.second.w3l_search input[type="search"] {
+	li.second.w3l_search input[type="search"],select {
       font-size: 13px;
 	}
 	.icon-box {
@@ -3185,12 +3193,13 @@ li.second.logo.admin {
 	li.dropdown.head-dpdn i {
 		font-size: 15px;
 	}
-	li.second.w3l_search input[type="search"] {
+	li.second.w3l_search input[type="search"],select {
     padding:10px 8px;
     font-size: 12px;
 	}
 	.inner_content_w3_agile_info.two_in {
-		margin-top: 2.5em;
+		/*margin-top: 2.5em;*/
+		margin-top: 1.5em;
 	}
 	.pages_agile_info_w3l {
 		min-height: 599px;
@@ -3255,7 +3264,7 @@ li.second.logo.admin {
 		left: 59%;
 		top: 61px;
 	}
-	li.second.w3l_search input[type="search"] {
+	li.second.w3l_search input[type="search"],select {
 		padding: 10px;
 		width: 74%;
 		float: left;
@@ -3310,7 +3319,7 @@ li.second.logo.admin {
 		height: 40px;
 		line-height: 1px;
 	}
-	li.second.w3l_search input[type="search"] {
+	li.second.w3l_search input[type="search"],select {
 		padding: 6px;
 		width: 74%;
 		float: left;
@@ -3324,7 +3333,9 @@ li.second.logo.admin {
 		padding: 1em 1em;
 	}
 	.inner_content_w3_agile_info.two_in {
-		margin-top: 2em;
+		/*margin-top: 2em;*/
+		margin-top: 1.5em;
+
 	}
 	.pages_agile_info_w3l {
 		min-height: 547px;

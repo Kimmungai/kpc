@@ -16,6 +16,8 @@
 	            </div>
 	          </div>
 	        <!-- //breadcrumbs -->
+					<!-- /inner_content_w3_agile_info-->
+			 <div class="inner_content_w3_agile_info">
 					<!--stock options buttons-->
 					<!--<div class="container" >
 						<div class="row">
@@ -54,7 +56,7 @@
 
 					<div class="container" >
 						<div class="row">
-							<h1 class="text-uppercase mb-2">{{$dept->name}}</h1>
+							<h1 class="text-capitalize mb-2">{{$dept->name}}</h1>
 						</div>
 
 						<div class="row">
@@ -70,7 +72,7 @@
 												<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 spend</p>
-												<a href="#" class="btn btn-sm btn-block btn-dark" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
+												<a href="#" class="btn btn-x-sm  btn-dark" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
 											<dd>
 										</dl>
 									</div>
@@ -87,7 +89,7 @@
 												<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>
-												<a href="#" class="btn btn-sm btn-block btn-dark" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
+												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
 											<dd>
 										</dl>
 									</div>
@@ -104,7 +106,7 @@
 												<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>
-												<a href="{{route('dept report',$dept->id)}}" class="btn btn-sm btn-block btn-dark">View reports</a>
+												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-dark">View reports</a>
 											<dd>
 										</dl>
 									</div>
@@ -121,7 +123,7 @@
 												<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>
-												<a href="#" class="btn btn-sm btn-block btn-dark" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
+												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
 											<dd>
 										</dl>
 									</div>
@@ -138,7 +140,7 @@
 												<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>
-												<a href="/dept-registration/{{$dept->id}}/edit" class="btn btn-sm btn-block btn-dark">Edit details</a>
+												<a href="/dept-registration/{{$dept->id}}/edit" class="btn btn-x-sm btn-dark">Edit details</a>
 											<dd>
 										</dl>
 									</div>
@@ -149,6 +151,7 @@
 
 				</div>
 		<!-- //inner_content-->
+	</div>
 		<input id="currentDeptID" type="hidden"  value="@if( isset($dept) ) {{$dept->id}} @endif">
 
 		@component( 'components.purchases-modal',['dept' => $dept] )

@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::redirect('/home','/');
 //purchases
 Route::get('/purchases','PurchasesController@index')->name('purchases');
 
@@ -40,11 +41,12 @@ Route::get('dept-report/{id}','DepartmentRegistrationController@report')->name('
 Route::resource('dept-registration','DepartmentRegistrationController');
 
 //purchases
-Route::resource('purchases-registration','PurchasesRegistrationController');
+
 Route::post('create-supplier','PurchasesAjaxController@create_supplier');
 Route::post('restore-purchases','PurchasesAjaxController@restore_purchase');
 Route::post('update-purchase','PurchasesAjaxController@update_purchase');
-
+Route::get('sort-purchases','PurchasesRegistrationController@index');
+Route::resource('purchases-registration','PurchasesRegistrationController');
 //products
 Route::post('create-product','ProductsAjaxController@create_product');
 Route::post('search-product','ProductsAjaxController@search_product');
@@ -53,6 +55,7 @@ Route::post('update-product','ProductsAjaxController@update_product');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');
+Route::get('sort-bookings','BookingsRegistrationController@index');
 Route::resource('bookings-registration','BookingsRegistrationController');
 
 //Transfers

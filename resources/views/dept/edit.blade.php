@@ -52,7 +52,7 @@
 
                  <div class="button" data-toggle="modal" data-target="#confirmModal">
                   <p class="btnText">Update?</p>
-                  <div class="btnTwo">
+                  <div class="btnTwo" style="background:green">
                     <p class="btnText2">GO!</p>
                   </div>
                  </div>

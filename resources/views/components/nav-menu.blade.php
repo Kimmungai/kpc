@@ -154,19 +154,36 @@
           </ul>
   </li>
 
-  <li class="second w3l_search">
+  <li class="second w3l_search" style="border:0">
 
       <form action="#" method="post">
-        <input type="search" name="search" placeholder="Search here..." required="">
-        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <!--<input type="search" name="search" placeholder="Search here..." required="">-->
+        <select class="" name="">
+          <option value="" disabled selected> Choose Report </option>
+
+          @if(isset($dept))
+            @if($dept)
+              <option value="{{$dept->id}}">{{$dept->name}} Profit & Loss</option>
+            @endif
+          @endif
+
+          @if(Auth::check())
+            @if(Auth::user()->type == 3 )
+              <option>Overall Profits & Loss</option>
+              <option>Overall Balance Sheet</option>
+            @endif
+          @endif
+
+        </select>
+        <button class="btn btn-default" type="submit"><i class="fa fa-download" aria-hidden="true"></i></button>
       </form>
 
   </li>
-  <li class="second full-screen">
+  <!--<li class="second full-screen">
     <section class="full-top">
       <button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
     </section>
-  </li>
+  </li>-->
 
 </ul>
 <!-- //nav -->
