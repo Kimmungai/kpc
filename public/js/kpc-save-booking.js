@@ -1,7 +1,8 @@
-function save_booking(tableID='booked-products-table')
+function save_booking(tableID='booked-products-table',update=0)
 {
 
   //get form inputs
+  var bookingID = $('#bookingID').val();
   var deptID = $("#bookingDeptID").val();
   var bookingType = $("#bookingType").val();
   var roomType = $("#roomType").val();
@@ -47,10 +48,13 @@ function save_booking(tableID='booked-products-table')
 
   var con = confirm( "Are you sure you want to save the booking details?" );
   if( !con ){ return; }
+  var route = "/save-booking";
+  if(update){ route = "/update-booking";}
 
-  $.post("/save-booking",//send details to server
+  $.post(route,//send details to server
     {
       dept_id:deptID,
+      bookingID:bookingID,
       user_id:customerID,
       bookingType:bookingType,
       roomType:roomType,
@@ -78,11 +82,12 @@ function save_booking(tableID='booked-products-table')
       else
         alert("Failed!")
     });
-
+    if( !update ){
     $('#recordBookingsModal').modal('hide');
     $('#table-booking-contact').html('');
     $('#booked-products-table').html('');
     clear_booking_form();
+  }
 
 
 }

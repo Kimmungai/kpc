@@ -28,8 +28,8 @@ class Booking extends Model
       return $this->hasMany('App\Revenue');
     }
 
-    public function Product()
+    /*public function Product()
     {
       $this->hasMany('App\Product');
-    }
+    }*/
 }

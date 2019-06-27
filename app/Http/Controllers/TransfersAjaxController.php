@@ -8,6 +8,10 @@ use App\Product;
 
 class TransfersAjaxController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function save_transfer(Request $request)
     {
 
@@ -65,7 +69,7 @@ class TransfersAjaxController extends Controller
         $newProduct->save();
         $newQuantity = $product->quantity - $transferProd['qty'];
         Product::where('id',$transferProd['id'])->update(['quantity' => $newQuantity]);
-        
+
 
       }else{
 

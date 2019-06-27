@@ -55,6 +55,7 @@ Route::post('update-product','ProductsAjaxController@update_product');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');
+Route::post('update-booking','BookingsAjaxController@update_booking');
 Route::get('sort-bookings','BookingsRegistrationController@index');
 Route::resource('bookings-registration','BookingsRegistrationController');
 

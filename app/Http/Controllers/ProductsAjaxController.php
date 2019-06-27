@@ -10,6 +10,10 @@ use Carbon\Carbon;
 
 class ProductsAjaxController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create_product(Request $request)
     {
       $validator = Validator::make($request->all(), [
@@ -33,7 +37,7 @@ class ProductsAjaxController extends Controller
       $product->purchases_id = $request->purchases_id;
       $product->dept_id = $request->dept_id;
       $product->save();
-      
+
       $expense = new Expense;
       $expense->purchase_id = $request->purchases_id;
       $expense->product_id = $product->id;

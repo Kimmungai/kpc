@@ -336,19 +336,16 @@
               </tr>
             </thead>
             <tbody id="booked-products-table">
+
               @if( isset($booking) )
-                @forelse( $booking->revenue as $revenue)
-                <tr data-prod="{{$revenue->product->id}}">
+                @foreach( $booking->revenue as $revenue)
+                <tr data-prod="{{$revenue->product->id}}" id="booked-products-table-prod-result-{{$revenue->product->id}}">
                 <td>{{$revenue->product->sku}}</td>
                 <td>{{$revenue->product->name}}</td>
-                <td class="text-info cursor" id="booked-products-table-booked-prod-qty-{{$revenue->product->id}}" onclick="std_update_amount_due(this.id,'+response.quantity+')">{{$revenue->bookedQuantity}}</td>
+                <td class="text-info cursor" id="booked-products-table-booked-prod-qty-{{$revenue->product->id}}" onclick="std_update_amount_due(this.id,{{$revenue->product->quantity}})">{{$revenue->bookedQuantity}}</td>
                 <td id="'booked-products-table-booked-prod-price-{{$revenue->product->id}}" class="text-info cursor" onclick="std_update_amount_due(this.id)">{{$revenue->price}}</td>
                 </tr>
-                @empty
-                <tr>
-                  <td colspan="4">No products found!</td>
-                </tr>
-                @endforelse
+                @endforeach
               @endif
 
             </tbody>
@@ -376,10 +373,16 @@
                  <div id="table-booking-contact-results-box" class="search-box-results border-1 hidden d-none">
 
                  </div>
-                 <div class="form-group">
-                   <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
-                 </div>
+								 @if( isset($booking) )
+									 @if($booking->user)
+	                 <div class="form-group">
+	                   <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
+	                 </div>
+									 @endif
+								@endif
                </div>
+							 @if( isset($booking) )
+								 @if($booking->user)
                     <div class="grid-1 hidden d-none" id="booking-create-user-form-container">
                       <div class="form-body " >
                         <div  data-example-id="simple-form-inline">
@@ -390,7 +393,7 @@
                                   <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                   </span>
-                                  <input  name="firstName"  type="text" class="form-control1" value="" placeholder="Name..." required />
+                                  <input  name="firstName"  type="text" class="form-control1" value="{{$booking->user->firstName}}" placeholder="Name..." required />
                               </div>
                             </div>
 
@@ -399,7 +402,7 @@
                                   <span class="input-group-addon">
                                     <i class="fa fa-envelope"></i>
                                   </span>
-                                  <input name="email"  type="email"  class="form-control1" value="" placeholder="Email..." required/>
+                                  <input name="email"  type="email"  class="form-control1" value="{{$booking->user->email}}" placeholder="Email..." required/>
                               </div>
                             </div>
 
@@ -408,7 +411,7 @@
                                   <span class="input-group-addon">
                                     <i class="fa fa-phone"></i>
                                   </span>
-                                  <input name="phoneNumber"  type="number" class="form-control1" value=""  placeholder="Phone Number..." required />
+                                  <input name="phoneNumber"  type="number" class="form-control1" value="{{$booking->user->phoneNumber}}"  placeholder="Phone Number..." required />
                               </div>
                             </div>
 
@@ -417,7 +420,7 @@
                                   <span class="input-group-addon">
                                     <i class="fas fa-id-card"></i>
                                   </span>
-                                  <input name="idNo" type="number" class="form-control" value="" placeholder="ID No..." />
+                                  <input name="idNo" type="number" class="form-control" value="{{$booking->user->idNo}}" placeholder="ID No..." />
                               </div>
                             </div>
 
@@ -432,9 +435,11 @@
 
                       </div>
                       <div class="form-group">
-                        <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-search-customer-container','booking-create-user-form-container')">Search customer from records instead <i class="fa fa-database"></i></button>
+                        <button type="button" class="btn btn-default btn-sm mt-2" name="button" onclick="toggleElements('booking-search-customer-container','booking-create-user-form-container')">Search customer from records instead <i class="fa fa-database"></i></button>
                       </div>
                      </div>
+										 @endif
+									@endif
 
 
                 </div>
@@ -476,14 +481,16 @@
      </div>
     <!-- //tables -->
     <input id="bookingDeptID" type="hidden" name="bookingDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
-    <input id="customerID" type="hidden" name="customerID" value="">
-
+		<input id="currentDeptID" type="hidden" name="currentDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
+    <input id="customerID" type="hidden" name="customerID" value="@if( isset($booking) )	@if($booking->user) {{$booking->user->id}} @endif @endif">
+		<input id="deptID" type="hidden" name="deptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
+		<input type="hidden" name="bookingID" id="bookingID" value="@if( isset($booking) ) {{$booking->id}} @endif">
         <!--end customer table-->
 
           <!--//booking form-->
 
             <!--end goods table-->
-            <div class="button" data-toggle="modal" data-target="#confirmModal">
+            <div class="button" onclick="save_booking('booked-products-table',1)">
              <p class="btnText">Update?</p>
              <div class="btnTwo" style="background:green">
                <p class="btnText2" >GO!</p>

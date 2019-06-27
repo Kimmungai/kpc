@@ -8,6 +8,10 @@ use App\User;
 
 class UserController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
   public function users_top()
   {
     $usersCount['staff'] = count(User::where('type',1)->get());

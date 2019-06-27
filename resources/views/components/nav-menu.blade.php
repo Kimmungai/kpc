@@ -89,7 +89,7 @@
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
-              @if( Request::is('home') || Request::is('dept-registration/*') )
+              @if( Request::is('/') || Request::is('dept-registration/*') )
                 <a href="{{url('/dept-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Add new department"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
               @elseif( Request::is('user-registration') || Request::is('user-registration/*') || Request::is('users') || Request::is('users/*'))
                 <a href="{{url('/user-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Create new user"><i class="fa fa-plus-square" aria-hidden="true"></i></a>

@@ -12,6 +12,10 @@ use Validator;
 
 class UserAjaxController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     public function search_user( Request $request,$type=5 )
     {
       $string = $request->string;

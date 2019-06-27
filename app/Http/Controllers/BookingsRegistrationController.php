@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use App\Booking;
+use App\Revenue;
 use App\Dept;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BookingsRegistrationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -121,6 +126,7 @@ class BookingsRegistrationController extends Controller
     public function destroy(Booking $booking,$id)
     {
       $booking = Booking::find($id);
+      Revenue::where('booking_id',$id)->forceDelete();
       $booking->forceDelete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
       return redirect('/bookings-registration');

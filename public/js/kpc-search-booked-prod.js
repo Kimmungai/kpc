@@ -2,6 +2,7 @@ function std_search_product(id,value,tableID)
 {
   if (value.length > 2) {
     var deptID = $("#currentDeptID").val();
+
     //send details to server
     $.post("/search-product",
       {
@@ -37,6 +38,7 @@ function std_update_product_results(data,id,tableID)
 
 function std_update_products_table(data,cost=0,tableID='booked-products-table')//refresh products table
 {
+  event.preventDefault();
   //var responseObj = JSON.stringify(data);
   //var response = JSON.parse(responseObj);
   var response = data;
@@ -64,6 +66,7 @@ function std_update_products_table(data,cost=0,tableID='booked-products-table')/
 
 function std_update_prod_table(id,tableID='booked-products-table')
 {
+  event.preventDefault();
   //var prodID = id.substring(30);
   var prodID = $("#"+id).data('prod');
 //  alert(prodID);return;

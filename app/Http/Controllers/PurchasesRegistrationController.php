@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use App\Purchase;
+use App\Expense;
+use App\Product;
 use App\Dept;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PurchasesRegistrationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -121,6 +127,8 @@ class PurchasesRegistrationController extends Controller
     public function destroy(Purchase $purchase,$id)
     {
       $purchase = Purchase::find($id);
+      Expense::where('purchase_id',$id)->forceDelete();
+      Product::where('purchases_id',$id)->forceDelete();
       $purchase->forceDelete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
       return redirect('/purchases-registration');
