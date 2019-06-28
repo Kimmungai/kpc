@@ -152,15 +152,15 @@
                   <td>{{$purchase->user->firstName}} {{$purchase->user->lastName}}</td>
                   <td>{{$purchase->user->email}}</td>
                   <td>{{$purchase->user->phoneNumber}}</td>
-                  <td class="text-info cursor" id="supplier-{{$purchase->user->id}}-amount-due" onclick="update_amount_due({{$purchase->id}},this.id,\'amountDue\')">{{$purchase->amountDue}}</td>
-                  <td class="text-info cursor" id="supplier-{{$purchase->user->id}}-amount-paid" onclick="update_amount_due({{$purchase->id}},this.id,\'amountPaid\')">{{$purchase->amountPaid}}</td>
+                  <td class="text-info cursor" id="supplier-{{$purchase->user->id}}-amount-due" onclick="update_amount_due({{$purchase->id}},this.id,'amountDue')">{{$purchase->amountDue}}</td>
+                  <td class="text-info cursor" id="supplier-{{$purchase->user->id}}-amount-paid" onclick="update_amount_due({{$purchase->id}},this.id,'amountPaid')">{{$purchase->amountPaid}}</td>
                   <td>
-                    <select id="supplier-{{$purchase->id}}-payment-method" onchange="update_amount_due({{$purchase->id}},this.value,\'paymentMethod\')">
+                    <select id="supplier-{{$purchase->id}}-payment-method" onchange="update_amount_due({{$purchase->id}},this.value,'paymentMethod')">
                       <option value="0" disabled>select one</option>
-                      <option value="1">Paid by cash</option>
-                      <option value="2">Paid by cheque</option>
-                      <option value="3">Paid by bank transfer</option>
-                      <option value="4">MPESA</option>
+                      <option value="1" @if( $purchase->paymentMethod ==1 ) selected @endif>Paid by cash</option>
+                      <option value="2" @if( $purchase->paymentMethod ==2 ) selected @endif>Paid by cheque</option>
+                      <option value="3" @if( $purchase->paymentMethod ==3 ) selected @endif>Paid by bank transfer</option>
+                      <option value="4" @if( $purchase->paymentMethod ==4 ) selected @endif>MPESA</option>
                     </select>
                   </td>
                   </tr>
@@ -261,7 +261,8 @@
 
             <div class="w3l-table-info agile_info_shadow">
               <table  class="two-axis">
-                <input id="purchasesID" type="hidden" name="purchasesID">
+                <input id="purchasesID" type="hidden" name="purchasesID" value="@if( isset($purchase) ) {{$purchase->id}} @endif">
+								<input type="hidden" id="currentDeptID" name="currentDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
               <thead>
                 <tr>
                 <th>SKU</th>
@@ -273,18 +274,14 @@
               <tbody id="purchases-table">
 
                 @if( isset($purchase) )
-                  @forelse( $purchase->expense as $expense )
-                  <tr>
+                  @foreach( $purchase->expense as $expense )
+                  <tr id="purchases-table-product-{{$expense->product->id}}">
                   <td>{{$expense->product->sku}}</td>
                   <td>{{$expense->product->name}}</td>
-                  <td class="text-info cursor" id="product-{{$expense->product->id}}" onclick="update_product_quantity({{$purchase->id}},this.id,\'suppliedQuantity\')">{{$expense->suppliedQuantity}}</td>
-                  <td>{{$expense->cost}}</td>
+                  <td data-prod="{{$expense->product->id}}" class="text-info cursor" id="product-{{$expense->product->id}}" onclick="update_product_quantity({{$purchase->id}},this.id,'suppliedQuantity')">{{$expense->suppliedQuantity}}</td>
+                  <td data-prod="{{$expense->product->id}}" class="text-info cursor" id="product-cost-{{$expense->product->id}}" onclick="update_product_quantity({{$purchase->id}},this.id,'cost')">{{$expense->cost}}</td>
                   </tr>
-                  @empty
-                  <tr>
-                    <td colspan="4">No products!</td>
-                  </tr>
-                  @endforelse
+                  @endforeach
                 @endif
 
               </tbody>

@@ -105,11 +105,11 @@ class ProductsAjaxController extends Controller
           Product::where('id',$id)->update([
             'quantity' => ($product->quantity + $value)
           ]);
-          return Expense::where('purchase_id',$purchase_id)->update([
+          return Expense::where('purchase_id',$purchase_id)->where('product_id',$id)->update([
             $field => $value
           ]);
         }else if($field === 'cost'){
-          return Expense::where('purchase_id',$purchase_id)->update([
+          return Expense::where('purchase_id',$purchase_id)->where('product_id',$id)->update([
             $field => $value
           ]);
        }else{

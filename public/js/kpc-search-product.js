@@ -2,6 +2,7 @@ $('#search-product-box').on('keyup', function() {
 
      if (this.value.length > 2) {
        var deptID = $("#currentDeptID").val();
+
        //send details to server
        $.post("/search-product",
          {
@@ -20,8 +21,7 @@ $('#search-product-box').on('keyup', function() {
 
 function update_product_results(data)
 {
-  $("#product-results-box").html('');
-  $("#product-results-box").removeClass('d-none').removeClass('hidden');
+  new_clear_prod_search();
   if( data.length )
   {
     for ( var x=0;x<data.length;x++ )
@@ -38,9 +38,11 @@ function update_product_results(data)
 
 function update_prod_table(id)
 {
+  event.preventDefault();
   var prodID = id.substring(12);
   var purchaseID = $("#purchasesID").val();
   if ( purchaseID == ''){ alert("please fill in supplier details first");return; }
+  if( $("#purchases-table-product-" +prodID).length ){alert("Product already added!");new_clear_prod_search();return;}
   //get user from server
   $.post("/get-product",
     {
@@ -59,7 +61,7 @@ function update_prod_table(id)
 function update_product_quantity(purchaseID,tdId,field)
 {
   var amount = prompt("please enter quantity in  digits only");
-  var productID = tdId.substring(8);
+  var productID = $("#"+tdId).data('prod');//tdId.substring(13);
   if( isNaN(amount) )
   {
     amount = prompt("Only digits can be entered!");
@@ -92,4 +94,8 @@ function update_product_quantity(purchaseID,tdId,field)
 
   }
   //alert(userID);
+}
+function new_clear_prod_search(){
+  $("#product-results-box").html('');
+  $("#product-results-box").removeClass('d-none').removeClass('hidden');
 }

@@ -115,8 +115,12 @@ function update_products_table(data,cost=0,qty=1)//refresh products table
 
   if( response.length )//means it is an array
   {
-    var purchaseID = $("#purchasesID").val();
-    $("#purchases-table").append('<tr><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">'+qty+'</td><td class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
+    if( !$("#purchases-table-product-" +response[0].id).length ){
+      var purchaseID = $("#purchasesID").val();
+      $("#purchases-table").append('<tr id="purchases-table-product-'+response[0].id+'"><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">'+qty+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
+    }else{
+      alert("Product already added!");
+    }
 
   }else{
 

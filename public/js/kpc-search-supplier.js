@@ -40,11 +40,14 @@ function update_sup_table(id)
 {
   var userID = id.substring(11);
   var deptID = $("#deptID").val();
+  var purchaseID = $("#purchasesID").val();
+
   //get user from server
   $.post("/get-purchases-user",
     {
       userID:userID,
       dept_id:deptID,
+      purchaseID:purchaseID,
       "_token": $('meta[name="csrf-token"]').attr('content'),
     },
     function(response,status){
