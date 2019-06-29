@@ -15,7 +15,7 @@ class Dept extends Model
      * @var array
      */
     protected $fillable = [
-      'org_id','name','address','avatar','type','deptDetails'
+      'org_id','name','address','avatar','type','deptDetails','targetCosts','targetRevenues','staffCapacity','bookingCapacity','stockCapacity'
     ];
 
     public function Org()

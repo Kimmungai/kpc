@@ -28,6 +28,10 @@ class StoreDept extends FormRequest
           'org_id' => 'required|numeric',
           'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
           'name' => 'required|max:255|unique:depts,name,'.\Request::segment(2),
+          'targetCosts' => 'required|numeric',
+          'targetRevenues' => 'required|numeric',
+          'bookingCapacity' => 'required|numeric',
+          'stockCapacity' => 'required|numeric',
           'address' => 'nullable|max:255',
           'deptDetails' => 'nullable',
         ];
@@ -57,6 +61,11 @@ class StoreDept extends FormRequest
         return [
             'avatar' => 'picture',
             'address' => 'location',
+            'deptDetails' => 'department details',
+            'targetCosts' => 'target costs',
+            'targetRevenues' => 'target revenues',
+            'staffCapacity' => 'staff capacity',
+            'bookingCapacity' => 'booking capacity',
             'deptDetails' => 'department details',
         ];
     }

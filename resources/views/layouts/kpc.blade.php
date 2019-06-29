@@ -316,54 +316,7 @@ var chart = AmCharts.makeChart("chartdiv1", {
 		</script>
 			<!-- script-for-menu -->
 
-<!-- /circle-->
-	 <script type="text/javascript" src="{{url('site-theme/js/circles.js') }}"></script>
-					         <script>
-								var colors = [
-										['#ffffff', '#fd9426'], ['#ffffff', '#fc3158'],['#ffffff', '#53d769'], ['#ffffff', '#147efb']
-									];
-								for (var i = 1; i <= 7; i++) {
-									var child = document.getElementById('circles-' + i),
-										percentage = 30 + (i * 10);
 
-									Circles.create({
-										id:         child.id,
-										percentage: percentage,
-										radius:     80,
-										width:      10,
-										number:   	percentage / 1,
-										text:       '%',
-										colors:     colors[i - 1]
-									});
-								}
-
-				</script>
-	<!-- //circle -->
-	<!--skycons-icons-->
-<script src="{{url('site-theme/js/skycons.js') }}"></script>
-<script>
-									 var icons = new Skycons({"color": "#fcb216"}),
-										  list  = [
-											"partly-cloudy-day"
-										  ],
-										  i;
-
-									  for(i = list.length; i--; )
-										icons.set(list[i], list[i]);
-									  icons.play();
-								</script>
-								<script>
-									 var icons = new Skycons({"color": "#fff"}),
-										  list  = [
-											"clear-night","partly-cloudy-night", "cloudy", "clear-day", "sleet", "snow", "wind","fog"
-										  ],
-										  i;
-
-									  for(i = list.length; i--; )
-										icons.set(list[i], list[i]);
-									  icons.play();
-								</script>
-<!--//skycons-icons-->
 <!-- //js -->
 <script src="{{url('site-theme/js/screenfull.js') }}"></script>
 		<script>

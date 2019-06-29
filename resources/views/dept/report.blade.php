@@ -22,25 +22,82 @@
           <!-- /w3ls_agile_circle_progress-->
         	<div class="w3ls_agile_circle_progress agile_info_shadow">
 
+						<!--sorting-->
+						<div class="container">
+							<div class="row">
+								<form class="" action="sort-purchases" method="get">
+								<div class="col-xs-2">
+									<p style="line-height:40px">Sort:</p>
+								</div>
+								<div class="col-xs-3">
+									<select id="filter_sort" class="form-control1" name="filter_sort" >
+										<option value="thisMonth" @if(isset($sortBy)) @if($sortBy == 'thisMonth' ) selected @endif @endif >This month</option>
+										<option value="thisWeek" @if(isset($sortBy)) @if($sortBy == 'thisWeek' ) selected @endif @endif>This week</option>
+										<option value="thisYear" @if(isset($sortBy)) @if($sortBy == 'thisYear' ) selected @endif @endif >This Year</option>
+										<option value="today" @if(isset($sortBy)) @if($sortBy == 'today' ) selected @endif @endif >Today</option>
+									</select>
+								</div>
+
+								<div class="col-xs-2">
+									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="" placeholder="Date from">
+								</div>
+								<div class="col-xs-1">
+									<p style="line-height:40px">~</p>
+								</div>
+								<div class="col-xs-2">
+									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="" placeholder="Date to">
+								</div>
+								<div class="col-xs-2">
+									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
+								</div>
+								</form>
+							</div>
+						</div>
+						<!--end sorting-->
+
+
+						<?php
+						//variables
+						$costsPercent = 0;$revenuesPercent = 0;$bookingsPercent = 0;$stockPercent = 0;
+						$costs = 0;$revenues = 0; ?>
+
+						 @foreach( $dept->purchase as $purchase )
+							 <?php $costs += $purchase->amountPaid; ?>
+						 @endforeach
+
+						 @foreach( $dept->booking as $booking )
+							 <?php $revenues += $booking->bookingAmountReceived; ?>
+						 @endforeach
+
+						 <?php
+						 //percentages
+						 if($dept->targetCosts){$costsPercent = ($costs / $dept->targetCosts) * 100;}
+						 if($dept->targetRevenues){$revenuesPercent = ($revenues / $dept->targetRevenues) * 100;}
+						 if($dept->bookingCapacity){$bookingsPercent = (count($dept->booking) / $dept->bookingCapacity) * 100;}
+						 if($dept->stockCapacity){$stockPercent = (count($dept->product) / $dept->stockCapacity) * 100;}
+						  ?>
+
+
+					@if( $costsPercent && $revenuesPercent && $bookingsPercent && $stockPercent )
             <div class="cir_agile_info " >
-            <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department</h3>
+            <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department <strong class="text-danger">{{date('M Y')}}</strong> highlights</h3>
                 <div class="skill-grids">
                   <div class="skills-grid text-center">
+                    <div class="circle" id="circles-0"></div>
+                    <p>Costs</p>
+                  </div>
+                  <div class="skills-grid text-center">
                     <div class="circle" id="circles-1"></div>
-                    <p>Purchases</p>
+                    <p>Revenues</p>
                   </div>
                   <div class="skills-grid text-center">
                     <div class="circle" id="circles-2"></div>
-                    <p>Sales</p>
+
+                    <p>Bookings</p>
                   </div>
                   <div class="skills-grid text-center">
                     <div class="circle" id="circles-3"></div>
-
-                    <p>Profit / loss</p>
-                  </div>
-                  <div class="skills-grid text-center">
-                    <div class="circle" id="circles-4"></div>
-                    <p>Workers</p>
+                    <p>Stock</p>
                   </div>
 
 
@@ -49,6 +106,7 @@
 
             </div>
           </div>
+					@endif
         </div>
         <!-- /w3ls_agile_circle_progress-->
 
@@ -129,18 +187,33 @@
 					<!-- //inner_content_w3_agile_info-->
 				</div>
 		<!-- //inner_content-->
-		<!--<input id="currentDeptID" type="hidden"  value="@if( isset($dept) ) {{$dept->id}} @endif">
+		@if( $costsPercent && $revenuesPercent && $bookingsPercent && $stockPercent )
+		<!-- /circle-->
+			 <script type="text/javascript" src="{{url('site-theme/js/circles.js') }}"></script>
+							         <script>
+										var colors = [
+												['#ffffff', '#53d769'], ['#ffffff', '#fc3158'],['#ffffff', '#fd9426'], ['#ffffff', '#147efb']
+											];
 
-		@component( 'components.purchases-modal',['dept' => $dept] )
+											var percentages = [{{$costsPercent}},{{$revenuesPercent}},{{$bookingsPercent}},{{$stockPercent}}];
 
-		@endcomponent
+										for (var i = 0; i <= 3; i++) {
+											var child = document.getElementById('circles-' + i),
+												percentage = percentages[i];
 
-		@component( 'components.bookings-modal',['dept' => $dept] )
+											Circles.create({
+												id:         child.id,
+												percentage: percentage,
+												radius:     80,
+												width:      10,
+												number:   	percentage / 1,
+												text:       '%',
+												colors:     colors[i - 1]
+											});
+										}
 
-		@endcomponent
-
-		@component( 'components.transfers-modal',['dept' => $dept] )
-
-		@endcomponent-->
+						</script>
+			<!-- //circle -->
+@endif
 
 @endsection

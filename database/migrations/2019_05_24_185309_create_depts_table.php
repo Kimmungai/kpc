@@ -19,6 +19,11 @@ class CreateDeptsTable extends Migration
             $table->string('name')->nullable();
             $table->tinyInteger('type')->nullable();
             $table->string('avatar')->nullable();
+            $table->double('targetCosts')->nullable();
+            $table->double('targetRevenues')->nullable();
+            $table->integer('bookingCapacity')->nullable();
+            $table->integer('staffCapacity')->nullable();
+            $table->double('stockCapacity')->nullable();
             $table->mediumText('address')->nullable();
             $table->mediumText('deptDetails')->nullable();
             $table->timestamp('deleted_at')->nullable();

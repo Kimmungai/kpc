@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
-
+use Carbon\Carbon;
 use App\Dept;
 use App\Http\Requests\StoreDept;
 
@@ -59,7 +59,12 @@ class DepartmentRegistrationController extends Controller
      */
     public function show(Dept $dept,$id)
     {
-      $dept = Dept::find($id);
+      $dept = Dept::where('id',$id)->with(['booking' => function($query) {
+        $query->whereMonth('created_at', Carbon::now()->month);
+      }])->with(['purchase' => function($query) {
+        $query->whereMonth('created_at', Carbon::now()->month);
+      }])->first();
+
       Session(['deptID'=>$id]);
       return view('dept.single',compact('dept'));
     }
@@ -115,7 +120,13 @@ class DepartmentRegistrationController extends Controller
      */
     public function report(Dept $dept,$id)
     {
-      $dept = Dept::find($id);
+      $dept = Dept::where('id',$id)->with(['purchase' => function($query) {
+        $query->whereMonth('created_at', Carbon::now()->month);
+      }])->with(['booking' => function($query) {
+        $query->whereMonth('created_at', Carbon::now()->month);
+      }])->with(['product' => function($query) {
+        $query->whereMonth('created_at', Carbon::now()->month);
+      }])->first();
       return view('dept.report',compact('dept'));
     }
 

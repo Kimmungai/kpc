@@ -187,7 +187,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group" id="paymentStatusTitle">
+                  <!--<div class="form-group" id="paymentStatusTitle">
                     <label class="col-md-2 control-label">Payment status</label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
@@ -207,7 +207,7 @@
                         @endif
                       </p>
                     </div>
-                  </div>
+                  </div>-->
 
                   <div class="form-group" id="paymentDueDateTitle">
                     <label class="col-md-2 control-label">Payment Due Date</label>

@@ -70,8 +70,14 @@
 											<dd>
 												<h3><a href="/purchases-registration">Purchases</a></h3>
 												<p class="text-underline">This month</p>
-												<p>50 purchases</p>
-												<p>Ksh. 50,0000 spend</p>
+												@if( isset($dept->purchase) )
+												<?php $totalAmountPaid=0;//get total amountPaid  ?>
+												@foreach( $dept->purchase as $purchase )
+													<?php $totalAmountPaid += $purchase->amountPaid; ?>
+												@endforeach
+													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
+													<p>Ksh. {{number_format($totalAmountPaid,2)}} spend</p>
+												@endif
 												<a href="#" class="btn btn-x-sm  btn-dark" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
 											<dd>
 										</dl>
@@ -87,8 +93,14 @@
 											<dd>
 												<h3><a href="/bookings-registration">Bookings</a></h3>
 												<p class="text-underline">This month</p>
-												<p>50 purchases</p>
-												<p>Ksh. 50,0000 made</p>
+												@if( isset($dept->booking) )
+													<?php $totalAmountReceived=0;//get total amountPaid  ?>
+													@foreach( $dept->booking as $booking )
+														<?php $totalAmountReceived += $booking->bookingAmountReceived; ?>
+													@endforeach
+													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
+													<p>Ksh. {{number_format($totalAmountReceived,2)}} made</p>
+												@endif
 												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
 											<dd>
 										</dl>
@@ -100,12 +112,23 @@
 										<dl>
 											<dt>
 												<a href="{{route('dept report',$dept->id)}}"><i class="fas fa-file"></i></a>
+												@if( isset($booking->bookingAmountReceived)  && isset($purchase->amountPaid) )
+													@if( $booking->bookingAmountReceived - $purchase->amountPaid  > 0 )
+													<div class="status-sec">Profit <span class="fa fa-circle text-success"></span></div>
+													@elseif( $booking->bookingAmountReceived - $purchase->amountPaid  == 0  )
+													<div class="status-sec">balanced <span class="fa fa-circle text-warning"></span></div>
+													@else
+													<div class="status-sec">Loss <span class="fa fa-circle text-danger"></span></div>
+													@endif
+												@endif
 											</dt>
 											<dd>
 												<h3><a href="{{route('dept report',$dept->id)}}">Reports</a></h3>
 												<p class="text-underline">This month</p>
-												<p>50 purchases</p>
-												<p>Ksh. 50,0000 made</p>
+												@if( $dept->purchase && $dept->booking )
+													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
+													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
+												@endif
 												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-dark">View reports</a>
 											<dd>
 										</dl>
@@ -119,10 +142,10 @@
 												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fas fa-external-link-alt"></i></a>
 											</dt>
 											<dd>
-												<h3><a href="#" data-toggle="modal" data-target="#recordTransfersModal">Transfers</a></h3>
-												<p class="text-underline">This month</p>
+												<h3 class="mb-2"><a href="#" data-toggle="modal" data-target="#recordTransfersModal">Transfers</a></h3>
+												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
-												<p>Ksh. 50,0000 made</p>
+												<p>Ksh. 50,0000 made</p>-->
 												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
 											<dd>
 										</dl>
@@ -136,10 +159,10 @@
 												<a href="/dept-registration/{{$dept->id}}/edit"><i class="fas fa-edit"></i></a>
 											</dt>
 											<dd>
-												<h3><a href="/dept-registration/{{$dept->id}}/edit">Dept Details</a></h3>
-												<p class="text-underline">This month</p>
+												<h3 class="mb-2"><a href="/dept-registration/{{$dept->id}}/edit">Dept Details</a></h3>
+												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
-												<p>Ksh. 50,0000 made</p>
+												<p>Ksh. 50,0000 made</p>-->
 												<a href="/dept-registration/{{$dept->id}}/edit" class="btn btn-x-sm btn-dark">Edit details</a>
 											<dd>
 										</dl>

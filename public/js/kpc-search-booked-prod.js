@@ -15,6 +15,9 @@ function std_search_product(id,value,tableID)
         //update_product_results(data);
         std_update_product_results(data,id+"-results",tableID);
       });
+    }else
+    {
+      $(".search-box-results").addClass('d-none').addClass('hidden');
     }
 }
 

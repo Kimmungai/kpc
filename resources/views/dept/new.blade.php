@@ -38,7 +38,7 @@
                           @if( count($errors) )
                             <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
                           @endif
-													 <h3 class="w3_inner_tittle two">Please fill in this Form </h3>
+													 <h3 class="w3_inner_tittle two">Please fill in all required field <span class="text-danger">*</span> </h3>
 
                            <form class="form-horizontal" id="newDeptForm" action="{{url('/dept-registration')}}" method="post" enctype="multipart/form-data">
                              @csrf
