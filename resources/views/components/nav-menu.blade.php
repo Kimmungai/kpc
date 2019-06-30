@@ -8,50 +8,29 @@
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller scrollbar1">
         <ul class="gn-menu agile_menu_drop">
-          <li><a href="main-page.html"> <i class="fa fa-tachometer"></i> Dashboard</a></li>
+          <li><a href="/"> <i class="fa fa-home"></i> Home</a></li>
           <li>
-            <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> UI Components <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Users <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="buttons.html"><i class="fa fa-caret-right" aria-hidden="true"></i> Buttons</a></li>
-              <li class="mini_list_w3"><a href="grids.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Grids</a></li>
+              <li class="mini_list_agile"><a href="/users/2"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>
+              <li class="mini_list_w3"><a href="/users/1"> <i class="fa fa-user" aria-hidden="true"></i> Staff</a></li>
+              <li class="mini_list_w3"><a href="/users/3"> <i class="fa fa-user" aria-hidden="true"></i> Administrators</a></li>
+              <li class="mini_list_w3"><a href="/users/4"> <i class="fa fa-user" aria-hidden="true"></i> Casuals</a></li>
             </ul>
           </li>
+          @if(Auth::check())
+            @if(Auth::user()->type == 3 )
           <li>
-            <a href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>Forms <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>Reports <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="input.html"><i class="fa fa-caret-right" aria-hidden="true"></i> Inputs</a></li>
-              <li class="mini_list_w3"><a href="validation.html"><i class="fa fa-caret-right" aria-hidden="true"></i> Validation</a></li>
+              <li class="mini_list_agile"><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Overall profit & loss</a></li>
+              <li class="mini_list_w3"><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Overall balance sheet</a></li>
             </ul>
           </li>
-          <li><a href="table.html"> <i class="fa fa-table" aria-hidden="true"></i> Tables</a></li>
-          <li><a href="#"><i class="fa fa-list" aria-hidden="true"></i>Short Codes <i class="fa fa-angle-down" aria-hidden="true"> </i></a>
-                <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="typo.html"><i class="fa fa-caret-right" aria-hidden="true"></i> Typography</a></li>
-              <li class="mini_list_w3"><a href="icons.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Icons</a></li>
+            @endif
+          @endif
+          <li><a href="table.html"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 
-            </ul>
-          </li>
-
-          <li><a href="charts.html"> <i class="fa fa-line-chart" aria-hidden="true"></i> Charts</a></li>
-          <li><a href="maps.html"><i class="fa fa-map-o" aria-hidden="true"></i> Maps</a></li>
-          <li class="page">
-            <a href="#"><i class="fa fa-files-o" aria-hidden="true"></i> Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-               <ul class="gn-submenu">
-
-              <li class="mini_list_agile"> <a href="signin.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Sign In</a></li>
-               <li class="mini_list_w3"><a href="signup.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Sign Up</a></li>
-               <li class="mini_list_agile error"><a href="404.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Error 404 </a></li>
-
-              <li class="mini_list_w3_line"><a href="calendar.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Calendar</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#"> <i class="fa fa-suitcase" aria-hidden="true"></i>More <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="faq.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Faq</a></li>
-              <li class="mini_list_w3"><a href="blank.html"> <i class="fa fa-caret-right" aria-hidden="true"></i> Blank Page</a></li>
-            </ul>
-          </li>
         </ul>
       </div><!-- /gn-scroller -->
     </nav>
@@ -101,54 +80,53 @@
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
          <li class="dropdown head-dpdn">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">9</span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-link"></i><!--<span class="badge blue">9</span>--></a>
               <ul class="dropdown-menu">
                 <li>
                   <div class="notification_header">
-                    <h3>You have 4 Pending tasks</h3>
+                    <h3>Quick links</h3>
                   </div>
                 </li>
-                <li><a href="#">
+                @if( isset($dept) )
+                @if( $dept != null )
+                <li><a href="/bookings-registration">
                   <div class="task-info">
-                    <span class="task-desc">Database update</span><span class="percentage">40%</span>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="progress progress-striped active">
-                    <div class="bar yellow" style="width:40%;"></div>
-                  </div>
-                </a></li>
-                <li><a href="#">
-                  <div class="task-info">
-                    <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+                    <span class="task-desc">{{$dept->name}} bookings</span><span class="percentage"></span>
                      <div class="clearfix"></div>
                   </div>
                   <div class="progress progress-striped active">
-                     <div class="bar green" style="width:90%;"></div>
+                     <div class="bar green" style="width:100%;"></div>
                   </div>
                 </a></li>
-                <li><a href="#">
+                <li><a href="/purchases-registration">
                   <div class="task-info">
-                    <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+                    <span class="task-desc">{{$dept->name}} purchases</span><span class="percentage"></span>
                     <div class="clearfix"></div>
                   </div>
                    <div class="progress progress-striped active">
-                     <div class="bar red" style="width: 33%;"></div>
+                     <div class="bar red" style="width: 100%;"></div>
                   </div>
                 </a></li>
-                <li><a href="#">
+                @endif
+                @endif
+                <li><a href="/users">
                   <div class="task-info">
-                    <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+                    <span class="task-desc">Users</span><span class="percentage"></span>
                      <div class="clearfix"></div>
                   </div>
                   <div class="progress progress-striped active">
-                     <div class="bar  blue" style="width: 80%;"></div>
+                     <div class="bar  blue" style="width: 100%;"></div>
                   </div>
                 </a></li>
-                <li>
-                  <div class="notification_bottom">
-                    <a href="#">See all pending tasks</a>
+                <li><a href="/users/2">
+                  <div class="task-info">
+                    <span class="task-desc">Customers</span><span class="percentage"></span>
+                    <div class="clearfix"></div>
                   </div>
-                </li>
+                  <div class="progress progress-striped active">
+                    <div class="bar yellow" style="width:100%;"></div>
+                  </div>
+                </a></li>
               </ul>
             </li>
           </ul>
@@ -164,6 +142,7 @@
           @if(isset($dept))
             @if($dept)
               <option value="{{$dept->id}}">{{$dept->name}} Profit & Loss</option>
+              <option value="{{$dept->id}}">{{$dept->name}} Balance sheet</option>
             @endif
           @endif
 

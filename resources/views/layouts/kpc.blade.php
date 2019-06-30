@@ -21,6 +21,7 @@
 <script src="{{ asset('js/kpc-save-booking.js') }}" defer></script>
 <script src="{{ asset('js/kpc-search-booked-prod.js') }}" defer></script>
 <script src="{{ asset('js/kpc-save-transfer.js') }}" defer></script>
+<script src="{{ asset('js/kpc-generate-reports.js') }}" defer></script>
 
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
@@ -92,73 +93,122 @@
 		       <script src="{{url('site-theme/js/serial.js') }}"></script>
 				<script src="{{url('site-theme/js/export.js') }}"></script>
 				<script src="{{url('site-theme/js/light.js') }}"></script>
+				@if( Route::is('dept report'))
+				@if(isset($dept->product))
+				@if(count($dept->product) > 2)
 				<!-- Chart code -->
 	 <script>
 var chart = AmCharts.makeChart("chartdiv", {
     "theme": "light",
     "type": "serial",
     "startDuration": 2,
-    "dataProvider": [{
-        "country": "Spoons",
-        "visits": 500,
+    "dataProvider": [
+		@if(isset($dept->product[0]))
+		{
+        "country": "{{$dept->product[0]->name}}",
+        "visits": {{$dept->product[0]->quantity}},
         "color": "#FF0F00"
-    }, {
-        "country": "China",
-        "visits": 1882,
+    },
+		@endif
+		@if(isset($dept->product[1]))
+		{
+        "country": "{{$dept->product[1]->name}}",
+        "visits":{{$dept->product[1]->quantity}},
         "color": "#FF6600"
-    }, {
-        "country": "Japan",
-        "visits": 1809,
+    },
+		@endif
+		@if(isset($dept->product[2]))
+		{
+        "country": "{{$dept->product[2]->name}}",
+        "visits": {{$dept->product[2]->quantity}},
         "color": "#FF9E01"
-    }, {
-        "country": "Germany",
-        "visits": 1322,
+    },
+		@endif
+		@if(isset($dept->product[3]))
+		{
+        "country": "{{$dept->product[3]->name}}",
+        "visits": {{$dept->product[3]->quantity}},
         "color": "#FCD202"
-    }, {
-        "country": "UK",
-        "visits": 1122,
+    },
+		@endif
+		@if(isset($dept->product[4]))
+		{
+        "country": "{{$dept->product[4]->name}}",
+        "visits": {{$dept->product[4]->quantity}},
         "color": "#F8FF01"
-    }, {
-        "country": "France",
-        "visits": 1114,
+    },
+		@endif
+		@if(isset($dept->product[5]))
+		{
+        "country": "{{$dept->product[5]->name}}",
+        "visits": {{$dept->product[5]->quantity}},
         "color": "#B0DE09"
-    }, {
-        "country": "India",
-        "visits": 984,
+    },
+		@endif
+		@if(isset($dept->product[6]))
+		{
+        "country": "{{$dept->product[6]->name}}",
+        "visits": {{$dept->product[6]->quantity}},
         "color": "#04D215"
-    }, {
-        "country": "Spain",
-        "visits": 711,
+    },
+		@endif
+		@if(isset($dept->product[7]))
+		{
+        "country": "{{$dept->product[7]->name}}",
+        "visits": {{$dept->product[7]->quantity}},
         "color": "#0D8ECF"
-    }, {
-        "country": "Netherlands",
-        "visits": 665,
+    },
+		@endif
+		@if(isset($dept->product[8]))
+		{
+        "country": "{{$dept->product[8]->name}}",
+        "visits": {{$dept->product[8]->quantity}},
         "color": "#0D52D1"
-    }, {
-        "country": "Russia",
-        "visits": 580,
+    },
+		@endif
+		@if(isset($dept->product[9]))
+		{
+        "country": "{{$dept->product[9]->name}}",
+        "visits": {{$dept->product[9]->quantity}},
         "color": "#2A0CD0"
-    }, {
-        "country": "South Korea",
-        "visits": 443,
+    },
+		@endif
+		@if(isset($dept->product[10]))
+		{
+        "country": "{{$dept->product[10]->name}}",
+        "visits": {{$dept->product[10]->quantity}},
         "color": "#8A0CCF"
-    }, {
-        "country": "Canada",
-        "visits": 441,
+    },
+		@endif
+		@if(isset($dept->product[11]))
+		{
+        "country": "{{$dept->product[11]->name}}",
+        "visits": {{$dept->product[11]->quantity}},
         "color": "#CD0D74"
-    }, {
-        "country": "Brazil",
-        "visits": 395,
+    },
+		@endif
+		@if(isset($dept->product[12]))
+		{
+        "country": "{{$dept->product[12]->name}}",
+        "visits": {{$dept->product[12]->quantity}},
         "color": "#754DEB"
-    }, {
-        "country": "Italy",
-        "visits": 386,
+    },
+		@endif
+		@if(isset($dept->product[13]))
+		{
+        "country": "{{$dept->product[13]->name}}",
+        "visits": {{$dept->product[13]->quantity}},
         "color": "#DDDDDD"
-    }, {
-        "country": "Taiwan",
-        "visits": 338,
+    },
+		@endif
+		@if(isset($dept->product[14]))
+		{
+        "country": "{{$dept->product[14]->name}}",
+        "visits": {{$dept->product[14]->quantity}},
         "color": "#333333"
-    }],
+    }
+		@endif
+	],
     "valueAxes": [{
         "position": "left",
         "axisAlpha":0,
@@ -193,6 +243,9 @@ var chart = AmCharts.makeChart("chartdiv", {
 
 }, 0);
 </script>
+@endif
+@endif
+@endif
 <!-- Chart code -->
 <!--<script>
 var chart = AmCharts.makeChart("chartdiv1", {

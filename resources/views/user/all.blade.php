@@ -60,10 +60,13 @@
               <p>No records found! <a href="{{url('user-registration/create')}}">Create new record</a></p>
              @endforelse
 
+
+
           </div>
               <div class="clearfix"></div>
 
           </div>
+          {{$users->links()}}
 
 
           </div>

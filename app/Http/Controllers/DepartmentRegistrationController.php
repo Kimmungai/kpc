@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use App\Dept;
 use App\Http\Requests\StoreDept;
+
 
 class DepartmentRegistrationController extends Controller
 {
@@ -118,14 +120,66 @@ class DepartmentRegistrationController extends Controller
      * @param  \App\Dept  $dept
      * @return \Illuminate\Http\Response
      */
-    public function report(Dept $dept,$id)
+    public function report(Dept $dept,$id,Request $request)
     {
-      $dept = Dept::where('id',$id)->with(['purchase' => function($query) {
-        $query->whereMonth('created_at', Carbon::now()->month);
-      }])->with(['booking' => function($query) {
-        $query->whereMonth('created_at', Carbon::now()->month);
-      }])->with(['product' => function($query) {
-        $query->whereMonth('created_at', Carbon::now()->month);
+      $id = $request->id;
+      $dt = Carbon::now();
+      if( count($request->all()) )
+      {
+
+        if($request->duration_sort === 'thisWeek'){
+
+          $dept = Dept::where('id',$id)->with(['purchase' => function($query) use ($dt){
+            $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
+          }])->with(['booking' => function($query) use ($dt){
+            $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
+          }])->with(['product' => function($query) use ($dt){
+            $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
+          }])->first();
+          return view('dept.report',compact('dept'));
+        }
+        if($request->duration_sort === 'thisYear') {
+          $dept = Dept::where('id',$id)->with(['purchase' => function($query) use ($dt) {
+            $query->whereYear('created_at', $dt->year )->orderBy('created_at','DESC');
+          }])->with(['booking' => function($query) use ($dt){
+            $query->whereYear('created_at', $dt->year)->orderBy('created_at','DESC');
+          }])->with(['product' => function($query) use ($dt){
+            $query->whereYear('created_at', $dt->year)->orderBy('created_at','DESC');
+          }])->first();
+          return view('dept.report',compact('dept'));
+        }
+        if($request->duration_sort === 'today'){
+          $dept = Dept::where('id',$id)->with(['purchase' => function($query) use ($dt){
+            $query->whereDay('created_at', $dt->day )->orderBy('created_at','DESC');
+          }])->with(['booking' => function($query) use ($dt){
+            $query->whereDay('created_at', $dt->day)->orderBy('created_at','DESC');
+          }])->with(['product' => function($query) use ($dt){
+            $query->whereDay('created_at', $dt->day)->orderBy('created_at','DESC');
+          }])->first();
+          return view('dept.report',compact('dept'));
+        }
+      }
+      if($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+        $dept = Dept::where('id',$id)->with(['purchase' => function($query) use ($request,$startDate,$endDate){
+          $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
+        }])->with(['booking' => function($query)  use ($request,$startDate,$endDate){
+          $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
+        }])->with(['product' => function($query)  use ($request,$startDate,$endDate) {
+          $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
+        }])->first();
+        return view('dept.report',compact('dept'));
+      }
+
+      $dept = Dept::where('id',$id)->with(['purchase' => function($query) use ($dt) {
+        $query->whereMonth('created_at', $dt->month )->orderBy('created_at','DESC');
+      }])->with(['booking' => function($query) use ($dt) {
+        $query->whereMonth('created_at', $dt->month)->orderBy('created_at','DESC');
+      }])->with(['product' => function($query) use ($dt) {
+        $query->whereMonth('created_at', $dt->month)->orderBy('created_at','DESC');
       }])->first();
       return view('dept.report',compact('dept'));
     }

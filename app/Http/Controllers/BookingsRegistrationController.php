@@ -89,8 +89,11 @@ class BookingsRegistrationController extends Controller
      */
     public function show(Booking $booking,$id)
     {
+      $dept ='';
       $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
+      if(Session('deptID') != null ){
       $dept = Dept::find(Session('deptID'));
+      }
       return view('bookings.edit',compact('booking','dept'));
     }
 

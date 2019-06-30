@@ -34,7 +34,7 @@
                             </div>
 
 															<div class="tp">
-																<input type="submit" value="LOG IN">
+																<input type="submit" value="LOG IN" autofocus>
 															</div>
 
 

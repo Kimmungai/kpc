@@ -18,41 +18,49 @@
 	        <!-- //breadcrumbs -->
 
 
+
 					<!--<h1 class="text-uppercase">@if( isset($dept) ) {{$dept->name}} @endif department</h1>-->
           <!-- /w3ls_agile_circle_progress-->
+
         	<div class="w3ls_agile_circle_progress agile_info_shadow">
 
 						<!--sorting-->
+						@if( isset($dept) )
+
 						<div class="container">
 							<div class="row">
-								<form class="" action="sort-purchases" method="get">
+								<form class="" action="dept-filtered-report" method="get">
 								<div class="col-xs-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
 								<div class="col-xs-3">
-									<select id="filter_sort" class="form-control1" name="filter_sort" >
-										<option value="thisMonth" @if(isset($sortBy)) @if($sortBy == 'thisMonth' ) selected @endif @endif >This month</option>
-										<option value="thisWeek" @if(isset($sortBy)) @if($sortBy == 'thisWeek' ) selected @endif @endif>This week</option>
-										<option value="thisYear" @if(isset($sortBy)) @if($sortBy == 'thisYear' ) selected @endif @endif >This Year</option>
-										<option value="today" @if(isset($sortBy)) @if($sortBy == 'today' ) selected @endif @endif >Today</option>
+									<select class="duration_sort" id="duration_sort" class="form-control1" name="duration_sort" onchange="set_report_duration(this.value)">
+										<option value="thisMonth" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisMonth' ) selected @endif @endif >This month</option>
+										<option value="thisWeek" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisWeek' ) selected @endif @endif>This week</option>
+										<option value="thisYear" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisYear' ) selected @endif @endif >This Year</option>
+										<option value="today" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'today' ) selected @endif @endif >Today</option>
+										<option value="dates" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'dates' ) selected @endif @endif >Choose specific dates</option>
 									</select>
 								</div>
-
-								<div class="col-xs-2">
-									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="" placeholder="Date from">
-								</div>
-								<div class="col-xs-1">
-									<p style="line-height:40px">~</p>
-								</div>
-								<div class="col-xs-2">
-									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="" placeholder="Date to">
-								</div>
+								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @endif">
+									<div class="col-xs-2">
+										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif " placeholder="Date from" onchange="clear_max_field('filter_to')">
+									</div>
+									<div class="col-xs-1">
+										<p style="line-height:40px">~</p>
+									</div>
+									<div class="col-xs-2">
+										<input type="text" id="filter_to" name="filter_to" class="form-control1" value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif" placeholder="Date to">
+									</div>
+							  </div>
+								<input type="hidden" name="id" value="{{$dept->id}}">
 								<div class="col-xs-2">
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
 								</form>
 							</div>
 						</div>
+						@endif
 						<!--end sorting-->
 
 
@@ -80,7 +88,35 @@
 
 					@if( $costsPercent && $revenuesPercent && $bookingsPercent && $stockPercent )
             <div class="cir_agile_info " >
-            <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department <strong class="text-danger">{{date('M Y')}}</strong> highlights</h3>
+            <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department
+							<strong class="text-danger">
+							@if(isset($_GET['duration_sort']))
+								@if($_GET['duration_sort'] == 'thisWeek')
+								{{date('Y')}}	week {{\Carbon\Carbon::now()->weekOfYear}}
+								@endif
+								@if($_GET['duration_sort'] == 'thisYear')
+								{{date('Y')}}
+								@endif
+								@if($_GET['duration_sort'] == 'today')
+								{{date('d M Y')}}
+								@endif
+								@if($_GET['duration_sort'] == 'dates')
+									@if($_GET['filter_from'] != '')
+										{{$_GET['filter_from']}}
+									@else
+									 	{{\Carbon\Carbon::now()->startOfMonth()->format('d/m/Y')}}
+									@endif
+									@if($_GET['filter_to'] != '')
+										to
+										{{$_GET['filter_to']}}
+									@endif
+								@endif
+							@else
+								{{date('M Y')}}
+							@endif
+						</strong>
+						highlights
+					</h3>
                 <div class="skill-grids">
                   <div class="skills-grid text-center">
                     <div class="circle" id="circles-0"></div>
@@ -115,16 +151,18 @@
         <!--/prograc-blocks_agileits-->
          <div class="prograc-blocks_agileits">
 
-
+				 @if( isset($costs) && isset($revenues)  )
             <div class="col-md-6 bars_agileits agile_info_shadow">
-              <h3 class="w3_inner_tittle two">Daily Sales</h3>
+              <h3 class="w3_inner_tittle two">Monthly statistics (Ksh.)</h3>
                <div class='bar_group'>
-                   <div class='bar_group__bar thin' label='Rating' show_values='true' tooltip='true' value='343'></div>
-                   <div class='bar_group__bar thin' label='Quality' show_values='true' tooltip='true' value='235'></div>
-                   <div class='bar_group__bar thin' label='Amount' show_values='true' tooltip='true' value='550'></div>
-                   <div class='bar_group__bar thin' label='Farming' show_values='true' tooltip='true' value='456'></div>
+                   <div class='bar_group__bar thin' label='Costs' show_values='true' tooltip='true' value='{{$costs}}'></div>
+                   <div class='bar_group__bar thin' label='Revenue' show_values='true' tooltip='true' value='{{$revenues}}'></div>
+                   <div class='bar_group__bar thin' label='Profit' show_values='true' tooltip='true' value='{{$revenues - $costs}}'></div>
+                   <!--<div class='bar_group__bar thin' label='Farming' show_values='true' tooltip='true' value='456'></div>-->
                </div>
            </div>
+					 @endif
+					 @if( isset($dept->purchase) )
            <div class="col-md-6 fallowers_agile agile_info_shadow">
              <h3 class="w3_inner_tittle two">Recent Purchases</h3>
                    <div class="work-progres">
@@ -141,39 +179,54 @@
                          </tr>
                        </thead>
                        <tbody>
-                       <tr>
-                         <td>1</td>
-                         <td>12/12/1990</td>
-                         <td>Malorum</td>
+												 <?php $count = 1; ?>
+											@foreach( $dept->purchase as $purchase )
+											  <?php if($count>5){break;} ?>
+												@if( $purchase->amountDue - $purchase->amountPaid > 0 )
+	                       <tr>
+	                         <td>Purchase-{{$purchase->id}}</td>
+	                         <td>{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
+	                         <td>{{$purchase->user->firstName}}</td>
 
-                         <td><span class="label label-danger">unpaid</span></td>
-                         <td><a href="#">Open</a></td>
-                       </tr>
-                       <tr>
-                         <td>2</td>
-                         <td>12/12/1990</td>
-                         <td>Evan</td>
+	                         <td><span class="label label-danger">unpaid</span></td>
+	                         <td><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
+	                       </tr>
+												 @else
+	                       <tr>
+													 <td>Purchase-{{$purchase->id}}</td>
+	                         <td>{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
+	                         <td>{{$purchase->user->firstName}}</td>
 
-                         <td><span class="label label-success">paid</span></td>
-                         <td><a href="#">Open</a></td>
-                       </tr>
+	                         <td><span class="label label-success">paid</span></td>
+	                         <td><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
+	                       </tr>
+												 @endif
+												 <?php $count++; ?>
+											 @endforeach
                      </tbody>
                    </table>
+									 @if( isset($dept->purchase) )
+										 @if( count($dept->purchase) > 5 )
+										 <a class="btn btn-default" href="/purchases-registration">view all purchases</a>
+										 @endif
+									 @endif
                  </div>
                </div>
            </div>
               <div class="clearfix"></div>
          </div>
-
+				 @endif
            <!--//prograc-blocks_agileits-->
 
 				    <!-- /inner_content_w3_agile_info-->
+				@if(isset($dept->product))
+					@if(count($dept->product) > 2)
 					<div class="inner_content_w3_agile_info">
 
 							<!-- /w3ls_agile_circle_progress-->
 							<div class="w3ls_agile_cylinder chart agile_info_shadow">
-							<h3 class="w3_inner_tittle two"> Stock overview</h3>
-
+							<h3 class="w3_inner_tittle two"> Recent Stock level overview</h3>
+							<a href="/product-registration" class="btn btn-default">View all products</a>
 									 <div id="chartdiv"></div>
 
 
@@ -184,6 +237,8 @@
 
 
 				    </div>
+					@endif
+				@endif
 					<!-- //inner_content_w3_agile_info-->
 				</div>
 		<!-- //inner_content-->

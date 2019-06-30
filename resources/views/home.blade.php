@@ -32,7 +32,7 @@
 									<?php if(!in_array($Dept->id, $departmentsArr)) {$departmentsArr [] = $Dept->id;}else{continue;}?>
 									<?php if($colors > 3){$colors =0;} ?>
 
-									 <li>
+									 <li style="width:32%">
 										 <a href="{{url('dept-registration')}}/{{$Dept->id}}">
 											 @if( strtolower($Dept->name) == 'kitchen' )
 											 <i class="fas fa-utensils" aria-hidden="true"></i>

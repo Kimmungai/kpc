@@ -37,8 +37,9 @@ Route::post('create-user','UserAjaxController@create_user');
 Route::resource('user-registration','UserRegistrationController');
 
 //depts
-Route::get('dept-report/{id}','DepartmentRegistrationController@report')->name('dept report');
+Route::get('dept-report/{id?}','DepartmentRegistrationController@report')->name('dept report');
 Route::resource('dept-registration','DepartmentRegistrationController');
+Route::get('dept-filtered-report','DepartmentRegistrationController@report');
 
 //purchases
 
@@ -61,3 +62,6 @@ Route::resource('bookings-registration','BookingsRegistrationController');
 
 //Transfers
 Route::post('save-transfer','TransfersAjaxController@save_transfer');
+
+//Products
+Route::resource('product-registration','ProductRegistrationController');

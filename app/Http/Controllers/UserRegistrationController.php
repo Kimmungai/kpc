@@ -21,7 +21,7 @@ class UserRegistrationController extends Controller
      */
     public function index($type=0)
     {
-        if( $type ){ $users = User::where('type',$type)->get(); }else{ $user = User::all(); }
+        if( $type ){ $users = User::where('type',$type)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5)); }else{ $user = User::all(); }
         return view('user.all',compact('users','type'));
     }
 
