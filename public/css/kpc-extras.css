@@ -150,3 +150,6 @@
   font-size: 14px;
   font-weight: bold;
 }
+.modal-body select{
+  height: 50px !important;
+}

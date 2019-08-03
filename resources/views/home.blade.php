@@ -52,8 +52,8 @@
 											 <i class="fas fa-tag" aria-hidden="true"></i>
 											 @endif
 											 <div class="ca-content">
-												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{count($Dept->booking)}} @if(count($Dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
-												 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif">{{$Dept->name}}</h3>
+												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{count($Dept->booking)}} @if(count($Dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
+												 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{$Dept->name}}</h3>
 											 </div>
 										 </a>
 									 </li>

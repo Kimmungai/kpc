@@ -26,7 +26,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-gift"></i>
                         </span>
-                        <select name="bookingType" id="bookingType" class="form-control1" onchange="select_booking_type(this.value)">
+                        <select name="bookingType" id="bookingType" class="form-control" onchange="select_booking_type(this.value)">
                           <option value="1" @if( old('bookingType') == 1 || ( isset($user) && $user->bookingType == 1 ) ) selected @endif> Food ordering </option>
                           <option value="2" @if( old('bookingType') == 2 || ( isset($user) && $user->bookingType == 2 ) ) selected @endif> Room booking </option>
                           <option value="3" @if( old('bookingType') == 3 || ( isset($user) && $user->bookingType == 3 ) ) selected @endif> Tent Hiring </option>
@@ -51,7 +51,7 @@
                         <span class="input-group-addon">
                           <i class="fas fa-hotel"></i>
                         </span>
-                        <select name="roomType" id="roomType" class="form-control1">
+                        <select name="roomType" id="roomType" class="form-control">
                           <option value="1" @if( old('roomType') == 1 || ( isset($user) && $user->roomType == 1 ) ) selected @endif> Single </option>
                           <option value="2" @if( old('roomType') == 2 || ( isset($user) && $user->roomType == 2 ) ) selected @endif> Double </option>
                           <option value="3" @if( old('roomType') == 3 || ( isset($user) && $user->roomType == 3 ) ) selected @endif> Delux </option>
@@ -74,7 +74,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-users"></i>
                         </span>
-                        <input name="numPple" id="numPple" type="text" class="form-control1" value="@if( old('numPple') ) {{old('numPple')}} @elseif( isset($user) ) {{$user->numPple}} @endif" placeholder="Number of People" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                        <input name="numPple" id="numPple" type="text" class="form-control" value="@if( old('numPple') ) {{old('numPple')}} @elseif( isset($user) ) {{$user->numPple}} @endif" placeholder="Number of People" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -93,7 +93,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>
-                        <input name="chk_in_date" id="chk_in_date" type="text" class="form-control1" value="@if( old('chk_in_date') ) {{old('chk_in_date')}} @elseif( isset($user) ) {{$user->chk_in_date}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="chk_in_date" id="chk_in_date" type="text" class="form-control" value="@if( old('chk_in_date') ) {{old('chk_in_date')}} @elseif( isset($user) ) {{$user->chk_in_date}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -112,7 +112,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>
-                        <input name="chk_out_date" id="chk_out_date" type="text" class="form-control1" value="@if( old('chk_out_date') ) {{old('chk_out_date')}} @elseif( isset($user) ) {{$user->chk_out_date}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="chk_out_date" id="chk_out_date" type="text" class="form-control" value="@if( old('chk_out_date') ) {{old('chk_out_date')}} @elseif( isset($user) ) {{$user->chk_out_date}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -131,7 +131,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control1" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                        <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -151,7 +151,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-info"></i>
                         </span>
-                        <select name="modeOfPayment" id="modeOfPayment"  class="form-control1">
+                        <select name="modeOfPayment" id="modeOfPayment"  class="form-control">
                           <option value="1" @if( old('modeOfPayment') == 1 || ( isset($user) && $user->modeOfPayment == 1 ) ) selected @endif>Paid by cash</option>
                           <option value="2" @if( old('modeOfPayment') == 2 || ( isset($user) && $user->modeOfPayment == 2 ) ) selected @endif>Paid by cheque</option>
                           <option value="3" @if( old('modeOfPayment') == 3 || ( isset($user) && $user->modeOfPayment == 3 ) ) selected @endif>Paid by bank transfer</option>
@@ -175,7 +175,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-money"></i>
                         </span>
-                        <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control1" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                        <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -194,7 +194,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-hourglass"></i>
                         </span>
-                        <select name="paymentStatus" id="paymentStatus"  class="form-control1">
+                        <select name="paymentStatus" id="paymentStatus"  class="form-control">
                           <option value="1" @if( old('paymentStatus') == 1 || ( isset($user) && $user->paymentStatus == 1 ) ) selected @endif>Paid</option>
                           <option value="2" @if( old('paymentStatus') == 2 || ( isset($user) && $user->paymentStatus == 2 ) ) selected @endif>Pending</option>
                         </select>
@@ -216,7 +216,7 @@
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>
-                        <input name="paymentDueDate" id="paymentDueDate" type="text" class="form-control1" value="@if( old('paymentDueDate') ) {{old('paymentDueDate')}} @elseif( isset($user) ) {{$user->paymentDueDate}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                        <input name="paymentDueDate" id="paymentDueDate" type="text" class="form-control" value="@if( old('paymentDueDate') ) {{old('paymentDueDate')}} @elseif( isset($user) ) {{$user->paymentDueDate}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
                       </div>
                     </div>
                     <div class="col-sm-2">
@@ -304,7 +304,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="sku" id="bookingSku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="sku" id="bookingSku"  type="text" class="form-control" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="prodNameTitle">
@@ -312,7 +312,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="prodName" id="bookingProdName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="prodName" id="bookingProdName"  type="text" class="form-control" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="quantityTitle">
@@ -320,7 +320,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-info"></i>
                                  </span>
-                                 <input name="quantity" id="bookingQuantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="quantity" id="bookingQuantity" min="0"  type="number" class="form-control" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
                            <div class="form-group" id="costTitle">
@@ -328,7 +328,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-dollar"></i>
                                  </span>
-                                 <input name="cost" id="bookingCost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                 <input name="cost" id="bookingCost" min="0"  type="number" class="form-control" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                              </div>
                            </div>
 
@@ -400,7 +400,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-user"></i>
                                  </span>
-                                 <input  name="firstName"  type="text" class="form-control1" value="" placeholder="Name..." required />
+                                 <input  name="firstName"  type="text" class="form-control" value="" placeholder="Name..." required />
                              </div>
                            </div>
 
@@ -409,7 +409,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-envelope"></i>
                                  </span>
-                                 <input name="email"  type="email"  class="form-control1" value="" placeholder="Email..." required/>
+                                 <input name="email"  type="email"  class="form-control" value="" placeholder="Email..." required/>
                              </div>
                            </div>
 
@@ -418,7 +418,7 @@
                                  <span class="input-group-addon">
                                    <i class="fa fa-phone"></i>
                                  </span>
-                                 <input name="phoneNumber"  type="number" class="form-control1" value=""  placeholder="Phone Number..." required />
+                                 <input name="phoneNumber"  type="number" class="form-control" value=""  placeholder="Phone Number..." required />
                              </div>
                            </div>
 

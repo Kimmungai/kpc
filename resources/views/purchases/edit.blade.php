@@ -64,7 +64,7 @@
                                         <span class="input-group-addon">
                                           <i class="fa fa-info"></i>
                                         </span>
-                                        <input name="firstName" id="firstName" type="text" class="form-control1" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                                        <input name="firstName" id="firstName" type="text" class="form-control" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                                     </div>
                                   </div>
 
@@ -73,7 +73,7 @@
                                         <span class="input-group-addon">
                                           <i class="fa fa-envelope"></i>
                                         </span>
-                                        <input name="email" id="email" type="text" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                                        <input name="email" id="email" type="text" class="form-control" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                                     </div>
                                   </div>
 
@@ -82,7 +82,7 @@
                                         <span class="input-group-addon">
                                           <i class="fa fa-phone"></i>
                                         </span>
-                                        <input name="phoneNumber" id="phoneNumber" min="0" type="number" class="form-control1" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+                                        <input name="phoneNumber" id="phoneNumber" min="0" type="number" class="form-control" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
                                     </div>
                                   </div>
 
@@ -91,7 +91,7 @@
                                         <span class="input-group-addon">
                                           <i class="fa fa-dollar"></i>
                                         </span>
-                                        <input name="amountDue" id="amountDue" min="0" type="number" class="form-control1" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Amount Owed..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                        <input name="amountDue" id="amountDue" min="0" type="number" class="form-control" value="@if( old('amountDue') ) {{old('amountDue')}} @elseif( isset($user) ) {{$user->amountDue}} @endif" placeholder="Amount Owed..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                     </div>
                                   </div>
 
@@ -100,7 +100,7 @@
                                         <span class="input-group-addon">
                                           <i class="fa fa-dollar"></i>
                                         </span>
-                                        <input name="amountPaid" id="amountPaid" min="0" type="number" class="form-control1" value="@if( old('amountPaid') ) {{old('amountPaid')}} @elseif( isset($user) ) {{$user->amountPaid}} @endif" placeholder="Amount Paid..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                        <input name="amountPaid" id="amountPaid" min="0" type="number" class="form-control" value="@if( old('amountPaid') ) {{old('amountPaid')}} @elseif( isset($user) ) {{$user->amountPaid}} @endif" placeholder="Amount Paid..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                     </div>
                                   </div>
 
@@ -211,7 +211,7 @@
                                       <span class="input-group-addon">
                                         <i class="fa fa-info"></i>
                                       </span>
-                                      <input name="sku" id="sku"  type="text" class="form-control1" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                      <input name="sku" id="sku"  type="text" class="form-control" value="@if( old('sku') ) {{old('sku')}} @elseif( isset($user) ) {{$user->sku}} @endif" placeholder="SKU..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                   </div>
                                 </div>
                                 <div class="form-group" id="prodNameTitle">
@@ -219,7 +219,7 @@
                                       <span class="input-group-addon">
                                         <i class="fa fa-info"></i>
                                       </span>
-                                      <input name="prodName" id="prodName"  type="text" class="form-control1" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                      <input name="prodName" id="prodName"  type="text" class="form-control" value="@if( old('prodName') ) {{old('prodName')}} @elseif( isset($user) ) {{$user->prodName}} @endif" placeholder="Product Name..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                   </div>
                                 </div>
                                 <div class="form-group" id="quantityTitle">
@@ -227,7 +227,7 @@
                                       <span class="input-group-addon">
                                         <i class="fa fa-info"></i>
                                       </span>
-                                      <input name="quantity" id="quantity" min="0"  type="number" class="form-control1" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                      <input name="quantity" id="quantity" min="0"  type="number" class="form-control" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($user) ) {{$user->quantity}} @endif" placeholder="Product Quantity..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                   </div>
                                 </div>
                                 <div class="form-group" id="costTitle">
@@ -235,7 +235,7 @@
                                       <span class="input-group-addon">
                                         <i class="fa fa-dollar"></i>
                                       </span>
-                                      <input name="cost" id="cost" min="0"  type="number" class="form-control1" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
+                                      <input name="cost" id="cost" min="0"  type="number" class="form-control" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($user) ) {{$user->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                                   </div>
                                 </div>
 

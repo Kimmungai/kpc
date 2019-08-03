@@ -112,15 +112,13 @@
 										<dl>
 											<dt>
 												<a href="{{route('dept report',$dept->id)}}"><i class="fas fa-file"></i></a>
-												@if( isset($booking->bookingAmountReceived)  && isset($purchase->amountPaid) )
-													@if( $booking->bookingAmountReceived - $purchase->amountPaid  > 0 )
+													@if( ($totalAmountReceived - $totalAmountPaid)  > 0 )
 													<div class="status-sec">Profit <span class="fa fa-circle text-success"></span></div>
-													@elseif( $booking->bookingAmountReceived - $purchase->amountPaid  == 0  )
+													@elseif( ($totalAmountReceived - $totalAmountPaid)  == 0  )
 													<div class="status-sec">balanced <span class="fa fa-circle text-warning"></span></div>
 													@else
 													<div class="status-sec">Loss <span class="fa fa-circle text-danger"></span></div>
 													@endif
-												@endif
 											</dt>
 											<dd>
 												<h3><a href="{{route('dept report',$dept->id)}}">Reports</a></h3>

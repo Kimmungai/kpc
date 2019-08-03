@@ -78,9 +78,14 @@ function save_booking(tableID='booked-products-table',update=0)
     },
     function(data,status){
       if( data == 1 )
-        alert("Success!")
+      {
+        alert("Success!");
+        location.reload();
+      }
       else
+      {
         alert("Failed!")
+      }
     });
     if( !update ){
     $('#recordBookingsModal').modal('hide');

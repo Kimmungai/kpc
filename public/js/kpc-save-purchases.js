@@ -17,6 +17,7 @@ function save_purchases()//make purchases records visible by nulling the deleted
         clear_inputs();
         alert("Details successfully saved!");
         $('#recordPurchasesModal').modal('hide');
+        location.reload();
       });
   }
 }
@@ -86,8 +87,6 @@ function update_supplier_table(data,amountDue=0,amountPaid=0,method=0)//refresh 
   var responseObj = JSON.stringify(data);
   var response = JSON.parse(responseObj);
 
-
-
   if( response.length )//means it is an array
   {
     if( method == 0 )
@@ -97,6 +96,7 @@ function update_supplier_table(data,amountDue=0,amountPaid=0,method=0)//refresh 
 
     $("#table-supplier-info").html('<tr id="supplier-'+response[0].id+'"><td>'+response[0].firstName+'</td><td>'+response[0].email+'</td><td>'+response[0].phoneNumber+'</td><td class="text-info cursor" id="supplier-'+response[0].id+'-amount-due" onclick="update_amount_due('+response[1].id+',this.id,\'amountDue\')"> '+amountDue+'</td><td class="text-info cursor" id="supplier-'+response[0].id+'-amount-paid" onclick="update_amount_due('+response[1].id+',this.id,\'amountPaid\')">'+amountPaid+'</td><td>'+method+'</td></tr>');
     $("#purchasesID").val(response[1].id);
+    toggleElements('search-supplier-form-container','purchase-create-supplier-form-container');
   }else{
 
     if( response.firstName != null){ alert(response.firstName); }
@@ -117,7 +117,8 @@ function update_products_table(data,cost=0,qty=1)//refresh products table
   {
     if( !$("#purchases-table-product-" +response[0].id).length ){
       var purchaseID = $("#purchasesID").val();
-      $("#purchases-table").append('<tr id="purchases-table-product-'+response[0].id+'"><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">'+qty+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>')
+      $("#purchases-table").append('<tr id="purchases-table-product-'+response[0].id+'"><td>'+response[0].sku+'</td><td>'+response[0].name+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'suppliedQuantity\')">'+qty+'</td><td data-prod="'+response[0].id+'" class="text-info cursor" id="product-cost-'+response[0].id+'" onclick="update_product_quantity('+purchaseID+',this.id,\'cost\')">'+cost+'</td></tr>');
+      toggleElements('purchases-search-product-form-container','purchases-create-product-form-container');
     }else{
       alert("Product already added!");
     }
