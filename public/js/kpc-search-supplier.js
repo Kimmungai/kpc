@@ -89,11 +89,13 @@ function update_amount_due(purchaseID,tdId,field)
     var amount = prompt("please enter amount in  digits only");
     if( amount == '' ){ amount=0; }
   }
-  if( isNaN(amount) )
+
+  while( isNaN(amount) )
   {
     var amount = prompt("Only digits can be entered!");
 
-  }else{
+  }
+
     //send details to server
     $.post("/update-purchase",
       {
@@ -106,7 +108,10 @@ function update_amount_due(purchaseID,tdId,field)
         //show result box
         update_supplier_results(data);
       });
-    $("#"+tdId).html(amount);
-  }
+    if( amount !== null )
+    {
+      $("#"+tdId).html(amount);
+    }
+
   //alert(userID);
 }

@@ -94,7 +94,7 @@ class BookingsRegistrationController extends Controller
       if(Session('deptID') != null ){
       $dept = Dept::find(Session('deptID'));
       }
-      return view('bookings.edit',compact('booking','dept'));
+      return view('bookings.show',compact('booking','dept'));
     }
 
     /**
@@ -103,9 +103,14 @@ class BookingsRegistrationController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit(Booking $booking,$id)
     {
-        //
+      $dept ='';
+      $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
+      if(Session('deptID') != null ){
+      $dept = Dept::find(Session('deptID'));
+      }
+      return view('bookings.edit',compact('booking','dept'));
     }
 
     /**

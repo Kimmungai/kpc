@@ -61,11 +61,11 @@
 
 						<div class="row">
 
-							<div class="col-sm-4 mb-2">
-								<div class="action-tab bg-admin">
+							<div class="col-sm-4 mt-2 mb-2">
+								<div class="action-tab ">
 										<dl>
 											<dt>
-												<a href="/purchases-registration"><i class="fas fa-money-check-alt"></i></a>
+												<a href="/purchases-registration"><i class="fa fa-money"></i></a>
 											</dt>
 											<dd>
 												<h3><a href="/purchases-registration">Purchases</a></h3>
@@ -78,17 +78,17 @@
 													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
 													<p>Ksh. {{number_format($totalAmountPaid,2)}} spend</p>
 												@endif
-												<a href="#" class="btn btn-x-sm  btn-dark" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
+												<a href="#" class="btn btn-x-sm  btn-default" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
 											<dd>
 										</dl>
 									</div>
 							</div>
 
-							<div class="col-sm-4 mb-2">
-								<div class="action-tab bg-admin">
+							<div class="col-sm-4 mt-2 mb-2">
+								<div class="action-tab">
 										<dl>
 											<dt>
-												<a href="/bookings-registration"><i class="fas fa-gift"></i></a>
+												<a href="/bookings-registration"><i class="fa fa-gift"></i></a>
 											</dt>
 											<dd>
 												<h3><a href="/bookings-registration">Bookings</a></h3>
@@ -101,17 +101,17 @@
 													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
 													<p>Ksh. {{number_format($totalAmountReceived,2)}} made</p>
 												@endif
-												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
+												<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
 											<dd>
 										</dl>
 									</div>
 							</div>
 
-							<div class="col-sm-4 mb-2">
-								<div class="action-tab bg-admin">
+							<div class="col-sm-4 mt-2 mb-2" >
+								<div class="action-tab ">
 										<dl>
 											<dt>
-												<a href="{{route('dept report',$dept->id)}}"><i class="fas fa-file"></i></a>
+												<a href="{{route('dept report',$dept->id)}}"><i class="fa fa-file"></i></a>
 													@if( ($totalAmountReceived - $totalAmountPaid)  > 0 )
 													<div class="status-sec">Profit <span class="fa fa-circle text-success"></span></div>
 													@elseif( ($totalAmountReceived - $totalAmountPaid)  == 0  )
@@ -127,41 +127,41 @@
 													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
 													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
 												@endif
-												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-dark">View reports</a>
+												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-default">View reports</a>
 											<dd>
 										</dl>
 									</div>
 							</div>
 
-							<div class="col-sm-4 mb-2">
-								<div class="action-tab bg-admin">
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
 										<dl>
 											<dt>
-												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fas fa-external-link-alt"></i></a>
+												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fa fa-external-link"></i></a>
 											</dt>
 											<dd>
 												<h3 class="mb-2"><a href="#" data-toggle="modal" data-target="#recordTransfersModal">Transfers</a></h3>
 												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>-->
-												<a href="#" class="btn btn-x-sm btn-dark" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
+												<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
 											<dd>
 										</dl>
 									</div>
 							</div>
 
-							<div class="col-sm-4 mb-2">
-								<div class="action-tab bg-admin">
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
 										<dl>
 											<dt>
-												<a href="/dept-registration/{{$dept->id}}/edit"><i class="fas fa-edit"></i></a>
+												<a href="/dept-registration/{{$dept->id}}/edit"><i class="fa fa-edit"></i></a>
 											</dt>
 											<dd>
 												<h3 class="mb-2"><a href="/dept-registration/{{$dept->id}}/edit">Dept Details</a></h3>
 												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>-->
-												<a href="/dept-registration/{{$dept->id}}/edit" class="btn btn-x-sm btn-dark">Edit details</a>
+												<a href="/dept-registration/{{$dept->id}}/edit" class="btn btn-x-sm btn-default">Edit details</a>
 											<dd>
 										</dl>
 									</div>

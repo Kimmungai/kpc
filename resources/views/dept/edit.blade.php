@@ -27,12 +27,14 @@
 
           <div class="wthree_general">
 
+            @if( count($errors) )
+              <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
+            @endif
+             <h3 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h3>
+
 
               <div class="grid-1 graph-form agile_info_shadow">
-              @if( count($errors) )
-                <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
-              @endif
-               <h3 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h3>
+
                @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
 
                @endcomponent
@@ -50,19 +52,7 @@
                  @endcomponent
 
 
-                 <div class="button" data-toggle="modal" data-target="#confirmModal">
-                  <p class="btnText">Update?</p>
-                  <div class="btnTwo" style="background:green">
-                    <p class="btnText2">GO!</p>
-                  </div>
-                 </div>
 
-                 <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
-                  <p class="btnText">Delete?</p>
-                  <div class="btnTwo">
-                    <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
-                  </div>
-                 </div>
 
                </form>
 
@@ -73,6 +63,22 @@
 
 
           </div>
+          
+          <div class="button" data-toggle="modal" data-target="#confirmModal">
+           <p class="btnText">Update?</p>
+           <div class="btnTwo" style="background:green">
+             <p class="btnText2">GO!</p>
+           </div>
+          </div>
+
+          <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
+           <p class="btnText">Delete?</p>
+           <div class="btnTwo">
+             <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
+           </div>
+          </div>
+
+
         </div>
         <!--//set-3-->
 

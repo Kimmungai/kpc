@@ -1072,6 +1072,7 @@ figure.icons,.weather-text {
 .w3l_agileits_breadcrumbs{
 	padding:1em 0;
 	background:#f5f5f5;
+	margin-top: 3em;
 }
 .w3l_agileits_breadcrumbs ul li{
 	display:inline-block;

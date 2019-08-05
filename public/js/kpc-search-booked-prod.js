@@ -95,15 +95,19 @@ function std_update_amount_due(tdId,qty=0)
     var amount = prompt("please enter amount in  digits only");
     if( amount == '' ){ amount=0; }
 
-  if( isNaN(amount) )
+  while( isNaN(amount) )
   {
-    alert("Only digits can be entered! Please try again.");
+    amount = prompt("Only digits can be entered! Please try again.");
+  }
 
-  }else{
-    if( qty != 0 && ( qty < amount)){ alert("Not enough in stock. Maximum available is "+qty);return; }
+  if( qty != 0 && ( qty < amount)){ alert("Not enough in stock. Maximum available is "+qty);return; }
 
+  if( amount !== null)
+  {
     $("#"+tdId).html(amount);
   }
+
+
   //alert(userID);
 }
 

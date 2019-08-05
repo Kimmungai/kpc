@@ -157,7 +157,7 @@ function isObject(val) {
     return (typeof val === 'object');
 }
 
-$(document).ajaxStart(function(){
+/*$(document).ajaxStart(function(){
   if( $('#recordPurchasesModal').hasClass('in') ) {
     $(".search-box .loading").removeClass('hidden').removeClass('d-none');
   }
@@ -165,4 +165,4 @@ $(document).ajaxStart(function(){
 
 $(document).ajaxStop(function(){
   $(".search-box .loading").addClass('hidden').addClass('d-none');
-});
+});*/

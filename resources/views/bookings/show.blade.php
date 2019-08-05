@@ -30,6 +30,23 @@
 							@endif
 						</div>
 
+						<!--buttons-->
+						<div class="row mt-2 mb-2">
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email"><span class="fa fa-share-alt"></span> Share</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document"><span class="fa fa-warning"></span> Delete</a>
+							</div>
+						</div>
+						<!--end buttons-->
+
 						<div class="row">
               <!--booking reg form-->
 
@@ -490,19 +507,24 @@
           <!--//booking form-->
 
             <!--end goods table-->
-            <div class="button" onclick="save_booking('booked-products-table',1)">
-             <p class="btnText">Update?</p>
-             <div class="btnTwo" style="background:green">
-               <p class="btnText2" >GO!</p>
-             </div>
-            </div>
 
-            <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
-             <p class="btnText">Delete?</p>
-             <div class="btnTwo">
-               <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
-             </div>
-            </div>
+						<!--buttons-->
+						<div class="row mt-2">
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email"><span class="fa fa-share-alt"></span> Share</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
+							</div>
+							<div class="col-xs-3">
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document"><span class="fa fa-warning"></span> Delete</a>
+							</div>
+						</div>
+						<!--end buttons-->
+
               </div>
               <!--booking reg form-->
 

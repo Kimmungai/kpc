@@ -99,10 +99,10 @@
 							@if(isset($purchases))
 								@foreach($purchases as $purchase)
 								<div class="col-sm-4 mb-2">
-									<div class="action-tab bg-admin">
+									<div class="action-tab ">
 											<dl>
 												<dt>
-													<a href="{{route('purchases-registration.show',$purchase->id)}}"><i class="fas fa-money-check-alt"></i></a>
+													<a href="{{route('purchases-registration.show',$purchase->id)}}"><i class="fa fa-money"></i></a>
 													@if( $purchase->amountDue - $purchase->amountPaid <= 0 )
 													<div class="status-sec">Paid <span class="fa fa-circle text-success"></span></div>
 													@else
@@ -118,7 +118,7 @@
 													<p>Date: <strong>{{date('d/m/Y',strtotime($purchase->created_at))}}</strong></p>
 													<p>Paid: <strong>Ksh. @if( !$purchase->amountPaid ) 0 @else {{$purchase->amountPaid}} @endif</strong></p>
 													<p>Owed: <strong>Ksh. @if( !$purchase->amountDue ) 0 @else {{$purchase->amountDue - $purchase->amountPaid}} @endif</strong></p>
-													<a href="{{route('purchases-registration.show',$purchase->id)}}" class="btn btn-x-sm  btn-dark" >Open</a>
+													<a href="{{route('purchases-registration.show',$purchase->id)}}" class="btn btn-x-sm  btn-default" >Open</a>
 												<dd>
 											</dl>
 										</div>

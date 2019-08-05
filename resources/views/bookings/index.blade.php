@@ -66,10 +66,10 @@
 							@if(isset($bookings))
 								@foreach($bookings as $booking)
 								<div class="col-sm-4 mb-2">
-									<div class="action-tab bg-admin">
+									<div class="action-tab ">
 											<dl>
 												<dt>
-													<a href="{{route('bookings-registration.show',$booking->id)}}"><i class="fas fa-gift"></i></a>
+													<a href="{{route('bookings-registration.show',$booking->id)}}"><i class="fa fa-gift"></i></a>
 													@if( $booking->bookingAmountDue - $booking->bookingAmountReceived <= 0 )
 													<div class="status-sec">Paid <span class="fa fa-circle text-success"></span></div>
 													@else
@@ -85,7 +85,7 @@
 													<p>Date: <strong>{{date('d/m/Y',strtotime($booking->created_at))}}</strong></p>
 													<p>Paid: <strong>Ksh. @if( !$booking->bookingAmountReceived ) 0 @else {{$booking->bookingAmountReceived}} @endif</strong></p>
 													<p>Pending: <strong>Ksh. @if( !$booking->bookingAmountDue ) 0 @else {{$booking->bookingAmountDue - $booking->bookingAmountReceived}} @endif</strong></p>
-													<a href="{{route('bookings-registration.show',$booking->id)}}" class="btn btn-x-sm  btn-dark" >Open</a>
+													<a href="{{route('bookings-registration.show',$booking->id)}}" class="btn btn-x-sm  btn-default" >Open</a>
 												<dd>
 											</dl>
 										</div>

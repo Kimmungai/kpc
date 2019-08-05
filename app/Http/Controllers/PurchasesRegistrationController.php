@@ -92,7 +92,7 @@ class PurchasesRegistrationController extends Controller
     {
         $purchase = Purchase::with(['user','expense.product'])->where('id',$id)->first();
         $dept = Dept::find(Session('deptID'));
-        return view('purchases.edit',compact('purchase','dept'));
+        return view('purchases.show',compact('purchase','dept'));
     }
 
     /**
@@ -101,9 +101,11 @@ class PurchasesRegistrationController extends Controller
      * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Purchase $purchase)
+    public function edit(Purchase $purchase, $id)
     {
-        //
+      $purchase = Purchase::with(['user','expense.product'])->where('id',$id)->first();
+      $dept = Dept::find(Session('deptID'));
+      return view('purchases.edit',compact('purchase','dept'));
     }
 
     /**

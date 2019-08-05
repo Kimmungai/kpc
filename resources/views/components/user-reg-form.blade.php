@@ -5,7 +5,7 @@
       <span class="input-group-addon">
         <i class="fa fa-building"></i>
       </span>
-      <select name="org_id" id="org_id" class="form-control1">
+      <select name="org_id" id="org_id" class="form-control">
         <option value="1" @if( old('org_id') == 1 || ( isset($user) && $user->org_id == 1 ) ) selected @endif> Kitui Pastoral center </option>
       </select>
     </div>
@@ -26,7 +26,7 @@
       <span class="input-group-addon">
         <i class="fa fa-user"></i>
       </span>
-      <select name="type" id="type" class="form-control1">
+      <select name="type" id="type" class="form-control">
         <option value="1" @if( old('type') == 1 || ( isset($user) && $user->type == 1 ) ) selected @endif>Staff</option>
         <option value="2" @if( old('type') == 2 || ( isset($user) && $user->type == 2 ) ) selected @endif>Customer</option>
         <option value="3" @if( old('type') == 3 || ( isset($user) && $user->type == 3 ) ) selected @endif>Administrator</option>
@@ -50,7 +50,7 @@
       <span class="input-group-addon">
         <i class="fas fa-layer-group"></i>
       </span>
-      <select name="dept" id="dept" class="form-control1">
+      <select name="dept" id="dept" class="form-control">
         <option value="1" @if( old('dept') == 1 || ( isset($user) && $user->dept == 1 ) ) selected @endif>Kitchen</option>
         <option value="2" @if( old('dept') == 2 || ( isset($user) && $user->dept == 2 ) ) selected @endif>Store</option>
         <option value="3" @if( old('dept') == 3 || ( isset($user) && $user->dept == 3 ) ) selected @endif>Hospitality</option>
@@ -97,7 +97,7 @@
       <span class="input-group-addon">
         <i class="fa fa-info"></i>
       </span>
-      <input name="firstName" id="firstName" type="text" class="form-control1" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="First Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+      <input name="firstName" id="firstName" type="text" class="form-control" value="@if( old('firstName') ) {{old('firstName')}} @elseif( isset($user) ) {{$user->firstName}} @endif" placeholder="First Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
     </div>
   </div>
   <div class="col-sm-2">
@@ -116,7 +116,7 @@
       <span class="input-group-addon">
         <i class="fa fa-info"></i>
       </span>
-      <input name="middleName" id="middleName" type="text" class="form-control1" value="@if( old('middleName') ) {{old('middleName')}} @elseif( isset($user) ) {{$user->middleName}} @endif" placeholder="Middle Name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
+      <input name="middleName" id="middleName" type="text" class="form-control" value="@if( old('middleName') ) {{old('middleName')}} @elseif( isset($user) ) {{$user->middleName}} @endif" placeholder="Middle Name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)" />
     </div>
   </div>
   <div class="col-sm-2">
@@ -135,7 +135,7 @@
       <span class="input-group-addon">
         <i class="fa fa-info"></i>
       </span>
-      <input name="lastName" id="lastName" type="text" class="form-control1" value="@if( old('lastName') ) {{old('lastName')}} @elseif( isset($user) ) {{$user->lastName}} @endif" placeholder="Last name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)"/>
+      <input name="lastName" id="lastName" type="text" class="form-control" value="@if( old('lastName') ) {{old('lastName')}} @elseif( isset($user) ) {{$user->lastName}} @endif" placeholder="Last name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -154,7 +154,7 @@
       <span class="input-group-addon">
         <i class="fa fa-calendar-alt"></i>
       </span>
-      <input name="DOB" id="DOB" type="text" class="form-control1" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onchange="validate(this.id,{required:1,min:3,max:255},this.value)"/>
+      <input name="DOB" id="DOB" type="text" class="form-control" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onchange="validate(this.id,{required:1,min:3,max:255},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -173,7 +173,7 @@
       <span class="input-group-addon">
         <i class="fa fa-envelope"></i>
       </span>
-      <input name="email" id="email" type="email" class="form-control1" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)"/>
+      <input name="email" id="email" type="email" class="form-control" value="@if( old('email') ) {{old('email')}} @elseif( isset($user) ) {{$user->email}} @endif" placeholder="Email..." onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -192,7 +192,7 @@
       <span class="input-group-addon">
         <i class="fa fa-phone"></i>
       </span>
-      <input name="phoneNumber" id="phoneNumber" type="text" class="form-control1" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:10,max:13,type:'numeric'},this.value)"/>
+      <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:10,max:13,type:'numeric'},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -211,7 +211,7 @@
       <span class="input-group-addon">
         <i class="fa fa-circle-notch"></i>
       </span>
-      <select name="gender" id="gender" class="form-control1">
+      <select name="gender" id="gender" class="form-control">
       <option value="1" @if( old('gender') == 1 || ( isset($user) && $user->gender == 1 ) ) selected @endif>Male</option>
       <option value="2" @if( old('gender') == 2 || ( isset($user) && $user->gender == 2 ) ) selected @endif>Female</option>
       </select>
@@ -330,7 +330,7 @@
       <span class="input-group-addon">
         <i class="fa fa-key"></i>
       </span>
-      <input name="password" id="password" type="text" class="form-control1" value="@if( old('password') ) {{old('password')}}  @endif" placeholder="Password..." onblur="validate(this.id,{required:1,min:8,max:255},this.value)" />
+      <input name="password" id="password" type="text" class="form-control" value="@if( old('password') ) {{old('password')}}  @endif" placeholder="Password..." onblur="validate(this.id,{required:1,min:8,max:255},this.value)" />
     </div>
   </div>
   <div class="col-sm-2">

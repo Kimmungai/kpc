@@ -35,21 +35,21 @@
 									 <li style="width:32%">
 										 <a href="{{url('dept-registration')}}/{{$Dept->id}}">
 											 @if( strtolower($Dept->name) == 'kitchen' )
-											 <i class="fas fa-utensils" aria-hidden="true"></i>
+											 <i class="fa fa-fire" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'chapel' )
-											 <i class="fas fa-church" aria-hidden="true"></i>
+											 <i class="fa fa-building" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'shamba' )
-											 <i class="fas fa-tractor" aria-hidden="true"></i>
+											 <i class="fa fa-leaf" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'compound' )
-											 <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
+											 <i class="fa fa-umbrella" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'administration' )
-											 <i class="fas fa-user-tie" aria-hidden="true"></i>
+											 <i class="fa fa-user" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'store' )
-											 <i class="fas fa-database" aria-hidden="true"></i>
+											 <i class="fa fa-database" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'hospitality' )
-											 <i class="fas fa-hotel" aria-hidden="true"></i>
+											 <i class="fa fa-hotel" aria-hidden="true"></i>
 											 @else
-											 <i class="fas fa-tag" aria-hidden="true"></i>
+											 <i class="fa fa-tag" aria-hidden="true"></i>
 											 @endif
 											 <div class="ca-content">
 												 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{count($Dept->booking)}} @if(count($Dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>

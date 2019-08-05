@@ -49,7 +49,7 @@
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
-                          <i class="fas fa-hotel"></i>
+                          <i class="fa fa-hotel"></i>
                         </span>
                         <select name="roomType" id="roomType" class="form-control">
                           <option value="1" @if( old('roomType') == 1 || ( isset($user) && $user->roomType == 1 ) ) selected @endif> Single </option>

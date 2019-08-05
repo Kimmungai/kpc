@@ -107,10 +107,26 @@
 }
 /*Action tabs*/
 .action-tab {
-  color: #fff;
   text-align: center;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
 }
 .action-tab .fas{
+  font-size: 5em;
+}
+.action-tab .fa-money{
+  font-size: 5em;
+}
+.action-tab .fa-gift{
+  font-size: 5em;
+}
+.action-tab .fa-file{
+  font-size: 5em;
+}
+.action-tab .fa-external-link{
+  font-size: 5em;
+}
+.action-tab .fa-edit{
   font-size: 5em;
 }
 .action-tab p{
@@ -150,6 +166,16 @@
   font-size: 14px;
   font-weight: bold;
 }
-.modal-body select{
+.form-group select{
+  height: 50px !important;
+}
+
+.form-group input[type="text"]{
+  height: 50px !important;
+}
+.form-group input[type="number"]{
+  height: 50px !important;
+}
+.form-group input[type="email"]{
   height: 50px !important;
 }

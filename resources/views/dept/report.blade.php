@@ -44,7 +44,7 @@
 								</div>
 								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @endif">
 									<div class="col-xs-2">
-										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif " placeholder="Date from" onchange="clear_max_field('filter_to')">
+										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif"  onchange="clear_max_field('filter_to')" placeholder="Date from">
 									</div>
 									<div class="col-xs-1">
 										<p style="line-height:40px">~</p>

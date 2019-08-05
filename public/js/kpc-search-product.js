@@ -62,11 +62,12 @@ function update_product_quantity(purchaseID,tdId,field)
 {
   var amount = prompt("please enter quantity in  digits only");
   var productID = $("#"+tdId).data('prod');//tdId.substring(13);
-  if( isNaN(amount) )
+  while( isNaN(amount) )
   {
     amount = prompt("Only digits can be entered!");
 
-  }else{
+  }
+
     if( amount == '' ){ amount = 0; }
     //if( field ==='quantity' ){
       //var current_val = parseInt($("#"+tdId).text());
@@ -92,7 +93,7 @@ function update_product_quantity(purchaseID,tdId,field)
         //alert(data);
       });
 
-  }
+
   //alert(userID);
 }
 function new_clear_prod_search(){
