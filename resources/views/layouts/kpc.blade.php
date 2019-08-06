@@ -40,6 +40,7 @@
 <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 <link href="{{ asset('css/kpc-extras.css') }}" rel="stylesheet">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/purchase.show.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
 
