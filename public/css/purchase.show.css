@@ -27,3 +27,16 @@
   background: #fff;
   border: 0;
 }
+.booking-details{
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  padding: 2em;
+}
+.booking-details h3{
+  text-align: center;
+}
+.booking-details p{
+  padding: 1em;
+  word-break: break-all;
+}

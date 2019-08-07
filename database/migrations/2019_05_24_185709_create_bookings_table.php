@@ -27,6 +27,7 @@ class CreateBookingsTable extends Migration
             $table->double('bookingAmountReceived')->nullable();
             $table->tinyInteger('paymentStatus')->nullable();
             $table->string('paymentDueDate')->nullable();
+            $table->string('transactionCode')->nullable();
             $table->tinyInteger('board')->nullable();
             $table->tinyInteger('menu')->nullable();
             $table->text('menuDetails')->nullable();
