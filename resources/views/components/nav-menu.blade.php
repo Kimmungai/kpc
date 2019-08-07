@@ -23,13 +23,15 @@
           <li>
             <a href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>Reports <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Overall profit & loss</a></li>
-              <li class="mini_list_w3"><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Overall balance sheet</a></li>
+              <li class="mini_list_agile"><a href="{{route('booking-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Booking report</a></li>
+              <li class="mini_list_agile"><a href="{{route('procurement-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Procurement report</a></li>
+              <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Inventory report</a></li>
             </ul>
           </li>
             @endif
           @endif
-          <li><a href="table.html"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+          <li><a href="#" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 
         </ul>
       </div><!-- /gn-scroller -->
@@ -50,7 +52,8 @@
               <ul class="dropdown-menu drp-mnu">
                 <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                 <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-                <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                <li> <a href="#" onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a> </li>
               </ul>
             </li>
 
@@ -80,8 +83,9 @@
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
          <li class="dropdown head-dpdn">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-link"></i><!--<span class="badge blue">9</span>--></a>
-              <ul class="dropdown-menu">
+              <a href="#" class="dropdown-toggle"  aria-expanded="false" title="Logout" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i><!--<span class="badge blue">9</span>--></a>
+              <!--<ul class="dropdown-menu">
                 <li>
                   <div class="notification_header">
                     <h3>Quick links</h3>
@@ -127,16 +131,16 @@
                     <div class="bar yellow" style="width:100%;"></div>
                   </div>
                 </a></li>
-              </ul>
+              </ul>-->
             </li>
           </ul>
   </li>
 
-  <li class="second w3l_search" style="border:0">
+  <!--<li class="second w3l_search" style="border:0">
 
-      <form action="#" method="post">
+      <form action="#" method="post">-->
         <!--<input type="search" name="search" placeholder="Search here..." required="">-->
-        <select class="" name="">
+        <!--<select class="" name="">
           <option value="" disabled selected> Choose Report </option>
 
           @if(isset($dept))
@@ -157,7 +161,7 @@
         <button class="btn btn-default" type="submit"><i class="fa fa-download" aria-hidden="true"></i></button>
       </form>
 
-  </li>
+  </li>-->
   <!--<li class="second full-screen">
     <section class="full-top">
       <button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
@@ -170,3 +174,6 @@
 </div>
 <div class="clearfix"></div>
 <!-- //w3_agileits_top_nav-->
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>

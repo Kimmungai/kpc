@@ -65,3 +65,8 @@ Route::post('save-transfer','TransfersAjaxController@save_transfer');
 
 //Products
 Route::resource('product-registration','ProductRegistrationController');
+
+//Reports
+Route::resource('booking-report','BookingReportController');
+Route::resource('procurement-report','ProcurementReportController');
+Route::resource('inventory-report','InventoryReportController');

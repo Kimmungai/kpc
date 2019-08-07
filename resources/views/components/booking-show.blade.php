@@ -59,7 +59,7 @@
           <table class="table">
             <tbody>
               <tr>
-                <th>Type</th>
+                <td>Type</td>
                 @if( $booking->bookingType == 1)<td>Food ordering </td>@endif
                 @if( $booking->bookingType == 2)<td>Room booking </td>@endif
                 @if( $booking->bookingType == 3)<td>Tent Hiring </td>@endif
@@ -68,36 +68,36 @@
               </tr>
               @if( $booking->roomType ==2 )
               <tr>
-                <th>Room Type</th>
+                <td>Room Type</td>
                 @if( $booking->roomType == 1 )<td> Single  </td>@endif
                 @if( $booking->roomType == 2 )<td> Double  </td>@endif
                 @if( $booking->roomType == 3 )<td> Delux   </td>@endif
               </tr>
               @endif
               <tr>
-                <th>No. of people</th>
+                <td>No. of people</td>
                 <td>{{$booking->numPple}}</td>
               </tr>
               <tr>
-                <th>Amount due</th>
+                <td>Amount due</td>
                 <td>@if( is_numeric($booking->bookingAmountDue)) Ksh. {{number_format($booking->bookingAmountDue,2)}} @endif</td>
               </tr>
               <tr>
-                <th>Amount received</th>
+                <td>Amount received</td>
                 <td>@if( is_numeric($booking->bookingAmountReceived) ) Ksh. {{number_format($booking->bookingAmountReceived,2)}} @endif</td>
               </tr>
               @if( is_numeric($booking->bookingAmountDue) && is_numeric($booking->bookingAmountReceived) )
                 <tr>
                   @if($booking->bookingAmountDue - $booking->bookingAmountReceived >= 0)
-                  <th>Amount Pending</th>
+                  <td>Amount Pending</td>
                   @else
-                  <th>Overpayment</th>
+                  <td>Overpayment</td>
                   @endif
                   <td> Ksh. {{number_format(abs($booking->bookingAmountDue - $booking->bookingAmountReceived),2)}}</td>
                 </tr>
               @endif
               <tr>
-                <th>Mode of payment</th>
+                <td>Mode of payment</td>
                 @if($booking->modeOfPayment == 1)<td>Paid by cash</td>@endif
                 @if($booking->modeOfPayment == 2)<td>Paid by cheque</td>@endif
                 @if($booking->modeOfPayment == 3)<td>Paid by bank transfer</td>@endif
@@ -105,7 +105,7 @@
               </tr>
               @if($booking->transactionCode)
               <tr>
-                <th>Code</th>
+                <td>Code</td>
                 <td>{{$booking->transactionCode}}</td>
               </tr>
               @endif
@@ -151,10 +151,10 @@
           <table class="table">
             <thead>
               <tr>
-              <th>SKU</th>
-              <th>Name</th>
-              <th>Quantity booked</th>
-              <th>Price</th>
+              <td>SKU</td>
+              <td>Name</td>
+              <td>Quantity booked</td>
+              <td>Price</td>
               </tr>
             </thead>
             <tbody>
