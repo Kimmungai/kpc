@@ -17,8 +17,10 @@
 
     <div class="col-xs-4">
       <ul>
+        @if(count($inventory))
         <li><strong>Period</strong></li>
-        <li>{{date('d-M-Y',strtotime($inventory[0]->created_at))}} <span class="fa fa-arrow-right"></span> {{date('d-M-Y',strtotime($inventory->last()->created_at))}}</li>
+        <li>{{$StartDate}} <span class="fa fa-arrow-right"></span> {{$EndDate}}</li>
+        @endif
       </ul>
     </div>
 

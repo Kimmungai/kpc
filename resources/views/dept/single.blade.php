@@ -137,6 +137,23 @@
 								<div class="action-tab">
 										<dl>
 											<dt>
+												<a href="/product-registration/"><i class="fa fa-database"></i></a>
+											</dt>
+											<dd>
+												<h3 class="mb-2"><a href="/dept-registration/{{$dept->id}}/edit">Stock</a></h3>
+												<!--<p class="text-underline">This month</p>
+												<p>50 purchases</p>
+												<p>Ksh. 50,0000 made</p>-->
+												<a href="/product-registration/" class="btn btn-x-sm btn-default">Open</a>
+											<dd>
+										</dl>
+									</div>
+							</div>
+
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
+										<dl>
+											<dt>
 												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fa fa-external-link"></i></a>
 											</dt>
 											<dd>
@@ -149,6 +166,7 @@
 										</dl>
 									</div>
 							</div>
+
 
 							<div class="col-sm-4 mb-2 mt-2">
 								<div class="action-tab">
@@ -166,6 +184,8 @@
 										</dl>
 									</div>
 							</div>
+
+
 
 						</div>
 					</div>

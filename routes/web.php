@@ -47,6 +47,7 @@ Route::post('create-supplier','PurchasesAjaxController@create_supplier');
 Route::post('restore-purchases','PurchasesAjaxController@restore_purchase');
 Route::post('update-purchase','PurchasesAjaxController@update_purchase');
 Route::get('sort-purchases','PurchasesRegistrationController@index');
+Route::get('download-purchase/{id}','PurchasesRegistrationController@download');
 Route::resource('purchases-registration','PurchasesRegistrationController');
 //products
 Route::post('create-product','ProductsAjaxController@create_product');
@@ -58,6 +59,7 @@ Route::post('update-product','ProductsAjaxController@update_product');
 Route::post('save-booking','BookingsAjaxController@save_booking');
 Route::post('update-booking','BookingsAjaxController@update_booking');
 Route::get('sort-bookings','BookingsRegistrationController@index');
+Route::get('download-booking/{id}','BookingsRegistrationController@download');
 Route::resource('bookings-registration','BookingsRegistrationController');
 
 //Transfers
@@ -70,3 +72,10 @@ Route::resource('product-registration','ProductRegistrationController');
 Route::resource('booking-report','BookingReportController');
 Route::resource('procurement-report','ProcurementReportController');
 Route::resource('inventory-report','InventoryReportController');
+Route::get('booking-filtered-report','BookingReportController@report');
+Route::get('download-booking-report','BookingReportController@download');
+Route::get('download-procurement-report','ProcurementReportController@download');
+Route::get('download-inventory-report','InventoryReportController@download');
+
+Route::get('purchase-filtered-report','ProcurementReportController@report');
+Route::get('inventory-filtered-report','InventoryReportController@report');

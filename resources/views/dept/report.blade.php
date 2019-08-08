@@ -28,7 +28,7 @@
 						@if( isset($dept) )
 
 						<div class="container">
-							<div class="row">
+							<div class="row mt-2">
 								<form class="" action="dept-filtered-report" method="get">
 								<div class="col-xs-2">
 									<p style="line-height:40px">Sort:</p>
@@ -42,7 +42,7 @@
 										<option value="dates" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'dates' ) selected @endif @endif >Choose specific dates</option>
 									</select>
 								</div>
-								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @endif">
+								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @else d-none hidden @endif">
 									<div class="col-xs-2">
 										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif"  onchange="clear_max_field('filter_to')" placeholder="Date from">
 									</div>
@@ -87,7 +87,7 @@
 
 
 					@if( $costsPercent && $revenuesPercent && $bookingsPercent && $stockPercent )
-            <div class="cir_agile_info " >
+            <div class="cir_agile_info mt-2" >
             <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department
 							<strong class="text-danger">
 							@if(isset($_GET['duration_sort']))

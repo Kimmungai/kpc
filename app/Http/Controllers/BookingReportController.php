@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use PDF;
 class BookingReportController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class BookingReportController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all();
+        $dt = Carbon::now();
+        $bookings= Booking::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
         return view('Reports.booking-report',compact('bookings'));
     }
 
@@ -83,4 +85,76 @@ class BookingReportController extends Controller
     {
         //
     }
+
+    public function report(Request $request)
+    {
+      $dt = Carbon::now();
+      if( count($request->all()) )
+      {
+
+        if($request->duration_sort === 'thisWeek'){
+          $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+          return view('Reports.booking-report',compact('bookings'));
+        }
+        if($request->duration_sort === 'thisYear') {
+          $bookings= Booking::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+          return view('Reports.booking-report',compact('bookings'));
+        }
+        if($request->duration_sort === 'today'){
+          $bookings= Booking::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+          return view('Reports.booking-report',compact('bookings'));
+        }
+      }
+      if($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+
+        $bookings= Booking::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+        return view('Reports.booking-report',compact('bookings'));
+      }
+
+      return redirect(route('booking-report.index'));
+    }
+
+    public function download(Request $request)
+    {
+      $dt = Carbon::now();
+
+      if($request->duration_sort === 'thisWeek'){
+        $startDate =$dt->startOfWeek();
+        $endDate = $dt->endOfWeek();
+        $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'thisYear') {
+        $startDate =$dt->startOfYear();
+        $endDate = $dt->endOfYear();
+        $bookings= Booking::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'today'){
+        $startDate =$dt->today();
+        $endDate = $dt->today();
+        $bookings= Booking::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+        $bookings= Booking::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+      }
+      else {
+        $startDate =$dt->startOfMonth();
+        $endDate = $dt->endOfMonth();
+        $bookings= Booking::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+      }
+
+
+      $docs = $bookings;
+      $pdf = PDF::loadView('pdf.all-bookings-report',compact('docs','startDate','endDate'));
+      return $pdf->download();
+    }
+
+
 }

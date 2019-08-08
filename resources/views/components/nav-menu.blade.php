@@ -10,6 +10,18 @@
         <ul class="gn-menu agile_menu_drop">
           <li><a href="/"> <i class="fa fa-home"></i> Home</a></li>
           <li>
+            <a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Departments <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <ul class="gn-submenu">
+              <li class="mini_list_agile"><a href="/dept-registration/1"><i class="fa fa-fire" aria-hidden="true"></i> Kitchen</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/2"> <i class="fa fa-building" aria-hidden="true"></i> Chapel</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/3"> <i class="fa fa-leaf" aria-hidden="true"></i> Shamba</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/4"> <i class="fa fa-umbrella" aria-hidden="true"></i> Compound</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/5"> <i class="fa fa-user" aria-hidden="true"></i> Administration</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/6"> <i class="fa fa-database" aria-hidden="true"></i> Store</a></li>
+              <li class="mini_list_w3"><a href="/dept-registration/7"> <i class="fa fa-hotel" aria-hidden="true"></i> Hospitality</a></li>
+            </ul>
+          </li>
+          <li>
             <a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Users <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
               <li class="mini_list_agile"><a href="/users/2"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>

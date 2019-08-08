@@ -66,7 +66,7 @@
 							@if(isset($products))
 								@foreach($products as $product)
 								<div class="col-sm-4 mb-2">
-									<div class="action-tab bg-admin">
+									<div class="action-tab">
 											<dl>
 												<dt>
 													<a href="{{route('product-registration.show',$product->id)}}">
@@ -90,7 +90,7 @@
 													<p>Registered: <strong>{{date('d/m/Y',strtotime($product->created_at))}}</strong></p>
 													<p>In store: <strong>{{$product->quantity}}</strong></p>
 													<p>Price: <strong>Ksh. {{$product->price}}</strong></p>
-													<a href="{{route('product-registration.show',$product->id)}}" class="btn btn-x-sm  btn-dark" >Open</a>
+													<a href="{{route('product-registration.show',$product->id)}}" class="btn btn-x-sm  btn-default" >Open</a>
 												<dd>
 											</dl>
 										</div>

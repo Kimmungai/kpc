@@ -6,6 +6,7 @@ use App\Booking;
 use App\Revenue;
 use App\Dept;
 use Carbon\Carbon;
+use PDF;
 use Illuminate\Http\Request;
 
 class BookingsRegistrationController extends Controller
@@ -138,5 +139,12 @@ class BookingsRegistrationController extends Controller
       $booking->forceDelete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
       return redirect('/bookings-registration');
+    }
+
+    public function download($id)
+    {
+      $doc = Booking::find($id);
+      $pdf = PDF::loadView('pdf.booking-report',compact('doc'));
+      return $pdf->download();
     }
 }

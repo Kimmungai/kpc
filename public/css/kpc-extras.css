@@ -129,6 +129,9 @@
 .action-tab .fa-edit{
   font-size: 5em;
 }
+.action-tab .fa-database{
+  font-size: 5em;
+}
 .action-tab p{
   font-size: 12px;
   padding: 5px;

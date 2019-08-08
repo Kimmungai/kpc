@@ -116,7 +116,7 @@
 
     </div>
 
-    <div class="">
+    <div class="col-xs-5">
       <div class="booking-details">
         <h3>Menu details</h3>
         @if($booking->board == 2)

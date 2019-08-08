@@ -21,8 +21,9 @@
         <li><small>{{$purchase->user->firstName}} {{$purchase->user->lastName}}</small></li>
         <li><small>{{$purchase->user->email}}</small></li>
         <li><small>{{$purchase->user->phoneNumber}}</small></li>
+        <li><small>Due: @if(is_numeric($purchase->amountDue)) Ksh. {{number_format($purchase->amountDue,2)}} @endif</small></li>
         <li><small>Paid: @if(is_numeric($purchase->amountPaid)) Ksh. {{number_format($purchase->amountPaid,2)}} @endif</small></li>
-        <li><small>Owed:@if(is_numeric($purchase->amountPaid)) Ksh. {{number_format($purchase->amountDue,2)}} @endif</small></li>
+        <li><small>Owed:@if(is_numeric($purchase->amountPaid) && is_numeric($purchase->amountDue)) Ksh. {{number_format($purchase->amountDue-$purchase->amountPaid,2)}} @endif</small></li>
       </ul>
     </div>
 

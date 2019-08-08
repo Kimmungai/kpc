@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 
 use App\Purchase;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use PDF;
 class ProcurementReportController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class ProcurementReportController extends Controller
      */
     public function index()
     {
-      $purchases = Purchase::all();
+      $dt = Carbon::now();
+      $purchases= Purchase::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
       return view('Reports.procurement-report',compact('purchases'));
     }
 
@@ -83,4 +86,74 @@ class ProcurementReportController extends Controller
     {
         //
     }
+    public function report(Request $request)
+    {
+      $dt = Carbon::now();
+      if( count($request->all()) )
+      {
+
+        if($request->duration_sort === 'thisWeek'){
+          $purchases= Purchase::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+          return view('Reports.procurement-report',compact('purchases'));
+        }
+        if($request->duration_sort === 'thisYear') {
+          $purchases= Purchase::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+          return view('Reports.procurement-report',compact('purchases'));
+        }
+        if($request->duration_sort === 'today'){
+          $purchases= Purchase::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+          return view('Reports.procurement-report',compact('purchases'));
+        }
+      }
+      if($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+
+        $purchases= Purchase::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+        return view('Reports.procurement-report',compact('purchases'));
+      }
+
+      return redirect(route('procurement-report.index'));
+    }
+
+    public function download(Request $request)
+    {
+      $dt = Carbon::now();
+
+      if($request->duration_sort === 'thisWeek'){
+        $startDate =$dt->startOfWeek();
+        $endDate = $dt->endOfWeek();
+        $purchases= Purchase::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'thisYear') {
+        $startDate =$dt->startOfYear();
+        $endDate = $dt->endOfYear();
+        $purchases= Purchase::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'today'){
+        $startDate =$dt->today();
+        $endDate = $dt->today();
+        $purchases= Purchase::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+      }
+      elseif($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+        $purchases= Purchase::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+      }
+      else {
+        $startDate =$dt->startOfMonth();
+        $endDate = $dt->endOfMonth();
+        $purchases= Purchase::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+      }
+
+
+      $docs = $purchases;
+      $pdf = PDF::loadView('pdf.all-purchases-report',compact('docs','startDate','endDate'));
+      return $pdf->download();
+    }
+
 }

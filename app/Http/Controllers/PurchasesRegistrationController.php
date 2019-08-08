@@ -8,6 +8,7 @@ use App\Product;
 use App\Dept;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PDF;
 
 class PurchasesRegistrationController extends Controller
 {
@@ -134,5 +135,12 @@ class PurchasesRegistrationController extends Controller
       $purchase->forceDelete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
       return redirect('/purchases-registration');
+    }
+
+    public function download($id)
+    {
+      $doc = Purchase::find($id);
+      $pdf = PDF::loadView('pdf.purchase-report',compact('doc'));
+      return $pdf->download();
     }
 }
