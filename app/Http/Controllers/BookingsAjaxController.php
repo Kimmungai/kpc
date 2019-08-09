@@ -93,4 +93,18 @@ class BookingsAjaxController extends Controller
       }
       return false;
     }
+
+    public function share(Request $request)
+    {
+      $request->validate([
+        'email' => 'required|email|max:255',
+        'id' => 'required|numeric',
+      ]);
+
+      $email = $request->email;
+      $booking = Booking::find($request->id);
+
+      //send email
+      return "booking ".$booking->id;
+    }
 }

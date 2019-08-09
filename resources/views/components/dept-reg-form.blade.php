@@ -5,7 +5,7 @@
       <span class="input-group-addon">
         <i class="fa fa-building"></i>
       </span>
-      <select name="org_id" id="org_id" class="form-control1">
+      <select name="org_id" id="org_id" class="form-control">
         <option value="1" @if( old('org_id') == 1 || ( isset($user) && $user->org_id == 1 ) ) selected @endif> Kitui Pastoral center </option>
       </select>
     </div>
@@ -26,7 +26,7 @@
       <span class="input-group-addon">
         <i class="fas fa-layer-group"></i>
       </span>
-      <select name="type" id="type" class="form-control1">
+      <select name="type" id="type" class="form-control">
       <option value="1" @if( old('type') == 1 || ( isset($dept) && $dept->type == 1 ) ) selected @endif>Type 1</option>
       <option value="2" @if( old('type') == 2 || ( isset($dept) && $dept->type == 2 ) ) selected @endif>Type 2</option>
       <option value="3" @if( old('type') == 3 || ( isset($dept) && $dept->type == 3 ) ) selected @endif>Type 3</option>
@@ -70,7 +70,7 @@
       <span class="input-group-addon">
         <i class="fa fa-image"></i>
       </span>
-      <input name="name" id="name" type="text" class="form-control1" value="@if( old('name') ) {{old('name')}} @elseif( isset($dept) ) {{$dept->name}} @endif" placeholder="Dept Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required/>
+      <input name="name" id="name" type="text" class="form-control" value="@if( old('name') ) {{old('name')}} @elseif( isset($dept) ) {{$dept->name}} @endif" placeholder="Dept Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -89,7 +89,7 @@
       <span class="input-group-addon">
         <i class="fas fa-money-bill-wave"></i>
       </span>
-      <input name="targetCosts" id="targetCosts" type="text" class="form-control1" value="@if( old('targetCosts') ) {{old('targetCosts')}} @elseif( isset($dept) ) {{$dept->targetCosts}} @endif" placeholder="Dept target costs..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required/>
+      <input name="targetCosts" id="targetCosts" type="text" class="form-control" value="@if( old('targetCosts') ) {{old('targetCosts')}} @elseif( isset($dept) ) {{$dept->targetCosts}} @endif" placeholder="Dept target costs..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -108,7 +108,7 @@
       <span class="input-group-addon">
         <i class="fas fa-cash-register"></i>
       </span>
-      <input name="targetRevenues" id="targetRevenues" type="text" class="form-control1" value="@if( old('targetRevenues') ) {{old('targetRevenues')}} @elseif( isset($dept) ) {{$dept->targetRevenues}} @endif" placeholder="Dept target revenue..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+      <input name="targetRevenues" id="targetRevenues" type="text" class="form-control" value="@if( old('targetRevenues') ) {{old('targetRevenues')}} @elseif( isset($dept) ) {{$dept->targetRevenues}} @endif" placeholder="Dept target revenue..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -127,7 +127,7 @@
       <span class="input-group-addon">
         <i class="fas fa-info"></i>
       </span>
-      <input name="bookingCapacity" id="bookingCapacity" type="text" class="form-control1" value="@if( old('bookingCapacity') ) {{old('bookingCapacity')}} @elseif( isset($dept) ) {{$dept->bookingCapacity}} @endif" placeholder="Dept booking capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+      <input name="bookingCapacity" id="bookingCapacity" type="text" class="form-control" value="@if( old('bookingCapacity') ) {{old('bookingCapacity')}} @elseif( isset($dept) ) {{$dept->bookingCapacity}} @endif" placeholder="Dept booking capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -146,7 +146,7 @@
       <span class="input-group-addon">
         <i class="fas fa-user-tie"></i>
       </span>
-      <input name="stockCapacity" id="stockCapacity" type="text" class="form-control1" value="@if( old('stockCapacity') ) {{old('stockCapacity')}} @elseif( isset($dept) ) {{$dept->stockCapacity}} @endif" placeholder="Dept staff and workers capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+      <input name="stockCapacity" id="stockCapacity" type="text" class="form-control" value="@if( old('stockCapacity') ) {{old('stockCapacity')}} @elseif( isset($dept) ) {{$dept->stockCapacity}} @endif" placeholder="Dept staff and workers capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
     </div>
   </div>
   <div class="col-sm-2">

@@ -96,4 +96,18 @@ class PurchasesAjaxController extends Controller
         ]);
       }
     }
+
+    public function share(Request $request)
+    {
+      $request->validate([
+        'email' => 'required|email|max:255',
+        'id' => 'required|numeric',
+      ]);
+
+      $email = $request->email;
+      $purchase = Purchase::find($request->id);
+
+      //send email
+      return "nyau ".$purchase->id;
+    }
 }

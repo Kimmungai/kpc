@@ -36,7 +36,7 @@
 								<a href="{{route('purchases-registration.edit',$purchase->id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
 							</div>
 							<div class="col-xs-3">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_doc('/share-purchase',{{$purchase->id}})"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-3">
 								<a href="{{url('download-purchase')}}/{{$purchase->id}}" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
@@ -57,7 +57,7 @@
 								<a href="{{route('purchases-registration.edit',$purchase->id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
 							</div>
 							<div class="col-xs-3">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_doc('/share-purchase',{{$purchase->id}})"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-3">
 								<a href="{{url('download-purchase')}}/{{$purchase->id}}" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>

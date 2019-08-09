@@ -156,5 +156,23 @@ class BookingReportController extends Controller
       return $pdf->download();
     }
 
+    public function share(Request $request)
+    {
+      $request->validate([
+        'email' => 'required|email|max:255',
+        'duration_sort' => 'required|max:255',
+        'filter_from' => 'nullable|max:255',
+        'filter_to' => 'nullable|max:255',
+      ]);
+
+      $email = $request->email;
+      $duration_sort =$request->duration_sort;
+      $filter_from =$request->filter_from;
+      $filter_to = $request->filter_to;
+
+      //send email
+      return 'share'.$duration_sort;
+    }
+
 
 }
