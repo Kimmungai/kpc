@@ -157,12 +157,14 @@ function isObject(val) {
     return (typeof val === 'object');
 }
 
-/*$(document).ajaxStart(function(){
-  if( $('#recordPurchasesModal').hasClass('in') ) {
-    $(".search-box .loading").removeClass('hidden').removeClass('d-none');
-  }
+$(document).ajaxStart(function(){
+
+    $(".loading-square").removeClass('hidden').removeClass('d-none');
+
 });
 
 $(document).ajaxStop(function(){
-  $(".search-box .loading").addClass('hidden').addClass('d-none');
-});*/
+
+  $(".loading-square").addClass('hidden').addClass('d-none');
+
+});

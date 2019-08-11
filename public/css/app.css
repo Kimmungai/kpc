@@ -77,3 +77,11 @@
   border: 1px solid rgba(137, 137, 137, 0.2);
   background: rgba(137, 137, 137, 0.04);
 }
+.loading-square {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

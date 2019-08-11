@@ -86,3 +86,5 @@ Route::post('share-inventory-report','InventoryReportController@share');
 
 Route::get('purchase-filtered-report','ProcurementReportController@report');
 Route::get('inventory-filtered-report','InventoryReportController@report');
+
+Route::get('nyau','BookingsAjaxController@share');

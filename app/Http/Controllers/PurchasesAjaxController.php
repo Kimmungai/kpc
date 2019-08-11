@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
+use App\Mail\PurchaseMail;
 use Validator;
 use App\User;
 use App\Purchase;
 use App\Expense;
+use PDF;
 class PurchasesAjaxController extends Controller
 {
     public function __construct()
@@ -108,6 +110,12 @@ class PurchasesAjaxController extends Controller
       $purchase = Purchase::find($request->id);
 
       //send email
-      return "nyau ".$purchase->id;
+      $doc = $purchase;
+      $pdf = PDF::loadView('pdf.purchase-report',compact('doc'));
+      $pathToPDF = 'doc-'.$doc->id.'.pdf';
+      $pdf->save($pathToPDF);
+      Mail::to($email)->send(new PurchaseMail($pathToPDF));
+      unlink($pathToPDF);
+      return 1;
     }
 }

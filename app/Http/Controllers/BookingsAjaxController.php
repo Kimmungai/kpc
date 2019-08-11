@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
+use App\Mail\BookingMail;
 use App\Http\Requests\StoreBookingAjax;
 use App\Booking;
 use App\Revenue;
 use App\Product;
+use PDF;
 class BookingsAjaxController extends Controller
 {
     public function __construct()
@@ -42,7 +45,16 @@ class BookingsAjaxController extends Controller
       }
 
       if( $booking )
+      {
+        //send email
+        $doc = $booking;
+        $pdf = PDF::loadView('pdf.booking-report',compact('doc'));
+        $pathToPDF = 'doc-'.$doc->id.'.pdf';
+        $pdf->save($pathToPDF);
+        Mail::to(env('ADMIN_EMAIL','kimpita9@gmail.com'))->send(new BookingMail($pathToPDF));
+        unlink($pathToPDF);
         return 1;
+      }
       return 0;
     }
 
@@ -79,7 +91,10 @@ class BookingsAjaxController extends Controller
       }
 
       if( $booking )
+      {
         return 1;
+      }
+
       return 0;
     }
 
@@ -105,6 +120,14 @@ class BookingsAjaxController extends Controller
       $booking = Booking::find($request->id);
 
       //send email
-      return "booking ".$booking->id;
+      $doc = $booking;
+      $pdf = PDF::loadView('pdf.booking-report',compact('doc'));
+      $pathToPDF = 'doc-'.$doc->id.'.pdf';
+      $pdf->save($pathToPDF);
+      Mail::to($email)->send(new BookingMail($pathToPDF));
+      unlink($pathToPDF);
+      return 1;
     }
+
+
 }

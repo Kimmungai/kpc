@@ -438,5 +438,8 @@ var chart = AmCharts.makeChart("chartdiv1", {
     });
 </script>
 @endif
+<div class="loading-square hidden d-none">
+	<img src="{{asset('images/loading.gif')}}" alt="">
+</div>
 </body>
 </html>

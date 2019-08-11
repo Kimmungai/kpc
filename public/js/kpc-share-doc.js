@@ -19,9 +19,10 @@ function share_doc(route,id)
     },
     function(data,status){
       //show result box
-      alert(data);
+
     });
 
+    alert("The document is being sent. It can take a few minutes to get to recipient.");
 
 }
 
@@ -52,8 +53,9 @@ function share_report(route)
     },
     function(data,status){
       //show result box
-      alert(data);
     });
+    
+    alert("The document is being sent. It can take a few minutes to get to recipient.");
 
 }
 
