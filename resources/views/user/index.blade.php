@@ -24,7 +24,7 @@
                     <li style="width:32%">
                       <a href="{{url('users')}}/2">
 
-                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <i class="fas fa-users" aria-hidden="true"></i>
                         <div class="ca-content">
 													@if(isset($usersCount['customers']))
                           	<h4 class="ca-main three">{{number_format($usersCount['customers'])}}</h4>
@@ -35,7 +35,7 @@
                     </li>
 									<li style="width:32%">
 										<a href="{{url('users')}}/1">
-										  <i class="fa fa-user" aria-hidden="true"></i>
+										  <i class="fas fa-user-tag" aria-hidden="true"></i>
 											<div class="ca-content">
 												@if(isset($usersCount['staff']))
 													<h4 class="ca-main three">{{number_format($usersCount['staff'])}}</h4>
@@ -46,7 +46,7 @@
 									</li>
 									<li style="width:32%">
 										<a href="{{url('users')}}/3">
-											<i class="fa fa-user" aria-hidden="true"></i>
+											<i class="fas fa-user-tie" aria-hidden="true"></i>
 											<div class="ca-content">
 												@if(isset($usersCount['administrators']))
 													<h4 class="ca-main three">{{number_format($usersCount['administrators'])}}</h4>
@@ -62,7 +62,7 @@
                 <li style="width:32%">
                   <a href="{{url('users')}}/4">
 
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <i class="fas fa-user-clock" aria-hidden="true"></i>
                     <div class="ca-content">
 											@if(isset($usersCount['casuals']))
 												<h4 class="ca-main three">{{number_format($usersCount['casuals'])}}</h4>

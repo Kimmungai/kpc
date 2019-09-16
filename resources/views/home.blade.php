@@ -35,19 +35,19 @@
 									 <li style="width:32%">
 										 <a href="{{url('dept-registration')}}/{{$Dept->id}}">
 											 @if( strtolower($Dept->name) == 'kitchen' )
-											 <i class="fa fa-fire" aria-hidden="true"></i>
+											 <i class="fas fa-utensils" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'chapel' )
-											 <i class="fa fa-building" aria-hidden="true"></i>
+											 <i class="fas fa-church" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'shamba' )
-											 <i class="fa fa-leaf" aria-hidden="true"></i>
+											 <i class="fa fa-tractor" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'compound' )
-											 <i class="fa fa-umbrella" aria-hidden="true"></i>
+											 <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'administration' )
-											 <i class="fa fa-user" aria-hidden="true"></i>
+											 <i class="fa fa-user-tie" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'store' )
-											 <i class="fa fa-database" aria-hidden="true"></i>
+											 <i class="fa fa-store-alt" aria-hidden="true"></i>
 											 @elseif( strtolower($Dept->name) == 'hospitality' )
-											 <i class="fa fa-hotel" aria-hidden="true"></i>
+											 <i class="fa fa-bed" aria-hidden="true"></i>
 											 @else
 											 <i class="fa fa-tag" aria-hidden="true"></i>
 											 @endif

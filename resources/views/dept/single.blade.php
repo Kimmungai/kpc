@@ -19,38 +19,7 @@
 					<!-- /inner_content_w3_agile_info-->
 			 <div class="inner_content_w3_agile_info">
 					<!--stock options buttons-->
-					<!--<div class="container" >
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="button" style="background:#f0ad4e" >
-								 <p class="btnText">Purchases</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-money-check-alt"></i></p>
-								 </div>
-								</div>
-							</div>
 
-							<div class="col-sm-4">
-								<div class="button" style="background:#5bc0de" >
-								 <p class="btnText">Bookings</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-gift"></i></p>
-								 </div>
-								</div>
-							</div>
-
-							<div class="col-sm-4">
-								<div class="button" style="background:#337ab7" >
-								 <p class="btnText">Transfers</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-external-link-alt"></i></p>
-								 </div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>-->
 					<!--end stock options buttons-->
 
 
@@ -65,7 +34,7 @@
 								<div class="action-tab ">
 										<dl>
 											<dt>
-												<a href="/purchases-registration"><i class="fa fa-money"></i></a>
+												<a href="/purchases-registration"><i class="fas fa-money-bill-wave"></i></a>
 											</dt>
 											<dd>
 												<h3><a href="/purchases-registration">Purchases</a></h3>
@@ -154,7 +123,7 @@
 								<div class="action-tab">
 										<dl>
 											<dt>
-												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fa fa-external-link"></i></a>
+												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fas fa-external-link-alt"></i></a>
 											</dt>
 											<dd>
 												<h3 class="mb-2"><a href="#" data-toggle="modal" data-target="#recordTransfersModal">Transfers</a></h3>

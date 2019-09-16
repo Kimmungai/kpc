@@ -89,7 +89,7 @@
                   <div class="form-group" id="chk_in_dateTitle">
                     <label class="col-md-2 control-label chk_in_dateName">Date <span class="text-danger">*</span></label>
                     <div class="col-md-8">
-                      <div class="input-group input-icon right">
+                      <div class="input-group-field input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>
@@ -108,7 +108,7 @@
                   <div class="form-group hidden d-none" id="chk_out_dateTitle">
                     <label class="col-md-2 control-label chk_out_dateName">Date <span class="text-danger">*</span></label>
                     <div class="col-md-8">
-                      <div class="input-group input-icon right">
+                      <div class="input-group-field input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>
@@ -129,7 +129,7 @@
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
-                          <i class="fa fa-money"></i>
+                          <i class="fas fa-money-bill"></i>
                         </span>
                         <input name="bookingAmountDue" id="bookingAmountDue" type="number" min="0" class="form-control" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($user) ) {{$user->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
@@ -149,7 +149,7 @@
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
-                          <i class="fa fa-info"></i>
+                          <i class="fa fa-info-circle"></i>
                         </span>
                         <select name="modeOfPayment" id="modeOfPayment"  class="form-control">
                           <option value="1" @if( old('modeOfPayment') == 1 || ( isset($user) && $user->modeOfPayment == 1 ) ) selected @endif>Paid by cash</option>
@@ -168,12 +168,31 @@
                     </div>
                   </div>
 
+                  <div class="form-group" id="transactionCodeTitle">
+                    <label class="col-md-2 control-label">Code </label>
+                    <div class="col-md-8">
+                      <div class="input-group input-icon right">
+                        <span class="input-group-addon">
+                          <i class="fas fa-money-check"></i>
+                        </span>
+                        <input name="transactionCode" id="transactionCode" type="text" min="0" class="form-control" value="@if( old('transactionCode') ) {{old('transactionCode')}} @elseif( isset($user) ) {{$user->transactionCode}} @endif" placeholder="E.g MPESA transaction code, cheque number etc" onblur="validate(this.id,{required:0,min:1,max:255},this.value)" />
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <p class="help-block red-text" id="transactionCodeHelper">
+                        @if ($errors->has('transactionCode'))
+                          {{ $errors->first('transactionCode') }}
+                        @endif
+                      </p>
+                    </div>
+                  </div>
+
                   <div class="form-group" id="bookingAmountReceivedTitle">
                     <label class="col-md-2 control-label">Amount Received <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                       <div class="input-group input-icon right">
                         <span class="input-group-addon">
-                          <i class="fa fa-money"></i>
+                          <i class="fas fa-money-bill"></i>
                         </span>
                         <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" min="0" class="form-control" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($user) ) {{$user->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
                       </div>
@@ -187,32 +206,12 @@
                     </div>
                   </div>
 
-                  <!--<div class="form-group" id="paymentStatusTitle">
-                    <label class="col-md-2 control-label">Payment status</label>
-                    <div class="col-md-8">
-                      <div class="input-group input-icon right">
-                        <span class="input-group-addon">
-                          <i class="fa fa-hourglass"></i>
-                        </span>
-                        <select name="paymentStatus" id="paymentStatus"  class="form-control">
-                          <option value="1" @if( old('paymentStatus') == 1 || ( isset($user) && $user->paymentStatus == 1 ) ) selected @endif>Paid</option>
-                          <option value="2" @if( old('paymentStatus') == 2 || ( isset($user) && $user->paymentStatus == 2 ) ) selected @endif>Pending</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <p class="help-block red-text" id="paymentStatusHelper">
-                        @if ($errors->has('paymentStatus'))
-                          {{ $errors->first('paymentStatus') }}
-                        @endif
-                      </p>
-                    </div>
-                  </div>-->
+
 
                   <div class="form-group" id="paymentDueDateTitle">
                     <label class="col-md-2 control-label">Payment Due Date</label>
                     <div class="col-md-8">
-                      <div class="input-group input-icon right">
+                      <div class="input-group-field input-icon right">
                         <span class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </span>

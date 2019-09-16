@@ -51,38 +51,7 @@
 						</div>
 	        <!-- //breadcrumbs -->
 					<!--stock options buttons-->
-					<!--<div class="container" >
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="button" style="background:#f0ad4e" >
-								 <p class="btnText">Purchases</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-money-check-alt"></i></p>
-								 </div>
-								</div>
-							</div>
 
-							<div class="col-sm-4">
-								<div class="button" style="background:#5bc0de" >
-								 <p class="btnText">Bookings</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-gift"></i></p>
-								 </div>
-								</div>
-							</div>
-
-							<div class="col-sm-4">
-								<div class="button" style="background:#337ab7" >
-								 <p class="btnText">Transfers</p>
-								 <div class="btnTwo">
-									 <p class="btnText2"><i class="fas fa-external-link-alt"></i></p>
-								 </div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>-->
 					<!--end stock options buttons-->
 
 
@@ -102,7 +71,7 @@
 									<div class="action-tab ">
 											<dl>
 												<dt>
-													<a href="{{route('purchases-registration.show',$purchase->id)}}"><i class="fa fa-money"></i></a>
+													<a href="{{route('purchases-registration.show',$purchase->id)}}"><i class="fas fa-money-bill-wave"></i></a>
 													@if( $purchase->amountDue - $purchase->amountPaid <= 0 )
 													<div class="status-sec">Paid <span class="fa fa-circle text-success"></span></div>
 													@else

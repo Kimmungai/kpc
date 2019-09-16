@@ -8,42 +8,58 @@
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller scrollbar1">
         <ul class="gn-menu agile_menu_drop">
-          <li><a href="/"> <i class="fa fa-home"></i> Home</a></li>
+          <li><a href="/"> <i class="fas fa-home"></i> Home</a></li>
           <li>
-            <a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Departments <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a href="/users"><i class="fas fa-building" aria-hidden="true"></i> Departments <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="/dept-registration/1"><i class="fa fa-fire" aria-hidden="true"></i> Kitchen</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/2"> <i class="fa fa-building" aria-hidden="true"></i> Chapel</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/3"> <i class="fa fa-leaf" aria-hidden="true"></i> Shamba</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/4"> <i class="fa fa-umbrella" aria-hidden="true"></i> Compound</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/5"> <i class="fa fa-user" aria-hidden="true"></i> Administration</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/6"> <i class="fa fa-database" aria-hidden="true"></i> Store</a></li>
-              <li class="mini_list_w3"><a href="/dept-registration/7"> <i class="fa fa-hotel" aria-hidden="true"></i> Hospitality</a></li>
+              @foreach( $allDepts as $dept )
+                @if( strtolower($dept->name) == 'kitchen' )
+                  <li class="mini_list_agile"><a href="/dept-registration/1"><i class="fas fa-utensils" aria-hidden="true"></i> Kitchen</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'chapel' )
+                  <li class="mini_list_w3"><a href="/dept-registration/2"> <i class="fas fa-church" aria-hidden="true"></i> Chapel</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'shamba' )
+                  <li class="mini_list_w3"><a href="/dept-registration/3"> <i class="fas fa-tractor" aria-hidden="true"></i> Shamba</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'Compound' )
+                  <li class="mini_list_w3"><a href="/dept-registration/4"> <i class="fas fa-umbrella-beach" aria-hidden="true"></i> Compound</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'Administration' )
+                  <li class="mini_list_w3"><a href="/dept-registration/5"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administration</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'Store' )
+                  <li class="mini_list_w3"><a href="/dept-registration/6"> <i class="fas fa-store-alt" aria-hidden="true"></i> Store</a></li>
+                @endif
+                @if( strtolower($dept->name) == 'Hospitality' )
+                  <li class="mini_list_w3"><a href="/dept-registration/7"> <i class="fas fa-bed" aria-hidden="true"></i> Hospitality</a></li>
+                @endif
+              @endforeach
             </ul>
           </li>
           <li>
-            <a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Users <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a href="/users"><i class="fas fa-users" aria-hidden="true"></i> Users <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="/users/2"><i class="fa fa-user" aria-hidden="true"></i> Customers</a></li>
-              <li class="mini_list_w3"><a href="/users/1"> <i class="fa fa-user" aria-hidden="true"></i> Staff</a></li>
-              <li class="mini_list_w3"><a href="/users/3"> <i class="fa fa-user" aria-hidden="true"></i> Administrators</a></li>
-              <li class="mini_list_w3"><a href="/users/4"> <i class="fa fa-user" aria-hidden="true"></i> Casuals</a></li>
+              <li class="mini_list_agile"><a href="/users/2"><i class="fas fa-users" aria-hidden="true"></i> Customers</a></li>
+              <li class="mini_list_w3"><a href="/users/1"> <i class="fas fa-user-tag" aria-hidden="true"></i> Staff</a></li>
+              <li class="mini_list_w3"><a href="/users/3"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administrators</a></li>
+              <li class="mini_list_w3"><a href="/users/4"> <i class="fas fa-user-clock" aria-hidden="true"></i> Casuals</a></li>
             </ul>
           </li>
           @if(Auth::check())
             @if(Auth::user()->type == 3 )
           <li>
-            <a href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>Reports <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a href="#"> <i class="fas fa-file-alt" aria-hidden="true"></i> Reports <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
-              <li class="mini_list_agile"><a href="{{route('booking-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Booking report</a></li>
-              <li class="mini_list_agile"><a href="{{route('procurement-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Procurement report</a></li>
-              <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Inventory report</a></li>
+              <li class="mini_list_agile"><a href="{{route('booking-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Booking report</a></li>
+              <li class="mini_list_agile"><a href="{{route('procurement-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Procurement report</a></li>
+              <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Inventory report</a></li>
             </ul>
           </li>
             @endif
           @endif
           <li><a href="#" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                        document.getElementById('logout-form').submit();"> <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout</a></li>
 
         </ul>
       </div><!-- /gn-scroller -->
@@ -51,7 +67,7 @@
   </li>
   <!-- //nav_agile_w3l -->
   <li class="second logo"><h1 style="font-size:14px;"><a href="/home"><i class="fa fa-graduation-cap" aria-hidden="true"></i>{{env('APP_NAME')}}</a></h1></li>
-    <li class="second admin-pic">
+    <!--<li class="second admin-pic">
          <ul class="top_dp_agile">
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -65,12 +81,12 @@
                 <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                 <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
                 <li> <a href="#" onclick="event.preventDefault();
-                              document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                              document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Logout</a> </li>
               </ul>
             </li>
 
       </ul>
-  </li>
+  </li>-->
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
@@ -96,7 +112,7 @@
      <ul class="top_dp_agile ">
          <li class="dropdown head-dpdn">
               <a href="#" class="dropdown-toggle"  aria-expanded="false" title="Logout" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i><!--<span class="badge blue">9</span>--></a>
+                            document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i><!--<span class="badge blue">9</span>--></a>
               <!--<ul class="dropdown-menu">
                 <li>
                   <div class="notification_header">

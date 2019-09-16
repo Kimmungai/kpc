@@ -33,6 +33,7 @@ class StoreBookingAjax extends FormRequest
             'chkOutDate' => 'nullable|date|max:255',
             'bookingAmountDue' => 'nullable|numeric',
             'modeOfPayment' => 'nullable|numeric',
+            'transactionCode' => 'nullable',
             'bookingAmountReceived' => 'nullable|numeric',
             'paymentStatus' => 'nullable|numeric',
             'paymentDueDate' => 'nullable|date|max:255',

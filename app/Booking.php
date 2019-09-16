@@ -10,7 +10,7 @@ class Booking extends Model
    use SoftDeletes;
 
    protected $fillable = [
-     'dept_id','user_id','bookingType','roomType','numPple','chkInDate','chkOutDate','bookingAmountDue','modeOfPayment','bookingAmountReceived','paymentStatus','paymentDueDate','board','menu','menuDetails','meetingHall','tent','paSystem','projector',
+     'dept_id','user_id','bookingType','roomType','numPple','chkInDate','chkOutDate','bookingAmountDue','modeOfPayment','bookingAmountReceived','paymentStatus','paymentDueDate','board','menu','menuDetails','meetingHall','tent','paSystem','transactionCode','projector',
    ];
 
     public function User()

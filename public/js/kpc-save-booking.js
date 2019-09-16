@@ -11,6 +11,7 @@ function save_booking(tableID='booked-products-table',update=0)
   var chkOutDate = $("#chk_out_date").val();
   var bookingAmountDue = $("#bookingAmountDue").val();
   var modeOfPayment = $("#modeOfPayment").val();
+  var transactionCode = $("#transactionCode").val();
   var bookingAmountReceived = $("#bookingAmountReceived").val();
   var paymentStatus = $("#paymentStatus").val();
   var paymentDueDate = $("#paymentDueDate").val();
@@ -29,13 +30,6 @@ function save_booking(tableID='booked-products-table',update=0)
     alert("Please fill in all required fields *");
     return;
   }
-
-
-  //var contactPsnName = $("#contactPsnName").val();
-  //var contactPsnIdNo = $("#contactPsnIdNo").val();
-  //var contactPsnPhoneNumber = $("#contactPsnPhoneNumber").val();
-//  var contactPsnEmail = $("#contactPsnEmail").val();
-
 
   var bookedProds = [];
 
@@ -63,6 +57,7 @@ function save_booking(tableID='booked-products-table',update=0)
       chkOutDate:chkOutDate,
       bookingAmountDue:bookingAmountDue,
       modeOfPayment:modeOfPayment,
+      transactionCode:transactionCode,
       bookingAmountReceived:bookingAmountReceived,
       paymentStatus:paymentStatus,
       paymentDueDate:paymentDueDate,
