@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dept;
+use Auth;
 
 
 class HomeController extends Controller
@@ -26,6 +27,20 @@ class HomeController extends Controller
     public function index()
     {
         $depts = Dept::all();
+
+        if( Auth::user()->type == -1 ){
+
+          return view('user.super-admin',compact('depts'));
+
+        }elseif ( Auth::user()->type == 1 ) {
+
+          return view('user.staff',compact('depts'));
+
+        }elseif ( Auth::user()->type == 3 ) {
+
+          return view('user.admin',compact('depts'));
+        }
+
         return view('home',compact('depts'));
     }
 }

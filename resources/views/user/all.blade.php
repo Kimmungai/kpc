@@ -25,11 +25,21 @@
           @if( isset($type) )
             <h2 class="w3_inner_tittle">@if($type==1) Staff @elseif($type==2) Customers @elseif($type==3) Administrators @elseif($type==4) Casuals @endif</h2>
           @else
-            <h2 class="w3_inner_tittle"> All users</h2>
+            <h2 class="w3_inner_tittle"> All users </h2>
+
           @endif
 
 
+
+
             <div class="social_media_w3ls">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="{{url('/user-registration/create')}}" class="btn btn-default pull-right" title="Create new user">New user <span class="fas fa-user-plus"></span></a>
+                </div>
+              </div>
+
               <div class="row">
 
               @forelse( $users as $user )

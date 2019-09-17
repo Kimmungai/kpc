@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,4 +37,38 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /*protected function authenticated(Request $request, $user)
+    {
+
+  	 if ($user->type == -1)//super admin
+     {
+  	 	return redirect('/home');
+     }
+     else if ($user->type == 1)
+     {
+  	 	return redirect('/staff');
+  	 }
+     else if ($user->type == 2)
+    {
+     return redirect('/author');
+    }
+    else if ($user->type == 3)
+    {
+     return redirect('/dept-registration/'.$user->dept.'');
+    }
+    else if ($user->type == 4)
+    {
+     return redirect('/author');
+    }
+    else if ($user->type == 5)
+    {
+     return redirect('/author');
+    }
+    else
+   {
+	 	return redirect('/home');
+  }
+
+  }*/
 }

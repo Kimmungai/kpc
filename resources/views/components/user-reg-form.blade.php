@@ -27,10 +27,15 @@
         <i class="fa fa-user"></i>
       </span>
       <select name="type" id="type" class="form-control">
+        @if(Auth::user()->type == -1 || Auth::user()->type == 3 )
         <option value="1" @if( old('type') == 1 || ( isset($user) && $user->type == 1 ) ) selected @endif>Staff</option>
-        <option value="2" @if( old('type') == 2 || ( isset($user) && $user->type == 2 ) ) selected @endif>Customer</option>
         <option value="3" @if( old('type') == 3 || ( isset($user) && $user->type == 3 ) ) selected @endif>Administrator</option>
+        @endif
+        <option value="2" @if( old('type') == 2 || ( isset($user) && $user->type == 2 ) ) selected @endif>Customer</option>
         <option value="4" @if( old('type') == 4 || ( isset($user) && $user->type == 4 ) ) selected @endif>Casuals</option>
+        @if(Auth::user()->type == -1)
+        <option value="-1" @if( old('type') == -1 || ( isset($user) && $user->type == -1 ) ) selected @endif>Super Administrator</option>
+        @endif
       </select>
     </div>
   </div>

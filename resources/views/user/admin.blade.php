@@ -17,12 +17,8 @@
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
 					<!-- /departments start-->
-					<h1 class="text-capitalize">All departments</h1>
-					<div class="row">
-						<div class="col-md-12">
-							<a href="{{url('/dept-registration/create')}}" class="btn btn-default pull-right" title="Add new department">New department <span class="fas fa-plus-circle"></span></a>
-						</div>
-					</div>
+					<h1 class="text-capitalize">Departments</h1>
+					
 					 <div class="agile_top_w3_grids">
 
 						 <?php $rows = ceil(count($depts) / 3); ?>
@@ -35,6 +31,7 @@
 
 									<?php if(!in_array($Dept->id, $departmentsArr)) {$departmentsArr [] = $Dept->id;}else{continue;}?>
 									<?php if($colors > 3){$colors =0;} ?>
+									<?php if(Auth::user()->dept != $Dept->id){continue;} ?>
 
 									 <li style="width:32%">
 										 <a href="{{url('dept-registration')}}/{{$Dept->id}}">

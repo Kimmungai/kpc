@@ -19,6 +19,11 @@
 
 					<!-- /departments start-->
 					<h1 class="text-uppercase">All users</h1>
+					<div class="row">
+						<div class="col-md-12">
+							<a href="{{url('/user-registration/create')}}" class="btn btn-default pull-right" title="Create new user">New user <span class="fas fa-user-plus"></span></a>
+						</div>
+					</div>
 					   <div class="agile_top_w3_grids">
 					          <ul class="ca-menu">
                     <li style="width:32%">
@@ -33,6 +38,7 @@
                         </div>
                       </a>
                     </li>
+									@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
 									<li style="width:32%">
 										<a href="{{url('users')}}/1">
 										  <i class="fas fa-user-tag" aria-hidden="true"></i>
@@ -44,36 +50,54 @@
 											</div>
 										</a>
 									</li>
+									@endif
+
 									<li style="width:32%">
-										<a href="{{url('users')}}/3">
-											<i class="fas fa-user-tie" aria-hidden="true"></i>
-											<div class="ca-content">
-												@if(isset($usersCount['administrators']))
-													<h4 class="ca-main three">{{number_format($usersCount['administrators'])}}</h4>
+	                  <a href="{{url('users')}}/4">
+
+	                    <i class="fas fa-user-clock" aria-hidden="true"></i>
+	                    <div class="ca-content">
+												@if(isset($usersCount['casuals']))
+													<h4 class="ca-main three">{{number_format($usersCount['casuals'])}}</h4>
 												@endif
-												<h3 class="ca-sub two">Administrators</h3>
-											</div>
-										</a>
-									</li>
+	                      <h3 class="ca-sub one">Casuals</h3>
+	                    </div>
+	                  </a>
+	                </li>
+
 									<div class="clearfix"></div>
 								</ul>
 
                 <ul class="ca-menu">
-                <li style="width:32%">
-                  <a href="{{url('users')}}/4">
 
-                    <i class="fas fa-user-clock" aria-hidden="true"></i>
-                    <div class="ca-content">
-											@if(isset($usersCount['casuals']))
-												<h4 class="ca-main three">{{number_format($usersCount['casuals'])}}</h4>
+								@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
+								<li style="width:32%">
+									<a href="{{url('users')}}/3">
+										<i class="fas fa-user-tie" aria-hidden="true"></i>
+										<div class="ca-content">
+											@if(isset($usersCount['administrators']))
+												<h4 class="ca-main three">{{number_format($usersCount['administrators'])}}</h4>
 											@endif
-                      <h3 class="ca-sub one">Casuals</h3>
-                    </div>
-                  </a>
-                </li>
+											<h3 class="ca-sub two">Administrators</h3>
+										</div>
+									</a>
+								</li>
+								@endif
 
+								@if(isset($usersCount['super_admins']))
+								<li style="width:32%">
+									<a href="{{url('users')}}/-1">
+										<i class="fas fa-user-secret" aria-hidden="true"></i>
+										<div class="ca-content">
 
-              <div class="clearfix"></div>
+												<h4 class="ca-main three">{{number_format($usersCount['super_admins'])}}</h4>
+
+											<h3 class="ca-sub four">Super Administrators</h3>
+										</div>
+									</a>
+								</li>
+								@endif
+								<div class="clearfix"></div>
             </ul>
 
 

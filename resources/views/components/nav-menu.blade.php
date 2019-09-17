@@ -13,25 +13,25 @@
             <a href="/users"><i class="fas fa-building" aria-hidden="true"></i> Departments <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
               @foreach( $allDepts as $dept )
-                @if( strtolower($dept->name) == 'kitchen' )
+                @if( strtolower($dept->name) == 'kitchen' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_agile"><a href="/dept-registration/1"><i class="fas fa-utensils" aria-hidden="true"></i> Kitchen</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'chapel' )
+                @if( strtolower($dept->name) == 'chapel' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/2"> <i class="fas fa-church" aria-hidden="true"></i> Chapel</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'shamba' )
+                @if( strtolower($dept->name) == 'shamba' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/3"> <i class="fas fa-tractor" aria-hidden="true"></i> Shamba</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'Compound' )
+                @if( strtolower($dept->name) == 'compound' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/4"> <i class="fas fa-umbrella-beach" aria-hidden="true"></i> Compound</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'Administration' )
+                @if( strtolower($dept->name) == 'administration' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/5"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administration</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'Store' )
+                @if( strtolower($dept->name) == 'store' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/6"> <i class="fas fa-store-alt" aria-hidden="true"></i> Store</a></li>
                 @endif
-                @if( strtolower($dept->name) == 'Hospitality' )
+                @if( strtolower($dept->name) == 'hospitality' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
                   <li class="mini_list_w3"><a href="/dept-registration/7"> <i class="fas fa-bed" aria-hidden="true"></i> Hospitality</a></li>
                 @endif
               @endforeach
@@ -41,13 +41,15 @@
             <a href="/users"><i class="fas fa-users" aria-hidden="true"></i> Users <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
               <li class="mini_list_agile"><a href="/users/2"><i class="fas fa-users" aria-hidden="true"></i> Customers</a></li>
+              @if( Auth::user()->type == -1 || Auth::user()->type == 3 )
               <li class="mini_list_w3"><a href="/users/1"> <i class="fas fa-user-tag" aria-hidden="true"></i> Staff</a></li>
               <li class="mini_list_w3"><a href="/users/3"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administrators</a></li>
+              @endif
               <li class="mini_list_w3"><a href="/users/4"> <i class="fas fa-user-clock" aria-hidden="true"></i> Casuals</a></li>
             </ul>
           </li>
           @if(Auth::check())
-            @if(Auth::user()->type == 3 )
+            @if(Auth::user()->type == -1 )
           <li>
             <a href="#"> <i class="fas fa-file-alt" aria-hidden="true"></i> Reports <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
@@ -87,6 +89,7 @@
 
       </ul>
   </li>-->
+ @if( Auth::user()->type == -1 ||  Auth::user()->type == 3 || Auth::user()->type == 1 )
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
@@ -96,6 +99,9 @@
 
       </ul>
   </li>
+  @endif
+
+  @if( Auth::user()->type == -1 )
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
             <li class="dropdown head-dpdn">
@@ -108,6 +114,8 @@
 
       </ul>
   </li>
+  @endif
+
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
          <li class="dropdown head-dpdn">
