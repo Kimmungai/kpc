@@ -23,7 +23,6 @@ function save_booking(tableID='booked-products-table',update=0)
   var paSystem = true ? $("#paSystem").is(":checked") : false;
   var projector = true ? $("#projector").is(":checked") : false;
   var customerID = $("#customerID").val();
-
   //data validation
   if( customerID == '' || numPple == '' || chkInDate == '' || bookingAmountDue  == '' || bookingAmountReceived == '' )
   {

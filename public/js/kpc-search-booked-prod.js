@@ -136,7 +136,7 @@ function std_update_amount_due(tdId,qty=0)
     });
 }*/
 
-function std_search_user(value,tableID)
+function std_search_user(value,tableID,type=2)
 {
   if (value.length > 2) {
 
@@ -144,6 +144,7 @@ function std_search_user(value,tableID)
     $.post("/search-any-user",
       {
         string:value,
+        type:type,
         "_token": $('meta[name="csrf-token"]').attr('content'),
       },
       function(data,status){

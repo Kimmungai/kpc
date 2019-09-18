@@ -379,14 +379,14 @@
                  <div class="loading hidden d-none">
                    <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
                  </div>
-                 <input id="table-booking-contact-input"  type="text" class="form-control" name="search" placeholder="Search by name..." onkeyup="std_search_user(this.value,'table-booking-contact')">
+                 <input id="table-booking-contact-input"  type="text" class="form-control" name="search" placeholder="Search by name..." onkeyup="std_search_user(this.value,'table-booking-contact',2)">
 
                 </div>
                 <div id="table-booking-contact-results-box" class="search-box-results border-1 hidden d-none">
 
                 </div>
                 <div class="form-group">
-                  <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
+                  <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
                 </div>
               </div>
                    <div class="grid-1 hidden d-none" id="booking-create-user-form-container">

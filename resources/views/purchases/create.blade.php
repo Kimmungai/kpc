@@ -13,7 +13,7 @@
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
 									<li><a href="/purchases-registration">Purchases</a> <span>«</span></li>
-                  <li>Purchase-@if(isset($purchase)){{$purchase->id}} @endif</li>
+                  <li>New Purchase</li>
 	              </ul>
 	            </div>
 	          </div>
@@ -279,4 +279,5 @@
 				</div>
 		<!-- //inner_content-->
 </div>
+<input id="currentDeptID" type="hidden"  value="@if( isset($dept) ) {{$dept->id}} @endif">
 @endsection

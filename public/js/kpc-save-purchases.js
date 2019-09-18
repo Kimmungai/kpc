@@ -17,7 +17,8 @@ function save_purchases()//make purchases records visible by nulling the deleted
         clear_inputs();
         alert("Details successfully saved!");
         $('#recordPurchasesModal').modal('hide');
-        location.reload();
+        //location.reload();
+        window.open("/purchases-registration","_self");
       });
   }
 }

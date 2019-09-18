@@ -69,7 +69,13 @@ class PurchasesRegistrationController extends Controller
      */
     public function create()
     {
-        return view('purchases.create');
+        if(Session('deptID') == null )
+        {
+          Session::flash('error', 'Please select a department');
+          return redirect('home');
+        }
+        $dept = Dept::find(Session('deptID'));
+        return view('purchases.create',compact('dept'));
     }
 
     /**

@@ -68,7 +68,14 @@ class BookingsRegistrationController extends Controller
      */
     public function create()
     {
-        //
+      if(Session('deptID') == null )
+      {
+        Session::flash('error', 'Please select a department');
+        return redirect('home');
+      }
+      $dept = Dept::find(Session('deptID'));
+      return view('bookings.create',compact('dept'));
+
     }
 
     /**
@@ -94,7 +101,10 @@ class BookingsRegistrationController extends Controller
       $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
       if(Session('deptID') != null ){
       $dept = Dept::find(Session('deptID'));
-      }
+    }else{
+        Session::flash('error', 'Please select a department');
+        return redirect('home');
+    }
       return view('bookings.show',compact('booking','dept'));
     }
 

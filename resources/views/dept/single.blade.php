@@ -47,7 +47,8 @@
 													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
 													<p>Ksh. {{number_format($totalAmountPaid,2)}} spend</p>
 												@endif
-												<a href="#" class="btn btn-x-sm  btn-default" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>
+												<a href="{{route('purchases-registration.create')}}" class="btn btn-x-sm  btn-default" >New purchase</a>
+												<!--<a href="#" class="btn btn-x-sm  btn-default" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>-->
 											<dd>
 										</dl>
 									</div>
