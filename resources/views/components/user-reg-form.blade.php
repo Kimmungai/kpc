@@ -33,6 +33,7 @@
         @endif
         <option value="2" @if( old('type') == 2 || ( isset($user) && $user->type == 2 ) ) selected @endif>Customer</option>
         <option value="4" @if( old('type') == 4 || ( isset($user) && $user->type == 4 ) ) selected @endif>Casuals</option>
+        <option value="5" @if( old('type') == 5 || ( isset($user) && $user->type == 5 ) ) selected @endif>Supplier</option>
         @if(Auth::user()->type == -1)
         <option value="-1" @if( old('type') == -1 || ( isset($user) && $user->type == -1 ) ) selected @endif>Super Administrator</option>
         @endif

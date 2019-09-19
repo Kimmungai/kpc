@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\Http\Requests\StoreUser;
+use Auth;
 
 class UserRegistrationController extends Controller
 {
@@ -21,6 +22,16 @@ class UserRegistrationController extends Controller
      */
     public function index($type=0)
     {
+        if( Auth::user()->type != 1 ||  Auth::user()->type != -1)//if not admin cannot view type 1, -1 and 3
+        {
+          if( $type == -1 || $type == 1 || $type == 3 )
+          {
+            Session::flash('error', "Sorry you are not allowed to perform that operatin. Contact administrator.");
+            return redirect(route('users'));
+          }
+
+        }
+
         if( $type ){ $users = User::where('type',$type)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5)); }else{ $user = User::all(); }
         return view('user.all',compact('users','type'));
     }

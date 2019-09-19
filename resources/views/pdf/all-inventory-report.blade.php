@@ -113,6 +113,7 @@ text-transform: uppercase;
           <tr>
               <th>Sku</th>
               <th>Name</th>
+              <th>Department</th>
               <th>Price</th>
               <th>Quantity</th>
           </tr>
@@ -123,6 +124,11 @@ text-transform: uppercase;
           <tr >
           <td>{{$doc->sku}}</td>
           <td>{{$doc->name}}</td>
+          @if( $doc->dept )
+          <td>{{$doc->dept->name}}</td>
+          @else
+          <td>-</td>
+          @endif
           <td>{{$doc->price}}</td>
           <td >@if(is_numeric($doc->quantity)){{number_format($doc->quantity,2)}}@endif</td>
           </tr>

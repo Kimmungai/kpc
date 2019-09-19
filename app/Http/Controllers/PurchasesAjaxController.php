@@ -38,6 +38,7 @@ class PurchasesAjaxController extends Controller
     $user = new User;
     $user->firstName = $request->firstName;
     $user->email = $request->email;
+    $user->dept = $request->dept_id;
     $user->phoneNumber = $request->phoneNumber;
     $user->type = 5;//supplier
     $user->password = Hash::make($request->password);

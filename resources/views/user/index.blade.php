@@ -34,7 +34,7 @@
 													@if(isset($usersCount['customers']))
                           	<h4 class="ca-main three">{{number_format($usersCount['customers'])}}</h4>
 													@endif
-                          <h3 class="ca-sub three">Customers</h3>
+                          <h3 class="ca-sub">Customers</h3>
                         </div>
                       </a>
                     </li>
@@ -72,13 +72,28 @@
 
 								@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
 								<li style="width:32%">
+									<a href="{{url('users')}}/5">
+
+										<i class="fas fa-users" aria-hidden="true"></i>
+										<div class="ca-content">
+											@if(isset($usersCount['suppliers']))
+												<h4 class="ca-main four">{{number_format($usersCount['suppliers'])}}</h4>
+											@endif
+											<h3 class="ca-sub ">Suppliers</h3>
+										</div>
+									</a>
+								</li>
+								@endif
+
+								@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
+								<li style="width:32%">
 									<a href="{{url('users')}}/3">
 										<i class="fas fa-user-tie" aria-hidden="true"></i>
 										<div class="ca-content">
 											@if(isset($usersCount['administrators']))
 												<h4 class="ca-main three">{{number_format($usersCount['administrators'])}}</h4>
 											@endif
-											<h3 class="ca-sub two">Administrators</h3>
+											<h3 class="ca-sub four">Administrators</h3>
 										</div>
 									</a>
 								</li>
@@ -92,7 +107,7 @@
 
 												<h4 class="ca-main three">{{number_format($usersCount['super_admins'])}}</h4>
 
-											<h3 class="ca-sub four">Super Administrators</h3>
+											<h3 class="ca-sub one">Super Administrators</h3>
 										</div>
 									</a>
 								</li>

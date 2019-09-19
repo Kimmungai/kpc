@@ -71,13 +71,13 @@
 												<dt>
 													<a href="{{route('product-registration.show',$product->id)}}">
                             @if( $product->img1 )
-                            <img class="img img-circle" src="{{$product->img1}}" alt="{{$product->name}}" height="100" width="100">
+                            <img class="img " src="{{$product->img1}}" alt="{{$product->name}}" height="120" width="150">
                             @else
-                            <img class="img img-circle" src="{{url('/images/kitchen-dept.jpg')}}" alt="{{$product->name}}" height="100" width="100">
+                            <img class="img " src="{{url('/images/product-placeholder.png')}}" alt="{{$product->name}}" height="120" width="150">
                             @endif
                           </a>
 													@if( $product->quantity > env('LOW_STOCK_LEVEL',5) )
-													<div class="status-sec">Stocked <span class="fa fa-circle text-success"></span></div>
+													<div class="status-sec">In stock <span class="fa fa-circle text-success"></span></div>
                           @elseif( $product->quantity > 0 )
 													<div class="status-sec"> low Stock <span class="fa fa-circle text-warning"></span></div>
 													@else
@@ -86,7 +86,7 @@
 
 												</dt>
 												<dd>
-													<h3><a href="{{route('product-registration.show',$product->id)}}">Product-{{$product->id}}</a></h3>
+													<h3><a href="{{route('product-registration.show',$product->id)}}">{{$product->name}}</a></h3>
 													<p>Registered: <strong>{{date('d/m/Y',strtotime($product->created_at))}}</strong></p>
 													<p>In store: <strong>{{$product->quantity}}</strong></p>
 													<p>Price: <strong>Ksh. {{$product->price}}</strong></p>

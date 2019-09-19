@@ -64,6 +64,12 @@
 						</div>
 
 						<div class="row">
+							<div class="col-md-12">
+								<a href="{{url('/purchases-registration/create')}}" class="btn btn-default pull-right" title="Create new user">New purchase <span class="fas fa-plus-circle"></span></a>
+							</div>
+						</div>
+
+						<div class="row">
 
 							@if(isset($purchases))
 								@foreach($purchases as $purchase)

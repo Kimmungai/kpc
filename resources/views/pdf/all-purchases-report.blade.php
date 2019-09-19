@@ -120,6 +120,9 @@ text-transform: uppercase;
         </thead>
         <tbody>
           <?php $total = 0; ?>
+          <?php $amtPaidTotal = 0; ?>
+          <?php $outstandingTotal = 0; ?>
+
           @foreach( $docs as $doc )
           <tr >
           <td>{{$doc->user->firstName}}</td>
@@ -131,15 +134,21 @@ text-transform: uppercase;
           @if( is_numeric($doc->amountDue) )
           <?php $total += $doc->amountDue; ?>
           @endif
+          @if( is_numeric($doc->amountPaid) )
+          <?php $amtPaidTotal += $doc->amountPaid; ?>
+          @endif
+          @if( is_numeric($doc->amountPaid) && is_numeric($doc->amountDue) )
+          <?php $outstandingTotal += ($doc->amountDue - $doc->amountPaid); ?>
+          @endif
           @endforeach
         </tbody>
 
         <tfoot>
           <tr>
-            <td colspan="3" class="text-right text-uppercase">Grand total:</td>
+            <td colspan="2" class="text-right text-uppercase">Grand total:</td>
             <td><strong>Ksh. {{number_format($total,2)}}</strong></td>
-            <td></td>
-            <td></td>
+            <td><strong>Ksh. {{number_format($amtPaidTotal,2)}}</strong></td>
+            <td><strong>Ksh. {{number_format($outstandingTotal,2)}}</strong></td>
           </tr>
         </tfoot>
       </table>

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Dept;
 use App\Http\Requests\StoreDept;
-
+use Auth;
 
 class DepartmentRegistrationController extends Controller
 {
@@ -68,7 +68,15 @@ class DepartmentRegistrationController extends Controller
       }])->first();
 
       Session(['deptID'=>$id]);
-      return view('dept.single',compact('dept'));
+      if( $this->canViewDept( $id,Auth::user() ) )
+      {
+        return view('dept.single',compact('dept'));
+      }
+      else
+      {
+        Session::flash('error', "Sorry you are not allowed to perform that operatin. Contact administrator.");
+        return redirect('/');
+      }
     }
 
     /**
@@ -79,6 +87,12 @@ class DepartmentRegistrationController extends Controller
      */
     public function edit(Dept $dept,$id)
     {
+      if( Auth::user()->type == 1 || Auth::user()->type == 2 || Auth::user()->type == 4 || Auth::user()->type == 5 )
+      {
+        Session::flash('error', "Sorry you are not allowed to perform that operatin. Contact administrator.");
+        return redirect(route('dept-registration.show', Auth::user()->dept ));
+      }
+
       $dept = Dept::find($id);
       Session(['deptID'=>$id]);
       return view('dept.edit',compact('dept'));
@@ -122,6 +136,12 @@ class DepartmentRegistrationController extends Controller
      */
     public function report(Dept $dept,$id,Request $request)
     {
+      if( Auth::user()->type == 1 || Auth::user()->type == 2 || Auth::user()->type == 4 || Auth::user()->type == 5 )
+      {
+        Session::flash('error', "Sorry you are not allowed to perform that operatin. Contact administrator.");
+        return redirect(route('dept-registration.show', Auth::user()->dept ));
+      }
+      
       $id = $request->id;
       $dt = Carbon::now();
       if( count($request->all()) )
@@ -210,6 +230,18 @@ class DepartmentRegistrationController extends Controller
       $name = time().'.'.$image->getClientOriginalExtension();
       $image->move($storageLoc, $name);
       return asset($storageLoc.'/'.$name);
+    }
+
+    protected function canViewDept($deptID,$user)
+    {
+      if( $user->type == -1 ){//if super admin allow
+        return true;
+      }else{
+        if( $user->dept == $deptID ){//if user registered in that dept allow
+          return true;
+        }
+      }
+      return false;
     }
 
 }

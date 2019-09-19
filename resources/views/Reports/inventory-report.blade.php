@@ -89,7 +89,7 @@
 						@else
 							<?php $StartDate=date('d-M-Y',strtotime($dt->startOfMonth()));$EndDate=date('d-M-Y',strtotime($dt->endOfMonth())); ?>
 						@endif
-
+	
             @component('components.inventory-report',['inventory'=>$inventory,'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
 						<!--end purchase-show-->
 

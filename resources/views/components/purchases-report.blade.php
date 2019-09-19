@@ -41,9 +41,13 @@
     </thead>
     <tbody>
       <?php $total = 0; ?>
+      <?php $amtPaidTotal = 0; ?>
+      <?php $outstandingTotal = 0; ?>
+
       @foreach( $purchases as $purchase )
       <tr >
-      <td>{{$purchase->user->firstName}}</td>
+      <td> <a href="{{route('user-registration.edit',$purchase->user->id)}}" title="Open {{$purchase->user->firstName}}'s record"> {{$purchase->user->firstName}}</a></td>
+
       <td>{{date('d-M-Y',strtotime($purchase->created_at))}}</td>
       <td>@if( is_numeric($purchase->amountDue) ) {{number_format($purchase->amountDue,2)}}@endif</td>
       <td >@if( is_numeric($purchase->amountPaid) ){{number_format($purchase->amountPaid,2)}} @endif</td>
@@ -52,6 +56,12 @@
       @if( is_numeric($purchase->amountDue) )
       <?php $total += $purchase->amountDue; ?>
       @endif
+      @if( is_numeric($purchase->amountPaid) )
+      <?php $amtPaidTotal += $purchase->amountPaid; ?>
+      @endif
+      @if( is_numeric($purchase->amountPaid) && is_numeric($purchase->amountDue) )
+      <?php $outstandingTotal += ($purchase->amountDue - $purchase->amountPaid); ?>
+      @endif
       @endforeach
     </tbody>
 
@@ -59,6 +69,9 @@
       <tr>
         <td colspan="2" class="text-right text-uppercase">Grand total:</td>
         <td><strong>Ksh. {{number_format($total,2)}}</strong></td>
+        <td><strong>Ksh. {{number_format($amtPaidTotal,2)}}</strong></td>
+        <td><strong>Ksh. {{number_format($outstandingTotal,2)}}</strong></td>
+
       </tr>
     </tfoot>
 </table>

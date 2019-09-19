@@ -43,10 +43,25 @@
     </thead>
     <tbody>
       <?php $total = 0; ?>
+      <?php $amtDueTotal = 0; ?>
+      <?php $outstandingTotal = 0; ?>
+
       @foreach( $bookings as $booking )
       <tr >
-      <td>{{$booking->bookingType}}</td>
-      <td>{{$booking->user->firstName}}</td>
+
+      @if( $booking->bookingType == 1 )
+      <td>Food Order</td>
+      @elseif( $booking->bookingType == 2 )
+      <td>Room Booking</td>
+      @elseif( $booking->bookingType == 3 )
+      <td>Tent Hiring</td>
+      @elseif( $booking->bookingType == 4 )
+      <td>Meeting Hall Booking</td>
+      @elseif( $booking->bookingType == 5 )
+      <td>Compound Booking</td>
+      @endif
+
+      <td><a href="{{route('user-registration.edit',$booking->user->id)}}" title="Open {{$booking->user->firstName}}'s record">{{$booking->user->firstName}}</a></td>
       <td>{{date('d-M-Y',strtotime($booking->created_at))}}</td>
       <td>@if( is_numeric($booking->bookingAmountDue) ) {{number_format($booking->bookingAmountDue,2)}}@endif</td>
       <td >@if( is_numeric($booking->bookingAmountReceived) ){{number_format($booking->bookingAmountReceived,2)}} @endif</td>
@@ -55,13 +70,21 @@
       @if( is_numeric($booking->bookingAmountReceived) )
       <?php $total += $booking->bookingAmountReceived; ?>
       @endif
+      @if( is_numeric($booking->bookingAmountDue) )
+      <?php $amtDueTotal += $booking->bookingAmountDue; ?>
+      @endif
+      @if( is_numeric($booking->bookingAmountReceived) && is_numeric($booking->bookingAmountDue) )
+      <?php $outstandingTotal += ($booking->bookingAmountDue - $booking->bookingAmountReceived); ?>
+      @endif
       @endforeach
     </tbody>
 
     <tfoot>
       <tr>
         <td colspan="3" class="text-right text-uppercase">Grand total:</td>
+        <td><strong>Ksh. {{number_format($amtDueTotal,2)}}</strong></td>
         <td><strong>Ksh. {{number_format($total,2)}}</strong></td>
+        <td><strong>Ksh. {{number_format($outstandingTotal,2)}}</strong></td>
       </tr>
     </tfoot>
 </table>

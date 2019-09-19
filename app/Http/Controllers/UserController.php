@@ -22,6 +22,8 @@ class UserController extends Controller
       $usersCount['administrators'] = count(User::where('type',3)->get());
       $usersCount['casuals'] = count(User::where('type',4)->get());
       $usersCount['super_admins'] = count(User::where('type',-1)->get());
+      $usersCount['suppliers'] = count(User::where('type',5)->get());
+
     }
     else
     {
@@ -29,6 +31,8 @@ class UserController extends Controller
       $usersCount['customers'] = count(User::where('type',2)->where('dept',Auth::user()->dept)->get());
       $usersCount['administrators'] = count(User::where('type',3)->where('dept',Auth::user()->dept)->get());
       $usersCount['casuals'] = count(User::where('type',4)->where('dept',Auth::user()->dept)->get());
+      $usersCount['suppliers'] = count(User::where('type',5)->get());
+
     }
 
     return view('user.index',compact('usersCount'));

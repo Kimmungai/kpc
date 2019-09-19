@@ -55,13 +55,15 @@
                     <p class="btnText2">GO!</p>
                   </div>
                  </div>
-
+                 
+                 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
                  <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
                   <p class="btnText">Delete?</p>
                   <div class="btnTwo">
                     <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
                   </div>
                  </div>
+                 @endif
 
                </form>
 

@@ -41,9 +41,11 @@
 							<div class="col-xs-3">
 								<a href="{{url('download-purchase')}}/{{$purchase->id}}" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
 							</div>
+							 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
 							<div class="col-xs-3">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document"><span class="fa fa-warning"></span> Delete</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-warning"></span> Delete</a>
 							</div>
+							@endif
 						</div>
 						<!--end buttons-->
 
@@ -62,9 +64,11 @@
 							<div class="col-xs-3">
 								<a href="{{url('download-purchase')}}/{{$purchase->id}}" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
 							</div>
+							@if( Auth::user()->type == 3 || Auth::user()->type == -1)
 							<div class="col-xs-3">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document"><span class="fa fa-warning"></span> Delete</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to permanently delete document" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-warning"></span> Delete</a>
 							</div>
+							@endif
 						</div>
 						<!--end buttons-->
 
@@ -73,12 +77,16 @@
 				</div>
 		<!-- //inner_content-->
 </div>
-@component( 'components.delete-confirm-modal',[ 'formId' => 'deletePurchaseForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
 
-@endcomponent
+@if( Auth::user()->type == 3 || Auth::user()->type == -1)
+
+@component( 'components.delete-confirm-modal',[ 'formId' => 'deletePurchaseForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] ) @endcomponent
 
 <form class="d-none hidden" id="deletePurchaseForm" action="{{route('purchases-registration.destroy',$purchase->id)}}" method="post">
   @csrf
   @method('DELETE')
 </form>
+
+@endif
+
 @endsection

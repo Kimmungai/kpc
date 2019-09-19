@@ -121,9 +121,21 @@ text-transform: uppercase;
         </thead>
         <tbody>
           <?php $total = 0; ?>
+          <?php $amtDueTotal = 0; ?>
+          <?php $outstandingTotal = 0; ?>
           @foreach( $docs as $doc )
           <tr >
-          <td>{{$doc->bookingType}}</td>
+            @if( $doc->bookingType == 1 )
+            <td>Food Order</td>
+            @elseif( $doc->bookingType == 2 )
+            <td>Room Booking</td>
+            @elseif( $doc->bookingType == 3 )
+            <td>Tent Hiring</td>
+            @elseif( $doc->bookingType == 4 )
+            <td>Meeting Hall Booking</td>
+            @elseif( $doc->bookingType == 5 )
+            <td>Compound Booking</td>
+            @endif
           <td>{{$doc->user->firstName}}</td>
           <td>{{date('d-M-Y',strtotime($doc->created_at))}}</td>
           <td>@if( is_numeric($doc->bookingAmountDue) ) {{number_format($doc->bookingAmountDue,2)}}@endif</td>
@@ -133,18 +145,27 @@ text-transform: uppercase;
           @if( is_numeric($doc->bookingAmountReceived) )
           <?php $total += $doc->bookingAmountReceived; ?>
           @endif
+          @if( is_numeric($doc->bookingAmountDue) )
+          <?php $amtDueTotal += $doc->bookingAmountDue; ?>
+          @endif
+          @if( is_numeric($doc->bookingAmountReceived) && is_numeric($doc->bookingAmountDue) )
+          <?php $outstandingTotal += ($doc->bookingAmountDue - $doc->bookingAmountReceived); ?>
+          @endif
+
           @endforeach
         </tbody>
 
         <tfoot>
           <tr>
             <td colspan="3" class="text-right text-uppercase">Grand total:</td>
+            <td><strong>Ksh. {{number_format($amtDueTotal,2)}}</strong></td>
             <td><strong>Ksh. {{number_format($total,2)}}</strong></td>
+            <td><strong>Ksh. {{number_format($outstandingTotal,2)}}</strong></td>
             <td></td>
             <td></td>
           </tr>
         </tfoot>
-        
+
       </table>
 
       </div>

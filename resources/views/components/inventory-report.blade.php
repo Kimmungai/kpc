@@ -34,6 +34,7 @@
         <tr>
             <th>Sku</th>
             <th>Name</th>
+            <th>Department</th>
             <th>Price</th>
             <th>Quantity</th>
         </tr>
@@ -44,6 +45,11 @@
       <tr >
       <td>{{$item->sku}}</td>
       <td>{{$item->name}}</td>
+      @if( $item->dept )
+      <td>{{$item->dept->name}}</td>
+      @else
+      <td>-</td>
+      @endif
       <td>{{$item->price}}</td>
       <td >@if(is_numeric($item->quantity)){{number_format($item->quantity,2)}}@endif</td>
       </tr>

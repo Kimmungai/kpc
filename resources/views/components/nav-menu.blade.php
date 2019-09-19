@@ -89,6 +89,16 @@
 
       </ul>
   </li>-->
+  <li class="second top_bell_nav">
+    <ul class="top_dp_agile ">
+           <li class="dropdown head-dpdn">
+             <a href="{{url('/')}}" class="dropdown-toggle"  aria-expanded="true" title="Go to home page"><i class="fa fa-home" aria-hidden="true"></i> </a>
+
+           </li>
+
+     </ul>
+  </li>
+
  @if( Auth::user()->type == -1 ||  Auth::user()->type == 3 || Auth::user()->type == 1 )
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
@@ -115,6 +125,12 @@
       </ul>
   </li>
   @endif
+
+  <li  class="second w3l_search" style="border:0">
+    <form action="#" method="post">
+      <input type="search" name="" value="">
+    </form>
+  </li>
 
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">

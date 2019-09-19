@@ -376,7 +376,7 @@
 								 @if( isset($booking) )
 									 @if($booking->user)
 	                 <div class="form-group">
-	                   <button type="button" class="btn btn-default btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
+	                   <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
 	                 </div>
 									 @endif
 								@endif
@@ -496,13 +496,14 @@
                <p class="btnText2" >GO!</p>
              </div>
             </div>
-
+						@if( Auth::user()->type == 3 || Auth::user()->type == -1)
             <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
              <p class="btnText">Delete?</p>
              <div class="btnTwo">
                <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
              </div>
             </div>
+						@endif
               </div>
               <!--booking reg form-->
 
@@ -513,12 +514,15 @@
 				</div>
 		<!-- //inner_content-->
 </div>
-@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
 
-@endcomponent
+@if( Auth::user()->type == 3 || Auth::user()->type == -1)
+
+@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] ) @endcomponent
 
 <form class="d-none hidden" id="deleteBookingForm" action="{{route('bookings-registration.destroy',$booking->id)}}" method="post">
   @csrf
   @method('DELETE')
 </form>
+@endif
+
 @endsection
