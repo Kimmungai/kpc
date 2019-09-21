@@ -14,25 +14,25 @@
             <ul class="gn-submenu">
               @foreach( $allDepts as $dept )
                 @if( strtolower($dept->name) == 'kitchen' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_agile"><a href="/dept-registration/1"><i class="fas fa-utensils" aria-hidden="true"></i> Kitchen</a></li>
+                  <li class="mini_list_agile"><a href="/dept-registration/{{$dept->id}}"><i class="fas fa-utensils" aria-hidden="true"></i> Kitchen</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'chapel' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/2"> <i class="fas fa-church" aria-hidden="true"></i> Chapel</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-church" aria-hidden="true"></i> Chapel</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'shamba' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/3"> <i class="fas fa-tractor" aria-hidden="true"></i> Shamba</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-tractor" aria-hidden="true"></i> Shamba</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'compound' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/4"> <i class="fas fa-umbrella-beach" aria-hidden="true"></i> Compound</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-umbrella-beach" aria-hidden="true"></i> Compound</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'administration' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/5"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administration</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-user-tie" aria-hidden="true"></i> Administration</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'store' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/6"> <i class="fas fa-store-alt" aria-hidden="true"></i> Store</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-store-alt" aria-hidden="true"></i> Store</a></li>
                 @endif
                 @if( strtolower($dept->name) == 'hospitality' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
-                  <li class="mini_list_w3"><a href="/dept-registration/7"> <i class="fas fa-bed" aria-hidden="true"></i> Hospitality</a></li>
+                  <li class="mini_list_w3"><a href="/dept-registration/{{$dept->id}}"> <i class="fas fa-bed" aria-hidden="true"></i> Hospitality</a></li>
                 @endif
               @endforeach
             </ul>
@@ -126,11 +126,7 @@
   </li>
   @endif
 
-  <li  class="second w3l_search" style="border:0">
-    <form action="#" method="post">
-      <input type="search" name="" value="">
-    </form>
-  </li>
+  
 
   <li class="second top_bell_nav">
      <ul class="top_dp_agile ">
