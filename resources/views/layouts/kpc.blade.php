@@ -255,7 +255,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 <!-- Chart code -->
 
 	<!-- //amcharts -->
-		<!--<script src="{{url('site-theme/js/chart1.js') }}"></script>
+		<script src="{{url('site-theme/js/chart1.js') }}"></script>
 				<script src="{{url('site-theme/js/Chart.min.js') }}"></script>
 		<script src="{{url('site-theme/js/modernizr.custom.js') }}"></script>
 
@@ -263,12 +263,12 @@ var chart = AmCharts.makeChart("chartdiv", {
 		<script src="{{url('site-theme/js/gnmenu.js') }}"></script>
 		<script>
 			new gnMenu( document.getElementById( 'gn-menu' ) );
-		</script>-->
+		</script>
 			<!-- script-for-menu -->
 
 
 <!-- //js -->
-<!--<script src="{{url('site-theme/js/screenfull.js') }}"></script>
+<script src="{{url('site-theme/js/screenfull.js') }}"></script>
 		<script>
 		$(function () {
 			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -295,7 +295,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 		        clockFace: 'HourlyCounter'
 		    });
 		});
-	</script>-->
+	</script>
 <script src="{{url('site-theme/js/bars.js') }}"></script>
 <script src="{{url('site-theme/js/jquery.nicescroll.js') }}"></script>
 <script src="{{url('site-theme/js/scripts.js') }}"></script>

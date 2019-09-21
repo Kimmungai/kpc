@@ -4,12 +4,12 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
 ;( function( window ) {
-	
+
 	'use strict';
 
 	// http://stackoverflow.com/a/11381730/989439
@@ -19,7 +19,7 @@
 		return check;
 	}
 
-	function gnMenu( el, options ) {	
+	function gnMenu( el, options ) {
 		this.el = el;
 		this._init();
 	}
@@ -44,10 +44,10 @@
 			if( !mobilecheck() ) {
 				this.trigger.addEventListener( 'mouseover', function(ev) { self._openIconMenu(); } );
 				this.trigger.addEventListener( 'mouseout', function(ev) { self._closeIconMenu(); } );
-			
+
 				this.menu.addEventListener( 'mouseover', function(ev) {
-					self._openMenu(); 
-					document.addEventListener( self.eventtype, self.bodyClickFn ); 
+					self._openMenu();
+					document.addEventListener( self.eventtype, self.bodyClickFn );
 				} );
 			}
 			this.trigger.addEventListener( this.eventtype, function( ev ) {
@@ -65,7 +65,7 @@
 			this.menu.addEventListener( this.eventtype, function(ev) { ev.stopPropagation(); } );
 		},
 		_openIconMenu : function() {
-			classie.add( this.menu, 'gn-open-part' );
+			classie.add( this.menu, 'gn-open-all' );
 		},
 		_closeIconMenu : function() {
 			classie.remove( this.menu, 'gn-open-part' );

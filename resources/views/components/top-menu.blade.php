@@ -127,6 +127,3 @@
 </div>
 <div class="clearfix"></div>
 <!-- //w3_agileits_top_nav-->
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
