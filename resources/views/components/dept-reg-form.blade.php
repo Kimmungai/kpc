@@ -70,7 +70,7 @@
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
-        <i class="fa fa-image"></i>
+        <i class="fa fa-info"></i>
       </span>
       <input name="name" id="name" type="text" class="form-control" value="@if( old('name') ) {{old('name')}} @elseif( isset($dept) ) {{$dept->name}} @endif" placeholder="Dept Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required/>
     </div>

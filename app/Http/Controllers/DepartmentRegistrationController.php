@@ -26,7 +26,7 @@ class DepartmentRegistrationController extends Controller
     {
         Session::flash('message', 'Please select a department');
         return redirect('/');
-        
+
     }
 
     /**
@@ -126,7 +126,7 @@ class DepartmentRegistrationController extends Controller
       $dept = Dept::find($id);
       $dept->delete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
-      return redirect('/home');
+      return redirect('/');
     }
 
     /**
@@ -142,7 +142,7 @@ class DepartmentRegistrationController extends Controller
         Session::flash('error', "Sorry you are not allowed to perform that operatin. Contact administrator.");
         return redirect(route('dept-registration.show', Auth::user()->dept ));
       }
-      
+
       $id = $request->id;
       $dt = Carbon::now();
       if( count($request->all()) )
