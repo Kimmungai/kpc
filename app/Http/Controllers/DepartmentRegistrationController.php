@@ -24,8 +24,9 @@ class DepartmentRegistrationController extends Controller
      */
     public function index()
     {
-        $depts = Dept::all();
-        return $depts;
+        Session::flash('message', 'Please select a department');
+        return redirect('/');
+        
     }
 
     /**

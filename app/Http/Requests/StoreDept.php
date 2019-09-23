@@ -24,7 +24,7 @@ class StoreDept extends FormRequest
     public function rules()
     {
         return [
-          'type' => 'required|numeric',
+          'type' => 'nullable|numeric',
           'org_id' => 'required|numeric',
           'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
           'name' => 'required|max:255|unique:depts,name,'.\Request::segment(2),

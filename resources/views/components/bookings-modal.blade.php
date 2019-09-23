@@ -17,6 +17,7 @@
              <div class="grid-1 graph-form agile_info_shadow" style="width:100%">
 
                 <h3 class="w3_inner_tittle two">Basic Information </h3>
+                <P class="text-danger mb-2">Kindly make a booking 5 days in advance</P>
                 <form class="form-horizontal">
 
                   <div class="form-group">

@@ -1,4 +1,4 @@
-<div class="form-group">
+<!--<div class="form-group">
   <label class="col-md-2 control-label">Organisation</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -17,10 +17,11 @@
       @endif
     </p>
   </div>
-</div>
+</div>-->
+<input type="hidden" name="org_id" value="1">
 
 <div class="form-group">
-  <label class="col-md-2 control-label">User type</label>
+  <label class="col-md-2 control-label">User type <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
@@ -50,7 +51,7 @@
 </div>
 
 <div class="form-group">
-  <label class="col-md-2 control-label">User department</label>
+  <label class="col-md-2 control-label">User department <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
@@ -97,7 +98,7 @@
 </div>
 
 <div class="form-group" id="firstNameTitle">
-  <label class="col-md-2 control-label">First Name</label>
+  <label class="col-md-2 control-label">First Name <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
@@ -141,7 +142,7 @@
       <span class="input-group-addon">
         <i class="fa fa-info"></i>
       </span>
-      <input name="lastName" id="lastName" type="text" class="form-control" value="@if( old('lastName') ) {{old('lastName')}} @elseif( isset($user) ) {{$user->lastName}} @endif" placeholder="Last name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)"/>
+      <input name="lastName" id="lastName" type="text" class="form-control" value="@if( old('lastName') ) {{old('lastName')}} @elseif( isset($user) ) {{$user->lastName}} @endif" placeholder="Last name..." onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -160,7 +161,7 @@
       <span class="input-group-addon">
         <i class="fa fa-calendar-alt"></i>
       </span>
-      <input name="DOB" id="DOB" type="text" class="form-control" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onchange="validate(this.id,{required:1,min:3,max:255},this.value)"/>
+      <input name="DOB" id="DOB" type="text" class="form-control" value="@if( old('DOB') ) {{old('DOB')}} @elseif( isset($user) ) {{$user->DOB}} @endif" placeholder="dd-mm-yyyy" onchange="validate(this.id,{required:0,min:3,max:255},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -173,7 +174,7 @@
 </div>
 
 <div class="form-group" id="emailTitle">
-  <label class="col-md-2 control-label">Email</label>
+  <label class="col-md-2 control-label">Email <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">
@@ -198,7 +199,7 @@
       <span class="input-group-addon">
         <i class="fa fa-phone"></i>
       </span>
-      <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:1,min:10,max:13,type:'numeric'},this.value)"/>
+      <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" value="@if( old('phoneNumber') ) {{old('phoneNumber')}} @elseif( isset($user) ) {{$user->phoneNumber}} @endif" placeholder="Phone Number..." onblur="validate(this.id,{required:0,min:10,max:13,type:'numeric'},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">
@@ -330,7 +331,7 @@
 </div>
 
 <div class="form-group" id="passwordTitle">
-  <label class="col-md-2 control-label">Password</label>
+  <label class="col-md-2 control-label">Password <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">

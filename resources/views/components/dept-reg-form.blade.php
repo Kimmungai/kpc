@@ -1,4 +1,4 @@
-<div class="form-group">
+<!--<div class="form-group">
   <label class="col-md-2 control-label">Organisation</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -17,9 +17,11 @@
       @endif
     </p>
   </div>
-</div>
+</div>-->
 
-<div class="form-group">
+<input type="hidden" name="org_id" value="1">
+
+<!--<div class="form-group">
   <label class="col-md-2 control-label">Department type</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -41,9 +43,9 @@
       @endif
     </p>
   </div>
-</div>
+</div>-->
 
-<div class="form-group" id="avatarTitle">
+<!--<div class="form-group" id="avatarTitle">
   <label class="col-md-2 control-label">Picture</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -61,7 +63,7 @@
       @endif
     </p>
   </div>
-</div>
+</div>-->
 
 <div class="form-group" id="nameTitle">
   <label class="col-md-2 control-label">Name <span class="text-danger">*</span></label>
@@ -140,7 +142,7 @@
 </div>
 
 <div class="form-group" id="stockCapacityTitle">
-  <label class="col-md-2 control-label">Staff capacity <span class="text-danger">*</span></label>
+  <label class="col-md-2 control-label">Stock capacity <span class="text-danger">*</span></label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
       <span class="input-group-addon">

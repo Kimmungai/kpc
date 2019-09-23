@@ -22,7 +22,7 @@ class UserRegistrationController extends Controller
      */
     public function index($type=0)
     {
-        if( Auth::user()->type != 1 ||  Auth::user()->type != -1)//if not admin cannot view type 1, -1 and 3
+        if( Auth::user()->type == 1 ||  Auth::user()->type == 2 || Auth::user()->type == 4 || Auth::user()->type == 5)//if not admin cannot view type 1, -1 and 3
         {
           if( $type == -1 || $type == 1 || $type == 3 )
           {
@@ -59,7 +59,7 @@ class UserRegistrationController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         $newUser = User::create($validated);
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
-        return redirect('/home');
+        return redirect('/users');
     }
 
     /**
