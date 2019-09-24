@@ -51,7 +51,7 @@ class DepartmentRegistrationController extends Controller
         $validated = $this->uploads($request,$validated);
         $newUser = Dept::create($validated);
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
-        return redirect('/home');
+        return redirect('/');
     }
 
     /**
