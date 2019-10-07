@@ -32,35 +32,53 @@
             @endif
              <h3 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h3>
 
+             <div class="row">
 
-              <div class="grid-1 graph-form agile_info_shadow">
+               <div class="col-md-8">
+                 <div class="grid-1 graph-form agile_info_shadow">
 
-               @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
+                  @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
 
-               @endcomponent
+                  @endcomponent
 
-               @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteDeptForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
+                  @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteDeptForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
 
-               @endcomponent
+                  @endcomponent
 
-               <form class="form-horizontal" id="DeptForm" action="{{route('dept-registration.update',$dept->id)}}" method="post" enctype="multipart/form-data">
-                 @csrf
-                 @method('PUT')
+                  <form class="form-horizontal" id="DeptForm" action="{{route('dept-registration.update',$dept->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                 @component( 'components.dept-reg-form',['dept'=>$dept] )
+                    @component( 'components.dept-reg-form',['dept'=>$dept] )
 
-                 @endcomponent
-
-
-
-
-               </form>
-
-               
+                    @endcomponent
 
 
-          </div>
-          
+
+
+                  </form>
+
+
+
+
+                </div>
+               </div>
+
+               <div class="col-md-4">
+                 <div class="grid-1 graph-form agile_info_shadow">
+
+
+                </div>
+
+                <div class="grid-1 graph-form agile_info_shadow">
+
+
+               </div>
+               </div>
+
+             </div>
+
+
           <div class="button" data-toggle="modal" data-target="#confirmModal">
            <p class="btnText">Update?</p>
            <div class="btnTwo" style="background:green">

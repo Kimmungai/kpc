@@ -68,56 +68,216 @@
     </nav>
   </li>
   <!-- //nav_agile_w3l -->
-  <li class="second logo"><h1 style="font-size:14px;"><a href="/home"><i class="fa fa-graduation-cap" aria-hidden="true"></i>{{env('APP_NAME')}}</a></h1></li>
+  <li class="second logo"><h1><a href="/"><i class="fas fa-home" aria-hidden="true"></i>Esteem </a></h1></li>
+					<li class="second admin-pic">
+				       <ul class="top_dp_agile">
+									<li class="dropdown profile_details_drop">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											<div class="profile_img">
+												<span class="prfil-img"><img src="{{url('/images/avatar-male.png')}}" alt="" height="45" width="45"> </span>
+											</div>
+										</a>
+										<ul class="dropdown-menu drp-mnu">
+											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
+											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+										</ul>
+									</li>
 
-  <li class="second top_bell_nav">
-    <ul class="top_dp_agile ">
-           <li class="dropdown head-dpdn">
-             <a href="{{url('/')}}" class="dropdown-toggle"  aria-expanded="true" title="Go to home page"><i class="fa fa-home" aria-hidden="true"></i> </a>
+						</ul>
+				</li>
+				<li class="second top_bell_nav">
+				   <ul class="top_dp_agile ">
+									<li class="dropdown head-dpdn">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Notifications"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge blue">4</span></a>
+										<ul class="dropdown-menu">
+											<li>
+												<div class="notification_header">
+													<h3>Your Notifications</h3>
+												</div>
+											</li>
+											<li><a href="#">
+												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+											   <div class="notification_desc">
+											     <h6>John Smith</h6>
+												<p>Lorem ipsum dolor</p>
+												<p><span>1 hour ago</span></p>
+												</div>
+											  <div class="clearfix"></div>
+											 </a></li>
+											 <li class="odd"><a href="#">
+												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+											   <div class="notification_desc">
+											     <h6>Jasmin Leo</h6>
+												<p>Lorem ipsum dolor</p>
+												<p><span>3 hour ago</span></p>
+												</div>
+											   <div class="clearfix"></div>
+											 </a></li>
+											 <li><a href="#">
+												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+											   <div class="notification_desc">
+											     <h6>James Smith</h6>
+												<p>Lorem ipsum dolor</p>
+												<p><span>2 hour ago</span></p>
+												</div>
+											   <div class="clearfix"></div>
+											 </a></li>
+											  <li><a href="#">
+												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+											   <div class="notification_desc">
+											     <h6>James Smith</h6>
+												<p>Lorem ipsum dolor</p>
+												<p><span>1 hour ago</span></p>
+												</div>
+											   <div class="clearfix"></div>
+											 </a></li>
+											 <li>
+												<div class="notification_bottom">
+													<a href="#">See all Notifications</a>
+												</div>
+											</li>
+										</ul>
+									</li>
 
-           </li>
+						</ul>
+				</li>
 
-     </ul>
-  </li>
+				<li class="second top_bell_nav">
+				   <ul class="top_dp_agile ">
+				       <li class="dropdown head-dpdn">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Pending tasks"><i class="fa fa-tasks"></i><span class="badge blue">9</span></a>
+										<ul class="dropdown-menu">
+											<li>
+												<div class="notification_header">
+													<h3>You have 4 Pending tasks</h3>
+												</div>
+											</li>
+											<li><a href="#">
+												<div class="task-info">
+													<span class="task-desc">Database update</span><span class="percentage">40%</span>
+													<div class="clearfix"></div>
+												</div>
+												<div class="progress progress-striped active">
+													<div class="bar yellow" style="width:40%;"></div>
+												</div>
+											</a></li>
+											<li><a href="#">
+												<div class="task-info">
+													<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+												   <div class="clearfix"></div>
+												</div>
+												<div class="progress progress-striped active">
+													 <div class="bar green" style="width:90%;"></div>
+												</div>
+											</a></li>
+											<li><a href="#">
+												<div class="task-info">
+													<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+													<div class="clearfix"></div>
+												</div>
+											   <div class="progress progress-striped active">
+													 <div class="bar red" style="width: 33%;"></div>
+												</div>
+											</a></li>
+											<li><a href="#">
+												<div class="task-info">
+													<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+												   <div class="clearfix"></div>
+												</div>
+												<div class="progress progress-striped active">
+													 <div class="bar  blue" style="width: 80%;"></div>
+												</div>
+											</a></li>
+											<li>
+												<div class="notification_bottom">
+													<a href="#">See all pending tasks</a>
+												</div>
+											</li>
+										</ul>
+									</li>
+								</ul>
+				</li>
 
- @if( Auth::user()->type == -1 ||  Auth::user()->type == 3 || Auth::user()->type == 1 )
-  <li class="second top_bell_nav">
-     <ul class="top_dp_agile ">
-            <li class="dropdown head-dpdn">
-              <a href="{{url('/users')}}" class="dropdown-toggle"  aria-expanded="true" title="See all users"><i class="fa fa-users" aria-hidden="true"></i> </a>
+        <li class="second top_bell_nav">
+				   <ul class="top_dp_agile ">
+									<li class="dropdown head-dpdn">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Go to users"><i class="fas fa-users" aria-hidden="true"></i> </a>
+										<ul class="dropdown-menu">
+											<li>
+												<div class="notification_header">
+													<h3>Users</h3>
+												</div>
+											</li>
+											<li><a href="/users/2">
+												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+											   <div class="notification_desc">
+											     <h6>Customers</h6>
+												<p>Click to view customers</p>
+												</div>
+											  <div class="clearfix"></div>
+											 </a></li>
+                       <li><a href="/users/1">
+ 												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+ 											   <div class="notification_desc">
+ 											     <h6>Staff</h6>
+ 												<p>Click to view staff</p>
+ 												</div>
+ 											  <div class="clearfix"></div>
+ 											 </a></li>
+                       <li><a href="/users/4">
+ 												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+ 											   <div class="notification_desc">
+ 											     <h6>Casuals</h6>
+ 												<p>Click to view casuals</p>
+ 												</div>
+ 											  <div class="clearfix"></div>
+ 											 </a></li>
+                       <li><a href="/users/5">
+                         <div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+                          <div class="notification_desc">
+                            <h6>Suppliers</h6>
+                         <p>Click to view suppliers</p>
+                         </div>
+                         <div class="clearfix"></div>
+                        </a></li>
+											 <li>
+                         <li><a href="/users/3">
+   												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+   											   <div class="notification_desc">
+   											     <h6>Admins</h6>
+   												<p>Click to view admins</p>
+   												</div>
+   											  <div class="clearfix"></div>
+   											 </a></li>
+                         <li><a href="/users/-1">
+   												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+   											   <div class="notification_desc">
+   											     <h6>Super Admins</h6>
+   												<p>Click to view super admins</p>
+   												</div>
+   											  <div class="clearfix"></div>
+   											 </a></li>
+												<div class="notification_bottom">
+													<a href="{{url('/users')}}">Open all users</a>
+												</div>
+											</li>
+										</ul>
+									</li>
 
-            </li>
-
-      </ul>
-  </li>
-  @endif
-
-  @if( Auth::user()->type == -1 )
-  <li class="second top_bell_nav">
-     <ul class="top_dp_agile ">
-            <li class="dropdown head-dpdn">
-              @if( Request::is('/') || Request::is('dept-registration/*') )
-                <a href="{{url('/dept-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Add new department"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
-              @elseif( Request::is('user-registration') || Request::is('user-registration/*') || Request::is('users') || Request::is('users/*'))
-                <a href="{{url('/user-registration/create')}}" class="dropdown-toggle"  aria-expanded="true" title="Create new user"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
-              @endif
-            </li>
-
-      </ul>
-  </li>
-  @endif
+						</ul>
+				</li>
 
 
+				<li class="second w3l_search" style="border:0">
 
-  <li class="second top_bell_nav">
-     <ul class="top_dp_agile ">
-         <li class="dropdown head-dpdn">
-              <a href="#" class="dropdown-toggle"  aria-expanded="false" title="Logout" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i><!--<span class="badge blue">9</span>--></a>
+						<form action="#" method="post">
+							<input type="search" name="search" placeholder="Search here..." required="">
+							<button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</form>
 
-            </li>
-          </ul>
-  </li>
+				</li>
+
 
 
 

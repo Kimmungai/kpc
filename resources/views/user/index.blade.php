@@ -25,8 +25,11 @@
 						</div>
 					</div>
 					   <div class="agile_top_w3_grids">
+							 <div class="row">
+
 					          <ul class="ca-menu">
-                    <li style="width:32%">
+										<div class="col-sm-4">
+                    <li >
                       <a href="{{url('users')}}/2">
 
                         <i class="fas fa-users" aria-hidden="true"></i>
@@ -38,8 +41,12 @@
                         </div>
                       </a>
                     </li>
+									</div>
+
 									@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
-									<li style="width:32%">
+									<div class="col-sm-4">
+
+									<li >
 										<a href="{{url('users')}}/1">
 										  <i class="fas fa-user-tag" aria-hidden="true"></i>
 											<div class="ca-content">
@@ -50,9 +57,11 @@
 											</div>
 										</a>
 									</li>
+								</div>
 									@endif
+									<div class="col-sm-4">
 
-									<li style="width:32%">
+									<li >
 	                  <a href="{{url('users')}}/4">
 
 	                    <i class="fas fa-user-clock" aria-hidden="true"></i>
@@ -64,14 +73,11 @@
 	                    </div>
 	                  </a>
 	                </li>
-
-									<div class="clearfix"></div>
-								</ul>
-
-                <ul class="ca-menu">
+								</div>
 
 								@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
-								<li style="width:32%">
+								<div class="col-sm-4">
+								<li >
 									<a href="{{url('users')}}/5">
 
 										<i class="fas fa-users" aria-hidden="true"></i>
@@ -83,10 +89,12 @@
 										</div>
 									</a>
 								</li>
+							</div>
 								@endif
 
 								@if(Auth::user()->type == -1 || Auth::user()->type == 3 )
-								<li style="width:32%">
+								<div class="col-sm-4">
+								<li >
 									<a href="{{url('users')}}/3">
 										<i class="fas fa-user-tie" aria-hidden="true"></i>
 										<div class="ca-content">
@@ -97,10 +105,12 @@
 										</div>
 									</a>
 								</li>
+							</div>
 								@endif
 
 								@if(isset($usersCount['super_admins']))
-								<li style="width:32%">
+								<div class="col-sm-4">
+								<li >
 									<a href="{{url('users')}}/-1">
 										<i class="fas fa-user-secret" aria-hidden="true"></i>
 										<div class="ca-content">
@@ -111,10 +121,13 @@
 										</div>
 									</a>
 								</li>
+							</div>
 								@endif
 								<div class="clearfix"></div>
-            </ul>
 
+							</ul>
+
+							</div>
 
 					   </div>
 					 <!-- //departments end-->
