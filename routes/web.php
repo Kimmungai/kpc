@@ -32,6 +32,7 @@ Route::post('search-any-user/','UserAjaxController@search_any_user');
 Route::post('get-purchases-user','UserAjaxController@get_purchases_user');
 Route::post('get-user','UserAjaxController@get_user');
 Route::post('create-user','UserAjaxController@create_user');
+Route::post('change-user-status','UserAjaxController@change_user_status');
 
 
 

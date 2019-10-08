@@ -32,7 +32,7 @@ class UserRegistrationController extends Controller
 
         }
 
-        if( $type ){ $users = User::where('type',$type)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5)); }else{ $user = User::all(); }
+        if( $type ){ $users = User::where('type',$type)->orderBy('created_at','DESC')->withTrashed()->paginate(env('ITEMS_PER_PAGE',5)); }else{ $user = User::all(); }
         return view('user.all',compact('users','type'));
     }
 

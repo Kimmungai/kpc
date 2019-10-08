@@ -22,3 +22,41 @@ function filterPurchases()
   var sort = $("#filter_sort").val();
   window.open('/sort-purchases/'+sort+'/'+startDate+'/'+endDate,'_self');*/
 }
+
+$('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');
+
+    if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+    }
+    if ($(this).find('.btn-danger').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-danger');
+    }
+    if ($(this).find('.btn-success').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-success');
+    }
+    if ($(this).find('.btn-info').size()>0) {
+    	$(this).find('.btn').toggleClass('btn-info');
+    }
+
+    $(this).find('.btn').toggleClass('btn-default');
+
+});
+
+function user_state_change(user_id)
+{
+  var status = $('#status-user-' + user_id).is(":checked");
+
+  if( status == true ){ status = 1; }else{ status = 0;}
+  //send details to server
+  $.post("/change-user-status",
+    {
+      status:status,
+      user_id:user_id,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //show result box
+      //alert("status updated");
+    });
+}

@@ -50,6 +50,7 @@
   </div>
 </div>
 
+@if( isset($allDepts) )
 <div class="form-group">
   <label class="col-md-2 control-label">User department <span class="text-danger">*</span></label>
   <div class="col-md-8">
@@ -58,13 +59,16 @@
         <i class="fas fa-layer-group"></i>
       </span>
       <select name="dept" id="dept" class="form-control">
-        <option value="1" @if( old('dept') == 1 || ( isset($user) && $user->dept == 1 ) ) selected @endif>Kitchen</option>
+        @foreach( $allDepts as $Dept )
+        <option value="{{$Dept->id}}" @if( old('dept') == $Dept->id || ( isset($user) && $user->dept == $Dept->id ) ) selected @endif>{{$Dept->name}}</option>
+        @endforeach
+        <!--<option value="1" @if( old('dept') == 1 || ( isset($user) && $user->dept == 1 ) ) selected @endif>Kitchen</option>
         <option value="2" @if( old('dept') == 2 || ( isset($user) && $user->dept == 2 ) ) selected @endif>Store</option>
         <option value="3" @if( old('dept') == 3 || ( isset($user) && $user->dept == 3 ) ) selected @endif>Hospitality</option>
         <option value="4" @if( old('dept') == 4 || ( isset($user) && $user->dept == 4 ) ) selected @endif>Chapel</option>
         <option value="5" @if( old('dept') == 5 || ( isset($user) && $user->dept == 5 ) ) selected @endif>Shamba/ dairy/ poultry</option>
         <option value="6" @if( old('dept') == 6 || ( isset($user) && $user->dept == 6 ) ) selected @endif>Compound</option>
-        <option value="7" @if( old('dept') == 7 || ( isset($user) && $user->dept == 7 ) ) selected @endif>Administration</option>
+        <option value="7" @if( old('dept') == 7 || ( isset($user) && $user->dept == 7 ) ) selected @endif>Administration</option>-->
       </select>
     </div>
   </div>
@@ -76,6 +80,7 @@
     </p>
   </div>
 </div>
+@endif
 
 <div class="form-group" id="avatarTitle">
   <label class="col-md-2 control-label">Picture</label>

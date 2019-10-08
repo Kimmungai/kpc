@@ -105,4 +105,27 @@ class UserAjaxController extends Controller
 
       return $user;
     }
+
+    public function change_user_status( Request $request )
+    {
+      $request->validate([
+        'status' => 'required',
+        'user_id' => 'required|numeric',
+      ]);
+
+      $user = User::where('id',$request->user_id)->withTrashed()->first();
+
+      if( $request->status == 1 ){
+
+        $user->restore();
+        return "nyau";
+
+      }else {
+
+        $user->delete();
+        return "mburi";
+
+      }
+      return 1;
+    }
 }

@@ -44,7 +44,7 @@
 
               @forelse( $users as $user )
                 <div class="col-md-4" style="margin-bottom:20px;">
-                  <div class="flip-card">
+                  <!--<div class="flip-card">
                     <div class="flip-card-inner">
                       <div class="flip-card-front">
                         @if( $user->avatar )
@@ -63,7 +63,104 @@
                         @endif
                       </div>
                     </div>
+                  </div>-->
+                  <!--new card design-->
+                  <div class="panel panel-default mt-2">
+                    <div class="panel-heading">  <h4 >User Profile</h4></div>
+                     <div class="panel-body">
+
+                      <div class="box box-info" style="overflow:hidden">
+
+                              <div class="box-body">
+                                       <div class="col-sm-6">
+                                         @if( $user->avatar )
+                                         <div  align="center"> <img alt="{{$user->firstName}}" src="{{$user->avatar}}" id="profile-image1" class="img-circle img-responsive">
+                                         @else
+                                         <div  align="center"> <img alt="{{$user->firstName}}" src="@if($user->gender == 1){{url('images/avatar-male.png')}}@else {{url('images/avatar-female.png')}} @endif" id="profile-image1" class="img-circle img-responsive">
+                                         @endif
+
+                                  <input id="profile-image-upload" class="hidden" type="file">
+                  <!--<div style="color:#999;" >click here to change profile image</div>-->
+                                  <!--Upload Image Js And Css-->
+                                       </div>
+                                <br>
+                                <!-- /input-group -->
+                              </div>
+                              <div class="col-sm-6">
+                              <h4 style="color:#007ee5;">{{$user->name}}</h4></span>
+                              @if( $user->type == -1 )
+                                <span><p style="color:#e53238">Super Adminstrator</p></span>
+                              @elseif( $user->type == 1 )
+                                <span><p style="color:#e53238">Staff</p></span>
+                              @elseif( $user->type == 2 )
+                                <span><p style="color:#e53238">Customer</p></span>
+                              @elseif( $user->type == 3 )
+                                <span><p style="color:#e53238">Administrator</p></span>
+                              @elseif( $user->type == 4 )
+                                <span><p style="color:#e53238">Casual</p></span>
+                              @elseif( $user->type == 5 )
+                                <span><p  style="color:#e53238">Supplier</p></span>
+                              @else
+                                <span><p style="color:#e53238">Customer</p></span>
+                              @endif
+                              <a class="btn btn-default btn-block mt-2" href="/user-registration/{{$user->id}}/edit">Open record</a>
+                              </div>
+                              <div class="clearfix"></div>
+                              <hr style="margin:5px 0 5px 0;">
+
+                  @if( $user->firstName || $user->lastName )
+                  <div class="col-sm-5 col-xs-6 tital " >Full Name:</div><div class="col-sm-7 col-xs-6 ">{{$user->firstName}} {{$user->lastName}}</div>
+                       <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+                  @endif
+                  <div class="col-sm-5 col-xs-6 tital " >Date Of Joining:</div><div class="col-sm-7">{{date('d M Y',strtotime($user->created_at))}}</div>
+
+                    <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+
+                  @if( isset($allDepts) )
+                  <div class="col-sm-5 col-xs-6 tital " >Department:</div>
+                  @foreach( $allDepts as $Dept )
+                    @if( $Dept->id == $user->dept )
+                      <div class="col-sm-7">{{$Dept->name}}</div>
+                      @break
+                    @endif
+                  @endforeach
+
+                    <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+                  @endif
+
+                  <div class="col-sm-5 col-xs-6 tital " >Phone:</div><div class="col-sm-7">{{$user->phoneNumber}}</div>
+
+                   <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+
+                  <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7">{{$user->email}}</div>
+
+                   <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+
+                  <div class="col-sm-5 col-xs-6 tital " >Status:</div>
+                  <div class="col-sm-7">
+                    <label class="switch">
+                      <input id="status-user-{{$user->id}}" type="checkbox" @if( !$user->deleted_at ) checked @endif onchange="user_state_change({{$user->id}},this.id)">
+                      <span class="slider round"></span>
+
+                    </label>
                   </div>
+
+
+                              <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+
+                          </div>
+
+
+                      </div>
+                      </div>
+                  <!-- end new card design-->
                 </div>
               @empty
 
@@ -77,6 +174,7 @@
 
           </div>
           {{$users->links()}}
+
 
 
           </div>
