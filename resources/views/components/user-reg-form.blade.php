@@ -1,23 +1,7 @@
-<!--<div class="form-group">
-  <label class="col-md-2 control-label">Organisation</label>
-  <div class="col-md-8">
-    <div class="input-group input-icon right">
-      <span class="input-group-addon">
-        <i class="fa fa-building"></i>
-      </span>
-      <select name="org_id" id="org_id" class="form-control">
-        <option value="1" @if( old('org_id') == 1 || ( isset($user) && $user->org_id == 1 ) ) selected @endif> Kitui Pastoral center </option>
-      </select>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <p class="help-block red-text">
-      @if ($errors->has('org_id'))
-        {{ $errors->first('org_id') }}
-      @endif
-    </p>
-  </div>
-</div>-->
+<div class="row">
+  <div class="col-md-7">
+    <div class="grid-1 graph-form agile_info_shadow">
+
 <input type="hidden" name="org_id" value="1">
 
 <div class="form-group">
@@ -82,25 +66,7 @@
 </div>
 @endif
 
-<div class="form-group" id="avatarTitle">
-  <label class="col-md-2 control-label">Picture</label>
-  <div class="col-md-8">
-    <div class="input-group input-icon right">
-      <span class="input-group-addon">
-        <i class="fa fa-image"></i>
-      </span>
-      <img src="@if( isset($user) ){{$user->avatar}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
-      <input name="avatar" id="avatar" type="file"  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <p class="help-block red-text" id="avatarHelper">
-      @if ($errors->has('avatar'))
-        {{ $errors->first('avatar') }}
-      @endif
-    </p>
-  </div>
-</div>
+
 
 <div class="form-group" id="firstNameTitle">
   <label class="col-md-2 control-label">First Name <span class="text-danger">*</span></label>
@@ -178,6 +144,55 @@
   </div>
 </div>
 
+<div class="form-group" id="genderTitle">
+  <label class="col-md-2 control-label">Gender</label>
+  <div class="col-md-8">
+    <div class="input-group input-icon right">
+      <span class="input-group-addon">
+        <i class="fa fa-circle-notch"></i>
+      </span>
+      <select name="gender" id="gender" class="form-control">
+      <option value="1" @if( old('gender') == 1 || ( isset($user) && $user->gender == 1 ) ) selected @endif>Male</option>
+      <option value="2" @if( old('gender') == 2 || ( isset($user) && $user->gender == 2 ) ) selected @endif>Female</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <p class="help-block red-text" id="genderHelper">
+      @if ($errors->has('gender'))
+        {{ $errors->first('gender') }}
+      @endif
+    </p>
+  </div>
+</div>
+
+<div class="form-group" id="passwordTitle">
+  <label class="col-md-2 control-label">Password <span class="text-danger">*</span></label>
+  <div class="col-md-8">
+    <div class="input-group input-icon right">
+      <span class="input-group-addon">
+        <i class="fa fa-key"></i>
+      </span>
+      <input name="password" id="password" type="text" class="form-control" value="@if( old('password') ) {{old('password')}}  @endif" placeholder="Password..." onblur="validate(this.id,{required:1,min:8,max:255},this.value)" />
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <p class="help-block red-text" id="passwordHelper">
+      @if ($errors->has('password'))
+        {{ $errors->first('password') }}
+      @endif
+    </p>
+  </div>
+</div>
+
+
+
+</div>
+</div>
+
+<div class="col-md-5">
+  <div class="grid-1 graph-form agile_info_shadow">
+
 <div class="form-group" id="emailTitle">
   <label class="col-md-2 control-label">Email <span class="text-danger">*</span></label>
   <div class="col-md-8">
@@ -216,27 +231,7 @@
   </div>
 </div>
 
-<div class="form-group" id="genderTitle">
-  <label class="col-md-2 control-label">Gender</label>
-  <div class="col-md-8">
-    <div class="input-group input-icon right">
-      <span class="input-group-addon">
-        <i class="fa fa-circle-notch"></i>
-      </span>
-      <select name="gender" id="gender" class="form-control">
-      <option value="1" @if( old('gender') == 1 || ( isset($user) && $user->gender == 1 ) ) selected @endif>Male</option>
-      <option value="2" @if( old('gender') == 2 || ( isset($user) && $user->gender == 2 ) ) selected @endif>Female</option>
-      </select>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <p class="help-block red-text" id="genderHelper">
-      @if ($errors->has('gender'))
-        {{ $errors->first('gender') }}
-      @endif
-    </p>
-  </div>
-</div>
+
 
 <div class="form-group" id="addressTitle">
   <label class="col-md-2 control-label">Address</label>
@@ -256,6 +251,29 @@
     </p>
   </div>
 </div>
+</div>
+
+<div class="grid-1 graph-form agile_info_shadow">
+
+  <div class="form-group" id="avatarTitle">
+    <label class="col-md-2 control-label">Picture</label>
+    <div class="col-md-8">
+      <div class="input-group input-icon right">
+        <span class="input-group-addon">
+          <i class="fa fa-image"></i>
+        </span>
+        <img src="@if( isset($user) ){{$user->avatar}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
+        <input name="avatar" id="avatar" type="file"  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <p class="help-block red-text" id="avatarHelper">
+        @if ($errors->has('avatar'))
+          {{ $errors->first('avatar') }}
+        @endif
+      </p>
+    </div>
+  </div>
 
 <div class="form-group" id="idNoTitle">
   <label class="col-md-2 control-label">ID No</label>
@@ -335,21 +353,8 @@
   </div>
 </div>
 
-<div class="form-group" id="passwordTitle">
-  <label class="col-md-2 control-label">Password <span class="text-danger">*</span></label>
-  <div class="col-md-8">
-    <div class="input-group input-icon right">
-      <span class="input-group-addon">
-        <i class="fa fa-key"></i>
-      </span>
-      <input name="password" id="password" type="text" class="form-control" value="@if( old('password') ) {{old('password')}}  @endif" placeholder="Password..." onblur="validate(this.id,{required:1,min:8,max:255},this.value)" />
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <p class="help-block red-text" id="passwordHelper">
-      @if ($errors->has('password'))
-        {{ $errors->first('password') }}
-      @endif
-    </p>
-  </div>
+
+
+</div>
+</div>
 </div>

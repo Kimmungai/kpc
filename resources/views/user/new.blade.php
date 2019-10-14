@@ -22,6 +22,11 @@
             @component( 'components.confirm-modal',[ 'formId' => 'newUserForm', 'heading' => 'New user datails', 'message' => 'Are you sure you want to save new user details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please save' ] )
 
             @endcomponent
+
+						<h4 class="w3_inner_tittle two mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
+						@if( count($errors) )
+							<h4 class="w3_inner_tittle two red-text mb-2">There are some errors, please correct them first.</h4>
+						@endif
 						<!--/forms-->
 				<div class="forms-main_agileits">
 
@@ -35,30 +40,28 @@
 											<div class="wthree_general">
 
 
-													<div class="grid-1 graph-form agile_info_shadow">
-                          @if( count($errors) )
-                            <h4 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h4>
-                          @endif
-													 <h3 class="w3_inner_tittle two">Please fill all required fields (<span class="text-danger">*</span>) </h3>
 
-                           <form class="form-horizontal" id="newUserForm" action="{{url('/user-registration')}}" method="post" enctype="multipart/form-data">
-                             @csrf
+	                           <form class="form-horizontal" id="newUserForm" action="{{url('/user-registration')}}" method="post" enctype="multipart/form-data">
+	                             @csrf
 
-                             @component( 'components.user-reg-form' )
+	                             @component( 'components.user-reg-form' )
 
-                             @endcomponent
-
-                             <div class="button" data-toggle="modal" data-target="#confirmModal">
-     													<p class="btnText">Save details?</p>
-     													<div class="btnTwo" style="background:green">
-     													  <p class="btnText2">GO!</p>
-     													</div>
-     												 </div>
-
-                           </form>
+	                             @endcomponent
 
 
+
+	                           </form>
+
+
+													
+
+											<div class="button" data-toggle="modal" data-target="#confirmModal">
+											 <p class="btnText">Save details?</p>
+											 <div class="btnTwo" style="background:green">
+												 <p class="btnText2">GO!</p>
+											 </div>
 											</div>
+
 										</div>
 										<!--//set-3-->
 

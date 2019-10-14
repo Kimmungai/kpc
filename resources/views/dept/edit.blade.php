@@ -30,12 +30,12 @@
             @if( count($errors) )
               <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
             @endif
-             <h3 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h3>
+             <h2 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h2>
+             <h4 class="w3_inner_tittle two mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
 
              <div class="row">
 
-               <div class="col-md-8">
-                 <div class="grid-1 graph-form agile_info_shadow">
+
 
                   @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
 
@@ -57,24 +57,6 @@
 
 
                   </form>
-
-
-
-
-                </div>
-               </div>
-
-               <div class="col-md-4">
-                 <div class="grid-1 graph-form agile_info_shadow">
-
-
-                </div>
-
-                <div class="grid-1 graph-form agile_info_shadow">
-
-
-               </div>
-               </div>
 
              </div>
 

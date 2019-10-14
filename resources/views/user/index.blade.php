@@ -80,7 +80,7 @@
 								<li >
 									<a href="{{url('users')}}/5">
 
-										<i class="fas fa-users" aria-hidden="true"></i>
+										<i class="fas fa-user-check" aria-hidden="true"></i>
 										<div class="ca-content">
 											@if(isset($usersCount['suppliers']))
 												<h4 class="ca-main four">{{number_format($usersCount['suppliers'])}}</h4>

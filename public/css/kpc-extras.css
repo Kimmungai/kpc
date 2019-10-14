@@ -263,3 +263,130 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/*New Purchases & Bookings sections*/
+.supplier-details{
+  padding: 1em;
+  overflow: hidden;
+  box-shadow: 0 2px 4px grey;
+  border-radius: 7px;
+
+}
+.supplier-details img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  box-shadow: 0 0 1px #eee;
+  object-fit: cover;
+}
+.supplier-details ul{
+  margin: 1em 0;
+  padding: 0;
+  list-style-type: none;
+}
+.prod-img
+{
+  border: 1px solid #eee;
+  box-shadow: 0 0 2px #eee;
+}
+/*Responsive tables*/
+.resp-table table{width: 100%;}
+
+@media only screen and  (min-width: 760px) {
+.resp-table table td{
+  padding: 8px;
+}
+.resp-table table th{
+  padding: 8px;
+}
+}
+
+/*Mobile View*/
+@media only screen and  (max-width: 760px) {
+
+.resp-table td, tr { display: block; }
+
+/* Hide table headers (but not display: none;, for accessibility) */
+
+.resp-table thead tr {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.resp-table tr { border: 1px solid #ccc; }
+
+.resp-table tr + tr { margin-top: 1.5em; }
+
+.resp-table td {
+  /* make like a "row" */
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  padding-left: 50%;
+  background: #fff;
+  text-align: left;
+}
+.resp-table th {
+  /* make like a "row" */
+  padding: 5px;
+  border: none;
+  position: relative;
+  text-align: left;
+}
+
+.resp-table td:before {
+  content: attr(data-label);
+  display: inline-block;
+  line-height: 1.5;
+  margin-left: -100%;
+  width: 100%;
+  white-space: nowrap;
+}
+}
+
+.resp-table table {
+    width: 100%;
+}
+
+.resp-table {
+    margin-top: 10px
+}
+
+.resp-table thead,
+tfoot,tbody {
+    background: #fff!important;
+}
+
+.resp-table td {
+    border: 1px solid #ccc;
+    text-align: center
+}
+
+.resp-table th {
+    border: 1px solid #ccc;
+    text-align: center!important;
+}
+
+.resp-table th {
+    border: 1px solid #ccc;
+    text-align: center
+}
+
+.resp-table tr {
+    border: 1px solid #ccc;
+    text-align: center
+}
+
+.resp-table td span {
+    cursor: pointer;
+    font-size: 12px
+}
+
+.resp-table tbody td {
+    text-align: left
+}
+.text-bold{
+  font-weight: bold;
+}

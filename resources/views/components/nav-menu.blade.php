@@ -10,7 +10,7 @@
         <ul class="gn-menu agile_menu_drop">
           <li><a href="/"> <i class="fas fa-home"></i> Home</a></li>
           <li>
-            <a href="/users"><i class="fas fa-building" aria-hidden="true"></i> Departments <i class="fas fa-angle-down" aria-hidden="true"></i></a>
+            <a href="/"><i class="fas fa-building" aria-hidden="true"></i> Departments <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
               @foreach( $allDepts as $dept )
                 @if( strtolower($dept->name) == 'kitchen' && ( Auth::user()->type == -1 || Auth::user()->dept == $dept->id ) )
@@ -37,7 +37,7 @@
               @endforeach
             </ul>
           </li>
-          <li>
+          <!--<li>
             <a href="/users"><i class="fas fa-users" aria-hidden="true"></i> Users <i class="fas fa-angle-down" aria-hidden="true"></i></a>
             <ul class="gn-submenu">
               <li class="mini_list_agile"><a href="/users/2"><i class="fas fa-users" aria-hidden="true"></i> Customers</a></li>
@@ -47,7 +47,7 @@
               @endif
               <li class="mini_list_w3"><a href="/users/4"> <i class="fas fa-user-clock" aria-hidden="true"></i> Casuals</a></li>
             </ul>
-          </li>
+          </li>-->
           @if(Auth::check())
             @if(Auth::user()->type == -1 )
           <li>
@@ -210,7 +210,7 @@
 												</div>
 											</li>
 											<li><a href="/users/2">
-												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+												<div class="user_img"><img src="{{url('/images/fa/customers.png')}}" alt=""></div>
 											   <div class="notification_desc">
 											     <h6>Customers</h6>
 												<p>Click to view customers</p>
@@ -218,7 +218,7 @@
 											  <div class="clearfix"></div>
 											 </a></li>
                        <li><a href="/users/1">
- 												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+ 												<div class="user_img"><img src="{{url('/images/fa/staff.png')}}" alt=""></div>
  											   <div class="notification_desc">
  											     <h6>Staff</h6>
  												<p>Click to view staff</p>
@@ -226,7 +226,7 @@
  											  <div class="clearfix"></div>
  											 </a></li>
                        <li><a href="/users/4">
- 												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+ 												<div class="user_img"><img src="{{url('/images/fa/casuals.png')}}" alt=""></div>
  											   <div class="notification_desc">
  											     <h6>Casuals</h6>
  												<p>Click to view casuals</p>
@@ -234,7 +234,7 @@
  											  <div class="clearfix"></div>
  											 </a></li>
                        <li><a href="/users/5">
-                         <div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+                         <div class="user_img"><img src="{{url('/images/fa/suppliers.png')}}" alt=""></div>
                           <div class="notification_desc">
                             <h6>Suppliers</h6>
                          <p>Click to view suppliers</p>
@@ -243,7 +243,7 @@
                         </a></li>
 											 <li>
                          <li><a href="/users/3">
-   												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+   												<div class="user_img"><img src="{{url('/images/fa/admins.png')}}" alt=""></div>
    											   <div class="notification_desc">
    											     <h6>Admins</h6>
    												<p>Click to view admins</p>
@@ -251,7 +251,7 @@
    											  <div class="clearfix"></div>
    											 </a></li>
                          <li><a href="/users/-1">
-   												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+   												<div class="user_img"><img src="{{url('/images/fa/super-admins.png')}}" alt=""></div>
    											   <div class="notification_desc">
    											     <h6>Super Admins</h6>
    												<p>Click to view super admins</p>
