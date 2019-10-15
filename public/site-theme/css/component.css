@@ -21,6 +21,9 @@ ul.gn-submenu {
 		list-style: none;
 		text-transform: none;
 }
+ul.gn-submenu i{
+		color: inherit!important;
+}
 ul.gn-menu.agile_menu_drop{
 	    line-height: 46px;
 }
@@ -33,7 +36,7 @@ ul.gn-menu.agile_menu_drop{
 			    position: fixed;
 }
 .w3_agileits_top_nav {
- 
+
     background: #007ee5;
     color: #fff;
     top: 0;
@@ -50,6 +53,7 @@ ul.gn-menu.agile_menu_drop{
 		    color: #fff;
 		text-decoration: none;
 		cursor: pointer;
+		padding-left: 10px;
 }
 
 .no-touch .gn-menu-main a:hover,
@@ -354,7 +358,7 @@ ul.gn-submenu i.fa::before{
 
 }
 @media (max-width:800px){
-	
+
 	 .gn-menu-wrapper.gn-open-all {
 		width: 260px;
 	}
@@ -404,7 +408,7 @@ ul.gn-submenu i.fa::before{
 		margin: 0;
 	}
 }
-@media screen and (max-width:414px) { 
+@media screen and (max-width:414px) {
 	.gn-menu-wrapper.gn-open-all {
 			-webkit-transform: translateX(0px);
 			-moz-transform: translateX(0px);
@@ -440,5 +444,4 @@ ul.gn-submenu i.fa::before{
 		margin: 0;
 	}
 }
-/*--//Responsive--*/	
-
+/*--//Responsive--*/

@@ -71,7 +71,9 @@
 													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
 													<p>Ksh. {{number_format($totalAmountReceived,2)}} made</p>
 												@endif
-												<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>
+												<!--<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>-->
+
+												<a href="/bookings-registration/create" class="btn btn-x-sm btn-default">New booking</a>
 											<dd>
 										</dl>
 									</div>

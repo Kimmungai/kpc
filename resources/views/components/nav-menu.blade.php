@@ -4,7 +4,7 @@
 <ul id="gn-menu" class="gn-menu-main">
        <!-- /nav_agile_w3l -->
   <li class="gn-trigger">
-    <a class="gn-icon gn-icon-menu"><i class="fa fa-bars" aria-hidden="true"></i><span>Menu</span></a>
+    <a class="gn-icon gn-icon-menu" style="padding:0"><i class="fa fa-bars" aria-hidden="true"></i><span>Menu</span></a>
     <nav class="gn-menu-wrapper">
       <div class="gn-scroller scrollbar1">
         <ul class="gn-menu agile_menu_drop">

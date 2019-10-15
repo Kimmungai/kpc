@@ -28,15 +28,16 @@
 
 						<div class="row">
 							<div class="col-sm-7 mb-2">
-								<div class="supplier-details ">
+								<div class="supplier-details box-shdow-4">
 									<div class="input-group">
-									  <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
+									  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
 									  <input type="text" class="form-control" placeholder="Search by name..." aria-describedby="basic-addon1">
 									</div>
+									<a href="#">Create new supplier instead</a>
 								</div>
 							</div>
 							<div class="col-sm-5">
-								<div class="supplier-details ">
+								<div class="supplier-details box-shdow-4">
 
 									<div class="row">
 										<div class="col-xs-8">
@@ -88,11 +89,12 @@
 
 						<div class="row">
 							<div class="col-sm-7 ">
-								<div class="supplier-details ">
+								<div class="supplier-details box-shdow-4">
 									<div class="input-group">
-									  <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
+									  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
 									  <input type="text" class="form-control" placeholder="Search by sku..." aria-describedby="basic-addon1">
 									</div>
+									<a href="#">Create new product instead</a>
 								</div>
 							</div>
 						</div>
