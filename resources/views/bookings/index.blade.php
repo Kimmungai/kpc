@@ -18,7 +18,6 @@
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
-						<div class="container">
 							<div class="row">
 								<form class="" action="sort-bookings" method="get">
 								<div class="col-xs-2">
@@ -48,18 +47,21 @@
 								</div>
 								</form>
 							</div>
-						</div>
 	        <!-- //breadcrumbs -->
 
 
 
-					<div class="container" >
 						<div class="row">
-							@if( isset($dept) )
-							<h1 class="text-capitalize ">{{$dept->name}} Bookings </h1>
-							<h4 class="pull-right  p-1 results-info">Showing: @if(isset($bookings)) {{count($bookings)}} of {{$bookings->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
-							@endif
+							<div class="col-sm-6">
+								<a href="{{url('/bookings-registration/create')}}" class="btn btn-default" title="Create new user">New booking <span class="fas fa-plus-circle"></span></a>
+							</div>
+							<div class="col-sm-6">
+								@if( isset($dept) )
+								<h4 class="pull-right  p-1 results-info">Showing: @if(isset($bookings)) {{count($bookings)}} of {{$bookings->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+								@endif
+							</div>
 						</div>
+
 
 						<div class="row">
 
@@ -99,7 +101,6 @@
 								{{$bookings->appends(request()->except('page'))->links()}}
 							@endif
 						</div>
-					</div>
 
 				</div>
 		<!-- //inner_content-->

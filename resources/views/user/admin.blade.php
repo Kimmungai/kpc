@@ -17,7 +17,7 @@
 				    <!-- /inner_content_w3_agile_info-->
 					<div class="inner_content_w3_agile_info">
 					<!-- /departments start-->
-					<h1 class="text-capitalize">All departments</h1>
+					<h4 class="text-capitalize text-bold">All departments</h4>
 					<div class="row">
 						<div class="col-md-12">
 							<a href="{{url('/dept-registration/create')}}" class="btn btn-default pull-right" title="Add new department">New department <span class="fas fa-plus-circle"></span></a>

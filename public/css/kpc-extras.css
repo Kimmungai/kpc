@@ -108,33 +108,39 @@
 /*Action tabs*/
 .action-tab {
   text-align: center;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 3px 3px #ccc;
   border-radius: 5px;
 }
 .action-tab .fas{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-money{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-gift{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-file{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-external-link{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-edit{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab .fa-database{
-  font-size: 5em;
+  font-size: 1.8em;
 }
 .action-tab p{
   font-size: 12px;
-  padding: 5px;
+  padding: 5px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+}
+.status-sec{
+  font-size: 10px;
 }
 .action-tab a{
   color: inherit;
@@ -153,11 +159,11 @@
   float: left;
 }
 .action-tab dd{
-  width: 60%;
+  width: 90%;
   margin-top: 5%;
 }
 .action-tab dt{
-  width: 40%;
+  width: 10%;
 }
 .mb-2{
   margin-bottom: 20px!important;

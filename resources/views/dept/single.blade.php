@@ -23,10 +23,7 @@
 					<!--end stock options buttons-->
 
 
-					<div class="container" >
-						<div class="row">
-							<h1 class="text-capitalize mb-2">{{$dept->name}}</h1>
-						</div>
+					 <h4 class="text-bold">{{$dept->name}} department</h4>
 
 						<div class="row">
 
@@ -150,7 +147,7 @@
 												<a href="/dept-registration/{{$dept->id}}/edit"><i class="fa fa-edit"></i></a>
 											</dt>
 											<dd>
-												<h3 class="mb-2"><a href="/dept-registration/{{$dept->id}}/edit">Dept Details</a></h3>
+												<h3 class="mb-2"><a href="/dept-registration/{{$dept->id}}/edit">Details</a></h3>
 												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>-->
@@ -163,7 +160,6 @@
 
 
 						</div>
-					</div>
 
 				</div>
 		<!-- //inner_content-->

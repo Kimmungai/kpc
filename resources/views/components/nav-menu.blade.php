@@ -225,14 +225,7 @@
  												</div>
  											  <div class="clearfix"></div>
  											 </a></li>
-                       <li><a href="/users/4">
- 												<div class="user_img"><img src="{{url('/images/fa/casuals.png')}}" alt=""></div>
- 											   <div class="notification_desc">
- 											     <h6>Casuals</h6>
- 												<p>Click to view casuals</p>
- 												</div>
- 											  <div class="clearfix"></div>
- 											 </a></li>
+
                        <li><a href="/users/5">
                          <div class="user_img"><img src="{{url('/images/fa/suppliers.png')}}" alt=""></div>
                           <div class="notification_desc">
@@ -242,22 +235,8 @@
                          <div class="clearfix"></div>
                         </a></li>
 											 <li>
-                         <li><a href="/users/3">
-   												<div class="user_img"><img src="{{url('/images/fa/admins.png')}}" alt=""></div>
-   											   <div class="notification_desc">
-   											     <h6>Admins</h6>
-   												<p>Click to view admins</p>
-   												</div>
-   											  <div class="clearfix"></div>
-   											 </a></li>
-                         <li><a href="/users/-1">
-   												<div class="user_img"><img src="{{url('/images/fa/super-admins.png')}}" alt=""></div>
-   											   <div class="notification_desc">
-   											     <h6>Super Admins</h6>
-   												<p>Click to view super admins</p>
-   												</div>
-   											  <div class="clearfix"></div>
-   											 </a></li>
+
+                         
 												<div class="notification_bottom">
 													<a href="{{url('/users')}}">Open all users</a>
 												</div>

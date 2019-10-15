@@ -43,7 +43,7 @@
               <div class="row">
 
               @forelse( $users as $user )
-                <div class="col-md-4" style="margin-bottom:20px;">
+                <div class="col-sm-6 col-md-4" style="margin-bottom:20px;">
                   <!--<div class="flip-card">
                     <div class="flip-card-inner">
                       <div class="flip-card-front">

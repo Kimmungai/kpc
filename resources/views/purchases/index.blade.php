@@ -18,13 +18,12 @@
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
-						<div class="container">
 							<div class="row">
 								<form class="" action="sort-purchases" method="get">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<select id="filter_sort" class="form-control1" name="filter_sort" >
 										<option value="newOld" @if(isset($sortBy)) @if($sortBy == 'newOld' ) selected @endif @endif >New-Old</option>
 										<option value="oldNew" @if(isset($sortBy)) @if($sortBy == 'oldNew' ) selected @endif @endif>Old-New</option>
@@ -34,38 +33,34 @@
 									</select>
 								</div>
 
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="" placeholder="Date from">
 								</div>
-								<div class="col-xs-1">
+								<div class="col-sm-1">
 									<p style="line-height:40px">~</p>
 								</div>
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="" placeholder="Date to">
 								</div>
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
 								</form>
 							</div>
-						</div>
 	        <!-- //breadcrumbs -->
 					<!--stock options buttons-->
 
 					<!--end stock options buttons-->
 
 
-					<div class="container" >
 						<div class="row">
-							@if( isset($dept) )
-							<h1 class="text-capitalize ">{{$dept->name}} Purchases </h1>
-							<h4 class="pull-right  p-1 results-info">Showing: @if(isset($purchases)) {{count($purchases)}} of {{$purchases->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
-							@endif
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<a href="{{url('/purchases-registration/create')}}" class="btn btn-default pull-right" title="Create new user">New purchase <span class="fas fa-plus-circle"></span></a>
+							<div class="col-sm-6">
+								<a href="{{url('/purchases-registration/create')}}" class="btn btn-default" title="Create new user">New purchase <span class="fas fa-plus-circle"></span></a>
+							</div>
+							<div class="col-xs-6">
+								@if( isset($dept) )
+								<h4 class="pull-right  p-1 results-info">Showing: @if(isset($purchases)) {{count($purchases)}} of {{$purchases->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+								@endif
 							</div>
 						</div>
 
@@ -107,7 +102,6 @@
 								{{$purchases->appends(request()->except('page'))->links()}}
 							@endif
 						</div>
-					</div>
 
 				</div>
 		<!-- //inner_content-->
