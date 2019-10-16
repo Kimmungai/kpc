@@ -30,7 +30,7 @@ class BookingsRegistrationController extends Controller
       if($sortBy)
       {
         if( $sortBy == 'oldNew' ){$sortField='created_at';$sortValue='ASC';}
-        if( $sortBy == 'paidOnly' ){ $status ='bookingAmountDue-bookingAmountReceived = 0'; }
+        if( $sortBy == 'paidOnly' ){ $status ='bookingAmountDue-bookingAmountReceived <= 0'; }
         if( $sortBy == 'pendingOnly' ){ $status ='bookingAmountDue-bookingAmountReceived > 0'; }
         if( $sortBy == 'overPaidOnly' ){ $status ='bookingAmountDue-bookingAmountReceived < 0'; }
       }

@@ -31,7 +31,7 @@ class PurchasesRegistrationController extends Controller
         if($sortBy)
         {
           if( $sortBy == 'oldNew' ){$sortField='created_at';$sortValue='ASC';}
-          if( $sortBy == 'paidOnly' ){ $status ='amountDue-amountPaid = 0'; }
+          if( $sortBy == 'paidOnly' ){ $status ='amountDue-amountPaid <= 0'; }
           if( $sortBy == 'pendingOnly' ){ $status ='amountDue-amountPaid > 0'; }
           if( $sortBy == 'overPaidOnly' ){ $status ='amountDue-amountPaid < 0'; }
         }

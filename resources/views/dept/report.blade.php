@@ -27,14 +27,13 @@
 						<!--sorting-->
 						@if( isset($dept) )
 
-						<div class="container">
 							<div class="row mt-2">
 								<form class="" action="dept-filtered-report" method="get">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
-								<div class="col-xs-3">
-									<select class="duration_sort" id="duration_sort" class="form-control1" name="duration_sort" onchange="set_report_duration(this.value)">
+								<div class="col-sm-3" style="overflow:hidden">
+									<select  id="duration_sort" class="duration_sort form-control1" name="duration_sort" onchange="set_report_duration(this.value)">
 										<option value="thisMonth" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisMonth' ) selected @endif @endif >This month</option>
 										<option value="thisWeek" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisWeek' ) selected @endif @endif>This week</option>
 										<option value="thisYear" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisYear' ) selected @endif @endif >This Year</option>
@@ -43,23 +42,24 @@
 									</select>
 								</div>
 								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @else d-none hidden @endif">
-									<div class="col-xs-2">
+									<div class="col-sm-2">
 										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif"  onchange="clear_max_field('filter_to')" placeholder="Date from">
 									</div>
-									<div class="col-xs-1">
+									<div class="col-sm-1 hidden-xs">
 										<p style="line-height:40px">~</p>
 									</div>
-									<div class="col-xs-2">
+									<div class="col-sm-2">
 										<input type="text" id="filter_to" name="filter_to" class="form-control1" value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif" placeholder="Date to">
 									</div>
 							  </div>
 								<input type="hidden" name="id" value="{{$dept->id}}">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
-								</form>
+							</form>
+
 							</div>
-						</div>
+
 						@endif
 						<!--end sorting-->
 
@@ -88,7 +88,7 @@
 
 					@if( $costsPercent && $revenuesPercent && $bookingsPercent && $stockPercent )
             <div class="cir_agile_info mt-2" >
-            <h3 class="w3_inner_tittle">@if( isset($dept) ) {{$dept->name}} @endif department
+            <h3 class="w3_inner_tittle text-center">@if( isset($dept) ) {{$dept->name}} @endif department
 							<strong class="text-danger">
 							@if(isset($_GET['duration_sort']))
 								@if($_GET['duration_sort'] == 'thisWeek')
@@ -166,16 +166,16 @@
            <div class="col-md-6 fallowers_agile agile_info_shadow">
              <h3 class="w3_inner_tittle two">Recent Purchases</h3>
                    <div class="work-progres">
-                     <div class="table-responsive">
-                       <table class="table table-hover">
+
+                     <div class="resp-table">
+                       <table class="">
                          <thead>
                          <tr>
-                           <th>#</th>
-                           <th>Date</th>
-                           <th>Supplier</th>
-
-                           <th>Status</th>
-                           <th>Action</th>
+                           <td style="background:#fff;">#</td>
+                           <td style="background:#fff;">Date</td>
+                           <td style="background:#fff;">Supplier</td>
+                           <td style="background:#fff;">Status</td>
+                           <td style="background:#fff;">Action</td>
                          </tr>
                        </thead>
                        <tbody>
@@ -184,21 +184,19 @@
 											  <?php if($count>5){break;} ?>
 												@if( $purchase->amountDue - $purchase->amountPaid > 0 )
 	                       <tr>
-	                         <td>Purchase-{{$purchase->id}}</td>
-	                         <td>{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
-	                         <td>{{$purchase->user->firstName}}</td>
-
-	                         <td><span class="label label-danger">unpaid</span></td>
-	                         <td><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
+	                         <td data-label="#" style="background:#fff;">Purchase-{{$purchase->id}}</td>
+	                         <td data-label="Date" style="background:#fff;">{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
+	                         <td data-label="Supplier" style="background:#fff;">{{$purchase->user->firstName}}</td>
+	                         <td data-label="Status" style="background:#fff;"><span class="label label-danger">unpaid</span></td>
+	                         <td data-label="Action" style="background:#fff;"><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
 	                       </tr>
 												 @else
 	                       <tr>
-													 <td>Purchase-{{$purchase->id}}</td>
-	                         <td>{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
-	                         <td>{{$purchase->user->firstName}}</td>
-
-	                         <td><span class="label label-success">paid</span></td>
-	                         <td><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
+													 <td data-label="#" style="background:#fff;">Purchase-{{$purchase->id}}</td>
+	                         <td data-label="Date" style="background:#fff;">{{date('d/m/Y',strtotime($purchase->created_at))}}</td>
+	                         <td data-label="Supplier" style="background:#fff;">{{$purchase->user->firstName}}</td>
+	                         <td data-label="Status" style="background:#fff;"><span class="label label-success">paid</span></td>
+	                         <td data-label="Action" style="background:#fff;"><a href="/purchases-registration/{{$purchase->id}}">Open</a></td>
 	                       </tr>
 												 @endif
 												 <?php $count++; ?>
@@ -211,6 +209,7 @@
 										 @endif
 									 @endif
                  </div>
+
                </div>
            </div>
               <div class="clearfix"></div>

@@ -18,13 +18,26 @@
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
-						<div class="container">
-							<div class="row">
-								<form class="" action="product-registration" method="get">
-								<div class="col-xs-2">
+					 <?php
+					 $filter_from = isset($_GET['filter_from']) ? $_GET['filter_from'] : null;
+					 $filter_to = isset($_GET['filter_to']) ? $_GET['filter_to'] : null;
+					 $filter_to = strtotime($filter_from) < strtotime($filter_to) ? $filter_to : null;
+					  ?>
+						 <div class="row mb-2">
+							 <div class="col-sm-12">
+								 @if( isset($dept) )
+								 <h4 class="text-capitalize text-bold">{{$dept->name}} Products </h4>
+								 <h4 class="pull-right  p-1 results-info">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+								 @endif
+							 </div>
+						 </div>
+
+							<div class="row mb-2">
+								<form class="" action="{{url('/product-registration')}}" method="get">
+								<div class="col-sm-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<select id="filter_sort" class="form-control1" name="filter_sort" >
 										<option value="newOld" @if(isset($sortBy)) @if($sortBy == 'newOld' ) selected @endif @endif >New-Old</option>
 										<option value="oldNew" @if(isset($sortBy)) @if($sortBy == 'oldNew' ) selected @endif @endif>Old-New</option>
@@ -34,32 +47,25 @@
 									</select>
 								</div>
 
-								<div class="col-xs-2">
-									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="" placeholder="Date from">
+								<div class="col-sm-2">
+									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="{{$filter_from}}" placeholder="Date from">
 								</div>
-								<div class="col-xs-1">
+								<div class="col-sm-1 hidden-xs">
 									<p style="line-height:40px">~</p>
 								</div>
-								<div class="col-xs-2">
-									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="" placeholder="Date to">
+								<div class="col-sm-2">
+									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="{{$filter_to}}" placeholder="Date to">
 								</div>
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
 								</form>
 							</div>
-						</div>
 	        <!-- //breadcrumbs -->
 
 
 
-					<div class="container" >
-						<div class="row">
-							@if( isset($dept) )
-							<h1 class="text-capitalize ">{{$dept->name}} Products </h1>
-							<h4 class="pull-right  p-1 results-info">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
-							@endif
-						</div>
+
 
 						<div class="row">
 
@@ -104,7 +110,6 @@
 								{{$products->appends(request()->except('page'))->links()}}
 							@endif
 						</div>
-					</div>
 
 				</div>
 		<!-- //inner_content-->
