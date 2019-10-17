@@ -41,10 +41,10 @@
 												@foreach( $dept->purchase as $purchase )
 													<?php $totalAmountPaid += $purchase->amountPaid; ?>
 												@endforeach
-													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
-													<p>Ksh. {{number_format($totalAmountPaid,2)}} spend</p>
+													<p><strong>{{count($dept->purchase)}}</strong> @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
+													<p>Ksh. <strong>{{number_format($totalAmountPaid,2)}}</strong> spend</p>
 												@endif
-												<a href="{{route('purchases-registration.create')}}" class="btn btn-x-sm  btn-default" >New purchase</a>
+												<a href="{{route('purchases-registration.create')}}" class="btn btn-x-sm  btn-default mt-1" >New purchase</a>
 												<!--<a href="#" class="btn btn-x-sm  btn-default" data-toggle="modal" data-target="#recordPurchasesModal">New purchase</a>-->
 											<dd>
 										</dl>
@@ -65,12 +65,12 @@
 													@foreach( $dept->booking as $booking )
 														<?php $totalAmountReceived += $booking->bookingAmountReceived; ?>
 													@endforeach
-													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
-													<p>Ksh. {{number_format($totalAmountReceived,2)}} made</p>
+													<p><strong>{{count($dept->booking)}}</strong> @if(count($dept->booking)==1) booking @else bookings @endif</p>
+													<p>Ksh. <strong>{{number_format($totalAmountReceived,2)}}</strong> made</p>
 												@endif
 												<!--<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordBookingsModal">New booking</a>-->
 
-												<a href="/bookings-registration/create" class="btn btn-x-sm btn-default">New booking</a>
+												<a href="/bookings-registration/create" class="btn btn-x-sm btn-default mt-1">New booking</a>
 											<dd>
 										</dl>
 									</div>
@@ -93,10 +93,10 @@
 												<h3><a href="{{route('dept report',$dept->id)}}">Reports</a></h3>
 												<p class="text-underline">This month</p>
 												@if( $dept->purchase && $dept->booking )
-													<p>{{count($dept->purchase)}} @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
-													<p>{{count($dept->booking)}} @if(count($dept->booking)==1) booking @else bookings @endif</p>
+													<p><strong>{{count($dept->purchase)}}</strong> @if(count($dept->purchase)==1) purchase @else purchases @endif</p>
+													<p><strong>{{count($dept->booking)}} </strong>@if(count($dept->booking)==1) booking @else bookings @endif</p>
 												@endif
-												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-default">View reports</a>
+												<a href="{{route('dept report',$dept->id)}}" class="btn btn-x-sm btn-default mt-1">View reports</a>
 											<dd>
 										</dl>
 									</div>

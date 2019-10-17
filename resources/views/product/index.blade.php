@@ -23,12 +23,22 @@
 					 $filter_to = isset($_GET['filter_to']) ? $_GET['filter_to'] : null;
 					 $filter_to = strtotime($filter_from) < strtotime($filter_to) ? $filter_to : null;
 					  ?>
+						 <div class="row mb-1">
+
+						@if( isset($dept) )
+							 <div class="col-sm-6">
+								 <h4 class="text-capitalize text-bold">{{$dept->name}} Products </h4>
+							 </div>
+							 <div class="col-sm-6">
+								 <h4 class="p-1 results-info text-right">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+							 </div>
+						 @endif
+
+						 </div>
+
 						 <div class="row mb-2">
 							 <div class="col-sm-12">
-								 @if( isset($dept) )
-								 <h4 class="text-capitalize text-bold">{{$dept->name}} Products </h4>
-								 <h4 class="pull-right  p-1 results-info">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
-								 @endif
+								 <a href="{{url('/user-registration/create')}}" class="btn btn-default" title="Create new user">Re - stock <span class="fas fa-undo"></span></a>
 							 </div>
 						 </div>
 
@@ -77,9 +87,9 @@
 												<dt>
 													<a href="{{route('product-registration.show',$product->id)}}">
                             @if( $product->img1 )
-                            <img class="img " src="{{$product->img1}}" alt="{{$product->name}}" height="120" width="150">
+                            <img class="img prod-img" src="{{$product->img1}}" alt="{{$product->name}}" height="60" width="75">
                             @else
-                            <img class="img " src="{{url('/images/product-placeholder.png')}}" alt="{{$product->name}}" height="120" width="150">
+                            <img class="img prod-img" src="{{url('/images/product-placeholder.png')}}" alt="{{$product->name}}" height="60" width="75">
                             @endif
                           </a>
 													@if( $product->quantity > env('LOW_STOCK_LEVEL',5) )

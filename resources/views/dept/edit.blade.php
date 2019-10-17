@@ -30,8 +30,8 @@
             @if( count($errors) )
               <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
             @endif
-             <h2 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h2>
-             <h4 class="w3_inner_tittle two mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
+             <!--<h2 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h2>--->
+             <h4 class="w3_inner_tittle two mt-2 mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
 
              <div class="row">
 

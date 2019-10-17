@@ -23,7 +23,6 @@
 
 
 
-					<div class="container" >
 						<h4 class="mb-2 text-bold">Supplier</h4>
 
 						<div class="row">
@@ -140,7 +139,6 @@
 						</div>
 
 
-					</div>
 
 				</div>
 		<!-- //inner_content-->

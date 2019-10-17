@@ -107,9 +107,7 @@
 }
 /*Action tabs*/
 .action-tab {
-  text-align: center;
-  box-shadow: 1px 1px 3px 3px #ccc;
-  border-radius: 5px;
+  overflow: hidden;
 }
 .action-tab .fas{
   font-size: 1.8em;
@@ -139,8 +137,14 @@
   text-overflow: ellipsis;
 
 }
+.action-tab h3{
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .status-sec{
   font-size: 10px;
+  display: inline;
 }
 .action-tab a{
   color: inherit;
@@ -149,21 +153,24 @@
   text-decoration: underline;
 }
 .action-tab dl{
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   overflow: hidden;
+  max-width: 250px;
+  text-align: center;
+  box-shadow: 1px 1px 1px 1px #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .action-tab dd,dt{
   margin: 0;
   padding: 5px;
-  float: left;
 }
 .action-tab dd{
-  width: 90%;
-  margin-top: 5%;
+
 }
 .action-tab dt{
-  width: 10%;
+
 }
 .mb-2{
   margin-bottom: 20px!important;
@@ -410,5 +417,13 @@ tfoot,tbody {
 }
 .pt-1{
   padding-top: 1em!important;
+}
+.text-italic{
+  font-style: italic!important;
+}
+.prod-img{
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px #ccc;
 }
 /*New & Edit Booking page*/
