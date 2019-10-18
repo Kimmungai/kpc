@@ -31,6 +31,7 @@ class StoreUser extends FormRequest
             'org_id' => 'required|numeric',
             'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
             'firstName' => 'required|max:255',
+            'name' => 'required|max:255|unique:users,name,'.\Request::segment(2),
             'lastName' => 'nullable|max:255',
             'DOB' => 'nullable|date|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.\Request::segment(2),

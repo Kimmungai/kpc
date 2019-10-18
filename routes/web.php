@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::redirect('/home','/');
 
 //purchases
-Route::get('/purchases','PurchasesController@index')->name('purchases');
+Route::get('purchases','PurchasesController@index')->name('purchases');
 
 
 //users
@@ -33,6 +33,7 @@ Route::post('get-purchases-user','UserAjaxController@get_purchases_user');
 Route::post('get-user','UserAjaxController@get_user');
 Route::post('create-user','UserAjaxController@create_user');
 Route::post('change-user-status','UserAjaxController@change_user_status');
+Route::get('profile/{id}','UserController@profile')->name('profile');
 
 
 
@@ -87,3 +88,9 @@ Route::post('share-inventory-report','InventoryReportController@share');
 
 Route::get('purchase-filtered-report','ProcurementReportController@report');
 Route::get('inventory-filtered-report','InventoryReportController@report');
+
+//Notifications
+Route::resource('notifications','NotificationsController');
+
+//Tasks
+Route::resource('tasks','TasksController');

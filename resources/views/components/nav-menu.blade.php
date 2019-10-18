@@ -68,22 +68,28 @@
     </nav>
   </li>
   <!-- //nav_agile_w3l -->
-  <li class="second logo"><h1><a href="/"><i class="fas fa-home" aria-hidden="true"></i>Esteem </a></h1></li>
+  <li class="second logo"><h1><a href="/">{{env('APP_NAME')}} </a></h1></li>
 					<li class="second admin-pic">
 				       <ul class="top_dp_agile">
+                 @if(Auth::check())
 									<li class="dropdown profile_details_drop">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 											<div class="profile_img">
-												<span class="prfil-img"><img src="{{url('/images/avatar-male.png')}}" alt="" height="45" width="45"> </span>
+                        @if(Auth::user()->avatar)
+                          <span class="prfil-img"><img src="{{Auth::user()->avatar}}" alt="" height="45" width="45"> </span>
+                        @else
+                          <span class="prfil-img"><img src="@if(Auth::user()->gender == 1) {{url('/images/avatar-male.png')}} @else {{url('/images/avatar-female.png')}} @endif" alt="" height="45" width="45"> </span>
+                        @endif
 											</div>
 										</a>
 										<ul class="dropdown-menu drp-mnu">
-											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+											<li> <a href="{{url('/user-registration')}}/{{Auth::id()}}/edit"><i class="fa fa-cog"></i> Settings</a> </li>
+											<li> <a href="{{route('profile',Auth::id())}}"><i class="fa fa-user"></i> Profile</a> </li>
+											<li> <a href="#" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out-alt"></i> Logout</a> </li>
 										</ul>
 									</li>
-
+                  @endif
 						</ul>
 				</li>
 				<li class="second top_bell_nav">
@@ -134,7 +140,7 @@
 											 </a></li>
 											 <li>
 												<div class="notification_bottom">
-													<a href="#">See all Notifications</a>
+													<a href="{{route('notifications.index')}}">See all Notifications</a>
 												</div>
 											</li>
 										</ul>
@@ -191,7 +197,7 @@
 											</a></li>
 											<li>
 												<div class="notification_bottom">
-													<a href="#">See all pending tasks</a>
+													<a href="{{route('tasks.index')}}">See all pending tasks</a>
 												</div>
 											</li>
 										</ul>
@@ -236,7 +242,7 @@
                         </a></li>
 											 <li>
 
-                         
+
 												<div class="notification_bottom">
 													<a href="{{url('/users')}}">Open all users</a>
 												</div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -36,6 +36,45 @@ class UserController extends Controller
     }
 
     return view('user.index',compact('usersCount'));
+  }
+
+  public function profile( $id )
+  {
+    if( $id == Auth::id() )
+    {
+      $profile = Auth::user();
+
+    }
+    else
+    {
+      $profile = User::find($id);
+      $admins = [3,-1];//admin type
+      $staffAdmins = [-1,1,3];//admins and staff
+      $otherUsers = [2,4,5];//cusomers,casuals,suppliers
+      if( $profile->type == -1  &&  Auth::user()->type != -1)
+      {
+        Session::flash('error', 'Sorry you are not authorised to perform this action.');
+        return back();
+      }
+      if( $profile->type == 3 &&  !in_array( Auth::user()->type, $admins ) )
+      {
+        Session::flash('error', 'Sorry you are not authorised to perform this action.');
+        return back();
+      }
+      if( $profile->type == 1  &&  !in_array( Auth::user()->type, $staffAdmins ) )
+      {
+        Session::flash('error', 'Sorry you are not authorised to perform this action.');
+        return back();
+      }
+      if( in_array( Auth::user()->type, $otherUsers ) &&  ($id != Auth::id()) )
+      {
+        Session::flash('error', 'Sorry you are not authorised to perform this action.');
+        return back();
+      }
+    }
+
+    return view('user.profile',compact('profile'));
+
   }
 
 }

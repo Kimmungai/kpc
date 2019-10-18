@@ -68,6 +68,25 @@
 
 
 
+<div class="form-group" id="nameTitle">
+  <label class="col-md-2 control-label">User Name <span class="text-danger">*</span></label>
+  <div class="col-md-8">
+    <div class="input-group input-icon right">
+      <span class="input-group-addon">
+        <i class="fa fa-info"></i>
+      </span>
+      <input name="name" id="name" type="text" class="form-control" value="@if( old('name') ) {{old('name')}} @elseif( isset($user) ) {{$user->name}} @endif" placeholder="User Name..." onblur="validate(this.id,{required:1,min:3,max:255},this.value)" />
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <p class="help-block red-text" id="nameHelper">
+      @if ($errors->has('name'))
+        {{ $errors->first('name') }}
+      @endif
+    </p>
+  </div>
+</div>
+
 <div class="form-group" id="firstNameTitle">
   <label class="col-md-2 control-label">First Name <span class="text-danger">*</span></label>
   <div class="col-md-8">

@@ -103,7 +103,7 @@
                               @else
                                 <span><p style="color:#e53238">Customer</p></span>
                               @endif
-                              <a class="btn btn-default btn-block mt-2" href="/user-registration/{{$user->id}}/edit">Open record</a>
+                              <a class="btn btn-default btn-block mt-2" href="{{route('profile',$user->id)}}">Open record</a>
                               </div>
                               <div class="clearfix"></div>
                               <hr style="margin:5px 0 5px 0;">
