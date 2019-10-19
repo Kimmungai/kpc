@@ -58,7 +58,7 @@ li.second.admin-pic img {
 		-o-box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 li.second.logo h1 {
-    font-size: 2em;
+    font-size: 1em;
     text-transform: uppercase;
     font-weight: 700;
     line-height: 59px;
@@ -69,6 +69,8 @@ li.second.logo h1 {
 	-o-text-shadow: 4px 4px 2px rgb(7, 70, 121);
 	-ms-text-shadow: 4px 4px 2px rgb(7, 70, 121);
 	position:relative;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 li.second.logo i.fa.fa-graduation-cap {
     position: absolute;
@@ -492,7 +494,7 @@ li.second.w3l_search input:-ms-input-placeholder {
 
  /*--inner_content --*/
 .inner_content {
-    padding: 4em 4em;
+    padding: 0 4em;
 }
 /*-- /agile_top_w3_post_sections --*/
 .img_wthee_post {
