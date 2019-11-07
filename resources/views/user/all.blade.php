@@ -23,9 +23,9 @@
 
         <div class="inner_content_w3_agile_info two_in">
           @if( isset($type) )
-            <h2 class="w3_inner_tittle">@if($type==1) Staff @elseif($type==2) Customers @elseif($type==3) Administrators @elseif($type==4) Casuals @elseif($type==5) Suppliers @elseif($type==-1) Super Administrators @endif</h2>
+            <h4 class="text-capitalize text-bold mb-1">@if($type==1) Staff @elseif($type==2) Customers @elseif($type==3) Administrators @elseif($type==4) Casuals @elseif($type==5) Suppliers @elseif($type==-1) Super Administrators @endif</h4>
           @else
-            <h2 class="w3_inner_tittle"> All users </h2>
+            <h4 class="text-capitalize text-bold mb-1"> All users </h4>
 
           @endif
 

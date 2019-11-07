@@ -51,7 +51,7 @@ li.second.admin-pic img {
     -o-border-radius: 50%;
 	    margin-top: 6px;
     /*width: 85%;*/
-    margin-left: -4px;
+    /*margin-left: -4px;*/
 	box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
 		-webkit-box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
 		-moz-box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
@@ -1074,7 +1074,7 @@ figure.icons,.weather-text {
 .w3l_agileits_breadcrumbs{
 	padding:1em 0;
 	background:#f5f5f5;
-	margin-top: 3em;
+	/*margin-top: 3em;*/
 }
 .w3l_agileits_breadcrumbs ul li{
 	display:inline-block;
@@ -2772,7 +2772,7 @@ li.second.logo.admin {
 	}
 	.w3l_agileits_breadcrumbs {
 		padding: 1em 0;
-		margin-top: 2em;
+		/*margin-top: 2em;*/
 	}
 	.button_set_one.three.one.agile_info_shadow {
 		margin-top: 1em;
@@ -2924,7 +2924,7 @@ li.second.logo.admin {
 		float: none;
 	}
 	.profile_img {
-		float: right;
+		/*(float: right;*/
 	}
 	li.second.admin-pic img {
 		margin-top: 6px;

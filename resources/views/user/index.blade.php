@@ -18,7 +18,7 @@
 					<div class="inner_content_w3_agile_info">
 
 					<!-- /departments start-->
-					<h1 class="text-uppercase">All users</h1>
+					<h4 class="text-capitalize text-bold mb-1">All users</h4>
 					<div class="row">
 						<div class="col-md-12">
 							<a href="{{url('/user-registration/create')}}" class="btn btn-default pull-right" title="Create new user">New user <span class="fas fa-user-plus"></span></a>
