@@ -20,7 +20,11 @@
   					<!-- //breadcrumbs -->
 
   					<div class="inner_content_w3_agile_info two_in">
-  					  <h2 class="w3_inner_tittle">User registration</h2>
+  					  <h4 class="text-bold text-capitalize mb-2">User registration</h4>
+              <h4 class="w3_inner_tittle two mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
+              @if( count($errors) )
+                <h4 class="w3_inner_tittle two red-text mb-2">There are some errors, please correct them first.</h4>
+              @endif
               @component( 'components.confirm-modal',[ 'formId' => 'newUserForm', 'heading' => 'New user datails', 'message' => 'Are you sure you want to save new user details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please save' ] )
 
               @endcomponent
@@ -43,10 +47,7 @@
 
 
   													<div class="grid-1 graph-form agile_info_shadow">
-                            @if( count($errors) )
-                              <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
-                            @endif
-  													 <h3 class="w3_inner_tittle two">Please fill in this Form </h3>
+
 
                              <form class="form-horizontal" id="newUserForm" action="{{route('user-registration.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                @csrf

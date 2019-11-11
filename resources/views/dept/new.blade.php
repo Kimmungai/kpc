@@ -17,7 +17,7 @@
 					<!-- //breadcrumbs -->
 
 					<div class="inner_content_w3_agile_info two_in">
-					  <h2 class="w3_inner_tittle">Department registration</h2>
+					 <!-- <h4 class="w3_inner_tittle text-bold text-capitalize mb-2">Department registration</h4>-->
             @component( 'components.confirm-modal',[ 'formId' => 'newDeptForm', 'heading' => 'New Department datails', 'message' => 'Are you sure you want to save new department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please save' ] )
 
             @endcomponent

@@ -133,7 +133,9 @@
 												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>-->
-												<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>
+												<!--<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>-->
+												<a href="{{route('transfer',$dept->id)}}" class="btn btn-x-sm btn-default" >Transfer stock</a>
+
 											<dd>
 										</dl>
 									</div>

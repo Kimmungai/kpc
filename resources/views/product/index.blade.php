@@ -12,7 +12,7 @@
                   @if( isset($dept) )
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
-									<li>All products</li>
+									<li>All products </li>
 	              </ul>
 	            </div>
 	          </div>
@@ -38,7 +38,7 @@
 
 						 <div class="row mb-2">
 							 <div class="col-sm-12">
-								 <a href="{{url('/user-registration/create')}}" class="btn btn-default" title="Create new user">Re - stock <span class="fas fa-undo"></span></a>
+								 <a href="{{route('requisition',$dept->id)}}" class="btn btn-default" title="Add new stock">Re - stock <span class="fas fa-undo"></span></a>
 							 </div>
 						 </div>
 

@@ -542,3 +542,6 @@ tfoot,tbody {
   color: #fff;
   margin-top: 20px;
 }
+.dropdown-menu a{
+  color: inherit;
+}

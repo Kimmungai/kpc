@@ -170,4 +170,11 @@ class ProductRegistrationController extends Controller
       $image->move($storageLoc, $name);
       return asset($storageLoc.'/'.$name);
     }
+
+    public function requisition($id)
+    {
+        $dept = Dept::find($id);
+        return view('product.requisition',compact('dept'));
+    }
+
 }

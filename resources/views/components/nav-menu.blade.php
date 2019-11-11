@@ -260,7 +260,7 @@
 				</li>
       </div>
 
-      <div class="col-sm-3" style="padding:10px;">
+      <div class="col-sm-3">
         <!--<li class="second w3l_search" style="border:0">
 
 						<form action="#" method="post">
@@ -269,7 +269,14 @@
 						</form>
 
 				</li>-->
-        <input class="form-control" type="text" name="" value="">
+        <div class="input-group" style="margin:15px 0 5px 0;">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-danger" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+
+
       </div>
 
     </div>
