@@ -494,7 +494,7 @@ li.second.w3l_search input:-ms-input-placeholder {
 
  /*--inner_content --*/
 .inner_content {
-    padding: 0 4em;
+    padding: 1em 4em;
 }
 /*-- /agile_top_w3_post_sections --*/
 .img_wthee_post {
@@ -2695,7 +2695,7 @@ li.second.logo.admin {
 @media (max-width:768px){
 
 	.inner_content {
-		padding: 2em 2em;
+		padding: 0 2em;
 	}
 	.w3ls_agile_cylinder.chart.agile_info_shadow {
 		padding: 1em 1em;
@@ -3004,7 +3004,7 @@ li.second.logo.admin {
 		margin-bottom: 1em;
 	}
 	.inner_content {
-		padding: 1.2em 1em;
+		padding: 1em 1em;
 	}
 	.cir_agile_info {
 		min-height: 340px;

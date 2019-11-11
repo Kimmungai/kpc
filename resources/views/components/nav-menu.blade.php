@@ -66,7 +66,7 @@
         <li class="app-title"><h1><a href="/">{{env('APP_NAME')}} </a></h1></li>
       </div>
 
-      <div class="col-xs-3  col-sm-1" style="padding:0;">
+      <div class="col-xs-3  col-sm-1" style="padding-bottom: 5px;">
         <li class="second admin-pic" style="padding:0;margin:0">
              <ul class="">
                @if(Auth::check())
@@ -93,7 +93,7 @@
       </div>
 
 
-      <div class="col-xs-3 col-sm-1" style="padding:0;">
+      <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
 									<li class="dropdown head-dpdn">
@@ -152,7 +152,7 @@
 				</li>
       </div>
 
-      <div class="col-xs-3 col-sm-1" style="padding:0;">
+      <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
 				       <li class="dropdown head-dpdn">
@@ -210,7 +210,7 @@
 				</li>
       </div>
 
-      <div class="col-xs-3 col-sm-1" style="padding:0;">
+      <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
 									<li class="dropdown head-dpdn">
@@ -260,7 +260,7 @@
 				</li>
       </div>
 
-      <div class="col-sm-3" style="padding:0;">
+      <div class="col-sm-3" style="padding:10px;">
         <!--<li class="second w3l_search" style="border:0">
 
 						<form action="#" method="post">
@@ -269,6 +269,7 @@
 						</form>
 
 				</li>-->
+        <input class="form-control" type="text" name="" value="">
       </div>
 
     </div>
