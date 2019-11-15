@@ -30,55 +30,50 @@
             @if( count($errors) )
               <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
             @endif
-             <!--<h2 class="w3_inner_tittle two">@if( isset($dept) ) {{$dept->name}} @endif department Registration details </h2>--->
              <h4 class="w3_inner_tittle two mt-2 mb-2">Please fill in all required field <span class="text-danger">*</span> </h4>
 
-             <div class="row">
+             @if( Auth::user()->type == -1 )
+              <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</a>
+             @endif
 
+             <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</a>
 
+             @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )@endcomponent
 
-                  @component( 'components.confirm-modal',[ 'formId' => 'DeptForm', 'heading' => 'Department datails', 'message' => 'Are you sure you want to update department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
+             @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteDeptForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )@endcomponent
+             <form class="form-horizontal" id="DeptForm" action="{{route('dept-registration.update',$dept->id)}}" method="post" enctype="multipart/form-data">
+               @csrf
+               @method('PUT')
+               <div class="row mt-2 dept-details">
+                    @component( 'components.dept-reg-form',['dept'=>$dept] )@endcomponent
+                </div>
+                <div class="row dept-details">
+                    @component( 'components.dept-reg-services-form',['dept'=>$dept] )@endcomponent
+                </div>
+              </form>
 
-                  @endcomponent
-
-                  @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteDeptForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
-
-                  @endcomponent
-
-                  <form class="form-horizontal" id="DeptForm" action="{{route('dept-registration.update',$dept->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-
-                    @component( 'components.dept-reg-form',['dept'=>$dept] )
-
-                    @endcomponent
-
-
-
-
-                  </form>
-
-             </div>
-
-
-          <div class="button" data-toggle="modal" data-target="#confirmModal">
+          <!--<div class="button" data-toggle="modal" data-target="#confirmModal">
            <p class="btnText">Update?</p>
            <div class="btnTwo" style="background:green">
              <p class="btnText2">GO!</p>
            </div>
-          </div>
+         </div>-->
           @if( Auth::user()->type == -1 )
-          <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
+          <!--<div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
            <p class="btnText">Delete?</p>
            <div class="btnTwo">
              <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
            </div>
-          </div>
+         </div>-->
+         <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</a>
           <form class="d-none hidden" id="deleteDeptForm" action="{{route('dept-registration.update',$dept->id)}}" method="post">
                  @csrf
                  @method('DELETE')
           </form>
           @endif
+
+          <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</a>
+
 
 
         </div>

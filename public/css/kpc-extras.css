@@ -545,3 +545,9 @@ tfoot,tbody {
 .dropdown-menu a{
   color: inherit;
 }
+.dept-details h3{
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}

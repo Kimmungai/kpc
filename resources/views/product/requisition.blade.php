@@ -40,8 +40,12 @@
 											<div class="wthree_general">
 
 
-
-	                           <form class="form-horizontal" id="newUserForm" action="{{url('/user-registration')}}" method="post" enctype="multipart/form-data">
+												<div class="row" >
+													<div class="col-md-12">
+														<a href="#" class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</a>
+													</div>
+												</div>
+	                           <form class="form-horizontal mt-2" id="newUserForm" action="{{url('/user-registration')}}" method="post" enctype="multipart/form-data">
 	                             @csrf
 
 	                             @component( 'components.user-reg-form' )
@@ -55,11 +59,16 @@
 
 
 
-											<div class="button" data-toggle="modal" data-target="#confirmModal">
+											<!--<div class="button" data-toggle="modal" data-target="#confirmModal">
 											 <p class="btnText">Save details?</p>
 											 <div class="btnTwo" style="background:green">
 												 <p class="btnText2">GO!</p>
 											 </div>
+										 </div>-->
+										 <div class="row" >
+												<div class="col-md-12">
+													<a href="#" class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</a>
+												</div>
 											</div>
 
 										</div>
