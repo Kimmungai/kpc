@@ -36,10 +36,18 @@
 
 						 </div>
 
-						 <div class="row mb-2">
-							 <div class="col-sm-12">
-								 <a href="{{route('requisition',$dept->id)}}" class="btn btn-default" title="Add new stock">Re - stock <span class="fas fa-undo"></span></a>
-							 </div>
+						 <div class="row">
+ 								<div class="col-sm-6 mb-2">
+									<div class="input-group">
+							      <input type="text" class="form-control" placeholder="Search for product @if(isset($dept)) in {{$dept->name}} department @endif">
+							      <span class="input-group-btn">
+							        <button class="btn btn-danger" type="button">Search</button>
+							      </span>
+							    </div>
+ 								</div>
+								<div class="col-sm-6 mb-2">
+ 								 <a href="{{route('prod_reg_type')}}" class="btn btn-default pull-right" title="Add new stock">Re - stock <span class="fas fa-undo"></span></a>
+ 							 </div>
 						 </div>
 
 							<div class="row mb-2">
@@ -48,7 +56,7 @@
 									<p style="line-height:40px">Sort:</p>
 								</div>
 								<div class="col-sm-3">
-									<select id="filter_sort" class="form-control1" name="filter_sort" >
+									<select id="filter_sort" class="form-control" name="filter_sort" >
 										<option value="newOld" @if(isset($sortBy)) @if($sortBy == 'newOld' ) selected @endif @endif >New-Old</option>
 										<option value="oldNew" @if(isset($sortBy)) @if($sortBy == 'oldNew' ) selected @endif @endif>Old-New</option>
 										<option value="inOnly" @if(isset($sortBy)) @if($sortBy == 'inOnly' ) selected @endif @endif >In stock only</option>
@@ -58,19 +66,20 @@
 								</div>
 
 								<div class="col-sm-2">
-									<input type="text" id="filter_from" name="filter_from" class="form-control1" value="{{$filter_from}}" placeholder="Date from">
+									<input type="text" id="filter_from" name="filter_from" class="form-control" value="{{$filter_from}}" placeholder="Date from">
 								</div>
 								<div class="col-sm-1 hidden-xs">
 									<p style="line-height:40px">~</p>
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="filter_to" name="filter_to" class="form-control1" value="{{$filter_to}}" placeholder="Date to">
+									<input type="text" id="filter_to" name="filter_to" class="form-control" value="{{$filter_to}}" placeholder="Date to">
 								</div>
 								<div class="col-sm-2">
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
 								</form>
 							</div>
+
 	        <!-- //breadcrumbs -->
 
 
@@ -101,12 +110,15 @@
 													@endif
 
 												</dt>
-												<dd>
+												<dd class="mb-3">
 													<h3><a href="{{route('product-registration.show',$product->id)}}">{{$product->name}}</a></h3>
 													<p>Registered: <strong>{{date('d/m/Y',strtotime($product->created_at))}}</strong></p>
 													<p>In store: <strong>{{$product->quantity}}</strong></p>
 													<p>Price: <strong>Ksh. {{$product->price}}</strong></p>
-													<a href="{{route('product-registration.show',$product->id)}}" class="btn btn-x-sm  btn-default" >Open</a>
+
+													<a href="{{route('product-registration.show',$product->id)}}" class="btn btn-x-sm  btn-default pull-left mt-1" ><span class="fa fa-eye"></span> Open</a>
+													<a href="#" class="btn btn-x-sm  btn-default pull-right mt-1" ><span class="fa fa-shopping-cart"></span> sell</a>
+
 												<dd>
 											</dl>
 										</div>

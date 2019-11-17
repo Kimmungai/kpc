@@ -60,6 +60,9 @@ Route::post('search-product','ProductsAjaxController@search_product');
 Route::post('get-product','ProductsAjaxController@get_product');
 Route::post('update-product','ProductsAjaxController@update_product');
 Route::get('product-requisition/{id}','ProductRegistrationController@requisition')->name('requisition');
+Route::get('product-requisition/{id}','ProductRegistrationController@requisition')->name('requisition');
+Route::get('product-registration-type','ProductRegistrationController@prod_reg_type')->name('prod_reg_type');
+Route::resource('product-registration','ProductRegistrationController');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');
@@ -73,8 +76,6 @@ Route::post('share-booking','BookingsAjaxController@share');
 Route::post('save-transfer','TransfersAjaxController@save_transfer');
 Route::get('stock-transfer/{id}','TransferController@index')->name('transfer');
 
-//Products
-Route::resource('product-registration','ProductRegistrationController');
 
 //Reports
 Route::resource('booking-report','BookingReportController');

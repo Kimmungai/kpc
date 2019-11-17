@@ -6,6 +6,7 @@ use App\Product;
 use App\Dept;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProduct;
 
 class ProductRegistrationController extends Controller
 {
@@ -64,7 +65,14 @@ class ProductRegistrationController extends Controller
      */
     public function create()
     {
-        //
+      if(Session('deptID') != null ){
+        $dept = Dept::find(Session('deptID'));
+        return view('product.create',compact('dept'));
+      }else {
+        Session::flash('error', 'There is an error! Session deptID not defined');
+        return redirect('/');
+      }
+
     }
 
     /**
@@ -73,9 +81,13 @@ class ProductRegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        //
+        $validated = $request->all();
+        $prodData = $this->uploads($request,$validated);
+        Product::create($prodData);
+        Session::flash('message', env("SAVE_SUCCESS_MSG","Product saved succesfully!"));
+        return redirect(route('product-registration.index'));
     }
 
     /**
@@ -175,6 +187,14 @@ class ProductRegistrationController extends Controller
     {
         $dept = Dept::find($id);
         return view('product.requisition',compact('dept'));
+    }
+
+    /*
+    *Function to select product registration type
+    */
+    public function prod_reg_type()
+    {
+      return view('product.reg-type');
     }
 
 }

@@ -47,7 +47,7 @@
 									<p style="line-height:40px">Sort:</p>
 								</div>
 								<div class="col-xs-3">
-									<select class="duration_sort" id="duration_sort" class="form-control1" name="duration_sort" onchange="set_report_duration(this.value)">
+									<select class="duration_sort" id="duration_sort" class="form-control" name="duration_sort" onchange="set_report_duration(this.value)">
 										<option value="thisMonth" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisMonth' ) selected @endif @endif >This month</option>
 										<option value="thisWeek" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisWeek' ) selected @endif @endif>This week</option>
 										<option value="thisYear" @if(isset($_GET['duration_sort'])) @if($_GET['duration_sort'] == 'thisYear' ) selected @endif @endif >This Year</option>
@@ -57,13 +57,13 @@
 								</div>
 								<div id="specific-dates" class="specific-dates @if(isset($_GET['duration_sort']))  @if($_GET['filter_from']=='' && $_GET['filter_to']=='') d-none hidden  @endif @else d-none hidden @endif">
 									<div class="col-xs-2">
-										<input type="text" id="filter_from" name="filter_from" class="form-control1" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif"  onchange="clear_max_field('filter_to')" placeholder="Date from">
+										<input type="text" id="filter_from" name="filter_from" class="form-control" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif"  onchange="clear_max_field('filter_to')" placeholder="Date from">
 									</div>
 									<div class="col-xs-1">
 										<p style="line-height:40px">~</p>
 									</div>
 									<div class="col-xs-2">
-										<input type="text" id="filter_to" name="filter_to" class="form-control1" value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif" placeholder="Date to">
+										<input type="text" id="filter_to" name="filter_to" class="form-control" value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif" placeholder="Date to">
 									</div>
 							  </div>
 								<div class="col-xs-2">
@@ -89,7 +89,7 @@
 						@else
 							<?php $StartDate=date('d-M-Y',strtotime($dt->startOfMonth()));$EndDate=date('d-M-Y',strtotime($dt->endOfMonth())); ?>
 						@endif
-	
+
             @component('components.inventory-report',['inventory'=>$inventory,'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
 						<!--end purchase-show-->
 

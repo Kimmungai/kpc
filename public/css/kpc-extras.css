@@ -175,6 +175,9 @@
 .mb-2{
   margin-bottom: 20px!important;
 }
+.mb-3{
+  margin-bottom: 3em!important;
+}
 .mt-2{
   margin-top: 2em!important;
 }
@@ -550,4 +553,30 @@ tfoot,tbody {
   font-weight: 800;
   text-transform: uppercase;
   margin-bottom: 1em;
+}
+ .prod-details h3{
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+.prod-reg-type
+{
+  margin: 2em;
+  border:1px solid #ccc;
+  box-shadow: 0 0 3px 1px #ccc;
+  border-radius: 5px;
+  padding: 15px;
+}
+.prod-reg-type h3
+{
+  text-align: center;
+  font-weight: 800;
+  font-size: 18px;
+  margin: 15px;
+}
+.prod-reg-type p
+{
+  text-align: center;
+  margin-bottom: 1.5em;
 }

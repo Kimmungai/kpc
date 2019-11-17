@@ -54,7 +54,7 @@
 
     <a href="#" class="btn btn-default btn-sm">Add room type</a>
 
-    <div class="form-group mt-2" id="nameTitle">
+    <!--<div class="form-group mt-2" id="nameTitle">
       <label class="col-md-2 control-label">Has products? </label>
       <div class="col-md-8">
           Yes <input name="has_products" id="has_products" type="radio" class="" value="@if( old('has_products') ) {{old('has_products')}} @elseif( isset($dept) ) {{$dept->has_products}} @endif"  />
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <a href="#" class="btn btn-default btn-sm ">Add product</a>
+    <a href="#" class="btn btn-default btn-sm ">Add product</a>-->
 
 
 

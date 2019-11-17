@@ -42,16 +42,25 @@
                            <form class="form-horizontal" id="newDeptForm" action="{{url('/dept-registration')}}" method="post" enctype="multipart/form-data">
                              @csrf
 
-                             @component( 'components.dept-reg-form' )
+														 <div class="row mt-2 dept-details">
+							                    @component( 'components.dept-reg-form' )@endcomponent
+							                </div>
+							                <div class="row dept-details">
+							                    @component( 'components.dept-reg-services-form' )@endcomponent
+							                </div>
 
-                             @endcomponent
-
-                             <div class="button" data-toggle="modal" data-target="#confirmModal">
+                             <!--<div class="button" data-toggle="modal" data-target="#confirmModal">
      													<p class="btnText">Save details?</p>
      													<div class="btnTwo" style="background:green">
      													  <p class="btnText2">GO!</p>
      													</div>
-     												 </div>
+														</div>-->
+														<div class="row">
+															<div class="col-sm-12">
+																<a class="btn btn-default btn-lg center-block" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</a>
+															</div>
+														</div>
+
 
                            </form>
 

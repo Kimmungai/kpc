@@ -10,7 +10,7 @@
               <li><a href="/home">Home</a> <span>«</span></li>
               <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
               <li class="text-capitalize"><a href="/product-registration">All products</a> <span>«</span></li>
-              <li class="text-capitalize">Product-{{$product->id}}</li>
+              <li class="text-capitalize">@if($product->name) {{$product->name}} @else Product-{{$product->id}} @endif</li>
             </ul>
           </div>
         </div>
@@ -26,44 +26,30 @@
 
           <div class="wthree_general">
 
+            <h4 class="text-capitalize text-bold mt-1">@if( isset($product) ) {{$product->name}} @else Product @endif Registration details </h4>
+            <h4 class="mt-1 mb-1">Fill in all required fields <span class="text-danger">*</span> </h4>
+            @if( count($errors) )
+              <h4 class="text-capitalize mb-1 mt-1 red-text">There are some errors, please correct them first.</h4>
+            @endif
 
-              <div class="grid-1 graph-form agile_info_shadow">
-              @if( count($errors) )
-                <h3 class="w3_inner_tittle two red-text">There are some errors, please correct them first.</h3>
-              @endif
-               <h3 class="w3_inner_tittle two">@if( isset($product) ) Product-{{$product->id}} @endif Registration details </h3>
-               @component( 'components.confirm-modal',[ 'formId' => 'ProdForm', 'heading' => 'Product datails', 'message' => 'Are you sure you want to update product details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )
+               @component( 'components.confirm-modal',[ 'formId' => 'ProdForm', 'heading' => 'Product datails', 'message' => 'Are you sure you want to update product details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please update' ] )@endcomponent
 
-               @endcomponent
+               @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteProdForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )@endcomponent
 
-               @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteProdForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
-
-               @endcomponent
+               <div class="row">
+                 <div class="col-sm-12">
+                   @if( Auth::user()->type == 3 || Auth::user()->type == -1)
+                   <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal" title="Delete @if(isset($product)) {{$product->name}} @endif"><span class="fa fa-exclamation-triangle"></span> Delete</a>
+                   @endif
+                   <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal" title="Update @if(isset($product)) {{$product->name}} @endif"><span class="fa fa-save"></span> Update</a>
+                 </div>
+               </div>
 
                <form class="form-horizontal" id="ProdForm" action="{{route('product-registration.update',$product->id)}}" method="post" enctype="multipart/form-data">
                  @csrf
                  @method('PUT')
 
-                 @component( 'components.prod-reg-form',['product'=>$product] )
-
-                 @endcomponent
-
-
-                 <div class="button" data-toggle="modal" data-target="#confirmModal">
-                  <p class="btnText">Update?</p>
-                  <div class="btnTwo" style="background:green">
-                    <p class="btnText2">GO!</p>
-                  </div>
-                 </div>
-                 
-                 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
-                 <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
-                  <p class="btnText">Delete?</p>
-                  <div class="btnTwo">
-                    <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
-                  </div>
-                 </div>
-                 @endif
+                 @component( 'components.prod-reg-form',['product'=>$product] )@endcomponent
 
                </form>
 
@@ -72,8 +58,16 @@
                  @method('DELETE')
                </form>
 
+               <div class="row">
+                 <div class="col-sm-12">
+                   @if( Auth::user()->type == 3 || Auth::user()->type == -1)
+                   <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal" title="Delete @if(isset($product)) {{$product->name}} @endif"><span class="fa fa-exclamation-triangle"></span> Delete</a>
+                   @endif
+                   <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal" title="Update @if(isset($product)) {{$product->name}} @endif"><span class="fa fa-save"></span> Update</a>
+                 </div>
+               </div>
 
-          </div>
+
         </div>
         <!--//set-3-->
 
