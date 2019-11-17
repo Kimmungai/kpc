@@ -44,7 +44,10 @@
 <link href="{{ asset('css/purchase.show.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-
+@if( Route::is('requisition*') )
+<link href="{{ asset('css/requisition.css') }}" rel="stylesheet">
+<script src="{{ asset('js/requisition.js') }}" defer></script>
+@endif
 <!-- font-awesome-icons -->
 <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
 <!--<link href="{{url('site-theme/css/font-awesome.css') }}" rel="stylesheet">-->

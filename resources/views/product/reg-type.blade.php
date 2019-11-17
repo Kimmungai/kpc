@@ -44,7 +44,7 @@
                 <div class="prod-reg-type">
                   <h3>Fill in requisition form</h3>
                   <p>Use this option to send a requisition request to the administration</p>
-                  <a href="#" class="btn btn-default  center-block"> <span class="fa fa-check-circle"></span> Use this option</a>
+                  <a href="{{route('requisition.create')}}" class="btn btn-default  center-block"> <span class="fa fa-check-circle"></span> Use this option</a>
                 </div>
               </div>
 

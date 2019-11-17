@@ -1,0 +1,59 @@
+.requisition-form{
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 1px 0 #ccc;
+  padding: 15px;
+}
+.requisition-form header ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75ch;
+}
+.requisition-form header li:first-child{
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.requisition-form header h1{
+  font-size: 22px;
+  text-align: right;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.requisition-form header p{
+  margin-top: 1em;
+  font-size: 12px;
+  padding-left: 15px;
+}
+.requisition-form header p .th{
+  font-weight: 600;
+}
+.requisition-form header p .td{
+  border-bottom: 1px dotted #000;
+  width: 100%;
+}
+.requisition-form main .resp-table th{
+  text-transform: capitalize;
+  background: #000;
+}
+.requisition-form main .resp-table td{
+  background: #fff;
+  text-transform: capitalize;
+}
+.tfoot-hidden-cell{
+  border-color:white!important;
+  border-right: 1px solid #ccc!important;
+}
+.comments-box{
+  border: 1px solid #ccc;
+  padding: 15px;
+  cursor: pointer;
+}
+.requisition-form .btn-info{
+  background: #fff;
+  border-color: #ccc;
+  color: #000;
+}

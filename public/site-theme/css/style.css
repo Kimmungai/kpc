@@ -465,7 +465,7 @@ li.second.w3l_search input[type="search"], select {
     letter-spacing: 1px;
     font-weight:400;
 }
-li.second.w3l_search button.btn.btn-default {
+li.second.w3l_search  {
     outline:none;
     padding: 10px 0 11px;
     width: 15%;
@@ -1634,13 +1634,13 @@ label {
     font-size: 1em;
     color: #777;
 }
-button.btn.btn-default {
+/*button.btn.btn-default {
     background: #00C6D7;
     color: #fff;
     font-size: 1em;
 	outline:none;
 	border:none;
-}
+}*/
 .graph-2.general {
     width: 100%;
 }
@@ -1733,14 +1733,14 @@ input.form-control1.icon {
   /*  top: 37px;*/
 }
 
-.form-body button.btn.btn-default {
+/*.form-body button.btn.btn-default {
     background: #007ee5;
     color: #fff;
     font-size: 1em;
     outline: none;
     border: none;
     padding: 0.6em 3em;
-}
+}*/
 .agile-validation.agile_info_shadow {
     margin-bottom: 2em;
 }
@@ -2655,7 +2655,7 @@ li.second.logo.admin {
 		float: left;
 		height: 41px;
 	}
-	li.second.w3l_search button.btn.btn-default {
+	li.second.w3l_search  {
 		outline: none;
 		padding: 10px 0 11px;
 		width: 20%;
@@ -3273,7 +3273,7 @@ li.second.logo.admin {
 		float: left;
 		height: 41px;
 	}
-	li.second.w3l_search button.btn.btn-default {
+	li.second.w3l_search  {
 		outline: none;
 		padding: 10px 0 11px;
 		width: 26%;

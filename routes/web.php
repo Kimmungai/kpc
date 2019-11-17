@@ -97,3 +97,6 @@ Route::resource('notifications','NotificationsController');
 
 //Tasks
 Route::resource('tasks','TasksController');
+
+//Requisition
+Route::resource('requisition','RequisitionController');
