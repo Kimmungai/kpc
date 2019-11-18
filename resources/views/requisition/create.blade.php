@@ -34,22 +34,22 @@
                    <ul>
                      <li>
                        <span id="req-company-name" onclick="toggleShow('req-company-name','req-company-name-edit')">{{env('APP_NAME','Company name')}}</span>
-                       @component( 'components.requisition-edit',['id1'=>'req-company-name','id2'=>'req-company-name-edit','name'=>'company_name','placeholder'=>'Company name','value'=>env('APP_NAME','Company name')] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'req-company-name','id2'=>'req-company-name-edit','name'=>'company_name','placeholder'=>'Company name','value'=>env('APP_NAME','Company name'),'hidden'=>true] )@endcomponent
                      </li>
                      <li>
                        <span id="req-company-addr" onclick="toggleShow('req-company-addr','req-company-addr-edit')">{{env('APP_ADDR','P.o Box 119 - 90200')}}</span>
-                       @component( 'components.requisition-edit',['id1'=>'req-company-addr','id2'=>'req-company-addr-edit','name'=>'company_addr','placeholder'=>'Company address','value'=>env('APP_ADDR','P.o Box 119 - 90200')] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'req-company-addr','id2'=>'req-company-addr-edit','name'=>'company_addr','placeholder'=>'Company address','value'=>env('APP_ADDR','P.o Box 119 - 90200'),'hidden'=>true] )@endcomponent
                      </li>
                      <li>
                        <span id="req-company-city" onclick="toggleShow('req-company-city','req-company-city-edit')">{{env('APP_CITY','Kitui, Kenya')}}</span>
-                       @component( 'components.requisition-edit',['id1'=>'req-company-city','id2'=>'req-company-city-edit','name'=>'company_city','placeholder'=>'Company city','value'=>env('APP_CITY','Kitui, Kenya')] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'req-company-city','id2'=>'req-company-city-edit','name'=>'company_city','placeholder'=>'Company city','value'=>env('APP_CITY','Kitui, Kenya'),'hidden'=>true] )@endcomponent
                      </li>
                    </ul>
                  </div>
                  <div class="col-sm-8">
                    <h1>
                      <span id="req-doc-title" onclick="toggleShow('req-doc-title','req-doc-title-edit')">Requisition Form</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-doc-title','id2'=>'req-doc-title-edit','name'=>'doc_title','placeholder'=>'Title ..','value'=>'Requisition Form'] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-doc-title','id2'=>'req-doc-title-edit','name'=>'doc_title','placeholder'=>'Title ..','value'=>'Requisition Form','hidden'=>true] )@endcomponent
                    </h1>
                  </div>
                </div>
@@ -60,7 +60,7 @@
                      <strong>Supplier name:</strong>
 
                      <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">Supplier name:</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>''] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
@@ -68,7 +68,7 @@
                      <strong>Requisition #:</strong>
 
                      <span id="req-number" class="th" onclick="toggleShow('req-number','req-number-edit')">745468</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-number','id2'=>'req-number-edit','name'=>'requisition_number','placeholder'=>'Requisition number','value'=>'745468'] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-number','id2'=>'req-number-edit','name'=>'requisition_number','placeholder'=>'Requisition number','value'=>'745468','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>
@@ -78,14 +78,14 @@
                    <div>
                      <strong>Address:</strong>
                      <span id="req-supplier-addr" class="th" onclick="toggleShow('req-supplier-addr','req-supplier-addr-edit')">P.o box 9 kitui</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-addr','id2'=>'req-supplier-addr-edit','name'=>'supplier_addr','placeholder'=>'Supplier address','value'=>'P.o box 9 kitui'] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-addr','id2'=>'req-supplier-addr-edit','name'=>'supplier_addr','placeholder'=>'Supplier address','value'=>'P.o box 9 kitui','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
                    <div>
                      <strong>Phone:</strong>
                      <span id="req-supplier-phone" class="th" onclick="toggleShow('req-supplier-phone','req-supplier-phone-edit')">0790643963</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'0790643963'] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'0790643963','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>
@@ -94,8 +94,8 @@
 
            <main class="mt-3">
              <div class="resp-table">
-               <a href="#" class="btn btn-default btn-xs"><span class="fa fa-plus-circle"></span> add row</a>
-               <table  class="" >
+               <button type="button" class="btn btn-default btn-xs" onclick="add_prod_table_row('products-table')"><span class="fa fa-plus-circle"></span> add row</button>
+               <table  id="products-table" >
                  <thead >
                    <tr>
                      <th>Item</th>
@@ -107,14 +107,35 @@
                    </tr>
                  </thead>
                  <tbody>
-                   <tr>
-                     <td data-label="Item" ><span class="fas fa-times-circle"></span> &nbsp;&nbsp;&nbsp;Maji</td>
-                     <td data-label="Description" >Nyau</td>
-                     <td data-label="Sale price" >Nyau</td>
-                     <td data-label="Cost / unit" >Nyau</td>
-                     <td data-label="Quantity" >Nyau</td>
-                     <td data-label="Total Cost" >Nyau</td>
+
+                   <tr id="row-1" data-row="1">
+                     <td data-label="Item" class="col-md-2">
+                       <!--<span class="fas fa-times-circle"></span> &nbsp;&nbsp;&nbsp;-->
+                       <span id="col-1-1" data-col='1.1' class="hidden" onclick="toggleShow('col-1-1','col-1-1-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-1','id2'=>'col-1-1-edit','name'=>'col-1-1','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
+                     <td data-label="Description" class="col-md-2">
+                       <span id="col-1-2" data-col='1.2' class="hidden" onclick="toggleShow('col-1-2','col-1-2-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-2','id2'=>'col-1-2-edit','name'=>'col-1-2','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
+                     <td data-label="Sale price" class="col-md-2">
+                       <span id="col-1-3" data-col='1.3' class="hidden" onclick="toggleShow('col-1-3','col-1-3-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-3','id2'=>'col-1-3-edit','name'=>'col-1-3','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
+                     <td data-label="Cost / unit" class="col-md-2">
+                       <span id="col-1-4" data-col='1.4' class="hidden" onclick="toggleShow('col-1-4','col-1-4-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-4','id2'=>'col-1-4-edit','name'=>'col-1-4','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
+                     <td data-label="Quantity" class="col-md-2">
+                       <span id="col-1-5" data-col='1.5' class="hidden" onclick="toggleShow('col-1-5','col-1-5-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-5','id2'=>'col-1-5-edit','name'=>'col-1-5','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
+                     <td data-label="Total Cost" class="col-md-2">
+                       <span id="col-1-6" data-col='1.6' class="hidden" onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                     </td>
                    </tr>
+
                  </tbody>
                  <tfoot>
                    <tr>
@@ -135,9 +156,10 @@
                  </tfoot>
                </table>
 
-               <a href="#" class="btn btn-default btn-xs mt-2"><span class="fa fa-plus-circle"></span> add row</a>
+               <button type="button" class="btn btn-default btn-xs mt-2" onclick="add_prod_table_row('products-table')"><span class="fa fa-plus-circle"></span> add row</button>
                <p class="mt-2">Notes / comments:</p>
-               <p class="comments-box"></p>
+               <p id="comments-box" class="comments-box" onclick="toggleShow('comments-box','comments-box-edit')"></p>
+               @component( 'components.requisition-edit',['id1'=>'comments-box','id2'=>'comments-box-edit','name'=>'description','placeholder'=>'Comments ...','value'=>'','hidden'=>true] )@endcomponent
 
                <div class="row mt-2">
                  <div class="col-sm-6">
