@@ -18,6 +18,7 @@ class CreateRequisitionsTable extends Migration
             $table->integer('dept_id')->unsigned()->index()->nullable();
             $table->integer('request_by')->unsigned()->index()->nullable();
             $table->integer('approved_by')->unsigned()->index()->nullable();
+            $table->integer('vat_percent')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->string('reference')->nullable();
             $table->string('company_name')->nullable();

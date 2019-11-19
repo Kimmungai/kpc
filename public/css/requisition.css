@@ -35,6 +35,9 @@
   border-bottom: 1px dotted #000;
   width: 100%;
 }
+.requisition-form header span{
+  display: inline-block;
+}
 .requisition-form main .resp-table th{
   text-transform: capitalize;
   background: #000;

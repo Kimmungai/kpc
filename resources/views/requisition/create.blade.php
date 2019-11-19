@@ -59,7 +59,7 @@
                    <div>
                      <strong>Supplier name:</strong>
 
-                     <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">Supplier name:</span>
+                     <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">...............</span>
                      @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'','hidden'=>true] )@endcomponent
                    </div>
                  </div>
@@ -98,6 +98,7 @@
                <table  id="products-table" >
                  <thead >
                    <tr>
+                     <th></th>
                      <th>Item</th>
                      <th>Description</th>
                      <th>Sale price</th>
@@ -109,28 +110,28 @@
                  <tbody>
 
                    <tr id="row-1" data-row="1">
-                     <td data-label="Item" class="col-md-2">
-                       <!--<span class="fas fa-times-circle"></span> &nbsp;&nbsp;&nbsp;-->
+                     <td><span class="fas fa-times-circle" onclick="remove_table_row('row-1')"></span></td>
+                     <td data-label="Item" >
                        <span id="col-1-1" data-col='1.1' class="hidden" onclick="toggleShow('col-1-1','col-1-1-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-1','id2'=>'col-1-1-edit','name'=>'col-1-1','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-1','id2'=>'col-1-1-edit','name'=>'col-1-1','placeholder'=>'','value'=>'','hidden'=>false,'keyup'=>true] )@endcomponent
                      </td>
-                     <td data-label="Description" class="col-md-2">
+                     <td data-label="Description" >
                        <span id="col-1-2" data-col='1.2' class="hidden" onclick="toggleShow('col-1-2','col-1-2-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-2','id2'=>'col-1-2-edit','name'=>'col-1-2','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
                      </td>
-                     <td data-label="Sale price" class="col-md-2">
+                     <td data-label="Sale price" >
                        <span id="col-1-3" data-col='1.3' class="hidden" onclick="toggleShow('col-1-3','col-1-3-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-3','id2'=>'col-1-3-edit','name'=>'col-1-3','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
                      </td>
-                     <td data-label="Cost / unit" class="col-md-2">
+                     <td data-label="Cost / unit" >
                        <span id="col-1-4" data-col='1.4' class="hidden" onclick="toggleShow('col-1-4','col-1-4-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-4','id2'=>'col-1-4-edit','name'=>'col-1-4','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
                      </td>
-                     <td data-label="Quantity" class="col-md-2">
+                     <td data-label="Quantity" >
                        <span id="col-1-5" data-col='1.5' class="hidden" onclick="toggleShow('col-1-5','col-1-5-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-5','id2'=>'col-1-5-edit','name'=>'col-1-5','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
                      </td>
-                     <td data-label="Total Cost" class="col-md-2">
+                     <td data-label="Total Cost" >
                        <span id="col-1-6" data-col='1.6' class="hidden" onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
                      </td>
@@ -139,17 +140,20 @@
                  </tbody>
                  <tfoot>
                    <tr>
-                     <td class="tfoot-hidden-cell" colspan="4"></td>
+                     <td class="tfoot-hidden-cell" colspan="5"></td>
                      <td>Sub total</td>
                      <td>Ksh. 5,000</td>
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="4"></td>
-                     <td>Vat <small>16%</small></td>
+                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td>Vat
+                       <small id="req-vat-percent" onclick="toggleShow('rreq-vat-percent','req-vat-percent-edit')">16</small><small>%</small>
+                       @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>'','hidden'=>true] )@endcomponent
+                     </td>
                      <td>Ksh. 500</td>
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="4"></td>
+                     <td class="tfoot-hidden-cell" colspan="5"></td>
                      <td><strong>Total amount</strong></td>
                      <td><strong>Ksh. 500</strong></td>
                    </tr>
@@ -159,7 +163,7 @@
                <button type="button" class="btn btn-default btn-xs mt-2" onclick="add_prod_table_row('products-table')"><span class="fa fa-plus-circle"></span> add row</button>
                <p class="mt-2">Notes / comments:</p>
                <p id="comments-box" class="comments-box" onclick="toggleShow('comments-box','comments-box-edit')"></p>
-               @component( 'components.requisition-edit',['id1'=>'comments-box','id2'=>'comments-box-edit','name'=>'description','placeholder'=>'Comments ...','value'=>'','hidden'=>true] )@endcomponent
+               @component( 'components.requisition-edit',['id1'=>'comments-box','id2'=>'comments-box-edit','name'=>'description','placeholder'=>'Comments ...','value'=>'','hidden'=>true,'type'=>'textarea'] )@endcomponent
 
                <div class="row mt-2">
                  <div class="col-sm-6">

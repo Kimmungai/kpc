@@ -26,14 +26,102 @@ function assign_new_val(newValue,IdToAssign)
 */
 function add_prod_table_row( tableID )
 {
-  $("#"+tableID+" tbody").append( product_row() );
+  var numRows = $("#"+tableID+" tbody tr").length;
+  $("#"+tableID+" tbody").append( product_row( numRows ) );
 }
 
 /*
 *Function to return mark up for product in requisition form table
 */
-function product_row()
+function product_row( numRows )
 {
-  var row = '<tr><td>Ntya</td></tr>';
+  var cols = 6;
+  var nextRow = numRows + 1;
+
+  var row = '<tr id="row-'+nextRow+'" data-row="'+nextRow+'">';
+      row += '<td><span class="fas fa-times-circle" onclick="remove_table_row(\'row-'+nextRow+'\')"></span></td>';
+      for( var col = 1; col <= cols; col++ )
+      {
+        row +=  product_col( nextRow, col );
+      }
+      row += '</tr>';
+
   return row;
+}
+
+/*
+*Function to return column of a row in requisition form table
+*/
+function product_col( nextRow, col )
+{
+
+  var td = '<td data-label="'+get_col_label( col )+'">';
+        td += '<span id="col-'+nextRow+'-'+col+'" data-col=\''+nextRow+'.'+col+'\' class="hidden" onclick="toggleShow(\'col-'+nextRow+'-'+col+'\',\'col-'+nextRow+'-'+col+'-edit\')"></span>';
+        td +=   '<span id="col-'+nextRow+'-'+col+'-edit" >';
+
+        if( col == 1 )//if first column, include product search event on key up
+          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control" placeholder="" value="" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" onkeyup="search_product(this.value)">';
+        else
+          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control" placeholder="" value="" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" >';
+
+        td +=  '</span>';
+      td += '</td>';
+
+  return td;
+}
+
+/*
+*Function to remove a row of the table in the requisition form
+*/
+function remove_table_row( id )
+{
+  $('#'+id).remove();
+}
+
+/*
+*Function to search for a product in requisition form
+*/
+function search_product( string )
+{
+  if( string.length < 3 ) //start searching when charaters are 3 or more
+    return
+
+    //Search for the damn product
+}
+
+/*
+*Function to get column label of a responsive table of the requisition form
+*/
+function get_col_label( col )
+{
+  switch ( col ) {
+    case 1:
+      return 'Item';
+    break;
+
+    case 2:
+      return 'Description';
+    break;
+
+    case 3:
+      return 'Sale price';
+    break;
+
+    case 4:
+      return 'Cost / unit';
+    break;
+
+    case 5:
+      return 'Quantity';
+    break;
+
+    case 6:
+      return 'Total Cost';
+    break;
+
+    default:
+      return 'Item';
+    break;
+
+  }
 }
