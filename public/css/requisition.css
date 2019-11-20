@@ -60,3 +60,19 @@
   border-color: #ccc;
   color: #000;
 }
+.search-panel{
+  max-height: 100px;
+  width: 150px;
+  background: #f5f5f5;
+  z-index: 10;
+  position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.search-panel a{
+  color: inherit;
+  display: block;
+  padding: 8px;
+  border-bottom: 1px #ccc solid;
+  overflow-wrap: break-word;
+}

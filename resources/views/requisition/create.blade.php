@@ -59,7 +59,7 @@
                    <div>
                      <strong>Supplier name:</strong>
 
-                     <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">...............</span>
+                     <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">name</span>
                      @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'','hidden'=>true] )@endcomponent
                    </div>
                  </div>
