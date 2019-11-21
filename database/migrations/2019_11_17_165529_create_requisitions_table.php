@@ -19,6 +19,7 @@ class CreateRequisitionsTable extends Migration
             $table->integer('request_by')->unsigned()->index()->nullable();
             $table->integer('approved_by')->unsigned()->index()->nullable();
             $table->integer('vat_percent')->unsigned()->nullable();
+            $table->double('vat_total')->nullable();
             $table->text('description')->nullable();
             $table->string('reference')->nullable();
             $table->string('company_name')->nullable();
@@ -29,6 +30,9 @@ class CreateRequisitionsTable extends Migration
             $table->string('requisition_number')->nullable();
             $table->string('supplier_addr')->nullable();
             $table->string('supplier_phone')->nullable();
+            $table->double('req_subtotal')->nullable();
+            $table->double('req_grandtotal')->nullable();
+            $table->integer('no_products')->unsigned()->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

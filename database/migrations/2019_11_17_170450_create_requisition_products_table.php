@@ -15,6 +15,7 @@ class CreateRequisitionProductsTable extends Migration
     {
         Schema::create('requisition_products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('requisition_id')->unsigned()->index();
             $table->string('name')->nullable();
             $table->string('sku')->nullable();
             $table->string('img1')->nullable();

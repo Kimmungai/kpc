@@ -16,16 +16,17 @@
         <!-- /inner_content_w3_agile_info-->
        <div class="inner_content_w3_agile_info">
 
-    <form id="requisitionForm" class="" action="index.html" method="post">
+
 
          <div class="row mb-1">
            <div class="col-sm-12">
-             <button type="submit" class="btn btn-default pull-right"><span class="fa fa-paper-plane"></span> Send request</button>
+             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#confirmModal" title="Submit requisition form" ><span class="fa fa-paper-plane"></span> Send request</button>
            </div>
          </div>
 
 
-
+      <form id="requisitionForm"  action="{{route('requisition.store')}}" method="post" onsubmit="req_num_rows()">
+        @csrf
          <article class="requisition-form">
 
            <header>
@@ -60,7 +61,7 @@
                      <strong>Supplier name:</strong>
 
                      <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">name</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'','hidden'=>true] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'name','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
@@ -152,6 +153,7 @@
                        @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>'16','hidden'=>true] )@endcomponent
                      </td>
                      <td id="req-vat">KES 0</td>
+                     <input type="hidden" name="vat_total" value="">
                    </tr>
                    <tr >
                      <td class="tfoot-hidden-cell" colspan="5"></td>
@@ -189,16 +191,18 @@
             </div>
            </main>
            <input type="hidden" name="dept_id" id="currentDeptID" value="@if(isset($dept)) {{$dept->id}} @endif">
-
+           <input type="hidden" name="no_products" value="">
          </article>
+         @component( 'components.confirm-modal',[ 'formId' => 'requisitionForm', 'heading' => 'Requisition form', 'message' => 'Are you sure you want to sunmit requisition form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
 
+       </form>
 
          <div class="row mt-1">
            <div class="col-sm-12">
-             <button type="submit" class="btn btn-default pull-right"><span class="fa fa-paper-plane"></span> Send request</button>
+             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#confirmModal" title="Submit requisition form"><span class="fa fa-paper-plane"></span> Send request</button>
            </div>
          </div>
-      </form>
+
 
        </div>
       <!-- //inner_content-->

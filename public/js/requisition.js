@@ -200,7 +200,7 @@ function update_requisition_product_results ( data, parentID, row )
     {
       if( !$("#req-prod-result-"+data[x].id+parentID).length )
       {
-        $("#"+parentID+'-search-panel').append('<a href="#" id="req-prod-result-'+data[x].id+parentID+'" data-id="'+data[x].id+'" onclick="req_update_product_table(this.id,\''+parentID+'\','+row+')">'+data[x].name+'</a>');
+        $("#"+parentID+'-search-panel').append('<a href="#" id="req-prod-result-'+data[x].id+parentID+'" data-id="'+data[x].id+'" onclick="event.preventDefault();req_update_product_table(this.id,\''+parentID+'\','+row+')">'+data[x].name+'</a>');
       }
     }
   }
@@ -292,6 +292,7 @@ function req_calculate_product_table_total( )
   var vatTotal = vat * subTotal *0.01;
 
   $('#req-vat').text(kes_currency(vatTotal,'KES'));
+  $('#requisitionForm input[name=vat_total]').val(vatTotal);
 
   var grandTotal = subTotal + vatTotal;
 
@@ -313,6 +314,13 @@ function kes_currency(value,currency)
   return formatter.format(value);
 }
 
+/*
+*function to count number of rows in the requisition form table and assign to a hidden input
+*/
+function req_num_rows()
+{
+  $('#requisitionForm input[name=no_products]').val($("#products-table tbody tr").length);
+}
 
 $(document).ajaxStop(function(){
 
