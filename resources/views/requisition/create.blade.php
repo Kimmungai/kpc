@@ -16,7 +16,7 @@
         <!-- /inner_content_w3_agile_info-->
        <div class="inner_content_w3_agile_info">
 
-    <form class="" action="index.html" method="post">
+    <form id="requisitionForm" class="" action="index.html" method="post">
 
          <div class="row mb-1">
            <div class="col-sm-12">
@@ -142,20 +142,23 @@
                    <tr>
                      <td class="tfoot-hidden-cell" colspan="5"></td>
                      <td>Sub total</td>
-                     <td>Ksh. 5,000</td>
+                     <td><span id="req_subtotal">KES 0</span></td>
+                     <input type="hidden" name="req_subtotal" value="">
                    </tr>
                    <tr >
                      <td class="tfoot-hidden-cell" colspan="5"></td>
                      <td>Vat
                        <small id="req-vat-percent" onclick="toggleShow('rreq-vat-percent','req-vat-percent-edit')">16</small><small>%</small>
-                       @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>'','hidden'=>true] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>'16','hidden'=>true] )@endcomponent
                      </td>
-                     <td>Ksh. 500</td>
+                     <td id="req-vat">KES 0</td>
                    </tr>
                    <tr >
                      <td class="tfoot-hidden-cell" colspan="5"></td>
                      <td><strong>Total amount</strong></td>
-                     <td><strong>Ksh. 500</strong></td>
+                     <td><strong id="req_grandtotal">KES 0</strong></td>
+                     <input type="hidden" name="req_grandtotal" value="">
+
                    </tr>
                  </tfoot>
                </table>
@@ -185,6 +188,7 @@
 
             </div>
            </main>
+           <input type="hidden" name="dept_id" id="currentDeptID" value="@if(isset($dept)) {{$dept->id}} @endif">
 
          </article>
 

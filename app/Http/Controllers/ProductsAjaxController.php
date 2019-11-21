@@ -121,4 +121,14 @@ class ProductsAjaxController extends Controller
       }
       return 0;
     }
+
+
+    public function find_product(Request $request)
+    {
+      $id = $request->prodID;
+      if( $id )
+      {
+        return $product = Product::find($id);
+      }
+    }
 }

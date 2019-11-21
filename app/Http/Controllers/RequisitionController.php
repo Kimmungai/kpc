@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Requisition;
 use Illuminate\Http\Request;
-
+use App\Dept;
 class RequisitionController extends Controller
 {
     /**
@@ -24,7 +24,8 @@ class RequisitionController extends Controller
      */
     public function create()
     {
-        return view('requisition.create');
+        $dept = Dept::find(Session('deptID'));
+        return view('requisition.create',compact('dept'));
     }
 
     /**
