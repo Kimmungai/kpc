@@ -342,6 +342,74 @@ function req_num_rows()
   $('#requisitionForm input[name=no_products]').val($("#products-table tbody tr").length);
 }
 
+/*
+*function to validate requisition form before submitiion
+*/
+function validate_requisition_form( id )
+{
+  var row = 1;
+  var error = 0;
+
+  $("#products-table tbody tr").each(function(){
+
+    if( $("#"+id+" input[name='col-"+row+"-1']").val() == '' )
+    {
+      error += 1;
+    }
+
+    if( $("#"+id+" input[name='col-"+row+"-3']").val() == '' || $("#"+id+" input[name='col-"+row+"-3']").val() == 0 )
+    {
+      error += 1;
+    }
+
+    if( $("#"+id+" input[name='col-"+row+"-4']").val() == '' || $("#"+id+" input[name='col-"+row+"-4']").val() == 0 )
+    {
+      error += 1;
+    }
+
+    if( $("#"+id+" input[name='col-"+row+"-5']").val() == '' || $("#"+id+" input[name='col-"+row+"-5']").val() == 0 )
+    {
+      error += 1;
+    }
+
+    row += 1;
+  });
+
+  if( error )
+  {
+    $('#'+id+'Alert').removeClass('hidden');
+  }
+  else
+  {
+    $("#"+id).submit();
+  }
+}
+
+/*
+*Function to approve requisition form
+*/
+function requisition_approval_change(requisition_id)
+{
+  var status = $('#req-approval-' + requisition_id).is(":checked");
+
+  if( status == true ){ status = 1; }else{ status = 0;}
+
+  //send details to server
+  $.post("/requisition-approval",
+    {
+      requisition_id:requisition_id,
+      status:status,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      if( data == 1 )
+        alert("Update succesfull!");
+      else
+        alert("Error!");
+    });
+    
+}
+
 $(document).ajaxStop(function(){
 
   req_calculate_product_table_total();

@@ -21,7 +21,18 @@ class RequisitionController extends Controller
      */
     public function index()
     {
-        return 'all requisitons';
+        if( Auth::user()->type == -1 || Auth::user()->type == -1 )
+        {
+          $requisitions = Requisition::orderBy('created_at','DESC')->paginate( env('ITEMS_PER_PAGE',5) );
+        }
+        else
+        {
+          $requisitions = Requisition::where('approval_status','<>',null)->orderBy('created_at','DESC')->paginate( env('ITEMS_PER_PAGE',5) );
+        }
+
+        Auth::user()->notifications->markAsRead();
+
+        return view('requisition.index',compact('requisitions'));
     }
 
     /**
@@ -66,7 +77,7 @@ class RequisitionController extends Controller
 
 
        //Send notification
-       $subscribedUsers = User::where('type',-1)->where('receive_notifications',1)->get();
+       $subscribedUsers = User::where('type',-1)->where('id','<>',Auth::id())->where('receive_notifications',1)->get();
        $dept = Dept::find($requisition->dept_id);
        $requester = User::find($request->request_by);
        $this->send_notifications( $subscribedUsers, $requisition->id, $dept, $requester );

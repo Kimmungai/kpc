@@ -24,6 +24,19 @@
            </div>
          </div>
 
+         <!--error alert-->
+         <div id="requisitionFormAlert" class="requisitionFormAlert alert alert-danger alert-dismissible hidden" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h3>The form has errors. Please ensure you have:</h3>
+           <ol>
+             <li>Typed the name of each item</li>
+             <li>Typed a sale price greater than 0 for each item</li>
+             <li>Typed a cost price greater than 0 for each item</li>
+             <li>Typed the quantity greater than 0 for each item</li>
+           </ol>
+         </div>
+         <!--end error alert-->
+
 
       <form id="requisitionForm"  action="{{route('requisition.store')}}" method="post" onsubmit="req_num_rows()">
         @csrf

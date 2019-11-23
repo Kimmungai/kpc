@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dept extends Model
 {
-  
+
 
     /**
      * The attributes that are mass assignable.
@@ -41,5 +41,10 @@ class Dept extends Model
     public function Report()
     {
       return $this->hasMany('App\Report');
+    }
+
+    public function Requisition()
+    {
+      return $this->hasMany('App\Requisition');
     }
 }

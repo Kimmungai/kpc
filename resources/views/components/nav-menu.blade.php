@@ -151,7 +151,8 @@
 						</ul>
 				</li>
       </div>
-
+    @if(Auth::check())
+      @if( Auth::user()->type == -1 || Auth::user()->type == 3 )
       <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
@@ -186,18 +187,69 @@
                         @endif
                       @endforeach
 
-                      @if( $notificationCount )
+
 											<li>
 												<div class="notification_bottom">
 													<a href="{{route('requisition.index')}}">See all Requisition Requests</a>
 												</div>
 											</li>
-                      @endif
+                      
 										</ul>
 									</li>
 								</ul>
 				</li>
       </div>
+      @elseif( Auth::user()->type == 1  )
+      <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
+        <li class="second top_bell_nav">
+				   <ul class="top_dp_agile ">
+				       <li class="dropdown head-dpdn">
+                   <?php $notificationCount = 0 ?>
+                    @foreach( Auth::user()->unreadNotifications as $notification )
+                      @if( $notification->type == 'App\Notifications\RequisitionApproved' ||  $notification->type == 'App\Notifications\RequisitionRejected' )
+                        <?php $notificationCount++ ?>
+                      @endif
+                    @endforeach
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Pending tasks"><i class="fa fa-tasks"></i>@if( $notificationCount )<span class="badge blue">{{$notificationCount}}</span>@endif</a>
+										<ul class="dropdown-menu">
+											<li>
+												<div class="notification_header">
+													<h3>Requisition request feedback</h3>
+												</div>
+											</li>
+                      <?php $count = 1 ?>
+                      @foreach( Auth::user()->unreadNotifications as $notification )
+                      <?php if( $count > 3){break;} ?>
+                        @if( $notification->type == 'App\Notifications\RequisitionApproved' ||  $notification->type == 'App\Notifications\RequisitionRejected' )
+                          <li><a href="{{route( 'requisition.show', $notification->data['requisition_id'] )}}">
+                          <div class="user_img"><img src="{{$notification->data['approver_avatar']}}" alt=""></div>
+                           <div class="notification_desc">
+                             <h6>{{$notification->data['approver_name']}}</h6>
+                          <p>@if($notification->type == 'App\Notifications\RequisitionApproved') Approved @else Rejected @endif requisition {{$notification->data['requisition_id']}}</p>
+                          <p><span>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</span></p>
+                          </div>
+                           <div class="clearfix"></div>
+                         </a></li>
+                         <?php $count++ ?>
+                        @endif
+                      @endforeach
+
+
+											<li>
+												<div class="notification_bottom">
+													<a href="{{route('requisition.index')}}">See all Requisition Requests</a>
+												</div>
+											</li>
+
+										</ul>
+									</li>
+								</ul>
+				</li>
+      </div>
+      @endif
+    @endif
+
+
 
       <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">

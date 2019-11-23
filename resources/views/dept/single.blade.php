@@ -23,7 +23,7 @@
 					<!--end stock options buttons-->
 
 
-					 <h4 class="text-bold">{{$dept->name}} department</h4>
+					 <h4 class="text-bold text-capitalize">{{$dept->name}} department</h4>
 
 						<div class="row">
 

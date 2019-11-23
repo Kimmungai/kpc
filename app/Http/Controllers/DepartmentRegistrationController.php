@@ -235,14 +235,16 @@ class DepartmentRegistrationController extends Controller
 
     protected function canViewDept($deptID,$user)
     {
-      if( $user->type == -1 ){//if super admin allow
-        return true;
+      $disallowed = [2,4,5];
+
+      if( in_array($user->type,$disallowed) ){//if super admin allow
+        return false;
       }else{
         if( $user->dept == $deptID ){//if user registered in that dept allow
           return true;
         }
       }
-      return false;
+      return true;
     }
 
 }

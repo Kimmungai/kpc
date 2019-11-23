@@ -33,6 +33,7 @@ class CreateRequisitionsTable extends Migration
             $table->double('req_subtotal')->nullable();
             $table->double('req_grandtotal')->nullable();
             $table->integer('no_products')->unsigned()->nullable();
+            $table->integer('approval_status')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

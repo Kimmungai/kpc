@@ -1,6 +1,12 @@
 function submit_form( id )
 {
-  $("#"+id).submit();
+  if( id == 'requisitionForm' ){//validate requisition form before submit
+    validate_requisition_form( id );
+  }
+  else{
+    $("#"+id).submit();
+  }
+
 }
 
 function toggleElements(elementA,elementB)

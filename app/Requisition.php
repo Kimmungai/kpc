@@ -13,4 +13,14 @@ class Requisition extends Model
   {
     return $this->hasMany('App\RequisitionProducts');
   }
+
+  public function Dept()
+  {
+    return $this->belongsTo('App\Dept');
+  }
+
+  public function User()
+  {
+    return $this->belongsTo('App\User', 'request_by');
+  }
 }

@@ -101,3 +101,4 @@ Route::resource('tasks','TasksController');
 
 //Requisition
 Route::resource('requisition','RequisitionController');
+Route::post('requisition-approval','RequisitionAjaxController@requisition_approval');
