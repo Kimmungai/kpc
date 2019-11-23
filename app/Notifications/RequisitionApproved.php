@@ -62,6 +62,7 @@ class RequisitionApproved extends Notification
           'dept_name' => $this->details['dept_name'],
           'approver_name' => $this->details['approver_name'],
           'approver_avatar' => $this->details['approver_avatar'],
+          'requisition_number' => $this->details['requisition_number'],
       ];
     }
 }

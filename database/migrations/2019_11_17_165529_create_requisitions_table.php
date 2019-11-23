@@ -29,11 +29,14 @@ class CreateRequisitionsTable extends Migration
             $table->string('supplier_name')->nullable();
             $table->string('requisition_number')->nullable();
             $table->string('supplier_addr')->nullable();
+            $table->string('approved_by_name')->nullable();
+            $table->timestamp('approved_on')->nullable();
             $table->string('supplier_phone')->nullable();
             $table->double('req_subtotal')->nullable();
             $table->double('req_grandtotal')->nullable();
             $table->integer('no_products')->unsigned()->nullable();
-            $table->integer('approval_status')->nullable();
+            $table->tinyInteger('approval_status')->nullable();
+            $table->tinyInteger('goods_received')->default(0);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

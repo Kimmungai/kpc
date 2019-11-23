@@ -193,7 +193,7 @@
 													<a href="{{route('requisition.index')}}">See all Requisition Requests</a>
 												</div>
 											</li>
-                      
+
 										</ul>
 									</li>
 								</ul>
@@ -225,7 +225,7 @@
                           <div class="user_img"><img src="{{$notification->data['approver_avatar']}}" alt=""></div>
                            <div class="notification_desc">
                              <h6>{{$notification->data['approver_name']}}</h6>
-                          <p>@if($notification->type == 'App\Notifications\RequisitionApproved') Approved @else Rejected @endif requisition {{$notification->data['requisition_id']}}</p>
+                          <p>@if($notification->type == 'App\Notifications\RequisitionApproved') Approved @else Rejected @endif requisition @if(isset($notification->data['requisition_number'])){{$notification->data['requisition_number']}}@endif</p>
                           <p><span>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</span></p>
                           </div>
                            <div class="clearfix"></div>

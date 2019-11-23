@@ -8,7 +8,10 @@
           <div class="w3l_agileits_breadcrumbs_inner">
             <ul>
               <li><a href="/home">Home</a> <span>«</span></li>
-              <li><a href="#">Requisition Form</a> </li>
+              @if( isset($dept) )
+              <li><a href="/home">{{$dept->name}}</a> <span>«</span></li>
+              @endif
+              <li>Requisition Form</li>
             </ul>
           </div>
         </div>

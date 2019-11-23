@@ -27,6 +27,7 @@ class CreateRequisitionProductsTable extends Migration
             $table->tinyInteger('virtualProduct')->nullable();
             $table->float('price')->default(0.00);
             $table->float('cost')->default(0.00);
+            $table->float('totalCost')->default(0.00);
             $table->float('salePrice')->nullable();
             $table->float('regularPrice')->nullable();
             $table->text('description')->nullable();

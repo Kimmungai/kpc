@@ -14,6 +14,11 @@ use Auth;
 
 class RequisitionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +26,7 @@ class RequisitionController extends Controller
      */
     public function index()
     {
-        if( Auth::user()->type == -1 || Auth::user()->type == -1 )
+        if( Auth::user()->type == -1 || Auth::user()->type == 3 )
         {
           $requisitions = Requisition::orderBy('created_at','DESC')->paginate( env('ITEMS_PER_PAGE',5) );
         }
@@ -77,7 +82,9 @@ class RequisitionController extends Controller
 
 
        //Send notification
-       $subscribedUsers = User::where('type',-1)->where('id','<>',Auth::id())->where('receive_notifications',1)->get();
+       $authorisedUsers = [-1,3];
+
+       $subscribedUsers = User::whereIn('type',$authorisedUsers)->where('id','<>',Auth::id())->where('receive_notifications',1)->get();
        $dept = Dept::find($requisition->dept_id);
        $requester = User::find($request->request_by);
        $this->send_notifications( $subscribedUsers, $requisition->id, $dept, $requester );
@@ -95,10 +102,12 @@ class RequisitionController extends Controller
      */
     public function show(Requisition $requisition)
     {
+        $dept = Dept::find(Session('deptID'));
+
         if( Auth::check() ){
           $this->mark_notifications_read( Auth::user(), $requisition );
         }
-        return $requisition;
+        return view('requisition.show',compact('dept','requisition'));
     }
 
     /**
@@ -121,7 +130,31 @@ class RequisitionController extends Controller
      */
     public function update(Request $request, Requisition $requisition)
     {
-        //
+        $data = $request->only([
+          'dept_id',
+          'request_by',
+          'vat_percent',
+          'vat_total',
+          'description',
+          'company_name',
+          'company_addr',
+          'company_city',
+          'doc_title',
+          'supplier_name',
+          'requisition_number',
+          'supplier_addr',
+          'supplier_phone',
+          'req_subtotal',
+          'req_grandtotal',
+          'no_products',
+        ]);
+
+       Requisition::where('id',$requisition->id)->update($data);
+       $this->save_requisition_products( $request, $requisition->id, 'update' );
+
+       Session::flash('message', "Requisition form updated succesfully!");
+       return back();
+
     }
 
     /**
@@ -141,12 +174,19 @@ class RequisitionController extends Controller
     *@param $request
     *@return $success or $fail
     */
-    private function save_requisition_products( $request, $requisition_id )
+    private function save_requisition_products( $request, $requisition_id, $action='create' )
     {
+      if( $action == 'update' )//delete all requisition products first
+      {
+        RequisitionProducts::where('requisition_id',$requisition_id)->delete();
+      }
+
       $no_prods = $request->no_products;
 
       for( $i = 1; $i <= $no_prods; $i++ )
       {
+        if( !$request->has( 'col-'.$i.'-1' ) ){$no_prods++;continue;}
+
         //first check wether sale price, cost and quantities have been specified
         if( $request['col-'.$i.'-3'] == null || $request['col-'.$i.'-4'] == null || $request['col-'.$i.'-5'] == null ){continue;}
 
@@ -157,6 +197,7 @@ class RequisitionController extends Controller
         $new_prod->price = $request['col-'.$i.'-3'];
         $new_prod->cost = $request['col-'.$i.'-4'];
         $new_prod->quantity = $request['col-'.$i.'-5'];
+        $new_prod->totalCost = $request['col-'.$i.'-6'];
         $new_prod->save();
       }
 

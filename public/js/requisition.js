@@ -102,6 +102,7 @@ function product_col( nextRow, col )
 function remove_table_row( id )
 {
   $('#'+id).remove();
+  req_calculate_product_table_total();
 }
 
 /*
@@ -407,7 +408,40 @@ function requisition_approval_change(requisition_id)
       else
         alert("Error!");
     });
-    
+
+}
+
+/*
+*Function to open modal
+*/
+function req_open_modal( id )
+{
+  $('#'+id).modal();
+}
+/*
+*Function to uncheck checkbox
+*/
+function uncheck_checkbox( id )
+{
+  $('#'+id).attr('checked', false);
+}
+
+/*
+*Function to update goods received
+*/
+function requisition_goods_received( requisition_id )
+{
+  $('#req-goods-supplied-html').html('<strong>Goods received:</strong> <span class="text-success">Supplied</span>');
+
+  //send details to server
+  $.post("/requisition-goods-received",
+    {
+      requisition_id:requisition_id,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      alert("Update Succesful");
+    });
 }
 
 $(document).ajaxStop(function(){
