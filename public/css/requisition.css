@@ -45,6 +45,7 @@
 .requisition-form main .resp-table td{
   background: #fff;
   text-transform: capitalize;
+  text-align: center;
 }
 .tfoot-hidden-cell{
   border-color:white!important;

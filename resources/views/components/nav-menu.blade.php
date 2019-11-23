@@ -101,7 +101,7 @@
 										<ul class="dropdown-menu">
 											<li>
 												<div class="notification_header">
-													<h3>Your Notifications</h3>
+													<h3>Bookings Notifications</h3>
 												</div>
 											</li>
 											<li><a href="#">
@@ -156,54 +156,43 @@
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
 				       <li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Pending tasks"><i class="fa fa-tasks"></i><span class="badge blue">9</span></a>
+                   <?php $notificationCount = 0 ?>
+                    @foreach( Auth::user()->unreadNotifications as $notification )
+                      @if( $notification->type == 'App\Notifications\RequisitionRequest' )
+                        <?php $notificationCount++ ?>
+                      @endif
+                    @endforeach
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Pending tasks"><i class="fa fa-tasks"></i>@if( $notificationCount )<span class="badge blue">{{$notificationCount}}</span>@endif</a>
 										<ul class="dropdown-menu">
 											<li>
 												<div class="notification_header">
-													<h3>You have 4 Pending tasks</h3>
+													<h3>You have {{$notificationCount}} Requisition Requests</h3>
 												</div>
 											</li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Database update</span><span class="percentage">40%</span>
-													<div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													<div class="bar yellow" style="width:40%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-												   <div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar green" style="width:90%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-													<div class="clearfix"></div>
-												</div>
-											   <div class="progress progress-striped active">
-													 <div class="bar red" style="width: 33%;"></div>
-												</div>
-											</a></li>
-											<li><a href="#">
-												<div class="task-info">
-													<span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-												   <div class="clearfix"></div>
-												</div>
-												<div class="progress progress-striped active">
-													 <div class="bar  blue" style="width: 80%;"></div>
-												</div>
-											</a></li>
+                      <?php $count = 1 ?>
+                      @foreach( Auth::user()->unreadNotifications as $notification )
+                      <?php if( $count > 3){break;} ?>
+                        @if( $notification->type == 'App\Notifications\RequisitionRequest' )
+                          <li><a href="{{route( 'requisition.show', $notification->data['requisition_id'] )}}">
+                          <div class="user_img"><img src="{{$notification->data['requester_avatar']}}" alt=""></div>
+                           <div class="notification_desc">
+                             <h6>{{$notification->data['requester_name']}}</h6>
+                          <p>From {{$notification->data['dept_name']}} department</p>
+                          <p><span>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</span></p>
+                          </div>
+                           <div class="clearfix"></div>
+                         </a></li>
+                         <?php $count++ ?>
+                        @endif
+                      @endforeach
+
+                      @if( $notificationCount )
 											<li>
 												<div class="notification_bottom">
-													<a href="{{route('tasks.index')}}">See all pending tasks</a>
+													<a href="{{route('requisition.index')}}">See all Requisition Requests</a>
 												</div>
 											</li>
+                      @endif
 										</ul>
 									</li>
 								</ul>

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
-
 use App\Requisition;
 use App\RequisitionProducts;
-
+use App\Notifications\RequisitionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequisition;
 use App\Dept;
+use App\User;
+use Notification;
+use Auth;
 
 class RequisitionController extends Controller
 {
@@ -19,7 +21,7 @@ class RequisitionController extends Controller
      */
     public function index()
     {
-        //
+        return 'all requisitons';
     }
 
     /**
@@ -61,6 +63,14 @@ class RequisitionController extends Controller
         ]);
        $requisition = Requisition::create($data);
        $this->save_requisition_products( $request, $requisition->id );
+
+
+       //Send notification
+       $subscribedUsers = User::where('type',-1)->where('receive_notifications',1)->get();
+       $dept = Dept::find($requisition->dept_id);
+       $requester = User::find($request->request_by);
+       $this->send_notifications( $subscribedUsers, $requisition->id, $dept, $requester );
+
        Session::flash('message', "Requisition form submitted succesfully!");
        return redirect(route('product-registration.index'));
 
@@ -74,7 +84,10 @@ class RequisitionController extends Controller
      */
     public function show(Requisition $requisition)
     {
-        //
+        if( Auth::check() ){
+          $this->mark_notifications_read( Auth::user(), $requisition );
+        }
+        return $requisition;
     }
 
     /**
@@ -134,6 +147,60 @@ class RequisitionController extends Controller
         $new_prod->cost = $request['col-'.$i.'-4'];
         $new_prod->quantity = $request['col-'.$i.'-5'];
         $new_prod->save();
+      }
+
+    }
+
+    /**
+    *Send users subscribed users notifications
+    *
+    *@param $subscribedUsers
+    */
+    private function send_notifications( $subscribedUsers, $requisitionID, $dept, $requester )
+    {
+      $avatar = url('/images/avatar-female.png');
+
+      if( $requester->avatar ){
+        $avatar = $requester->avatar;
+      }else {
+        if( $requester->gender == 1 )
+        {
+          $avatar = url('/images/avatar-male.png');
+        }
+      }
+
+      $details = [
+                   'greeting' => 'Hi Admin,',
+                   'subject' => 'New requisition request',
+                   'body' => 'A new requisition request from '.$dept->name.' department has been received. Requisition form has been filled by '.$requester->name,
+                   'thanks' => 'Thank you for using Kitui Pastoral Center system',
+                   'actionText' => 'View Requisition Form',
+                   'actionURL' => route( 'requisition.show', $requisitionID ),
+                   'requisition_id' => $requisitionID,
+                   'dept_name' => $dept->name,
+                   'requester_name' => $requester->name,
+                   'requester_avatar' => $avatar,
+               ];
+
+      Notification::send($subscribedUsers, new RequisitionRequest($details));
+    }
+
+    /**
+    *Mark notifications as read
+    *
+    *@param $user, $requisition
+    */
+    private function mark_notifications_read( $user, $requisition )
+    {
+
+      foreach ( $user->unreadNotifications as $notification )
+      {
+        if( !isset( $notification->data['requisition_id'] ) ){ continue; }
+
+        if ( $notification->data['requisition_id'] == $requisition->id ) {
+          $notification->markAsRead();
+        }
+
       }
 
     }

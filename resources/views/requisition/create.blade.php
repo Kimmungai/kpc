@@ -114,27 +114,27 @@
                      <td><span class="fas fa-times-circle" onclick="remove_table_row('row-1')"></span></td>
                      <td data-label="Item" >
                        <span id="col-1-1" data-col='1.1' class="hidden" onclick="toggleShow('col-1-1','col-1-1-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-1','id2'=>'col-1-1-edit','name'=>'col-1-1','placeholder'=>'','value'=>'','hidden'=>false,'keyup'=>true] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-1','id2'=>'col-1-1-edit','name'=>'col-1-1','placeholder'=>'Item','value'=>'','hidden'=>false,'keyup'=>true] )@endcomponent
                      </td>
                      <td data-label="Description" >
                        <span id="col-1-2" data-col='1.2' class="hidden" onclick="toggleShow('col-1-2','col-1-2-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-2','id2'=>'col-1-2-edit','name'=>'col-1-2','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-2','id2'=>'col-1-2-edit','name'=>'col-1-2','placeholder'=>'Description','value'=>'','hidden'=>false] )@endcomponent
                      </td>
                      <td data-label="Sale price" >
                        <span id="col-1-3" data-col='1.3' class="hidden" onclick="toggleShow('col-1-3','col-1-3-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-3','id2'=>'col-1-3-edit','name'=>'col-1-3','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-3','id2'=>'col-1-3-edit','name'=>'col-1-3','placeholder'=>'Numbers only','value'=>'0','hidden'=>false,'numeric'=>true] )@endcomponent
                      </td>
                      <td data-label="Cost / unit" >
                        <span id="col-1-4" data-col='1.4' class="hidden" onclick="toggleShow('col-1-4','col-1-4-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-4','id2'=>'col-1-4-edit','name'=>'col-1-4','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-4','id2'=>'col-1-4-edit','name'=>'col-1-4','placeholder'=>'Numbers only','value'=>'0','hidden'=>false,'numeric'=>true] )@endcomponent
                      </td>
                      <td data-label="Quantity" >
                        <span id="col-1-5" data-col='1.5' class="hidden" onclick="toggleShow('col-1-5','col-1-5-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-5','id2'=>'col-1-5-edit','name'=>'col-1-5','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       @component( 'components.requisition-edit',['id1'=>'col-1-5','id2'=>'col-1-5-edit','name'=>'col-1-5','placeholder'=>'Numbers only','value'=>'0','hidden'=>false,'numeric'=>true] )@endcomponent
                      </td>
                      <td data-label="Total Cost" >
-                       <span id="col-1-6" data-col='1.6' class="hidden" onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'','value'=>'','hidden'=>false] )@endcomponent
+                       <span id="col-1-6" data-col='1.6'  onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'','value'=>'','hidden'=>true,'numeric'=>true] )@endcomponent
                      </td>
                    </tr>
 

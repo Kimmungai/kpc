@@ -8,7 +8,8 @@ function toggleShow(IdToHide,IdToShow)
 
   if($("#"+IdToHide+" input").length){
     newValue = $("#"+IdToHide+" input").val();
-    assign_new_val(newValue,IdToShow);}
+    assign_new_val(newValue,IdToShow);
+  }
 
 }
 
@@ -64,16 +65,25 @@ function product_row( numRows )
 */
 function product_col( nextRow, col )
 {
+  var hidden_last_col = 'hidden';
+  var hidden_other_col = '';
+  if( col == 6 ){ hidden_last_col = ''; hidden_other_col = 'hidden';}
+
+  var numeric = '';
+  var value = '';
+  var placeholder = get_col_label( col );
+
+  if( col == 3 || col == 4 || col == 5 || col == 6 ){ numeric = 'numeric'; value = 0; placeholder = 'Numbers only';}
 
   var td = '<td data-label="'+get_col_label( col )+'">';
-        td += '<span id="col-'+nextRow+'-'+col+'" data-col=\''+nextRow+'.'+col+'\' class="hidden" onclick="toggleShow(\'col-'+nextRow+'-'+col+'\',\'col-'+nextRow+'-'+col+'-edit\')"></span>';
-        td +=   '<span id="col-'+nextRow+'-'+col+'-edit" >';
+        td += '<span id="col-'+nextRow+'-'+col+'" data-col=\''+nextRow+'.'+col+'\' class="'+hidden_last_col+'" onclick="toggleShow(\'col-'+nextRow+'-'+col+'\',\'col-'+nextRow+'-'+col+'-edit\')"></span>';
+        td +=   '<span id="col-'+nextRow+'-'+col+'-edit" class="'+hidden_other_col+'">';
 
         if( col == 1 ){//if first column, include product search event on key up
-          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control" placeholder="" value="" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" onkeyup="search_product(this.value,\'col-'+nextRow+'-'+col+'\','+nextRow+')">';
+          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control" placeholder="'+placeholder+'" value="" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" onkeyup="search_product(this.value,\'col-'+nextRow+'-'+col+'\','+nextRow+')">';
         }
         else{
-          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control" placeholder="" value="" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" >';
+          td +=     '<input name="col-'+nextRow+'-'+col+'" type="text" class="form-control '+numeric+'" placeholder="'+placeholder+'" value="'+value+'" onchange="assign_new_val(this.value,\'col-'+nextRow+'-'+col+'\')" onfocusout="toggleShow(\'col-'+nextRow+'-'+col+'-edit\',\'col-'+nextRow+'-'+col+'\')" >';
         }
         td +=  '</span>';
 
@@ -240,22 +250,32 @@ function req_update_product_table( colID, parentID, row )
       var col_1 = 'col-'+row+'-1';
       assign_new_val( data.name, col_1 );
       assign_new_val_to_input( data.name, col_1 );
+      $("#"+col_1+"-edit").addClass('hidden');
+      $("#"+col_1).removeClass('hidden');
 
       var col_2 = 'col-'+row+'-2';
       assign_new_val( data.description, col_2 );
       assign_new_val_to_input( data.description, col_2 );
+      $("#"+col_2+"-edit").addClass('hidden');
+      $("#"+col_2).removeClass('hidden');
 
       var col_3 = 'col-'+row+'-3';
       assign_new_val( data.price, col_3 );
       assign_new_val_to_input( data.price, col_3 );
+      $("#"+col_3+"-edit").addClass('hidden');
+      $("#"+col_3).removeClass('hidden');
 
       var col_4 = 'col-'+row+'-4';
       assign_new_val( data.cost, col_4 );
       assign_new_val_to_input( data.cost, col_4 );
+      $("#"+col_4+"-edit").addClass('hidden');
+      $("#"+col_4).removeClass('hidden');
 
       var col_5 = 'col-'+row+'-5';
       assign_new_val( data.lowStockAlert, col_5 );
       assign_new_val_to_input( data.lowStockAlert, col_5 );
+      $("#"+col_5+"-edit").addClass('hidden');
+      $("#"+col_5).removeClass('hidden');
 
     });
 
@@ -326,4 +346,8 @@ $(document).ajaxStop(function(){
 
   req_calculate_product_table_total();
 
+});
+
+$(document).on("input", ".numeric", function() {
+    this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });
