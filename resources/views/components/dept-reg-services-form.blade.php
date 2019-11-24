@@ -139,83 +139,57 @@
 
 <div class="col-md-6">
   <div class="grid-1 graph-form agile_info_shadow">
-    <h3>Costs details</h3>
-    <div class="form-group" id="targetCostsTitle">
-      <label class="col-md-4 control-label">Target Costs <span class="text-danger">*</span></label>
-      <div class="col-md-6">
-        <div class="input-group input-icon right">
-          <span class="input-group-addon">
-            <i class="fas fa-money-bill-wave"></i>
-          </span>
-          <input name="targetCosts" id="targetCosts" type="text" class="form-control" value="@if( old('targetCosts') ) {{old('targetCosts')}} @elseif( isset($dept) ) {{$dept->targetCosts}} @endif" placeholder="Dept target costs..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required/>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <p class="help-block red-text" id="targetCostsHelper">
-          @if ($errors->has('targetCosts'))
-            {{ $errors->first('targetCosts') }}
-          @endif
-        </p>
-      </div>
-    </div>
-
-    <div class="form-group" id="targetRevenuesTitle">
-      <label class="col-md-4 control-label">Target revenue <span class="text-danger">*</span></label>
-      <div class="col-md-6">
-        <div class="input-group input-icon right">
-          <span class="input-group-addon">
-            <i class="fas fa-cash-register"></i>
-          </span>
-          <input name="targetRevenues" id="targetRevenues" type="text" class="form-control" value="@if( old('targetRevenues') ) {{old('targetRevenues')}} @elseif( isset($dept) ) {{$dept->targetRevenues}} @endif" placeholder="Dept target revenue..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <p class="help-block red-text" id="targetRevenuesHelper">
-          @if ($errors->has('targetRevenues'))
-            {{ $errors->first('targetRevenues') }}
-          @endif
-        </p>
-      </div>
-    </div>
-
-    <div class="form-group" id="bookingCapacityTitle">
-      <label class="col-md-4 control-label">Booking capacity <span class="text-danger">*</span></label>
+    <h3>Services details</h3>
+    <div class="form-group" id="nameOfServiceTitle">
+      <label class="col-md-4 control-label">Name of service</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
             <i class="fas fa-info"></i>
           </span>
-          <input name="bookingCapacity" id="bookingCapacity" type="text" class="form-control" value="@if( old('bookingCapacity') ) {{old('bookingCapacity')}} @elseif( isset($dept) ) {{$dept->bookingCapacity}} @endif" placeholder="Dept booking capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="nameOfService" id="nameOfService" type="text" class="form-control" value="@if( old('nameOfService') ) {{old('nameOfService')}} @elseif( isset($dept) ) {{$dept->nameOfService}} @endif" placeholder="Dept target costs..." />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="bookingCapacityHelper">
-          @if ($errors->has('bookingCapacity'))
-            {{ $errors->first('bookingCapacity') }}
+        <p class="help-block red-text" id="nameOfServiceHelper">
+          @if ($errors->has('nameOfService'))
+            {{ $errors->first('nameOfService') }}
           @endif
         </p>
       </div>
     </div>
 
-    <div class="form-group" id="stockCapacityTitle">
-      <label class="col-md-4 control-label">Stock capacity <span class="text-danger">*</span></label>
+    <div class="form-group" id="costOfServiceTitle">
+      <label class="col-md-4 control-label">Cost of service</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
-            <i class="fas fa-user-tie"></i>
+            <i class="fas fa-info"></i>
           </span>
-          <input name="stockCapacity" id="stockCapacity" type="text" class="form-control" value="@if( old('stockCapacity') ) {{old('stockCapacity')}} @elseif( isset($dept) ) {{$dept->stockCapacity}} @endif" placeholder="Dept staff and workers capacity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="costOfService" id="costOfService" type="number" class="form-control numeric" value="@if( old('costOfService') ) {{old('costOfService')}} @elseif( isset($dept) ) {{$dept->costOfService}} @endif" placeholder="Numbers only"  />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="stockCapacityHelper">
-          @if ($errors->has('stockCapacity'))
-            {{ $errors->first('stockCapacity') }}
+        <p class="help-block red-text" id="costOfServiceHelper">
+          @if ($errors->has('costOfService'))
+            {{ $errors->first('costOfService') }}
           @endif
         </p>
       </div>
     </div>
 
+    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_service(@if(isset($dept)) {{$dept->id}} @endif)">Add service</button>
+
+    <!--list of added services-->
+    <ul id="services-list" class="list-inline added-rooms-list">
+      @if( isset($dept) )
+        @if( $dept->DeptServices )
+          @foreach( $dept->DeptServices as $service )
+            <li> <span class="fa fa-times-circle" onclick="dept_remove_list(this,{{$service->id}})"></span> <span>{{$service->service}}</span> <small> at KES {{$service->cost}}</small></li>
+          @endforeach
+        @endif
+      @endif
+    </ul>
 
 
   </div>

@@ -650,17 +650,16 @@ input:checked + .slider-xs:before {
 .added-rooms-list{
   list-style-type: none;
   padding-top: 15px;
-
 }
 
 .added-rooms-list li {
   text-transform: capitalize;
-  font-weight: 600;
 }
 .added-rooms-list li span{
   cursor: pointer;
+  font-weight: 600;
 }
 .added-rooms-list li small{
-  text-transform: capitalize!important;
-  font-style: 400!important;
+  font-size: 10px;
+  text-transform: capitalize;
 }

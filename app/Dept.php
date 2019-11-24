@@ -47,4 +47,12 @@ class Dept extends Model
     {
       return $this->hasMany('App\Requisition');
     }
+    public function DeptRooms()
+    {
+      return $this->hasMany('App\DeptRooms');
+    }
+    public function DeptServices()
+    {
+      return $this->hasMany('App\DeptServices');
+    }
 }

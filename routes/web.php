@@ -43,6 +43,8 @@ Route::resource('user-registration','UserRegistrationController');
 Route::get('dept-report/{id?}','DepartmentRegistrationController@report')->name('dept report');
 Route::resource('dept-registration','DepartmentRegistrationController');
 Route::get('dept-filtered-report','DepartmentRegistrationController@report');
+Route::post('add-dept-service','DepartmentAjaxController@add_service');
+Route::post('remove-dept-service','DepartmentAjaxController@remove_service');
 
 //purchases
 
