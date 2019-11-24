@@ -646,3 +646,21 @@ input:checked + .slider-xs:before {
 .slider-xs.round:before {
   border-radius: 50%;
 }
+
+.added-rooms-list{
+  list-style-type: none;
+  padding-top: 15px;
+
+}
+
+.added-rooms-list li {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.added-rooms-list li span{
+  cursor: pointer;
+}
+.added-rooms-list li small{
+  text-transform: capitalize!important;
+  font-style: 400!important;
+}

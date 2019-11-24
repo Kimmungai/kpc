@@ -66,3 +66,7 @@ function user_state_change(user_id)
       //alert("status updated");
     });
 }
+
+$(document).on("input", ".numeric", function() {
+    this.value = this.value.replace(/[^0-9\\.]+/g,'');
+});

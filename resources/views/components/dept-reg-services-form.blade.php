@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <a href="#" class="btn btn-default btn-sm">Add room type</a>
+    <button type="button" class="btn btn-default btn-xs">Add room type</button>
 
     <!--<div class="form-group mt-2" id="nameTitle">
       <label class="col-md-2 control-label">Has products? </label>

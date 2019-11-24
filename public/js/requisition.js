@@ -449,7 +449,3 @@ $(document).ajaxStop(function(){
   req_calculate_product_table_total();
 
 });
-
-$(document).on("input", ".numeric", function() {
-    this.value = this.value.replace(/[^0-9\\.]+/g,'');
-});

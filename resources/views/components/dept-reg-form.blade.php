@@ -82,7 +82,7 @@
           <span class="input-group-addon">
             <i class="fas fa-info"></i>
           </span>
-          <input name="nameOfService" id="nameOfService" type="text" class="form-control" value="@if( old('nameOfService') ) {{old('nameOfService')}} @elseif( isset($dept) ) {{$dept->nameOfService}} @endif" placeholder="Dept target costs..." onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required/>
+          <input name="nameOfService" id="nameOfService" type="text" class="form-control" value="@if( old('nameOfService') ) {{old('nameOfService')}} @elseif( isset($dept) ) {{$dept->nameOfService}} @endif" placeholder="Dept target costs..." />
         </div>
       </div>
       <div class="col-sm-2">
@@ -101,7 +101,7 @@
           <span class="input-group-addon">
             <i class="fas fa-info"></i>
           </span>
-          <input name="costOfService" id="costOfService" type="text" class="form-control" value="@if( old('costOfService') ) {{old('costOfService')}} @elseif( isset($dept) ) {{$dept->costOfService}} @endif" placeholder="Dept target revenue..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="costOfService" id="costOfService" type="number" class="form-control numeric" value="@if( old('costOfService') ) {{old('costOfService')}} @elseif( isset($dept) ) {{$dept->costOfService}} @endif" placeholder="Numbers only"  />
         </div>
       </div>
       <div class="col-sm-2">
@@ -113,7 +113,14 @@
       </div>
     </div>
 
+    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_service()">Add service</button>
 
+    <!--list of added services-->
+    <ul id="services-list" class="list-inline added-rooms-list">
+
+    </ul>
+    <input id="service_name_hidden" type="text" name="service_name[]" value="">
+    <input id="service_cost_hidden" type="text" name="service_cost[]" value="">
 
   </div>
 </div>
