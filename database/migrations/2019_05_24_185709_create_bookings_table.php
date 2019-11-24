@@ -35,6 +35,7 @@ class CreateBookingsTable extends Migration
             $table->tinyInteger('tent')->nullable();
             $table->tinyInteger('paSystem')->nullable();
             $table->tinyInteger('projector')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

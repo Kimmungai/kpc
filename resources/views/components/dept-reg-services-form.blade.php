@@ -7,12 +7,11 @@
     <div class="form-group" id="nameTitle">
       <label class="col-md-2 control-label">Has rooms? </label>
       <div class="col-md-8">
-          Yes <input name="has_rooms" id="has_rooms" type="radio" class="" value="@if( old('has_rooms') ) {{old('has_rooms')}} @elseif( isset($dept) ) {{$dept->has_rooms}} @endif"  />
-          No <input name="has_rooms" id="has_rooms" type="radio" class="" value="@if( old('has_rooms') ) {{old('has_rooms')}} @elseif( isset($dept) ) {{$dept->has_rooms}} @endif"  checked/>
+          Yes <input name="has_rooms" id="has_rooms_1" type="radio" value="1"  onchange="hide_unhide_room_panel( @if(isset($dept)) {{$dept->id}} @endif )" @if( old('has_rooms') == 1 ) checked @elseif(isset($dept)) @if($dept->has_rooms ==1) checked @endif @endif />
+          No <input name="has_rooms" id="has_rooms_2" type="radio" value="-1"   onchange="hide_unhide_room_panel( @if(isset($dept)) {{$dept->id}} @endif )" @if( old('has_rooms') == -1 ) checked @elseif(isset($dept)) @if($dept->has_rooms ==-1 ) checked @endif @else checked @endif />
       </div>
-
     </div>
-
+<div class="rooms-panel @if( old('has_rooms') == -1 ) hidden @elseif(isset($dept)) @if($dept->has_rooms ==-1 ) hidden @endif @else hidden @endif">
     <div class="form-group" id="deptRoomTypeTitle">
       <label class="col-md-2 control-label">Type of room</label>
       <div class="col-md-8">
@@ -20,7 +19,7 @@
           <span class="input-group-addon">
             <i class="fa fa-bed"></i>
           </span>
-          <input name="deptRoomType" id="deptRoomType" type="text" class="form-control" value="@if( old('deptRoomType') ) {{old('deptRoomType')}} @elseif( isset($dept) ) {{$dept->deptRoomType}} @endif" placeholder="e.g Standard, Delux, etc." onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
+          <input name="deptRoomType" id="deptRoomType" type="text" class="form-control" value="@if( old('deptRoomType') ) {{old('deptRoomType')}} @elseif( isset($dept) ) {{$dept->deptRoomType}} @endif" placeholder="e.g Standard, Delux, etc." />
         </div>
       </div>
       <div class="col-sm-2">
@@ -40,7 +39,7 @@
           <span class="input-group-addon">
             <i class="fa fa-info"></i>
           </span>
-          <input name="deptRoomPriceType" id="deptRoomPriceType" type="text" class="form-control" value="@if( old('deptRoomPriceType') ) {{old('deptRoomPriceType')}} @elseif( isset($dept) ) {{$dept->deptRoomPriceType}} @endif" placeholder="Price customers will pay" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
+          <input name="deptRoomPriceType" id="deptRoomPriceType" type="text" class="form-control numeric" value="@if( old('deptRoomPriceType') ) {{old('deptRoomPriceType')}} @elseif( isset($dept) ) {{$dept->deptRoomPriceType}} @endif" placeholder="Price customers will pay" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
         </div>
       </div>
       <div class="col-sm-2">
@@ -52,86 +51,21 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-default btn-xs">Add room type</button>
+    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_room(@if(isset($dept)) {{$dept->id}} @endif)">Add room type</button>
 
-    <!--<div class="form-group mt-2" id="nameTitle">
-      <label class="col-md-2 control-label">Has products? </label>
-      <div class="col-md-8">
-          Yes <input name="has_products" id="has_products" type="radio" class="" value="@if( old('has_products') ) {{old('has_products')}} @elseif( isset($dept) ) {{$dept->has_products}} @endif"  />
-          No <input name="has_products" id="has_products" type="radio" class="" value="@if( old('has_products') ) {{old('has_products')}} @elseif( isset($dept) ) {{$dept->has_products}} @endif"  checked/>
-      </div>
+    <ul id="rooms-list" class="list-inline added-rooms-list">
 
-    </div>
+      @if( isset($dept) )
+        @if( $dept->DeptRooms )
+          @foreach( $dept->DeptRooms as $room )
+            <li> <span class="fa fa-times-circle" onclick="dept_remove_room_list(this,{{$room->id}})"></span> <span>{{$room->type}}</span> <small> at KES {{$room->price}}</small></li>
+          @endforeach
+        @endif
+      @endif
 
-    <div class="form-group" id="deptProductNameTitle">
-      <label class="col-md-2 control-label">Product name</label>
-      <div class="col-md-8">
-        <div class="input-group input-icon right">
-          <span class="input-group-addon">
-            <i class="fa fa-info"></i>
-          </span>
-          <input name="deptProductName" id="deptProductName" type="text" class="form-control" value="@if( old('deptProductName') ) {{old('deptProductName')}} @elseif( isset($dept) ) {{$dept->deptProductName}} @endif" placeholder="e.g Standard, Delux, etc." onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <p class="help-block red-text" id="deptProductNameHelper">
-          @if ($errors->has('deptProductName'))
-            {{ $errors->first('deptProductName') }}
-          @endif
-        </p>
-      </div>
-    </div>
+    </ul>
 
-    <div class="form-group" id="deptProductCostTitle">
-      <label class="col-md-2 control-label">Product cost</label>
-      <div class="col-md-8">
-        <div class="input-group input-icon right">
-          <span class="input-group-addon">
-            <i class="fa fa-info"></i>
-          </span>
-          <input name="deptProductCostType" id="deptProductCostType" type="text" class="form-control" value="@if( old('deptProductCostType') ) {{old('deptProductCostType')}} @elseif( isset($dept) ) {{$dept->deptProductCostType}} @endif" placeholder="Price customers will pay" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <p class="help-block red-text" id="deptProductCostHelper">
-          @if ($errors->has('deptProductCost'))
-            {{ $errors->first('deptProductCost') }}
-          @endif
-        </p>
-      </div>
-    </div>
-
-    <div class="form-group" id="deptProductPriceTitle">
-      <label class="col-md-2 control-label">Product price</label>
-      <div class="col-md-8">
-        <div class="input-group input-icon right">
-          <span class="input-group-addon">
-            <i class="fa fa-info"></i>
-          </span>
-          <input name="deptProductPriceType" id="deptProductPriceType" type="text" class="form-control" value="@if( old('deptProductPriceType') ) {{old('deptProductPriceType')}} @elseif( isset($dept) ) {{$dept->deptProductPriceType}} @endif" placeholder="Price customers will pay" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <p class="help-block red-text" id="deptProductPriceHelper">
-          @if ($errors->has('deptProductPrice'))
-            {{ $errors->first('deptProductPrice') }}
-          @endif
-        </p>
-      </div>
-    </div>
-
-    <a href="#" class="btn btn-default btn-sm ">Add product</a>-->
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
   </div>

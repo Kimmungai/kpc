@@ -23,6 +23,7 @@ class CreateDeptsTable extends Migration
             $table->double('targetRevenues')->nullable();
             $table->integer('bookingCapacity')->nullable();
             $table->integer('staffCapacity')->nullable();
+            $table->tinyInteger('has_rooms')->default(-1);
             $table->double('stockCapacity')->nullable();
             $table->mediumText('address')->nullable();
             $table->mediumText('deptDetails')->nullable();

@@ -15,6 +15,9 @@ class CreateDeptRoomsTable extends Migration
     {
         Schema::create('dept_rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('dept_id')->unsigned()->index();
+            $table->string('type')->nullable();
+            $table->double('price')->nullable();
             $table->timestamps();
         });
     }

@@ -45,6 +45,9 @@ Route::resource('dept-registration','DepartmentRegistrationController');
 Route::get('dept-filtered-report','DepartmentRegistrationController@report');
 Route::post('add-dept-service','DepartmentAjaxController@add_service');
 Route::post('remove-dept-service','DepartmentAjaxController@remove_service');
+Route::post('add-dept-room','DepartmentAjaxController@add_room');
+Route::post('update-has-rooms','DepartmentAjaxController@update_has_room');
+Route::post('remove-dept-room','DepartmentAjaxController@remove_room');
 
 //purchases
 

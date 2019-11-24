@@ -27,29 +27,35 @@
 
 							<div class="col-sm-7 mb-2">
 								<!--booking form-->
-								<h4 class="mb-2 text-bold">Booking form</h4>
+								<h4 id="formTitle" class="mb-2 text-bold">Booking form</h4>
 
 								<div class="row">
 									<div class="col-sm-12 ">
 										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										  <span class="input-group-addon" id=""><i class="fas fa-gift"></i></span>
+										  <select class="form-control" name="bookingType" onchange="select_booking_type(this.value)">
+												<option value="1"> Food ordering </option>
+												<option value="2"> Room booking </option>
+												<option value="3"> Tent Hiring </option>
+												<option value="4"> Meeting hall booking </option>
+												<option value="5"> Compound booking </option>
+										  </select>
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="numPpleTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-users"></i></span>
+										  <input name="numPple" id="numPple" type="number" class="form-control numeric" value="{{old('numPple')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required>
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="chkInDateTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
+										  <input type="text" name="chkInDate" id="chkInDate" class="form-control" placeholder="Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="chkOutDateTitle" class="input-group input-group-md hidden">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
+										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control" placeholder="Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="bookingAmountDueTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
+										  <input name="bookingAmountDue" id="bookingAmountDue" type="number" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required>
 										</div>
 										<div class="input-group input-group-md">
 										  <span class="input-group-addon" id="">@</span>
@@ -159,39 +165,29 @@
 
 								</div>
 								<!--End customer details-->
-								<h4 class="mb-2 mt-1 text-bold">Other services</h4>
+								@if( isset($dept) )
+								@if( count($dept->DeptServices) )
+								<h4 class="mb-2 mt-1 text-bold">Other services </h4>
 								<div class="supplier-details box-shdow-1">
 
 									<div class="row">
+
 										<div class="col-xs-6">
 											<ul>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
+												@foreach( $dept->DeptServices as $service )
+													<li>
+														<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
+												  </li>
+												@endforeach
 											</ul>
 										</div>
-										<div class="col-xs-6">
-											<ul>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
-												<li>
-													<input id="" type="checkbox" > Projector
-											  </li>
-											</ul>
-										</div>
+
+
 									</div>
 
 								</div>
+								@endif
+								@endif
 
 								<div class="row mt-2">
 									<div class="col-sm-12 ">
