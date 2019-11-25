@@ -67,6 +67,22 @@ function user_state_change(user_id)
     });
 }
 
+/*
+*Function to hide element by its ID
+*/
+function hide_element( id )
+{
+  $('#'+id).addClass('hidden');
+}
+
+/*
+*Function to unhide element by its ID
+*/
+function unhide_element( id )
+{
+  $('#'+id).removeClass('hidden');
+}
+
 $(document).on("input", ".numeric", function() {
     this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });

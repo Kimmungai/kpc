@@ -185,22 +185,6 @@ function get_table_search_panel_markup( nextRow, col )
 }
 
 /*
-*Function to hide element by its ID
-*/
-function hide_element( id )
-{
-  $('#'+id).addClass('hidden');
-}
-
-/*
-*Function to unhide element by its ID
-*/
-function unhide_element( id )
-{
-  $('#'+id).removeClass('hidden');
-}
-
-/*
 *Function to update the result panel in the requisition form
 */
 function update_requisition_product_results ( data, parentID, row )

@@ -173,6 +173,9 @@
 .action-tab dt{
 
 }
+.mb-0{
+  margin-bottom: 0!important;
+}
 .mb-2{
   margin-bottom: 20px!important;
 }
@@ -662,4 +665,16 @@ input:checked + .slider-xs:before {
 .added-rooms-list li small{
   font-size: 10px;
   text-transform: capitalize;
+}
+.search-panel-lg{
+  max-height: 100px;
+  background: #f5f5f5;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.search-panel-lg a{
+  color: inherit;
+  display: block;
+  padding: 8px;
+  overflow-wrap: break-word;
 }

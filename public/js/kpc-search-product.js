@@ -1,4 +1,4 @@
-$('#search-product-box').on('keyup', function() {
+/*$('#search-product-box').on('keyup', function() {
 
      if (this.value.length > 2) {
        var deptID = $("#currentDeptID").val();
@@ -99,4 +99,76 @@ function update_product_quantity(purchaseID,tdId,field)
 function new_clear_prod_search(){
   $("#product-results-box").html('');
   $("#product-results-box").removeClass('d-none').removeClass('hidden');
+}*/
+
+/*
+*Function to search
+*/
+function kpc_search( string, inputID, deptID, model='all' )
+{
+  if( string.length < 3 || inputID == '' || deptID == '' )
+    return;
+
+    //send details to server
+    $.post( kpc_get_search_route(model),
+      {
+        string:string,
+        deptID:deptID,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        //show result box
+        update_search_panel( data, inputID+'Panel', inputID+'Table' );
+      });
+
+    unhide_element(inputID+'Panel');
+
+}
+
+/*
+*Function to update search panel
+*/
+function update_search_panel( data, panelID, tableID )
+{
+  $("#"+panelID).html('');
+  $("#"+panelID).append('<span class="close" onclick="hide_element(\''+panelID+'\')"><i class="fa fa-times-circle"></i></span>')
+
+  if( data.length )
+  {
+    for ( var x=0;x<data.length;x++ )
+    {
+      if( !$("#search-result-"+data[x].id).length )
+      {
+        $("#"+panelID).append('<a id="search-result-'+data[x].id+'" href="#" onclick="event.preventDefault();update_table_with_results(\''+tableID+'\')">'+data[x].name+'</a>');
+      }
+    }
+  }else{
+    $("#"+panelID).append('<a href="#" onclick="event.preventDefault()">No result</a>');
+  }
+}
+
+/*
+*Update a table with search results
+*/
+function update_table_with_results(tableID)
+{
+  $('#'+tableID+' tbody').html('');//suzuki
+}
+
+/*
+*Function to return correct search route
+*/
+function kpc_get_search_route(model)
+{
+  switch ( model ) {
+
+    case 'product':
+      return '/search-product';
+    break;
+
+    default:
+      return '/search-product';
+    break;
+
+  }
 }

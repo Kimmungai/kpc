@@ -93,11 +93,20 @@
 										<h4 class="mb-2 text-bold">Other Booked products</h4>
 
 										<div class="supplier-details box-shdow-4">
-											<div class="input-group">
+											<div class="input-group mb-0" >
 											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
-											  <input type="text" class="form-control" placeholder="Search by product name..." aria-describedby="basic-addon1">
+											  <input id="otherProductsSearch" type="text" class="form-control" placeholder="Search by product name..." onkeyup="kpc_search(this.value,this.id,@if(isset($dept)){{$dept->id}}@endif,'product')">
 											</div>
+
+											<div id="otherProductsSearchPanel" class="search-panel-lg hidden">
+
+
+											</div>
+
 										</div>
+
+
+
 									</div>
 								</div>
 
@@ -105,7 +114,7 @@
 
 									<div class="col-sm-12">
 										<div class="resp-table ">
-											<table  class="" >
+											<table id="otherProductsSearchTable" class="" >
 												<thead >
 													<tr>
 														<td style="background:#fff;">#</td>
@@ -142,7 +151,7 @@
 								<h4 class="mb-2 text-bold">Customer</h4>
 
 								<div class="supplier-details box-shdow-1 mb-2 text-center">
-									<h3>Total</h3>
+									<h3>Total Due</h3>
 									<h3 class="text-danger text-bold">KES 50,000</h3>
 								</div>
 
