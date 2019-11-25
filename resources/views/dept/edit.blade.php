@@ -57,6 +57,9 @@
                 <div class="row dept-details">
                     @component( 'components.dept-reg-services-form',['dept'=>$dept] )@endcomponent
                 </div>
+                <div class="row dept-details">
+                    @component( 'components.dept-booking-menu-details-form',['dept'=>$dept] )@endcomponent
+                </div>
               </form>
 
 
