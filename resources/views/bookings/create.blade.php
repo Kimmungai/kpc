@@ -21,7 +21,11 @@
 				 <div class="inner_content_w3_agile_info">
 
 
-
+					 <div class="row mt-2">
+				 		<div class="col-sm-12 ">
+				 			<button type="submit" class="btn btn-default btn-lg mb-1 pull-right"><span class="fa fa-save"></span> Save</button>
+				 		</div>
+				 	</div>
 
 						<div class="row">
 
@@ -33,53 +37,52 @@
 									<div class="col-sm-12 ">
 										<div class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-gift"></i></span>
-										  <select class="form-control" name="bookingType" onchange="select_booking_type(this.value)">
-												<option value="1"> Food ordering </option>
-												<option value="2"> Room booking </option>
-												<option value="3"> Tent Hiring </option>
-												<option value="4"> Meeting hall booking </option>
-												<option value="5"> Compound booking </option>
+										  <select class="form-control" name="bookingType">
+												@if( isset($dept) )
+													@if( $dept->DeptBookingTypes )
+														@foreach( $dept->DeptBookingTypes as $type )
+															<option value="{{$type->price}}"> {{$type->type}} </option>
+														@endforeach
+													@endif
+												@endif
 										  </select>
 										</div>
 										<div id="numPpleTitle" class="input-group input-group-md">
-										  <span class="input-group-addon" id=""><i class="fas fa-users"></i></span>
+										  <span class="input-group-addon" id=""><i class="fas fa-users"></i> <i class="text-danger">*</i></span>
 										  <input name="numPple" id="numPple" type="number" class="form-control numeric" value="{{old('numPple')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required>
 										</div>
 										<div id="chkInDateTitle" class="input-group input-group-md">
-										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
-										  <input type="text" name="chkInDate" id="chkInDate" class="form-control" placeholder="Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i> <i class="text-danger">*</i></span>
+										  <input type="text" name="chkInDate" id="chkInDate" class="form-control" placeholder="Start Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
 										</div>
-										<div id="chkOutDateTitle" class="input-group input-group-md hidden">
+										<div id="chkOutDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
-										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control" placeholder="Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
+										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control" placeholder="End Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
 										</div>
 										<div id="bookingAmountDueTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
-										  <input name="bookingAmountDue" id="bookingAmountDue" type="number" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required>
+										  <input name="bookingAmountDue" id="bookingAmountDue" type="text" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Amount due" disabled>
 										</div>
 										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										  <span class="input-group-addon" id=""><i class="fas fa-info-circle"></i></span>
+											<select class="form-control" name="modeOfPayment"  id="modeOfPayment">
+												<option value="1">Paid in cash</option>
+												<option value="2">Paid by cheque</option>
+												<option value="3">Paid by bank transfer</option>
+												<option value="4">Paid by MPESA</option>
+											</select>
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="transactionCodeTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-check"></i></span>
+										  <input type="text" id="transactionCode" class="form-control" name="transactionCode" placeholder="E.g MPESA transaction code, cheque number etc" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="bookingAmountReceivedTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
+										  <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" class="form-control numeric" value="{{old('bookingAmountReceived')}}" placeholder="Amount Received" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"  >
 										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
-										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
-										</div>
-										<div class="input-group input-group-md">
-										  <span class="input-group-addon" id="">@</span>
-										  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+										<div id="paymentDueDateTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
+										  <input type="text" name="paymentDueDate" id="paymentDueDate" class="form-control" placeholder="Payment Due Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
 										</div>
 									</div>
 								</div>
@@ -92,9 +95,8 @@
 										<div class="supplier-details box-shdow-4">
 											<div class="input-group">
 											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
-											  <input type="text" class="form-control" placeholder="Search by sku..." aria-describedby="basic-addon1">
+											  <input type="text" class="form-control" placeholder="Search by product name..." aria-describedby="basic-addon1">
 											</div>
-											<a href="#">Create new product instead</a>
 										</div>
 									</div>
 								</div>
@@ -138,6 +140,11 @@
 							<div class="col-sm-5">
 								<!--Customer details-->
 								<h4 class="mb-2 text-bold">Customer</h4>
+
+								<div class="supplier-details box-shdow-1 mb-2 text-center">
+									<h3>Total</h3>
+									<h3 class="text-danger text-bold">KES 50,000</h3>
+								</div>
 
 								<div class="supplier-details box-shdow-1 mb-2">
 									<div class="input-group">
@@ -189,15 +196,38 @@
 								@endif
 								@endif
 
-								<div class="row mt-2">
-									<div class="col-sm-12 ">
-										<a href="#" class="btn btn-default btn-lg mt-1"><span class="fa fa-save"></span> Save</a>
-										<a href="#" class="btn btn-default btn-lg mt-1"><span class="fa fa-undo"></span> clear</a>
+								@if( isset($dept) )
+								@if( count($dept->DeptMenu) )
+								<h4 class="mb-2 mt-1 text-bold">Menu details </h4>
+								<div class="supplier-details box-shdow-1">
+
+									<div class="row">
+
+										<div class="col-xs-6">
+											<ul>
+												@foreach( $dept->DeptMenu as $menu )
+													<li>
+														<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+												  </li>
+												@endforeach
+											</ul>
+										</div>
+
 
 									</div>
 
 								</div>
+								@endif
+								@endif
 
+
+
+							</div>
+						</div>
+
+						<div class="row mt-2">
+							<div class="col-sm-12 ">
+								<button type="submit" class="btn btn-default btn-lg mt-1 pull-right"><span class="fa fa-save"></span> Save</button>
 							</div>
 						</div>
 

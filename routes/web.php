@@ -48,6 +48,10 @@ Route::post('remove-dept-service','DepartmentAjaxController@remove_service');
 Route::post('add-dept-room','DepartmentAjaxController@add_room');
 Route::post('update-has-rooms','DepartmentAjaxController@update_has_room');
 Route::post('remove-dept-room','DepartmentAjaxController@remove_room');
+Route::post('add-dept-booking-type','DepartmentAjaxController@add_booking_type');
+Route::post('remove-dept-booking-type','DepartmentAjaxController@remove_booking_type');
+Route::post('add-dept-menu','DepartmentAjaxController@add_menu');
+Route::post('remove-dept-menu','DepartmentAjaxController@remove_menu');
 
 //purchases
 

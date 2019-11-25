@@ -55,4 +55,12 @@ class Dept extends Model
     {
       return $this->hasMany('App\DeptServices');
     }
+    public function DeptBookingTypes()
+    {
+      return $this->hasMany('App\DeptBookingTypes');
+    }
+    public function DeptMenu()
+    {
+      return $this->hasMany('App\DeptMenu');
+    }
 }

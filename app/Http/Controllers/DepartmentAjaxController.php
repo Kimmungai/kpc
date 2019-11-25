@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DeptServices;
 use App\DeptRooms;
+use App\DeptBookingTypes;
+use App\DeptMenu;
 use App\Dept;
 
 class DepartmentAjaxController extends Controller
@@ -84,6 +86,67 @@ class DepartmentAjaxController extends Controller
     ]);
 
     DeptRooms::where('id',$request->room_id)->delete();
+
+    return 1;
+  }
+
+  /*
+  *Add booking type to department
+  */
+  public function add_booking_type( Request $request )
+  {
+    $request->validate([
+      'type' => 'required',
+      'price' => 'required|numeric',
+      'dept_id' => 'required|numeric',
+    ]);
+
+    $type = DeptBookingTypes::create($request->all());
+
+    return $type;
+
+  }
+
+  /*
+  *Remove a department booking type
+  */
+  public function remove_booking_type(Request $request)
+  {
+    $request->validate([
+      'booking_type_id' => 'required|numeric',
+    ]);
+
+    DeptBookingTypes::where('id',$request->booking_type_id)->delete();
+
+    return 1;
+  }
+
+  /*
+  *Add a department food menu
+  */
+  public function add_menu(Request $request)
+  {
+    $request->validate([
+      'name' => 'required',
+      'price' => 'required|numeric',
+      'dept_id' => 'required|numeric',
+    ]);
+
+    $type = DeptMenu::create($request->all());
+
+    return $type;
+  }
+
+  /*
+  *Remove a department menu
+  */
+  public function remove_menu(Request $request)
+  {
+    $request->validate([
+      'menu_id' => 'required|numeric',
+    ]);
+
+    DeptMenu::where('id',$request->menu_id)->delete();
 
     return 1;
   }

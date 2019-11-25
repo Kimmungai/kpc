@@ -133,3 +133,102 @@ function dept_remove_room_list(element,room_id)
 
   $(element).parent().remove();
 }
+
+/*
+*Add booking type to department form page
+*/
+function dept_add_booking_type( dept_id = 0 )
+{
+  if(!dept_id){return;}
+
+  var type = $("#deptBookingType").val();
+  var price = $("#deptBookingTypePrice").val();
+
+  if( type != '' && price != '')
+  {
+
+
+    $("#deptBookingType").val('');
+    $("#deptBookingTypePrice").val('');
+
+    $.post("/add-dept-booking-type",
+      {
+        type:type,
+        price:price,
+        dept_id:dept_id,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        //append room to list
+        $('#booking-type-list').append('<li> <span class="fa fa-times-circle" onclick="dept_remove_booking_type_list(this,'+data.id+')"></span> <span>'+type+'</span> <small> at KES '+price+'</small></li>');
+      });
+
+
+  }
+}
+
+/*
+*remove booking type from department form
+*/
+function dept_remove_booking_type_list(element,booking_type_id)
+{
+  $.post("/remove-dept-booking-type",
+    {
+      booking_type_id:booking_type_id,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //alert(data)
+    });
+
+  $(element).parent().remove();
+}
+
+/*
+*Add food menu to department form page
+*/
+function dept_add_menu( dept_id = 0 )
+{
+  if(!dept_id){return;}
+
+  var name = $("#nameOfMenu").val();
+  var price = $("#costOfMenu").val();
+
+  if( name != '' && price != '')
+  {
+
+    $("#nameOfMenu").val('');
+    $("#costOfMenu").val('');
+
+    $.post("/add-dept-menu",
+      {
+        name:name,
+        price:price,
+        dept_id:dept_id,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        //append room to list
+       $('#menu-list').append('<li> <span class="fa fa-times-circle" onclick="dept_remove_menu_list(this,\'+data.id+\')"></span> <span>'+name+'</span> <small> at KES '+price+'</small></li>');
+      });
+
+
+  }
+}
+
+/*
+*remove menu from department form
+*/
+function dept_remove_menu_list(element,menu_id)
+{
+  $.post("/remove-dept-menu",
+    {
+      menu_id:menu_id,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //alert(data)
+    });
+
+  $(element).parent().remove();
+}

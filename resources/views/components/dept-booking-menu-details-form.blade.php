@@ -6,53 +6,53 @@
 
 
 
-    <div class="form-group" id="deptRoomTypeTitle">
+    <div class="form-group" id="deptBookingTypeTitle">
       <label class="col-md-4 control-label">Type of booking</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
             <i class="fa fa-gift"></i>
           </span>
-          <input name="deptRoomType" id="deptRoomType" type="text" class="form-control" value="@if( old('deptRoomType') ) {{old('deptRoomType')}} @elseif( isset($dept) ) {{$dept->deptRoomType}} @endif" placeholder="e.g Standard, Delux, etc." />
+          <input name="deptBookingType" id="deptBookingType" type="text" class="form-control" value="@if( old('deptBookingType') ) {{old('deptBookingType')}} @elseif( isset($dept) ) {{$dept->deptBookingType}} @endif" placeholder="e.g Standard, Delux, etc." />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="deptRoomTypeHelper">
-          @if ($errors->has('deptRoomType'))
-            {{ $errors->first('deptRoomType') }}
+        <p class="help-block red-text" id="deptBookingTypeHelper">
+          @if ($errors->has('deptBookingType'))
+            {{ $errors->first('deptBookingType') }}
           @endif
         </p>
       </div>
     </div>
 
 
-    <div class="form-group" id="deptRoomPriceTitle">
+    <div class="form-group" id="deptBookingTypePriceTitle">
       <label class="col-md-4 control-label">Price per person</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
             <i class="fa fa-money-bill"></i>
           </span>
-          <input name="deptRoomPriceType" id="deptRoomPriceType" type="text" class="form-control numeric" value="@if( old('deptRoomPriceType') ) {{old('deptRoomPriceType')}} @elseif( isset($dept) ) {{$dept->deptRoomPriceType}} @endif" placeholder="Price customers will pay" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"/>
+          <input name="deptBookingTypePrice" id="deptBookingTypePrice" type="text" class="form-control numeric" value="@if( old('deptBookingTypePrice') ) {{old('deptBookingTypePrice')}} @elseif( isset($dept) ) {{$dept->deptBookingTypePrice}} @endif" placeholder="Price customers will pay" />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="deptRoomPriceHelper">
-          @if ($errors->has('deptRoomPrice'))
-            {{ $errors->first('deptRoomPrice') }}
+        <p class="help-block red-text" id="deptBookingTypePriceHelper">
+          @if ($errors->has('deptBookingTypePrice'))
+            {{ $errors->first('deptBookingTypePrice') }}
           @endif
         </p>
       </div>
     </div>
 
-    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_room(@if(isset($dept)) {{$dept->id}} @endif)">Add booking type</button>
+    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_booking_type(@if(isset($dept)) {{$dept->id}} @endif)">Add booking type</button>
 
-    <ul id="rooms-list" class="list-inline added-rooms-list">
+    <ul id="booking-type-list" class="list-inline added-rooms-list">
 
       @if( isset($dept) )
-        @if( $dept->DeptRooms )
-          @foreach( $dept->DeptRooms as $room )
-            <li> <span class="fa fa-times-circle" onclick="dept_remove_room_list(this,{{$room->id}})"></span> <span>{{$room->type}}</span> <small> at KES {{$room->price}}</small></li>
+        @if( $dept->DeptBookingTypes )
+          @foreach( $dept->DeptBookingTypes as $type )
+            <li> <span class="fa fa-times-circle" onclick="dept_remove_booking_type_list(this,{{$type->id}})"></span> <span>{{$type->type}}</span> <small> at KES {{$type->price}}</small></li>
           @endforeach
         @endif
       @endif
@@ -67,52 +67,52 @@
 <div class="col-md-6">
   <div class="grid-1 graph-form agile_info_shadow">
     <h3>Menu details</h3>
-    <div class="form-group" id="nameOfServiceTitle">
+    <div class="form-group" id="nameOfMenuTitle">
       <label class="col-md-4 control-label">Menu type</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
             <i class="fas fa-utensils"></i>
           </span>
-          <input name="nameOfService" id="nameOfService" type="text" class="form-control" value="@if( old('nameOfService') ) {{old('nameOfService')}} @elseif( isset($dept) ) {{$dept->nameOfService}} @endif" placeholder="Dept target costs..." />
+          <input name="nameOfMenu" id="nameOfMenu" type="text" class="form-control" value="@if( old('nameOfMenu') ) {{old('nameOfMenu')}} @elseif( isset($dept) ) {{$dept->nameOfMenu}} @endif" placeholder="Dept target costs..." />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="nameOfServiceHelper">
-          @if ($errors->has('nameOfService'))
-            {{ $errors->first('nameOfService') }}
+        <p class="help-block red-text" id="nameOfMenuHelper">
+          @if ($errors->has('nameOfMenu'))
+            {{ $errors->first('nameOfMenu') }}
           @endif
         </p>
       </div>
     </div>
 
-    <div class="form-group" id="costOfServiceTitle">
+    <div class="form-group" id="costOfMenuTitle">
       <label class="col-md-4 control-label">Cost per person</label>
       <div class="col-md-6">
         <div class="input-group input-icon right">
           <span class="input-group-addon">
             <i class="fas fa-money-bill"></i>
           </span>
-          <input name="costOfService" id="costOfService" type="number" class="form-control numeric" value="@if( old('costOfService') ) {{old('costOfService')}} @elseif( isset($dept) ) {{$dept->costOfService}} @endif" placeholder="Numbers only"  />
+          <input name="costOfMenu" id="costOfMenu" type="number" class="form-control numeric" value="@if( old('costOfMenu') ) {{old('costOfMenu')}} @elseif( isset($dept) ) {{$dept->costOfMenu}} @endif" placeholder="Numbers only"  />
         </div>
       </div>
       <div class="col-sm-2">
-        <p class="help-block red-text" id="costOfServiceHelper">
-          @if ($errors->has('costOfService'))
-            {{ $errors->first('costOfService') }}
+        <p class="help-block red-text" id="costOfMenuHelper">
+          @if ($errors->has('costOfMenu'))
+            {{ $errors->first('costOfMenu') }}
           @endif
         </p>
       </div>
     </div>
 
-    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_service(@if(isset($dept)) {{$dept->id}} @endif)">Add menu</button>
+    <button type="button" class="btn btn-default btn-xs" onclick="dept_add_menu(@if(isset($dept)) {{$dept->id}} @endif)">Add menu</button>
 
     <!--list of added services-->
-    <ul id="services-list" class="list-inline added-rooms-list">
+    <ul id="menu-list" class="list-inline added-rooms-list">
       @if( isset($dept) )
-        @if( $dept->DeptServices )
-          @foreach( $dept->DeptServices as $service )
-            <li> <span class="fa fa-times-circle" onclick="dept_remove_list(this,{{$service->id}})"></span> <span>{{$service->service}}</span> <small> at KES {{$service->cost}}</small></li>
+        @if( $dept->DeptMenu )
+          @foreach( $dept->DeptMenu as $menu )
+            <li> <span class="fa fa-times-circle" onclick="dept_remove_menu_list(this,{{$menu->id}})"></span> <span>{{$menu->name}}</span> <small> at KES {{$menu->price}}</small></li>
           @endforeach
         @endif
       @endif
