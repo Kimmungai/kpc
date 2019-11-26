@@ -306,18 +306,7 @@ function req_calculate_product_table_total( )
 
 }
 
-/*
-*Currency formatter
-*/
-function kes_currency(value,currency)
-{
-  var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency,
-  });
 
-  return formatter.format(value);
-}
 
 /*
 *function to count number of rows in the requisition form table and assign to a hidden input

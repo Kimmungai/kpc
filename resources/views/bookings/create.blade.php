@@ -20,12 +20,14 @@
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
 
+				<form id="booking-form" class="" action="index.html" method="post">
 
 					 <div class="row mt-2">
 				 		<div class="col-sm-12 ">
 				 			<button type="submit" class="btn btn-default btn-lg mb-1 pull-right"><span class="fa fa-save"></span> Save</button>
 				 		</div>
 				 	</div>
+
 
 						<div class="row">
 
@@ -95,7 +97,7 @@
 										<div class="supplier-details box-shdow-4">
 											<div class="input-group mb-0" >
 											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
-											  <input id="otherProductsSearch" type="text" class="form-control" placeholder="Search by product name..." onkeyup="kpc_search(this.value,this.id,@if(isset($dept)){{$dept->id}}@endif,'product')">
+											  <input id="otherProductsSearch" type="text" class="form-control search-input" placeholder="Search by product name..." onkeyup="kpc_search(this.value,this.id,@if(isset($dept)){{$dept->id}}@endif,'product')">
 											</div>
 
 											<div id="otherProductsSearchPanel" class="search-panel-lg hidden">
@@ -114,27 +116,35 @@
 
 									<div class="col-sm-12">
 										<div class="resp-table ">
-											<table id="otherProductsSearchTable" class="" >
-												<thead >
+											<table id="otherProductsSearchTable" class="bg-white hidden" >
+												<thead>
 													<tr>
-														<td style="background:#fff;">#</td>
-														<td style="background:#fff;">Image</td>
-														<td style="background:#fff;">SKU</td>
-														<td style="background:#fff;">Name</td>
-														<td style="background:#fff;">Quantity</td>
-														<td style="background:#fff;">Cost</td>
+														<td>#</td>
+														<td>Name</td>
+														<td>Description</td>
+														<td>Quantity</td>
+														<td>Selling price</td>
+														<td>Total</td>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td data-label="#" style="background:#fff;"><span class="fas fa-times-circle"></span> &nbsp;&nbsp;&nbsp;1.</td>
-														<td data-label="Image" style="background:#fff;"> <img class="img-circle prod-img" src="{{url('images/avatar-male.png')}}" alt="" height="50" width="50"></td>
-														<td data-label="Name" style="background:#fff;">Nyau</td>
-														<td data-label="Email" style="background:#fff;">Nyau</td>
-														<td data-label="Phone" style="background:#fff;">Nyau</td>
-														<td data-label="Amount Owed" style="background:#fff;">Nyau</td>
-													</tr>
+													<!--<tr id="booked-prods-row-1" data-product="'+data.id+'">
+														<td data-label="#"><span class="fas fa-times-circle" onclick="remove_row('booked-prods-row-1')"></span> &nbsp;&nbsp;&nbsp;1.</td>
+														<td data-label="Name"> Nyau</td>
+														<td data-label="Description">Nyau</td>
+														<td data-label="Quantity">Nyau</td>
+														<td data-label="Selling price">Nyau</td>
+														<td data-label="Total">Nyau</td>
+													</tr>-->
 												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="4"></td>
+														<td>Grand Total</td>
+														<td id="booked_prods_grand_total" class="text-bold"></td>
+														<input type="hidden" name="booked_prods_grand_total" value="">
+													</tr>
+												</tfoot>
 											</table>
 									 </div>
 									</div>
@@ -240,7 +250,7 @@
 							</div>
 						</div>
 
-
+</form>
 				</div>
 		<!-- //inner_content-->
 </div>

@@ -83,6 +83,27 @@ function unhide_element( id )
   $('#'+id).removeClass('hidden');
 }
 
+/*
+*Function to remove a row of a table
+*/
+function remove_row( id )
+{
+  $('#'+id).remove();
+}
+
+/*
+*Currency formatter
+*/
+function kes_currency(value,currency)
+{
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency,
+  });
+
+  return formatter.format(value);
+}
+
 $(document).on("input", ".numeric", function() {
     this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });

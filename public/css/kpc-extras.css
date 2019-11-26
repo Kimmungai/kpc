@@ -385,6 +385,7 @@ input:checked + .slider:before {
   margin-left: -100%;
   width: 100%;
   white-space: nowrap;
+  font-weight: 600;
 }
 }
 
@@ -403,12 +404,12 @@ tfoot,tbody {
 
 .resp-table td {
     border: 1px solid #ccc;
-    text-align: center
 }
 
 .resp-table th {
     border: 1px solid #ccc;
-    text-align: center!important;
+    background: #fff;
+    color: inherit;
 }
 
 .resp-table th {
@@ -426,8 +427,11 @@ tfoot,tbody {
     font-size: 12px
 }
 
-.resp-table tbody td {
-    text-align: left
+.resp-table thead td {
+    font-weight: 600;
+}
+.resp-table tfoot td {
+    font-weight: 600;
 }
 .text-bold{
   font-weight: bold;
@@ -677,4 +681,7 @@ input:checked + .slider-xs:before {
   display: block;
   padding: 8px;
   overflow-wrap: break-word;
+}
+.bg-white td{
+  background-color: #fff;
 }

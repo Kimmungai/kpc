@@ -139,7 +139,7 @@ function update_search_panel( data, panelID, tableID )
     {
       if( !$("#search-result-"+data[x].id).length )
       {
-        $("#"+panelID).append('<a id="search-result-'+data[x].id+'" href="#" onclick="event.preventDefault();update_table_with_results(\''+tableID+'\')">'+data[x].name+'</a>');
+        $("#"+panelID).append('<a id="search-result-'+data[x].id+'" href="#" onclick="event.preventDefault();update_table_with_results(\''+tableID+'\',\''+panelID+'\',\''+data[x].id+'\')">'+data[x].name+'</a>');
       }
     }
   }else{
@@ -150,9 +150,39 @@ function update_search_panel( data, panelID, tableID )
 /*
 *Update a table with search results
 */
-function update_table_with_results(tableID)
+function update_table_with_results(tableID,searchPanelID,prodID)
 {
-  $('#'+tableID+' tbody').html('');//suzuki
+  hide_element(searchPanelID);
+  $('.search-input').val('');
+  var nextRow = $('#'+tableID+' tbody tr').length + 1;
+
+  //get product from server
+  $.post("/find-product",
+    {
+      prodID:prodID,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //append row to other booked products table
+      if( !product_in_table(tableID,prodID) )
+      {
+        $('#'+tableID+' tbody').append(booked_prods_table_markup(data,nextRow,tableID));
+        sum_booked_prods_table(tableID);
+        unhide_element(tableID);
+      }
+      else
+      {
+        var con = confirm("Item already in table, would you like to increase its quantity?");
+
+        if(con)
+        {
+          increase_prod_qty_in_booked_prods_table(tableID, prodID);
+        }
+
+      }
+    });
+
+
 }
 
 /*
@@ -171,4 +201,101 @@ function kpc_get_search_route(model)
     break;
 
   }
+}
+
+/*
+*Function to append other booked products table with new row
+*/
+function booked_prods_table_markup(data,nextRow,tableID)
+{
+  var row =  '<tr id="booked-prods-row-'+nextRow+'" data-product="'+data.id+'">';
+      row += '<td id="col_'+nextRow+'_1" data-label="#"><span class="fas fa-times-circle" onclick="remove_row_hide_empty_table( \'booked-prods-row-'+nextRow+'\', \''+tableID+'\' )"></span> &nbsp;&nbsp;&nbsp;'+nextRow+'.</td>';
+      row += '<td id="col_'+nextRow+'_2" data-label="Name"> '+data.name+'</td>';
+      row += '<td id="col_'+nextRow+'_3" data-label="Description"> '+data.description+'</td>';
+      row += '<td id="col_'+nextRow+'_4" data-label="Quantity"> 1 </td><input type="hidden" name="col_'+nextRow+'_4" value="1">';
+      row += '<td id="col_'+nextRow+'_5" data-label="Selling price"> '+data.price+'</td><input type="hidden" name="col_'+nextRow+'_5" value="'+data.price+'">';
+      row += '<td id="col_'+nextRow+'_6" data-label="Total"> </td><input type="hidden" name="col_'+nextRow+'_6" value="1">';
+  return row;
+}
+
+/*
+*Function to remove a row of a table and hide table if all rows are removed
+*/
+function remove_row_hide_empty_table( id, tableID )
+{
+  $('#'+id).remove();
+
+  if( !$('#'+tableID+' tbody tr').length )
+    $('#'+tableID).addClass('hidden');
+
+  sum_booked_prods_table( tableID );
+
+}
+
+/*
+*Calculate values in the booked products table
+*/
+function sum_booked_prods_table( tableID )
+{
+  var grandTotal = 0;
+  var row = 1;
+
+  $('#'+tableID+' tbody tr').each(function(){
+
+    while( !$('#booked-prods-row-'+row+'').length ){ row += 1; }
+
+    var quantity = parseFloat($('#booking-form input[name=col_'+row+'_4]').val());
+    var selling_price = parseFloat($('#booking-form input[name=col_'+row+'_5]').val());
+
+    var total = quantity * selling_price;
+    $('#booking-form input[name=col_'+row+'_6]').val(total);
+    $('#col_'+row+'_6').text(kes_currency(total,'KES'));
+
+    grandTotal += total;
+    row += 1;
+  });
+
+  $('#booking-form input[name=booked_prods_grand_total]').val(grandTotal);
+  $('#booked_prods_grand_total').text(kes_currency(grandTotal,'KES'));
+
+}
+
+/*
+*Function to check whether a product is already in table
+*/
+function product_in_table( tableID, prodID )
+{
+  var in_table = 0;
+
+  $('#'+tableID+' tbody tr').each(function(){
+    if( $(this).data('product') == prodID )
+    {
+      in_table += 1;
+    }
+  });
+
+  return in_table;
+}
+
+/*
+*Function to increase quantity of a product in the booked products table by 1
+*/
+function increase_prod_qty_in_booked_prods_table(tableID, prodID)
+{
+  var row = 1;
+
+  $('#'+tableID+' tbody tr').each(function(){
+
+    if( $(this).data('product') == prodID )
+    {
+      var quantity = parseFloat($('#booking-form input[name=col_'+row+'_4]').val());
+      var new_quantity = quantity + 1;
+      $('#booking-form input[name=col_'+row+'_4]').val(new_quantity);
+      $('#col_'+row+'_4').text(new_quantity);
+      sum_booked_prods_table( tableID );
+      return false;
+    }
+
+    row += 1;
+  });
 }
