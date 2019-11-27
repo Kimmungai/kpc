@@ -128,14 +128,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<!--<tr id="booked-prods-row-1" data-product="'+data.id+'">
-														<td data-label="#"><span class="fas fa-times-circle" onclick="remove_row('booked-prods-row-1')"></span> &nbsp;&nbsp;&nbsp;1.</td>
-														<td data-label="Name"> Nyau</td>
-														<td data-label="Description">Nyau</td>
-														<td data-label="Quantity">Nyau</td>
-														<td data-label="Selling price">Nyau</td>
-														<td data-label="Total">Nyau</td>
-													</tr>-->
+													
 												</tbody>
 												<tfoot>
 													<tr>

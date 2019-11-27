@@ -1,27 +1,3 @@
-/*
-*Function to toggle input of a field in  requisition form
-*/
-function toggleShow(IdToHide,IdToShow)
-{
-  $("#"+IdToHide).addClass('hidden');
-  $("#"+IdToShow).removeClass('hidden');
-
-  if($("#"+IdToHide+" input").length){
-    newValue = $("#"+IdToHide+" input").val();
-    assign_new_val(newValue,IdToShow);
-  }
-
-}
-
-/*
-*Function to assign input value to a field title in the requisition form
-*/
-function assign_new_val(newValue,IdToAssign)
-{
-  if( newValue == '' ) { newValue = 'null'; }
-  $("#"+IdToAssign).text(newValue);
-  req_calculate_product_table_total();
-}
 
 /*
 *Function to assign value to an input by name

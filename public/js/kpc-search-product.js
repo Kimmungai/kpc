@@ -210,10 +210,18 @@ function booked_prods_table_markup(data,nextRow,tableID)
 {
   var row =  '<tr id="booked-prods-row-'+nextRow+'" data-product="'+data.id+'">';
       row += '<td id="col_'+nextRow+'_1" data-label="#"><span class="fas fa-times-circle" onclick="remove_row_hide_empty_table( \'booked-prods-row-'+nextRow+'\', \''+tableID+'\' )"></span> &nbsp;&nbsp;&nbsp;'+nextRow+'.</td>';
-      row += '<td id="col_'+nextRow+'_2" data-label="Name"> '+data.name+'</td>';
-      row += '<td id="col_'+nextRow+'_3" data-label="Description"> '+data.description+'</td>';
-      row += '<td id="col_'+nextRow+'_4" data-label="Quantity"> 1 </td><input type="hidden" name="col_'+nextRow+'_4" value="1">';
-      row += '<td id="col_'+nextRow+'_5" data-label="Selling price"> '+data.price+'</td><input type="hidden" name="col_'+nextRow+'_5" value="'+data.price+'">';
+      row += '<td  data-label="Name"> <span id="col_'+nextRow+'_2"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">'+data.name+'</span>';
+      row += edit_booked_prods_col( 'col_'+nextRow+'_2', data.name);
+      row += '</td>';
+      row += '<td data-label="Description"> <span id="col_'+nextRow+'_3"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">'+data.description+'</span>';
+      row += edit_booked_prods_col( 'col_'+nextRow+'_3', data.description );
+      row += '</td>';
+      row += '<td data-label="Quantity"><span id="col_'+nextRow+'_4"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">1</span>';
+      row += edit_booked_prods_col( 'col_'+nextRow+'_4', 1, 'numeric' );
+      row += '</td>';
+      row += '<td  data-label="Selling price"> <span id="col_'+nextRow+'_5"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">'+data.price+'</span>';
+      row += edit_booked_prods_col( 'col_'+nextRow+'_5', data.price, 'numeric' );
+      row += '</td>';
       row += '<td id="col_'+nextRow+'_6" data-label="Total"> </td><input type="hidden" name="col_'+nextRow+'_6" value="1">';
   return row;
 }
@@ -235,7 +243,7 @@ function remove_row_hide_empty_table( id, tableID )
 /*
 *Calculate values in the booked products table
 */
-function sum_booked_prods_table( tableID )
+function sum_booked_prods_table( tableID='otherProductsSearchTable' )
 {
   var grandTotal = 0;
   var row = 1;
@@ -298,4 +306,16 @@ function increase_prod_qty_in_booked_prods_table(tableID, prodID)
 
     row += 1;
   });
+}
+
+/*
+*Function to return markup for editing a column in booked products table
+*/
+function edit_booked_prods_col( id, value='', numeric='',placeholder='' )
+{
+  var markup  = '<span id="'+id+'_editor" class="hidden">';
+      markup += '<input name="'+id+'" type="text" class="form-control '+numeric+'" placeholder="'+placeholder+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" >';
+      markup += '</span>';
+
+  return  markup;
 }

@@ -104,6 +104,54 @@ function kes_currency(value,currency)
   return formatter.format(value);
 }
 
+/*
+*Function to toggle input of a field in  requisition form
+*/
+function toggleShow(IdToHide,IdToShow,table=1)
+{
+  $("#"+IdToHide).addClass('hidden');
+  $("#"+IdToShow).removeClass('hidden');
+
+  if($("#"+IdToHide+" input").length){
+    newValue = $("#"+IdToHide+" input").val();
+    assign_new_val(newValue,IdToShow,table);
+  }
+
+}
+
+/*
+*Function to assign input value to a field title in the requisition form
+*/
+function assign_new_val(newValue,IdToAssign, table=1)
+{
+  if( newValue == '' ) { newValue = 'null'; }
+  $("#"+IdToAssign).text(newValue);
+
+  get_totals_of_table( table );
+}
+
+/*
+*function to determine which table to get totals of
+*/
+function get_totals_of_table( table )
+{
+  switch (table) {
+
+    case 1://table in the rquisition form
+      req_calculate_product_table_total();
+    break;
+
+    case 2://other booked products in the bookings form
+      sum_booked_prods_table();
+    break;
+
+    default:
+      req_calculate_product_table_total();
+    break;
+
+  }
+}
+
 $(document).on("input", ".numeric", function() {
     this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });
