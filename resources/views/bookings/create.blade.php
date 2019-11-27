@@ -128,7 +128,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													
+
 												</tbody>
 												<tfoot>
 													<tr>
@@ -151,25 +151,66 @@
 
 							<div class="col-sm-5">
 								<!--Customer details-->
-								<h4 class="mb-2 text-bold">Customer</h4>
-
 								<div class="supplier-details box-shdow-1 mb-2 text-center">
-									<h3>Total Due</h3>
+									<legend>Total Due</legend>
 									<h3 class="text-danger text-bold">KES 50,000</h3>
 								</div>
 
-								<div class="supplier-details box-shdow-1 mb-2">
-									<div class="input-group">
-									  <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
+								<div id="bookingCustomerSearchPanel" class="supplier-details box-shdow-1 mb-2">
+									<legend>Search</legend>
+									<div  class="input-group">
+									  <span class="input-group-addon" ><span class="fa fa-search"></span></span>
 									  <input type="text" class="form-control" placeholder="Search customer by name..." aria-describedby="basic-addon1">
 									</div>
-									<a href="#">Create new customer instead</a>
+									<a href="#" onclick="event.preventDefault();toggleElements('bookingCustomerRegPanel','bookingCustomerSearchPanel')">Create new customer instead</a>
+								</div>
+
+								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 hidden">
+									<legend>Customer Registration Form</legend>
+									<div class="row">
+										<div class="col-sm-6">
+											<div id="bookingCustomerNameTitle" class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-user-tag"></span></span>
+											  <input id="bookingCustomerName" type="text" class="form-control" placeholder="Name" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerPhoneTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-phone"></span></span>
+											  <input id="bookingCustomerPhone" type="text" class="form-control numeric" placeholder="Phone" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerEmailTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-envelope"></span></span>
+											  <input id="bookingCustomerEmail" type="email" class="form-control" placeholder="Email" onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerAvatarTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-image"></span></span>
+											  <input id="bookingCustomerAvatar" type="file" class="form-control" onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" >
+											</div>
+										</div>
+
+
+									</div>
+
+									<button class="btn btn-default btn-block mb-1">Submit details</button>
+
+
+									<a href="#" onclick="event.preventDefault();toggleElements('bookingCustomerSearchPanel','bookingCustomerRegPanel')" >Search customer instead</a>
+
 								</div>
 
 								<div class="supplier-details box-shdow-1">
 
 									<div class="row">
 										<div class="col-xs-8">
+											<legend>Customer details</legend>
 											<ul class="pt-1">
 												<li><span class="fa fa-user"></span> Name</li>
 												<li><span class="fa fa-phone"></span> 0790643963</li>
@@ -186,17 +227,35 @@
 								<!--End customer details-->
 								@if( isset($dept) )
 								@if( count($dept->DeptServices) )
-								<h4 class="mb-2 mt-1 text-bold">Other services </h4>
-								<div class="supplier-details box-shdow-1">
 
+								<div class="supplier-details box-shdow-1 mb-2 mt-1">
+									<legend>Other services</legend>
 									<div class="row">
+
+										<?php $count = 0; ?>
 
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptServices as $service )
-													<li>
-														<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
-												  </li>
+													@if( $count % 2 != 0 )
+														<li>
+															<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+
+										<div class="col-xs-6">
+											<ul>
+												@foreach( $dept->DeptServices as $service )
+													@if( $count % 2 == 0 )
+														<li>
+															<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
+													  </li>
+													@endif
+													<?php $count++; ?>
 												@endforeach
 											</ul>
 										</div>
@@ -210,17 +269,35 @@
 
 								@if( isset($dept) )
 								@if( count($dept->DeptMenu) )
-								<h4 class="mb-2 mt-1 text-bold">Menu details </h4>
-								<div class="supplier-details box-shdow-1">
 
+								<div class="supplier-details box-shdow-1 mb-2 mt-1">
+									<legend>Menu details</legend>
 									<div class="row">
+
+										<?php $count = 0; ?>
 
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptMenu as $menu )
-													<li>
-														<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
-												  </li>
+													@if( $count % 2 != 0 )
+														<li>
+															<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+
+										<div class="col-xs-6">
+											<ul>
+												@foreach( $dept->DeptMenu as $menu )
+													@if( $count % 2 == 0 )
+														<li>
+															<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+													  </li>
+													@endif
+													<?php $count++; ?>
 												@endforeach
 											</ul>
 										</div>
@@ -242,6 +319,8 @@
 								<button type="submit" class="btn btn-default btn-lg mt-1 pull-right"><span class="fa fa-save"></span> Save</button>
 							</div>
 						</div>
+
+						<input type="hidden" name="user_id" >
 
 </form>
 				</div>

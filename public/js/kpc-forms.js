@@ -126,8 +126,8 @@ function assign_new_val(newValue,IdToAssign, table=1)
 {
   if( newValue == '' ) { newValue = 'null'; }
   $("#"+IdToAssign).text(newValue);
-
-  get_totals_of_table( table );
+  if( table )
+    get_totals_of_table( table );
 }
 
 /*
@@ -138,15 +138,21 @@ function get_totals_of_table( table )
   switch (table) {
 
     case 1://table in the rquisition form
+    if (jQuery.isFunction(req_calculate_product_table_total)) {
       req_calculate_product_table_total();
+    }
     break;
 
     case 2://other booked products in the bookings form
+    if (jQuery.isFunction(sum_booked_prods_table)) {
       sum_booked_prods_table();
+    }
     break;
 
     default:
+    if (jQuery.isFunction(req_calculate_product_table_total)) {
       req_calculate_product_table_total();
+    }
     break;
 
   }

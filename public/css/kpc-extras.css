@@ -685,3 +685,6 @@ input:checked + .slider-xs:before {
 .bg-white td{
   background-color: #fff;
 }
+.text-white{
+  color: #fff!important;
+}

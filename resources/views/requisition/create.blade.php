@@ -113,7 +113,7 @@
              <div class="resp-table">
                <button type="button" class="btn btn-default btn-xs" onclick="add_prod_table_row('products-table')"><span class="fa fa-plus-circle"></span> add row</button>
                <table  id="products-table" >
-                 <thead >
+                 <thead class="text-white">
                    <tr>
                      <th></th>
                      <th>Item</th>
