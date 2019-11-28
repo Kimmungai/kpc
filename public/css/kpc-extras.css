@@ -688,3 +688,12 @@ input:checked + .slider-xs:before {
 .text-white{
   color: #fff!important;
 }
+.cust-errors-list h5
+{
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+.cust-errors-list p::before
+{
+  content: "* ";
+}
