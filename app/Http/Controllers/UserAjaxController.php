@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 use App\User;
 use App\Purchase;
 use App\Expense;
@@ -82,7 +84,7 @@ class UserAjaxController extends Controller
         'org_id' => 'required|numeric',
         'dept' => 'required|numeric',
         'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
-        'firstName' => 'required|max:255',
+        'firstName' => 'nullable|max:255',
         'lastName' => 'nullable|max:255',
         'DOB' => 'nullable|date|max:255',
         'email' => 'required|email|max:255|unique:users,email,'.\Request::segment(2),
@@ -128,4 +130,92 @@ class UserAjaxController extends Controller
       }
       return 1;
     }
+
+    /*
+    *Function to create a customer
+    */
+    public function create_customer( Request $request )
+    {
+      $userType = 2;//customer
+      $orgID = 1;//organisation id
+
+      $validated = Validator::make($request->all(),[
+        'avatar' => 'nullable|image|mimes:jpeg,bmp,png|max:1024',
+        'name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users,email',
+        'phoneNumber' => 'required|numeric|digits_between:10,15',
+      ]);
+
+      if ($validated->fails()) {
+          return response()->json($validated->errors());
+      }
+
+      $valid = $request->only(['name','avatar','email','phoneNumber']);
+
+      $userData = $this->uploads($request,$valid,$userType);
+
+      $userData['password'] = Hash::make(env('DEFAULT_PASSWORD','secret'));
+      $userData['dept'] = Session('deptID');
+      $userData['type'] = $userType;
+      $userData['org_id'] = $orgID;
+
+      $user = User::create($userData);
+
+      return $user;
+
+    }
+
+    /*
+    *Function to remove a customer
+    */
+    public function remove_customer(Request $request)
+    {
+      $request->validate([
+        'id' => 'required|numeric',
+      ]);
+
+      $id = $request->id;
+
+      $user = User::find($id);
+      $user->forceDelete();
+    }
+
+
+    /**
+     * Upload new user files.
+     *
+     * @param  \App\User  $user
+     * @return validated user with image urls
+     */
+    private function uploads($request,$userData,$type)
+    {
+      if( $request->hasFile('avatar') )
+      {
+        $storageLoc = env('AVATAR_STORAGE_LOC','public/users/'.$type.'/pictures');
+        $userData['avatar'] = $this->handleFileUpload($storageLoc,$request);
+      }
+      if( $request->hasFile('idImage') )
+      {
+        $storageLoc = env('ID_STORAGE_LOC','public/users/'.$type.'/ids');
+        $userData['idImage'] = $this->handleFileUpload($storageLoc,$request,'idImage');
+      }
+      if( $request->hasFile('passportImage') )
+      {
+        $storageLoc = env('PASSPORT_STORAGE_LOC','public/users/'.$type.'/passports');
+        $userData['passportImage'] = $this->handleFileUpload($storageLoc,$request,'passportImage');
+      }
+      return $userData;
+    }
+
+    /*
+    *Function to upload files
+    */
+    private function handleFileUpload($storageLoc,$request,$value='avatar')
+    {
+      $image = $request->file($value);
+      $name = time().'.'.$image->getClientOriginalExtension();
+      $image->move($storageLoc, $name);
+      return asset($storageLoc.'/'.$name);
+    }
+
 }

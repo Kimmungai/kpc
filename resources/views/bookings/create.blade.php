@@ -165,7 +165,7 @@
 									<a href="#" onclick="event.preventDefault();toggleElements('bookingCustomerRegPanel','bookingCustomerSearchPanel')">Create new customer instead</a>
 								</div>
 
-								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 ">
+								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 hidden">
 									<legend>Customer Registration Form</legend>
 									<div class="alert alert-danger cust-errors-list hidden" role="alert">
 										<h5>Please correct the following errors first</h5>
@@ -213,20 +213,20 @@
 
 								</div>
 
-								<div class="supplier-details box-shdow-1">
+								<div id="bookingCustomerDetails" class="supplier-details box-shdow-1 hidden">
 
 									<div class="row">
 										<div class="col-xs-8">
 											<legend>Customer details</legend>
 											<ul class="pt-1">
-												<li><span class="fa fa-user"></span> Name</li>
-												<li><span class="fa fa-phone"></span> 0790643963</li>
-												<li><span class="fa fa-envelope"></span> kimpita9@gmail.com</li>
+												<li id="bookingCustomerNameLabel"><span class="fa fa-user"></span> </li>
+												<li id="bookingCustomerPhoneLabel"><span class="fa fa-phone"></span></li>
+												<li id="bookingCustomerEmailLabel"><span class="fa fa-envelope"></span> </li>
 											</ul>
 										</div>
 										<div class="col-xs-4">
-											<span class="fas fa-times-circle close"></span>
-											<img src="{{url('images/avatar-male.png')}}" alt="">
+											<span class="fas fa-times-circle close" onclick="remove_booking_customer()"></span>
+											<img class="thumbnail img-responsive" id="bookingCustomerAvatarLabel" src="" alt="" >
 										</div>
 									</div>
 
