@@ -158,11 +158,17 @@
 
 								<div id="bookingCustomerSearchPanel" class="supplier-details box-shdow-1 mb-2">
 									<legend>Search</legend>
-									<div  class="input-group">
+									<div  class="input-group mb-0">
 									  <span class="input-group-addon" ><span class="fa fa-search"></span></span>
-									  <input type="text" class="form-control" placeholder="Search customer by name..." aria-describedby="basic-addon1">
+									  <input id="customerSearch" type="text" class="form-control search-input" placeholder="Search customer by name..." onkeyup="kpc_cust_search(this.value,this.id)">
 									</div>
-									<a href="#" onclick="event.preventDefault();toggleElements('bookingCustomerRegPanel','bookingCustomerSearchPanel')">Create new customer instead</a>
+
+									<div id="customerSearchPanel" class="search-panel-lg hidden">
+
+
+									</div>
+									<br>
+									<a href="#"  onclick="event.preventDefault();toggleElements('bookingCustomerRegPanel','bookingCustomerSearchPanel')">Create new customer instead</a>
 								</div>
 
 								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 hidden">
@@ -199,7 +205,7 @@
 										<div id="bookingCustomerAvatarTitle" class="col-sm-6">
 											<div class="input-group">
 											  <span class="input-group-addon" ><span class="fa fa-image"></span></span>
-											  <input id="bookingCustomerAvatar" type="file" class="form-control" onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" >
+											  <input id="bookingCustomerAvatar" type="file" class="form-control search-input" onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" >
 											</div>
 										</div>
 
@@ -219,14 +225,14 @@
 										<div class="col-xs-8">
 											<legend>Customer details</legend>
 											<ul class="pt-1">
-												<li id="bookingCustomerNameLabel"><span class="fa fa-user"></span> </li>
-												<li id="bookingCustomerPhoneLabel"><span class="fa fa-phone"></span></li>
-												<li id="bookingCustomerEmailLabel"><span class="fa fa-envelope"></span> </li>
+												<li><span class="fa fa-user"></span> <span id="bookingCustomerNameLabel"></span></li>
+												<li><span class="fa fa-phone"></span> <span id="bookingCustomerPhoneLabel"></span></li>
+												<li><span class="fa fa-envelope"></span> <span id="bookingCustomerEmailLabel"></span></li>
 											</ul>
 										</div>
 										<div class="col-xs-4">
 											<span class="fas fa-times-circle close" onclick="remove_booking_customer()"></span>
-											<img class="thumbnail img-responsive" id="bookingCustomerAvatarLabel" src="" alt="" >
+											<div class="profile-img"><img  id="bookingCustomerAvatarLabel" src="" alt="" ></div>
 										</div>
 									</div>
 

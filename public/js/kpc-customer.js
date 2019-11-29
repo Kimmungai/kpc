@@ -131,14 +131,7 @@ function handle_cust_object_from_server(data)
 {
   toggleElements('bookingCustomerSearchPanel','bookingCustomerRegPanel');
 
-  $("#bookingCustomerNameLabel").text(data.name);
-  $("#bookingCustomerPhoneLabel").text(data.phoneNumber);
-  $("#bookingCustomerEmailLabel").text(data.email);
-  $('#bookingCustomerAvatarLabel').attr('src',data.avatar);
-  //customer id in hidden field
-  $('#booking-form input[name=user_id]').val(data.id)
-
-  $('#bookingCustomerDetails').removeClass('hidden');
+  update_cust_details_panel( data );
 
   reset_booking_cust_reg_form();
 
@@ -170,7 +163,7 @@ function remove_booking_customer()
   if(!id){alert("Error!");return;}
   var con = confirm("Are you sure you want to delete this customer?")
   if(!con){return;}
-  
+
   //send details to server
   $.post( '/remove-customer',
     {
@@ -192,4 +185,91 @@ function reset_booking_cust_reg_form()
   $("#bookingCustomerPhone").val('');
   $("#bookingCustomerEmail").val('');
   $('#bookingCustomerAvatar').val('');
+  $('#booking-form input[name=user_id]').val('');
+}
+
+/*
+*Function to update customer details panel
+*/
+function update_cust_details_panel( data )
+{
+  $("#bookingCustomerNameLabel").text(data.name);
+  $("#bookingCustomerPhoneLabel").text(data.phoneNumber);
+  $("#bookingCustomerEmailLabel").text(data.email);
+  if( data.avatar )
+    $('#bookingCustomerAvatarLabel').attr('src',data.avatar);
+  else
+    $('#bookingCustomerAvatarLabel').attr('src','/images/avatar-male.png');
+  //customer id in hidden field
+  $('#booking-form input[name=user_id]').val(data.id);
+
+  $('#bookingCustomerDetails').removeClass('hidden');
+}
+
+/*
+*Function to customer
+*/
+function kpc_cust_search( string, inputID )
+{
+  if( string.length < 3 || inputID == '' )
+    return;
+
+    //send details to server
+    $.post('/search-any-user',
+      {
+        string:string,
+        field:'name',
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        //show result box
+        update_cust_search_panel( data, inputID+'Panel' );
+      });
+
+    unhide_element(inputID+'Panel');
+
+}
+
+/*
+*Function to update customer search panel
+*/
+function update_cust_search_panel( data, panelID )
+{
+  $("#"+panelID).html('');
+  $("#"+panelID).append('<span class="close" onclick="hide_element(\''+panelID+'\')"><i class="fa fa-times-circle"></i></span>')
+
+  if( data.length )
+  {
+    for ( var x=0;x<data.length;x++ )
+    {
+      if( !$("#search-result-"+data[x].id).length )
+      {
+        $("#"+panelID).append('<a id="search-result-'+data[x].id+'" href="#" onclick="event.preventDefault();update_cust_details_results(\''+panelID+'\',\''+data[x].id+'\')">'+data[x].name+'</a>');
+      }
+    }
+  }else{
+    $("#"+panelID).append('<a href="#" onclick="event.preventDefault()">No result</a>');
+  }
+}
+
+/*
+*Update a customer details pabnel with selected customer from results panel
+*/
+function update_cust_details_results(searchPanelID,custID)
+{
+  hide_element(searchPanelID);
+  $('.search-input').val('');
+
+  //get product from server
+  $.post("/get-user",
+    {
+      userID:custID,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      //append row to other booked products table
+      update_cust_details_panel( data )
+    });
+
+
 }

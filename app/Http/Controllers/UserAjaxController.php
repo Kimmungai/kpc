@@ -28,13 +28,14 @@ class UserAjaxController extends Controller
     public function search_any_user( Request $request )
     {
       $string = $request->string;
+      $field = $request->field ? $request->field : 'firstName';
       if($request->type)
       {
-        $users = User::where('firstName', 'LIKE',  $string . '%')->where('type',$request->type)->get();
+        $users = User::where($field, 'LIKE',  $string . '%')->where('type',$request->type)->get();
       }
       else
       {
-        $users = User::where('firstName', 'LIKE',  $string . '%')->get();
+        $users = User::where($field, 'LIKE',  $string . '%')->get();
       }
       return $users;
     }
