@@ -265,6 +265,7 @@ function sum_booked_prods_table( tableID='otherProductsSearchTable' )
 
   $('#booking-form input[name=booked_prods_grand_total]').val(grandTotal);
   $('#booked_prods_grand_total').text(kes_currency(grandTotal,'KES'));
+  calculate_booking_costs();
 
 }
 

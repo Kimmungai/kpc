@@ -20,8 +20,8 @@
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
 
-				<form id="booking-form" class="" action="index.html" method="post">
-
+				<form id="booking-form" class="" action="{{route('bookings-registration.store')}}" method="post">
+					@csrf
 					 <div class="row mt-2">
 				 		<div class="col-sm-12 ">
 				 			<button type="submit" class="btn btn-default btn-lg mb-1 pull-right"><span class="fa fa-save"></span> Save</button>
@@ -39,7 +39,8 @@
 									<div class="col-sm-12 ">
 										<div class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-gift"></i></span>
-										  <select class="form-control" name="bookingType">
+										  <select id="bookingType" class="form-control calc-costs-onchange" name="bookingType">
+												<option value="0" selected>Choose a booking type</option>
 												@if( isset($dept) )
 													@if( $dept->DeptBookingTypes )
 														@foreach( $dept->DeptBookingTypes as $type )
@@ -51,20 +52,31 @@
 										</div>
 										<div id="numPpleTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-users"></i> <i class="text-danger">*</i></span>
-										  <input name="numPple" id="numPple" type="number" class="form-control numeric" value="{{old('numPple')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" required>
+										  <input name="numPple" id="numPple" type="number" class="form-control numeric calc-costs-onchange" value="{{old('numPple')}}" placeholder="Number of people" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required>
 										</div>
+										@if( $dept->has_rooms == 1 )<!-- 1 has rooms, -1 no rooms -->
+										<div id="roomIdTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-bed"></i> </span>
+											<select id="roomId" class="form-control calc-costs-onchange" name="roomId">
+												<option value="0" data-price="0" selected>Choose a room type</option>
+												@foreach( $dept->DeptRooms as $room )
+													<option value="{{$room->id}}" data-price="{{$room->price}}">{{$room->type}}</option>
+												@endforeach
+											</select>
+										</div>
+										@endif
 										<div id="chkInDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i> <i class="text-danger">*</i></span>
-										  <input type="text" name="chkInDate" id="chkInDate" class="form-control" placeholder="Start Date" onblur="validate(this.id,{required:1,min:3,max:255},this.value)">
+										  <input type="text" name="chkInDate" id="chkInDate" class="form-control calc-costs-onchange" placeholder="Start Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
 										</div>
 										<div id="chkOutDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
-										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control" placeholder="End Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
+										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control calc-costs-onchange" placeholder="End Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
 										</div>
-										<div id="bookingAmountDueTitle" class="input-group input-group-md">
+										<!--<div id="bookingAmountDueTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
 										  <input name="bookingAmountDue" id="bookingAmountDue" type="text" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Amount due" disabled>
-										</div>
+										</div>-->
 										<div class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-info-circle"></i></span>
 											<select class="form-control" name="modeOfPayment"  id="modeOfPayment">
@@ -135,7 +147,7 @@
 														<td colspan="4"></td>
 														<td>Grand Total</td>
 														<td id="booked_prods_grand_total" class="text-bold"></td>
-														<input type="hidden" name="booked_prods_grand_total" value="">
+														<input type="hidden" id="booked_prods_grand_total" name="booked_prods_grand_total" value="">
 													</tr>
 												</tfoot>
 											</table>
@@ -153,7 +165,8 @@
 								<!--Customer details-->
 								<div class="supplier-details box-shdow-1 mb-2 text-center">
 									<legend>Total Due</legend>
-									<h3 class="text-danger text-bold">KES 50,000</h3>
+									<h3 id="booking-total-cost" class="text-danger text-bold">KES 0.00</h3>
+									<strong class="hidden days-label">For <span class="booking-num-days"></span> day(s) </strong>
 								</div>
 
 								<div id="bookingCustomerSearchPanel" class="supplier-details box-shdow-1 mb-2">
@@ -252,7 +265,7 @@
 												@foreach( $dept->DeptServices as $service )
 													@if( $count % 2 != 0 )
 														<li>
-															<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
+															<input id="" class="booking-service" type="checkbox" value="{{$service->cost}}"> {{$service->service}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -265,7 +278,7 @@
 												@foreach( $dept->DeptServices as $service )
 													@if( $count % 2 == 0 )
 														<li>
-															<input id="" type="checkbox" value="{{$service->id}}"> {{$service->service}}
+															<input id="" class="booking-service" type="checkbox" value="{{$service->cost}}"> {{$service->service}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -294,7 +307,7 @@
 												@foreach( $dept->DeptMenu as $menu )
 													@if( $count % 2 != 0 )
 														<li>
-															<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+															<input id="" class="booking-service" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -307,7 +320,7 @@
 												@foreach( $dept->DeptMenu as $menu )
 													@if( $count % 2 == 0 )
 														<li>
-															<input id="" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+															<input id="" class="booking-service" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -334,6 +347,8 @@
 						</div>
 
 						<input type="hidden" name="user_id" >
+						<input type="hidden" name="booking_num_days" >
+						<input type="hidden" name="bookingAmountDue" value="">
 
 </form>
 				</div>

@@ -17,9 +17,11 @@ class CreateBookingsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->integer('dept_id')->unsigned()->index()->nullable();
+            $table->integer('dept_rooms_id')->unsigned()->index()->nullable();
             $table->tinyInteger('bookingType')->nullable();
             $table->tinyInteger('roomType')->nullable();
             $table->integer('numPple')->nullable();
+            $table->integer('booking_num_days')->nullable();
             $table->string('chkInDate')->nullable();
             $table->string('chkOutDate')->nullable();
             $table->double('bookingAmountDue')->nullable();

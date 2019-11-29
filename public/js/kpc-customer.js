@@ -159,21 +159,10 @@ function handle_cust_form_error_from_server(data)
 */
 function remove_booking_customer()
 {
-  var id = $('#booking-form input[name=user_id]').val();
-  if(!id){alert("Error!");return;}
-  var con = confirm("Are you sure you want to delete this customer?")
+  $('#booking-form input[name=user_id]').val('');
+  var con = confirm("Are you sure you want to remove this customer?")
   if(!con){return;}
-
-  //send details to server
-  $.post( '/remove-customer',
-    {
-      id:id,
-      "_token": $('meta[name="csrf-token"]').attr('content'),
-    },
-    function(data,status){
-      $('#bookingCustomerDetails').addClass('hidden');
-    });
-
+  $('#bookingCustomerDetails').addClass('hidden');
 }
 
 /*
