@@ -40,11 +40,11 @@
 										<div class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-gift"></i></span>
 										  <select id="bookingType" class="form-control calc-costs-onchange" name="bookingType">
-												<option value="0" selected>Choose a booking type</option>
+												<option value="0" data-price="0" selected>Choose a booking type</option>
 												@if( isset($dept) )
 													@if( $dept->DeptBookingTypes )
 														@foreach( $dept->DeptBookingTypes as $type )
-															<option value="{{$type->price}}"> {{$type->type}} </option>
+															<option value="{{$type->id}}" data-price="{{$type->price}}"> {{$type->type}} </option>
 														@endforeach
 													@endif
 												@endif
@@ -57,7 +57,7 @@
 										@if( $dept->has_rooms == 1 )<!-- 1 has rooms, -1 no rooms -->
 										<div id="roomIdTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-bed"></i> </span>
-											<select id="roomId" class="form-control calc-costs-onchange" name="roomId">
+											<select id="roomId" class="form-control calc-costs-onchange" name="dept_rooms_id">
 												<option value="0" data-price="0" selected>Choose a room type</option>
 												@foreach( $dept->DeptRooms as $room )
 													<option value="{{$room->id}}" data-price="{{$room->price}}">{{$room->type}}</option>
@@ -92,7 +92,7 @@
 										</div>
 										<div id="bookingAmountReceivedTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
-										  <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" class="form-control numeric" value="{{old('bookingAmountReceived')}}" placeholder="Amount Received" onblur="validate(this.id,{required:0,min:3,max:255},this.value)"  >
+										  <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" class="form-control numeric" value="{{old('bookingAmountReceived')}}" placeholder="Amount Received" value="0" onblur="validate(this.id,{required:0,min:1,max:255},this.value)"  >
 										</div>
 										<div id="paymentDueDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
@@ -275,22 +275,22 @@
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptServices as $service )
-													@if( $count % 2 != 0 )
+													@if( $count % 2 == 0 )
 														<li>
-															<input id="" class="booking-service" type="checkbox" value="{{$service->cost}}"> {{$service->service}}
+															<input name="other_services[]" class="booking-service" type="checkbox" value="{{$service->id}}" data-price="{{$service->cost}}"> {{$service->service}}
 													  </li>
 													@endif
 													<?php $count++; ?>
 												@endforeach
 											</ul>
 										</div>
-
+										<?php $count = 0; ?>
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptServices as $service )
-													@if( $count % 2 == 0 )
+													@if( $count % 2 != 0 )
 														<li>
-															<input id="" class="booking-service" type="checkbox" value="{{$service->cost}}"> {{$service->service}}
+															<input name="other_services[]"  class="booking-service" type="checkbox" value="{{$service->id}}" data-price="{{$service->cost}}"> {{$service->service}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -317,22 +317,22 @@
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptMenu as $menu )
-													@if( $count % 2 != 0 )
+													@if( $count % 2 == 0 )
 														<li>
-															<input id="" class="booking-service" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+															<input name="booking_menu[]" class="booking-service" type="checkbox" value="{{$menu->id}}" data-price="{{$menu->price}}" > {{$menu->name}}
 													  </li>
 													@endif
 													<?php $count++; ?>
 												@endforeach
 											</ul>
 										</div>
-
+										<?php $count = 0; ?>
 										<div class="col-xs-6">
 											<ul>
 												@foreach( $dept->DeptMenu as $menu )
-													@if( $count % 2 == 0 )
+													@if( $count % 2 != 0 )
 														<li>
-															<input id="" class="booking-service" type="checkbox" value="{{$menu->price}}"> {{$menu->name}}
+															<input name="booking_menu[]" class="booking-service" type="checkbox" value="{{$menu->id}}" data-price="{{$menu->price}}"> {{$menu->name}}
 													  </li>
 													@endif
 													<?php $count++; ?>
@@ -362,6 +362,7 @@
 						<input type="hidden" name="booking_num_days" >
 						<input type="hidden" name="bookingAmountDue" >
 						<input type="hidden" name="no_products" >
+						<input type="hidden" name="dept_id" value="@if(isset($dept)){{$dept->id}}@endif">
 						@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Booking form', 'message' => 'Are you sure you want to sunmit booking form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
 
 </form>

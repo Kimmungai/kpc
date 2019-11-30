@@ -217,12 +217,13 @@ function booked_prods_table_markup(data,nextRow,tableID)
       row += edit_booked_prods_col( 'col_'+nextRow+'_3', data.description );
       row += '</td>';
       row += '<td data-label="Quantity"><span id="col_'+nextRow+'_4"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">1</span>';
-      row += edit_booked_prods_col( 'col_'+nextRow+'_4', 1, 'numeric' );
+      row += edit_booked_prods_col( 'col_'+nextRow+'_4', 1, 'numeric','','number','1',data.quantity );
       row += '</td>';
       row += '<td  data-label="Selling price"> <span id="col_'+nextRow+'_5"  onclick="toggleShow(this.id,this.id+\'_editor\',2)">'+data.price+'</span>';
       row += edit_booked_prods_col( 'col_'+nextRow+'_5', data.price, 'numeric' );
       row += '</td>';
       row += '<td id="col_'+nextRow+'_6" data-label="Total"> </td><input type="hidden" name="col_'+nextRow+'_6" value="1">';
+      row += '<input type="hidden" name="col_'+nextRow+'_7" value="'+data.id+'">';
   return row;
 }
 
@@ -312,10 +313,14 @@ function increase_prod_qty_in_booked_prods_table(tableID, prodID)
 /*
 *Function to return markup for editing a column in booked products table
 */
-function edit_booked_prods_col( id, value='', numeric='',placeholder='' )
+function edit_booked_prods_col( id, value='', numeric='',placeholder='',type='text',min='1',max='' )
 {
   var markup  = '<span id="'+id+'_editor" class="hidden">';
-      markup += '<input name="'+id+'" type="text" class="form-control '+numeric+'" placeholder="'+placeholder+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" >';
+    if( !max )
+      markup += '<input name="'+id+'" type="'+type+'" class="form-control '+numeric+'" placeholder="'+placeholder+'" min="'+min+'" max="'+max+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" >';
+    else
+      markup += '<input name="'+id+'" type="'+type+'" class="form-control '+numeric+'" placeholder="'+placeholder+'" min="'+min+'" max="'+max+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" onkeyup="max_field_input(this)">';
+
       markup += '</span>';
 
   return  markup;

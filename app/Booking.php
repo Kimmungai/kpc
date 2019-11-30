@@ -9,9 +9,7 @@ class Booking extends Model
 {
    use SoftDeletes;
 
-   protected $fillable = [
-     'dept_id','user_id','bookingType','roomType','numPple','chkInDate','chkOutDate','bookingAmountDue','modeOfPayment','bookingAmountReceived','paymentStatus','paymentDueDate','board','menu','menuDetails','meetingHall','tent','paSystem','transactionCode','projector',
-   ];
+    protected $guarded = ['id'];
 
     public function User()
     {
@@ -28,8 +26,12 @@ class Booking extends Model
       return $this->hasMany('App\Revenue');
     }
 
-    /*public function Product()
+    public function BookingMenu()
     {
-      $this->hasMany('App\Product');
-    }*/
+      $this->hasMany('App\BookingMenu');
+    }
+    public function BookingServices()
+    {
+      $this->hasMany('App\BookingServices');
+    }
 }

@@ -110,14 +110,14 @@ function kes_currency(value,currency)
 /*
 *Function to toggle input of a field in  requisition form
 */
-function toggleShow(IdToHide,IdToShow,table=1)
+function toggleShow(IdToHide,IdToShow,table=1,max=0)
 {
   $("#"+IdToHide).addClass('hidden');
   $("#"+IdToShow).removeClass('hidden');
 
   if($("#"+IdToHide+" input").length){
     newValue = $("#"+IdToHide+" input").val();
-    assign_new_val(newValue,IdToShow,table);
+    assign_new_val(newValue,IdToShow,table,max);
   }
 
 }
@@ -127,7 +127,9 @@ function toggleShow(IdToHide,IdToShow,table=1)
 */
 function assign_new_val(newValue,IdToAssign, table=1)
 {
-  if( newValue == '' ) { newValue = 'null'; }
+  if( newValue == '' )
+    newValue = 'null'
+
   $("#"+IdToAssign).text(newValue);
   if( table )
     get_totals_of_table( table );
@@ -161,6 +163,24 @@ function get_totals_of_table( table )
   }
 }
 
+//
+function max_field_input(input)
+{
+  v = parseFloat($(input).val());
+  min = parseFloat($(input).attr('min'));
+  max = parseFloat($(input).attr('max'));
+  if (v > max)
+  {
+    alert("You can only add a maximum of "+max+" item(s)");
+    $(input).val(max);
+  }
+  else if( v < min )
+  {
+    alert("You can only add a minimum of "+min+" item(s)");
+    $(input).val(min);
+  }
+
+}
 $(document).on("input", ".numeric", function() {
     this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });

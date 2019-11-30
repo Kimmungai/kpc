@@ -174,7 +174,6 @@ function reset_booking_cust_reg_form()
   $("#bookingCustomerPhone").val('');
   $("#bookingCustomerEmail").val('');
   $('#bookingCustomerAvatar').val('');
-  $('#booking-form input[name=user_id]').val('');
 }
 
 /*

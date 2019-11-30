@@ -67,7 +67,7 @@
 */
 function calculate_booking_costs()
 {
-  var booking_type_price = numeric_values( $('#bookingType') );
+  var booking_type_price = parseFloat($('#bookingType').find(':selected').data('price'));
   var num_pple = numeric_values( $('#numPple') );
   var room_price =  parseFloat($('#roomId').find(':selected').data('price'));
   var num_days = num_days_two_dates( $('#chkInDate'), $('#chkOutDate') );
@@ -133,7 +133,7 @@ function booking_services_costs()
   $('#booking-form .booking-service').each(function(){
 
     if( $(this).is(":checked") )
-      service_cost += parseFloat($(this).val());
+      service_cost += parseFloat($(this).data('price'));
 
   });
   return service_cost;
