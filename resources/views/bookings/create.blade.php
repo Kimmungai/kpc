@@ -106,6 +106,11 @@
 									<div class="col-sm-12 ">
 										<h4 class="mb-2 text-bold">Other Booked products</h4>
 
+										<div id="booked-prods-error" class="alert alert-danger alert-dismissible hidden" role="alert">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h5>Please enter correct values for the fields in red.</h5>
+										</div>
+
 										<div class="supplier-details box-shdow-4">
 											<div class="input-group mb-0" >
 											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>

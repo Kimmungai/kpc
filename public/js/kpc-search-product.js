@@ -252,8 +252,8 @@ function sum_booked_prods_table( tableID='otherProductsSearchTable' )
 
     while( !$('#booked-prods-row-'+row+'').length ){ row += 1; }
 
-    var quantity = parseFloat($('#booking-form input[name=col_'+row+'_4]').val());
-    var selling_price = parseFloat($('#booking-form input[name=col_'+row+'_5]').val());
+    var quantity = numeric_values($('#booking-form input[name=col_'+row+'_4]'));
+    var selling_price = numeric_values($('#booking-form input[name=col_'+row+'_5]'));
 
     var total = quantity * selling_price;
     $('#booking-form input[name=col_'+row+'_6]').val(total);
