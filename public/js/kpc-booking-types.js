@@ -138,3 +138,113 @@ function booking_services_costs()
   });
   return service_cost;
 }
+
+/*
+*Funtion to validate booking form before submission
+*/
+function validate_booking( formId )
+{
+  var error = 0;
+
+  if( !customer_added_to_booking( formId ) ){
+    required_booking_fields( formId )
+    error += 1;
+  }
+
+  if( !required_booking_fields( formId ) ){
+    customer_added_to_booking( formId )
+    error += 1;
+  }
+
+  //if( !other_booked_prods_fields( formId ) ){
+  //  error += 1;
+  //}
+  alert( $('#'+formId+'  input[name=col_1_2]').val() )//suzuki
+
+  if( error )
+    return
+
+
+
+  $('#'+formId+'  input[name=no_products]').val($("#otherProductsSearchTable tbody tr").length);
+  $("#"+formId).submit();
+}
+
+/*
+*check if booking customer has been added
+*/
+function customer_added_to_booking( formId )
+{
+  if( $('#'+formId+'  input[name=user_id]').val() === '' )
+  {
+    $("#no-user-error").removeClass('hidden');
+    return 0;
+  }
+  else
+  {
+    $("#no-user-error").addClass('hidden')
+    return 1;
+  }
+}
+
+/*
+*check if booking customer has been added
+*/
+function required_booking_fields( formId )
+{
+  var error = 0;
+
+  if( $('#'+formId+'  input[name=numPple]').val() === '' ){
+    $("#numPpleTitle").addClass('has-error');
+    error += 1;
+  }
+  if( $('#'+formId+'  input[name=chkInDate]').val() === '' ){
+    $("#chkInDateTitle").addClass('has-error');
+    error += 1;
+  }
+
+  if( error )
+    return 0
+  else
+    return 1
+}
+
+/*
+*check if the other booked table is correct
+*/
+function other_booked_prods_fields( formId )
+{
+  var row = 1;
+  var error = 0;
+
+  /*$("#otherProductsSearchTable tbody tr").each(function(){
+
+    if( $("#"+id+" input[name='col_"+row+"_2']").val() == '' )
+    {
+    //  $("#col_"+row+"_2").css('color','red');
+      error += 1;
+      alert("hete")
+    }
+    /*if( $("#"+id+" input[name='col_"+row+"_4']").val() == '' || isNaN($("#"+id+" input[name='col_"+row+"_4']").val()) )
+    {
+      error += 1;
+    }
+    if( $("#"+id+" input[name='col_"+row+"_5']").val() == '' || isNaN($("#"+id+" input[name='col_"+row+"_5']").val()) )
+    {
+      error += 1;
+    }*/
+
+
+  /*  row += 1;
+  });
+
+  if( error )
+  {
+    return 0
+  }
+  else
+  {
+    return 1
+  }*/
+
+}

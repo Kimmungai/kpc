@@ -193,6 +193,7 @@ function update_cust_details_panel( data )
   $('#booking-form input[name=user_id]').val(data.id);
 
   $('#bookingCustomerDetails').removeClass('hidden');
+  $('#no-user-error').addClass('hidden');
 }
 
 /*

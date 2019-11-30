@@ -20,11 +20,11 @@
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
 
-				<form id="booking-form" class="" action="{{route('bookings-registration.store')}}" method="post">
+				<form id="booking-form" class="" action="{{route('bookings-registration.store')}}" method="post" >
 					@csrf
 					 <div class="row mt-2">
 				 		<div class="col-sm-12 ">
-				 			<button type="submit" class="btn btn-default btn-lg mb-1 pull-right"><span class="fa fa-save"></span> Save</button>
+				 			<button type="button" class="btn btn-default btn-lg mb-1 pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</button>
 				 		</div>
 				 	</div>
 
@@ -67,7 +67,7 @@
 										@endif
 										<div id="chkInDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i> <i class="text-danger">*</i></span>
-										  <input type="text" name="chkInDate" id="chkInDate" class="form-control calc-costs-onchange" placeholder="Start Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">
+										  <input type="text" name="chkInDate" id="chkInDate" class="form-control calc-costs-onchange" placeholder="Start Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" required>
 										</div>
 										<div id="chkOutDateTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
@@ -169,6 +169,12 @@
 									<strong class="hidden days-label">For <span class="booking-num-days"></span> day(s) </strong>
 								</div>
 
+								<div id="no-user-error" class="alert alert-danger alert-dismissible hidden" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h5>Please add a customer to the booking</h5>
+								</div>
+
+
 								<div id="bookingCustomerSearchPanel" class="supplier-details box-shdow-1 mb-2">
 									<legend>Search</legend>
 									<div  class="input-group mb-0">
@@ -186,7 +192,8 @@
 
 								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 hidden">
 									<legend>Customer Registration Form</legend>
-									<div class="alert alert-danger cust-errors-list hidden" role="alert">
+									<div class="alert alert-danger alert-dismissible cust-errors-list hidden" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<h5>Please correct the following errors first</h5>
 										<p class="cust-name-error hidden">The name must be atleast 3 characters</p>
 										<p class="cust-phone-number-error hidden">The phone number must be numeric and atleast 10 digits</p>
@@ -342,13 +349,15 @@
 
 						<div class="row mt-2">
 							<div class="col-sm-12 ">
-								<button type="submit" class="btn btn-default btn-lg mt-1 pull-right"><span class="fa fa-save"></span> Save</button>
+								<button type="button" class="btn btn-default btn-lg mt-1 pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</button>
 							</div>
 						</div>
 
 						<input type="hidden" name="user_id" >
 						<input type="hidden" name="booking_num_days" >
-						<input type="hidden" name="bookingAmountDue" value="">
+						<input type="hidden" name="bookingAmountDue" >
+						<input type="hidden" name="no_products" >
+						@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Booking form', 'message' => 'Are you sure you want to sunmit booking form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
 
 </form>
 				</div>

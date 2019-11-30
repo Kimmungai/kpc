@@ -1,7 +1,10 @@
 function submit_form( id )
 {
   if( id == 'requisitionForm' ){//validate requisition form before submit
-    validate_requisition_form( id );
+    validate_requisition_form( id )
+  }
+  else if ( id == 'booking-form' ) {
+    validate_booking( id )
   }
   else{
     $("#"+id).submit();
