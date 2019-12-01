@@ -49,6 +49,8 @@
                     <li class="mini_list_agile"><a href="{{route('booking-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Booking report</a></li>
                     <li class="mini_list_agile"><a href="{{route('procurement-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Procurement report</a></li>
                     <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Inventory report</a></li>
+                    <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> P & L report</a></li>
+                    <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Balance sheet report</a></li>
                   </ul>
                 </li>
                   @endif
@@ -92,57 +94,44 @@
       </li>
       </div>
 
-
+      @if(Auth::check())
+        @if( Auth::user()->type == -1 || Auth::user()->type == 3 || Auth::user()->type == 1 )
       <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
         <li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
+             <?php $notificationCount = 0 ?>
+              @foreach( Auth::user()->unreadNotifications as $notification )
+                @if( $notification->type == 'App\Notifications\NewBooking' )
+                  <?php $notificationCount++ ?>
+                @endif
+              @endforeach
 									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Notifications"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge blue">4</span></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Notifications"><i class="fa fa-bell" aria-hidden="true"></i> @if($notificationCount) <span class="badge blue">{{$notificationCount}}</span> @endif</a>
 										<ul class="dropdown-menu">
 											<li>
 												<div class="notification_header">
-													<h3>Bookings Notifications</h3>
+													<h3>You have {{$notificationCount}} new bookings notifications</h3>
 												</div>
 											</li>
-											<li><a href="#">
-												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
-											   <div class="notification_desc">
-											     <h6>John Smith</h6>
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											  <div class="clearfix"></div>
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
-											   <div class="notification_desc">
-											     <h6>Jasmin Leo</h6>
-												<p>Lorem ipsum dolor</p>
-												<p><span>3 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											 </a></li>
-											 <li><a href="#">
-												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
-											   <div class="notification_desc">
-											     <h6>James Smith</h6>
-												<p>Lorem ipsum dolor</p>
-												<p><span>2 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											 </a></li>
-											  <li><a href="#">
-												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
-											   <div class="notification_desc">
-											     <h6>James Smith</h6>
-												<p>Lorem ipsum dolor</p>
-												<p><span>1 hour ago</span></p>
-												</div>
-											   <div class="clearfix"></div>
-											 </a></li>
+                      @foreach( Auth::user()->unreadNotifications as $notification )
+                        @if( $notification->type == 'App\Notifications\NewBooking' )
+    											<li><a href="{{route('bookings-registration.show',$notification->data['booking_id'])}}">
+    												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
+    											   <div class="notification_desc">
+                               <h6>By: {{$notification->data['booker_name']}}</h6>
+                            <p>In: {{$notification->data['dept_name']}} department</p>
+                            <p><span>{{ \Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</span></p>
+    												</div>
+    											  <div class="clearfix"></div>
+    											 </a></li>
+                          @endif
+                        @endforeach
+
+
+
 											 <li>
 												<div class="notification_bottom">
-													<a href="{{route('notifications.index')}}">See all Notifications</a>
+													<a href="{{route('bookings-registration.index')}}">See all Bookings</a>
 												</div>
 											</li>
 										</ul>
@@ -151,6 +140,9 @@
 						</ul>
 				</li>
       </div>
+      @endif
+    @endif
+
     @if(Auth::check())
       @if( Auth::user()->type == -1 || Auth::user()->type == 3 )
       <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">

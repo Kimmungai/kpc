@@ -24,7 +24,7 @@
 					 $filter_to = strtotime($filter_from) < strtotime($filter_to) ? $filter_to : null;
 					  ?>
 					 @component( 'components.sort-form', [ 'action' => 'sort-bookings','sortBy' => $sortBy,'filter_from'=>$filter_from,'filter_to'=>$filter_to ] ) @endcomponent
-							
+
 	        <!-- //breadcrumbs -->
 
 
@@ -60,7 +60,7 @@
 												<dd>
 													<h3><a href="{{route('bookings-registration.show',$booking->id)}}">Booking-{{$booking->id}}</a></h3>
 													@if( $booking->user )
-													<p>Customer: <strong>{{$booking->user->firstName}}</strong></p>
+													<p>Customer: <strong>{{$booking->user->name}}</strong></p>
 													@endif
 													<p>Date: <strong>{{date('d/m/Y',strtotime($booking->created_at))}}</strong></p>
 													<p>Paid: <strong>Ksh. @if( !$booking->bookingAmountReceived ) 0 @else {{$booking->bookingAmountReceived}} @endif</strong></p>

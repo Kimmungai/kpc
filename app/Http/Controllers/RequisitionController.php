@@ -34,8 +34,12 @@ class RequisitionController extends Controller
         {
           $requisitions = Requisition::where('approval_status','<>',null)->orderBy('created_at','DESC')->paginate( env('ITEMS_PER_PAGE',5) );
         }
-
-        Auth::user()->notifications->markAsRead();
+        
+        foreach (Auth::user()->unreadNotifications as $notification)
+        {
+          if( $notification->type == 'App\Notifications\RequisitionApproved' || $notification->type == 'App\Notifications\RequisitionRejected' || $notification->type == 'App\Notifications\RequisitionRequest' )
+            $notification->markAsRead();
+        }
 
         return view('requisition.index',compact('requisitions'));
     }

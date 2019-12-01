@@ -19,8 +19,6 @@
 
 
 
-					<div class="container" >
-
 
 
 						<!--buttons-->
@@ -108,7 +106,6 @@
 
 
 
-					</div>
 
 				</div>
 		<!-- //inner_content-->

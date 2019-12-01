@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreBooking;
+use App\Notifications\NewBooking;
 use App\Booking;
 use App\Revenue;
 use App\BookingMenu;
 use App\BookingServices;
 use App\Product;
 use App\Dept;
+use App\User;
 use Carbon\Carbon;
 use PDF;
 use Illuminate\Http\Request;
+use Notification;
+use Auth;
 
 class BookingsRegistrationController extends Controller
 {
@@ -25,6 +30,12 @@ class BookingsRegistrationController extends Controller
      */
     public function index(Request $request)
     {
+      foreach (Auth::user()->unreadNotifications as $notification)
+      {
+        if( $notification->type == 'App\Notifications\NewBooking' )
+          $notification->markAsRead();
+      }
+
       $sortField='created_at';$sortValue='DESC';
       $status =' id != "" ';
       $sortBy = $request->filter_sort;
@@ -87,11 +98,15 @@ class BookingsRegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBooking $request)
     {
         $bookingData = $this->booking_data( $request );
         //create booking
         $booking = Booking::create( $bookingData );
+        if( $booking->bookingAmountDue <= $booking->bookingAmountReceived )
+        {
+          $booking->update(['status'=>1]);//booking confirmed
+        }
 
         //create revenue (booked products)
         $this->save_other_booked_products( $request, $booking->id );
@@ -103,6 +118,12 @@ class BookingsRegistrationController extends Controller
         $this->create_booking_services( $request, $booking->id );
 
         //notify Admin, Staff, super admin
+        $authorisedUsers = [-1,1,3];
+        $subscribedUsers = User::whereIn('type',$authorisedUsers)->where('id','<>',Auth::id())->where('receive_notifications',1)->get();
+        $dept = Dept::find($booking->dept_id);
+        $booker = Auth::user();
+        $this->send_notifications( $subscribedUsers, $booking, $dept, $booker );
+
 
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved successfully!"));
         return redirect(route('bookings-registration.index'));
@@ -119,6 +140,9 @@ class BookingsRegistrationController extends Controller
     {
       $dept ='';
       $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
+      if( Auth::check() ){
+        $this->mark_notifications_read( Auth::user(), $booking );
+      }
       if(Session('deptID') != null ){
       $dept = Dept::find(Session('deptID'));
     }else{
@@ -225,6 +249,8 @@ class BookingsRegistrationController extends Controller
     //create menu selected in this booking
     private function create_booking_menu( $request, $booking_id )
     {
+      if(!is_array($request->booking_menu))
+        return;
       foreach ($request->booking_menu as $menu )
       {
         $bookingMenu = new BookingMenu;
@@ -237,6 +263,9 @@ class BookingsRegistrationController extends Controller
     //create services selected for this booking
     private function create_booking_services( $request, $booking_id )
     {
+      if(!is_array($request->other_services))
+        return;
+
       foreach ($request->other_services as $service )
       {
         $bookingService = new BookingServices;
@@ -266,6 +295,60 @@ class BookingsRegistrationController extends Controller
         'no_products',
         'dept_id',
       ]);
+    }
+
+    /**
+    *Send users subscribed users notifications
+    *
+    *@param $subscribedUsers
+    */
+    private function send_notifications( $subscribedUsers, $booking, $dept, $booker )
+    {
+      $avatar = url('/images/avatar-female.png');
+
+      if( $booker->avatar ){
+        $avatar = $booker->avatar;
+      }else {
+        if( $booker->gender == 1 )
+        {
+          $avatar = url('/images/avatar-male.png');
+        }
+      }
+
+      $details = [
+                   'greeting' => 'Hi,',
+                   'subject' => 'New booking',
+                   'body' => 'A new booking in the '.$dept->name.' department has been received. The booking has been facilitaed by '.$booker->name,
+                   'thanks' => 'Thank you for using Kitui Pastoral Center system',
+                   'actionText' => 'View booking details',
+                   'actionURL' => route( 'bookings-registration.show', $booking->id ),
+                   'booking_id' => $booking->id,
+                   'dept_name' => $dept->name,
+                   'booker_name' => $booker->name,
+                   'booker_avatar' => $avatar,
+               ];
+
+      Notification::send($subscribedUsers, new NewBooking($details));
+    }
+
+    /**
+    *Mark notifications as read
+    *
+    *@param $user, $requisition
+    */
+    private function mark_notifications_read( $user, $booking )
+    {
+
+      foreach ( $user->unreadNotifications as $notification )
+      {
+        if( !isset( $notification->data['booking_id'] ) ){ continue; }
+
+        if ( $notification->data['booking_id'] == $booking->id ) {
+          $notification->markAsRead();
+        }
+
+      }
+
     }
 
 }

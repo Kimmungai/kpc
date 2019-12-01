@@ -19,7 +19,6 @@
 
 
 
-					<div class="container" >
 
 
 
@@ -109,7 +108,6 @@
 
 
 
-					</div>
 
 				</div>
 		<!-- //inner_content-->

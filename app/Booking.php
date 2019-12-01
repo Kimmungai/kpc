@@ -28,10 +28,18 @@ class Booking extends Model
 
     public function BookingMenu()
     {
-      $this->hasMany('App\BookingMenu');
+      return  $this->hasMany('App\BookingMenu');
     }
     public function BookingServices()
     {
-      $this->hasMany('App\BookingServices');
+      return $this->hasMany('App\BookingServices');
+    }
+    public function DeptBookingTypes()
+    {
+      return $this->hasOne('App\DeptBookingTypes','id','bookingType');
+    }
+    public function DeptRooms()
+    {
+      return $this->hasOne('App\DeptRooms','id','dept_rooms_id');
     }
 }

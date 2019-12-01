@@ -23,7 +23,6 @@
 
 
 
-					<div class="container" >
 						<div class="row">
 							@if( isset($dept) )
 							<h1 class="text-capitalize ">{{$dept->name}} Purchase-@if(isset($purchase)){{$purchase->id}} @endif </h1>
@@ -311,7 +310,6 @@
 
 						</div>
 
-					</div>
 
 				</div>
 		<!-- //inner_content-->

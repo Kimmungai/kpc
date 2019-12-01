@@ -18,7 +18,7 @@
     <div class="col-xs-4">
       <ul>
         <li><strong>Customer @if( $booking->bookingAmountDue - $booking->bookingAmountReceived <= 0 ) <span class="fa fa-circle text-success"></span> @else <span class="fa fa-circle text-danger"></span> @endif</strong></li>
-        <li><small>{{$booking->user->firstName}} {{$booking->user->lastName}}</small></li>
+        <li><small>{{$booking->user->name}}</small></li>
         <li><small>{{$booking->user->email}}</small></li>
         <li><small>{{$booking->user->phoneNumber}}</small></li>
       </ul>
@@ -60,18 +60,14 @@
             <tbody>
               <tr>
                 <td>Type</td>
-                @if( $booking->bookingType == 1)<td>Food ordering </td>@endif
-                @if( $booking->bookingType == 2)<td>Room booking </td>@endif
-                @if( $booking->bookingType == 3)<td>Tent Hiring </td>@endif
-                @if( $booking->bookingType == 4)<td>Meeting hall booking </td>@endif
-                @if( $booking->bookingType == 5)<td>Compound booking </td>@endif
+                @if($booking->DeptBookingTypes)
+                <td>{{$booking->DeptBookingTypes->type}}</td>
+                @endif
               </tr>
-              @if( $booking->roomType ==2 )
+              @if( $booking->DeptRooms )
               <tr>
                 <td>Room Type</td>
-                @if( $booking->roomType == 1 )<td> Single  </td>@endif
-                @if( $booking->roomType == 2 )<td> Double  </td>@endif
-                @if( $booking->roomType == 3 )<td> Delux   </td>@endif
+                <td>{{$booking->DeptRooms->type}}</td>
               </tr>
               @endif
               <tr>
@@ -119,24 +115,21 @@
     <div class="col-xs-5">
       <div class="booking-details">
         <h3>Menu details</h3>
-        @if($booking->board == 2)
-        <p>Full board</p>
-        @else
-        <p>Half board</p>
+        @if($dept->DeptMenu)
+          @foreach( $dept->DeptMenu as $menu )
+            <p>{{$menu->name}}</p>
+          @endforeach
         @endif
-
-        @if($booking->menu == 2)
-        <p>Special menu</p>
-        @else
-        <p>Ordinary menu</p>
-        @endif
-
         <p>{{$booking->menuDetails}}</p>
 
       </div>
       <div class="booking-details mt-2">
         <h3>Requested services</h3>
-          <p>@if($booking->meetingHall == 1) Meeting hall, @endif @if($booking->tent == 1 ) Tent, @endif @if($booking->paSystem == 1) PA system, @endif @if($booking->projector == 1) Projector @endif</p>
+        @if($dept->DeptServices)
+          @foreach( $dept->DeptServices as $service )
+            <p>{{$service->service}}</p>
+          @endforeach
+        @endif
       </div>
     </div>
 

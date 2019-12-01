@@ -23,7 +23,6 @@
 
 
 
-					<div class="container" >
 						<div class="row">
 							@if( isset($dept) )
 							<h1 class="text-capitalize ">{{$dept->name}} Booking-@if(isset($booking)){{$booking->id}} @endif </h1>
@@ -72,7 +71,6 @@
 						</div>
 						<!--end buttons-->
 
-					</div>
 
 				</div>
 		<!-- //inner_content-->

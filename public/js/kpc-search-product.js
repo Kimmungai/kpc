@@ -317,9 +317,14 @@ function edit_booked_prods_col( id, value='', numeric='',placeholder='',type='te
 {
   var markup  = '<span id="'+id+'_editor" class="hidden">';
     if( !max )
+    {
       markup += '<input name="'+id+'" type="'+type+'" class="form-control '+numeric+'" placeholder="'+placeholder+'" min="'+min+'" max="'+max+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" >';
+    }
     else
+    {
       markup += '<input name="'+id+'" type="'+type+'" class="form-control '+numeric+'" placeholder="'+placeholder+'" min="'+min+'" max="'+max+'" value="'+value+'" onchange="assign_new_val(this.value,\''+id+'\',2)" onfocusout="toggleShow(\''+id+'_editor\',\''+id+'\',2)" onkeyup="max_field_input(this)">';
+      markup += '<input name="'+id+'_max" type="hidden" value="'+max+'">'; 
+    }
 
       markup += '</span>';
 
