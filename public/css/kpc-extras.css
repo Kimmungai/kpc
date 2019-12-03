@@ -697,3 +697,45 @@ input:checked + .slider-xs:before {
 {
   content: "* ";
 }
+.cart-icon{
+  text-align: right;
+}
+.cart-icon a{
+  color: inherit;
+  text-align: right;
+}
+.chart-window{
+  width: 80%;
+  position: absolute;
+  right: 4.5%;
+  z-index: 1000;
+  border:1px solid #ccc;
+  background: #f5f5f5;
+  padding: 15px;
+}
+.chart-window ul{
+  padding: 15px;
+  list-style-type: none;
+}
+.chart-window input{
+  width: 60px;
+}
+.chart-window h4{
+  text-transform: uppercase;
+  text-align: center;
+}
+@media only screen and (min-width: 1200px) {
+  .chart-window{
+    width: 30%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .chart-window{
+    width: 35%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .chart-window{
+    width: 35%;
+  }
+}

@@ -13,7 +13,9 @@
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
 									<li>All products </li>
+									<li class="pull-right"></li>
 	              </ul>
+
 	            </div>
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
@@ -26,27 +28,48 @@
 						 <div class="row mb-1">
 
 						@if( isset($dept) )
-							 <div class="col-sm-6">
+							 <div class="col-sm-5">
 								 <h4 class="text-capitalize text-bold">{{$dept->name}} Products </h4>
 							 </div>
-							 <div class="col-sm-6">
-								 <h4 class="p-1 results-info text-right">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+							 <div class="col-sm-5">
+								 <h4 class=" results-info text-right">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
+							 </div>
+							 <div class="col-sm-2 cart-icon">
+								<a href="#"> <span class="fa fa-shopping-cart"></span> <span class="badge badge-danger">2</span></a>
 							 </div>
 						 @endif
 
 						 </div>
 
+						 <div class="chart-window">
+							 <span class="fa fa-times-circle close"></span>
+							 <h4><span class="fas fa-clipboard-check"></span> Items to sell</h4>
+							 
+							 <div class="table-responsive">
+								 <table class="table table-condensed">
+								  <tbody>
+								  	<tr>
+								  		<td>Warr</td>
+											<td>Wsa</td>
+											<td><input type="number"></td>
+								  	</tr>
+								  </tbody>
+								</table>
+							 </div>
+
+						 </div><!--end chat window-->
+
 						 <div class="row">
- 								<div class="col-sm-6 mb-2">
+ 								<!--<div class="col-sm-6 mb-2">
 									<div class="input-group">
 							      <input type="text" class="form-control" placeholder="Search for product @if(isset($dept)) in {{$dept->name}} department @endif">
 							      <span class="input-group-btn">
 							        <button class="btn btn-danger" type="button">Search</button>
 							      </span>
 							    </div>
- 								</div>
+ 								</div>-->
 								<div class="col-sm-6 mb-2">
- 								 <a href="{{route('prod_reg_type')}}" class="btn btn-default pull-right" title="Add new stock">Re - stock <span class="fas fa-undo"></span></a>
+ 								 <a href="{{route('prod_reg_type')}}" class="btn btn-default" title="Add new stock">Re - stock <span class="fas fa-undo"></span></a>
  							 </div>
 						 </div>
 
