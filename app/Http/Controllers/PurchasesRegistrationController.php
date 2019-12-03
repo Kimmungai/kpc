@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StorePurchase;
 use App\Purchase;
 use App\Expense;
 use App\Product;
@@ -122,9 +123,21 @@ class PurchasesRegistrationController extends Controller
      * @param  \App\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Request $request, $id)
     {
-        //
+       $validated = $request->validate([
+          'amountPaid' => 'required|numeric',
+          'paymentMethod' => 'required|numeric',
+          'remarks' => 'nullable',
+        ]);
+
+        if(!Purchase::where('id',$id)->update($validated)){
+          Session::flash('error', env("SAVE_SUCCESS_MSG","An error occured, please try again!"));
+          return back();
+        }
+
+        Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
+        return back();
     }
 
     /**

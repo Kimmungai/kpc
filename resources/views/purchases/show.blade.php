@@ -28,6 +28,10 @@
 							<h1 class="text-capitalize ">{{$dept->name}} Purchase-@if(isset($purchase)){{$purchase->id}} @endif </h1>
 							@endif
 						</div>
+						<div class="alert alert-danger alert-dismissible @if(!$errors->has('amountPaid')) hidden @endif" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h5>Please enter a valid number when making payments!</h5>
+						</div>
 
 						<!--buttons-->
 						<div class="row mt-2">
@@ -79,6 +83,7 @@
 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
 
 @component( 'components.delete-confirm-modal',[ 'formId' => 'deletePurchaseForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] ) @endcomponent
+@component( 'components.purchase-payment',['purchase'=>$purchase]) @endcomponent
 
 <form class="d-none hidden" id="deletePurchaseForm" action="{{route('purchases-registration.destroy',$purchase->id)}}" method="post">
   @csrf

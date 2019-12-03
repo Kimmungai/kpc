@@ -26,7 +26,7 @@ class UserRegistrationController extends Controller
         {
           if( $type == -1 || $type == 1 || $type == 3 )
           {
-            Session::flash('error', "Sorry you are not allowed to perform that operati0n. Contact administrator.");
+            Session::flash('error', "Sorry you are not allowed to perform that operation. Contact administrator.");
             return redirect(route('users'));
           }
 

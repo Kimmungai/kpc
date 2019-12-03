@@ -299,7 +299,7 @@
              </div>
             </div>
 
-            <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
+            <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#purchasePaymentModal">
              <p class="btnText">Delete?</p>
              <div class="btnTwo">
                <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
