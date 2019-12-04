@@ -44,18 +44,43 @@
 						 <div class="chart-window">
 							 <span class="fa fa-times-circle close"></span>
 							 <h4><span class="fas fa-clipboard-check"></span> Items to sell</h4>
-							 
+
 							 <div class="table-responsive">
 								 <table class="table table-condensed">
 								  <tbody>
+
 								  	<tr>
-								  		<td>Warr</td>
+								  		<td><span class="fa fa-times-circle"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
 											<td>Wsa</td>
-											<td><input type="number"></td>
+											<td><input type="number" min="1" max=""></td>
+											<td>KES 20000</td>
 								  	</tr>
+										<tr>
+								  		<td><span class="fa fa-times-circle"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
+											<td>Wsa</td>
+											<td><input type="number" min="1" max=""></td>
+											<td>KES 20000</td>
+								  	</tr>
+
 								  </tbody>
+									<tfoot>
+										<tr>
+											<td class="text-right text-bold" colspan="3">Sub total</td>
+											<td>KES 50000</td>
+										</tr>
+										<tr>
+											<td class="text-right text-bold" colspan="3">Tax</td>
+											<td>KES 50000</td>
+										</tr>
+										<tr>
+											<td class="text-right text-bold" colspan="3">Grand total</td>
+											<td>KES 50000</td>
+										</tr>
+									</tfoot>
 								</table>
 							 </div>
+
+							 <button class="btn btn-danger center-block" type="button" name="button"><span class="fa fa-shopping-cart"></span> Sell</button>
 
 						 </div><!--end chat window-->
 
