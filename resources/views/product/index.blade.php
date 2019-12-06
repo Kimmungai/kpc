@@ -35,48 +35,36 @@
 								 <h4 class=" results-info text-right">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
 							 </div>
 							 <div class="col-sm-2 cart-icon">
-								<a href="#"> <span class="fa fa-shopping-cart"></span> <span class="badge badge-danger">2</span></a>
+								<a href="#" onclick="event.preventDefault();open_cart_window('chart-window')"> <span class="fa fa-shopping-cart"></span> <span class="badge badge-danger hidden count-cart-prods"></span></a>
 							 </div>
 						 @endif
 
 						 </div>
 
-						 <div class="chart-window">
-							 <span class="fa fa-times-circle close"></span>
+						 <div id="chart-window" class="chart-window"><!--start chat window-->
+							 <span class="fa fa-times-circle close" onclick="close_cart_window('chart-window')"></span>
 							 <h4><span class="fas fa-clipboard-check"></span> Items to sell</h4>
 
-							 <div class="table-responsive">
-								 <table class="table table-condensed">
+							 <div class="table-responsive cart-items">
+								 <table id="cart-items" class="table table-condensed">
 								  <tbody>
 
-								  	<tr>
-								  		<td><span class="fa fa-times-circle"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
+								  	<!--<tr id="cart-prod-2">
+								  		<td><span class="fa fa-times-circle" onclick="remove_cart_prod(2)"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
 											<td>Wsa</td>
 											<td><input type="number" min="1" max=""></td>
 											<td>KES 20000</td>
-								  	</tr>
-										<tr>
-								  		<td><span class="fa fa-times-circle"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
-											<td>Wsa</td>
-											<td><input type="number" min="1" max=""></td>
-											<td>KES 20000</td>
-								  	</tr>
+								  	</tr>-->
 
 								  </tbody>
+
 									<tfoot>
 										<tr>
-											<td class="text-right text-bold" colspan="3">Sub total</td>
-											<td>KES 50000</td>
-										</tr>
-										<tr>
-											<td class="text-right text-bold" colspan="3">Tax</td>
-											<td>KES 50000</td>
-										</tr>
-										<tr>
-											<td class="text-right text-bold" colspan="3">Grand total</td>
-											<td>KES 50000</td>
+											<td class="text-right text-bold" colspan="3">Total</td>
+											<td id="cart-total">KES 50000</td>
 										</tr>
 									</tfoot>
+
 								</table>
 							 </div>
 
@@ -165,7 +153,7 @@
 													<p>Price: <strong>Ksh. {{$product->price}}</strong></p>
 
 													<a href="{{route('product-registration.show',$product->id)}}" class="btn btn-x-sm  btn-default pull-left mt-1" ><span class="fa fa-eye"></span> Open</a>
-													<a href="#" class="btn btn-x-sm  btn-default pull-right mt-1" ><span class="fa fa-shopping-cart"></span> sell</a>
+													<a href="#" class="btn btn-x-sm  btn-default pull-right mt-1" onclick="event.preventDefault();add_to_cart({{$product->id}})"><span class="fa fa-shopping-cart"></span> sell</a>
 
 												<dd>
 											</dl>

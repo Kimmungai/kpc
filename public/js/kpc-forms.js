@@ -97,7 +97,7 @@ function remove_row( id )
 /*
 *Currency formatter
 */
-function kes_currency(value,currency)
+function kes_currency(value,currency='KES')
 {
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -184,3 +184,13 @@ function max_field_input(input)
 $(document).on("input", ".numeric", function() {
     this.value = this.value.replace(/[^0-9\\.]+/g,'');
 });
+//open chart window
+function open_cart_window(id='chart-window')
+{
+  $("#"+id).addClass('activated');
+}
+//open chart window
+function close_cart_window(id='chart-window')
+{
+  $("#"+id).removeClass('activated');
+}

@@ -769,3 +769,21 @@ input:checked + .slider-xs:before {
 .text-bold{
   font-weight: 800!important;
 }
+.chart-window .cart-items
+{
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.mt-0{
+  margin-top: 0!important;
+}
+.chart-window {
+	transform: translateX(100%);
+	opacity: 0;
+	transition: all 0.15s ease;
+}
+.activated {
+	transform: translateX(0px);
+	opacity: 1;
+}
