@@ -116,7 +116,7 @@
           <span class="input-group-addon">
             <i class="fas fa-cash-register"></i>
           </span>
-          <input name="price" id="price" type="text" class="form-control" value="@if( old('price') ) {{old('price')}} @elseif( isset($product) ) {{$product->price}} @endif" placeholder="Product selling price..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="price" id="price" type="text" class="form-control numeric" value="@if( old('price') ) {{old('price')}} @elseif( isset($product) ) {{$product->price}} @endif" placeholder="Product selling price..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
         </div>
       </div>
       <div class="col-sm-2">
@@ -135,7 +135,7 @@
           <span class="input-group-addon">
             <i class="fas fa-money-bill-wave"></i>
           </span>
-          <input name="cost" id="cost" type="text" class="form-control" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($product) ) {{$product->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="cost" id="cost" type="text" class="form-control numeric" value="@if( old('cost') ) {{old('cost')}} @elseif( isset($product) ) {{$product->cost}} @endif" placeholder="Product cost..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
         </div>
       </div>
       <div class="col-sm-2">
@@ -154,7 +154,7 @@
           <span class="input-group-addon">
             <i class="fas fa-info-circle"></i>
           </span>
-          <input name="quantity" id="quantity" type="text" class="form-control" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($product) ) {{$product->quantity}} @endif" placeholder="Product quantity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
+          <input name="quantity" id="quantity" type="text" class="form-control numeric" value="@if( old('quantity') ) {{old('quantity')}} @elseif( isset($product) ) {{$product->quantity}} @endif" placeholder="Product quantity..." onblur="validate(this.id,{required:1,min:0,max:255},this.value)" required/>
         </div>
       </div>
       <div class="col-sm-2">

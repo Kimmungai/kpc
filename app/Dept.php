@@ -63,4 +63,8 @@ class Dept extends Model
     {
       return $this->hasMany('App\DeptMenu');
     }
+    public function DeptSales()
+    {
+      return $this->hasMany('App\DeptSales');
+    }
 }

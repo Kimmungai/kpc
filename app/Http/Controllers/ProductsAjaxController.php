@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 use Validator;
 use App\Product;
 use App\Expense;
+use App\Revenue;
+use App\DeptSales;
 use Carbon\Carbon;
 
 class ProductsAjaxController extends Controller
@@ -122,7 +125,9 @@ class ProductsAjaxController extends Controller
       return 0;
     }
 
-
+    /*
+    *Function to search for product using its id and returning its object
+    */
     public function find_product(Request $request)
     {
       $id = $request->prodID;
@@ -130,5 +135,78 @@ class ProductsAjaxController extends Controller
       {
         return $product = Product::find($id);
       }
+    }
+
+    /*
+    *Function to save save cart contents to cookie
+    */
+    public function save_cart(Request $request)
+    {
+
+      $cartContents = $request->cart_contents;
+
+      if( !is_array( $cartContents ) )
+        $cartContents = [];
+
+      session([ 'cart_contents',[] ]);
+
+      $newCartContents = [];
+
+      foreach ($cartContents as $cartContent ) {
+        $newCartContents []= $cartContent;
+      }
+
+      session(['cart_contents' => $newCartContents]);
+
+      return 1;
+    }
+
+    /*
+    *Function to record a sale
+    */
+    function make_sale( Request $request )
+    {
+      $request->validate([
+        'customerID' => 'required|numeric',
+        'saleAmountReceived' => 'nullable|numeric',
+        'saleAmountDue' => 'required|numeric',
+        'modeOfPayment' => 'required|numeric',
+        'transactionCode' => 'nullable',
+        'dept_id' => 'required|numeric',
+      ]);
+
+      $sale = DeptSales::create($request->all());
+
+      if( session('cart_contents') != null )
+      {
+        $cartContents = session('cart_contents');
+
+        foreach ($cartContents as $cartContent ) {
+          $revenue = new Revenue;
+          $revenue->dept_sales_id  = $sale->id;
+          $revenue->product_id = $cartContent['id'];
+          $revenue->bookedQuantity = $cartContent['qty'];
+          $revenue->price = $cartContent['price'];
+          //$revenue->total = $cartContent['total'];
+          //reduce stock
+          $this->reduceStock( $cartContent['id'], $cartContent['qty']);
+          $revenue->save();
+        }
+        session([ 'cart_contents' => [] ]);
+      }
+      return 1;
+
+    }
+
+    //reduce stock
+    protected function reduceStock($prodId, $reduceQty)
+    {
+      $product = Product::find($prodId);
+      $newQuantity = $product->quantity - $reduceQty;
+      if(Product::where('id',$prodId)->update(['quantity'=>$newQuantity]))
+      {
+        return true;
+      }
+      return false;
     }
 }

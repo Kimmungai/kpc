@@ -16,6 +16,7 @@ class CreateRevenuesTable extends Migration
         Schema::create('revenues', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('booking_id')->unsigned()->index()->nullable();
+            $table->integer('dept_sales_id')->unsigned()->index()->nullable();
             $table->integer('report_id')->unsigned()->index()->nullable();
             $table->integer('product_id')->unsigned()->index()->nullable();
             $table->integer('bookedQuantity')->default(0);

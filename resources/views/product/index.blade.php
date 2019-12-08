@@ -26,6 +26,15 @@
 					 $filter_to = strtotime($filter_from) < strtotime($filter_to) ? $filter_to : null;
 					  ?>
 						 <div class="row mb-1">
+						<?php $no_cart_items = 0 ?>
+						<?php $cart_items = [] ?>
+
+						@if( session('cart_contents') != null )
+							@if( is_array( session('cart_contents') ) )
+								<?php $cart_items = session('cart_contents') ?>
+								<?php $no_cart_items = count($cart_items) ?>
+							@endif
+						@endif
 
 						@if( isset($dept) )
 							 <div class="col-sm-5">
@@ -35,7 +44,7 @@
 								 <h4 class=" results-info text-right">Showing: @if(isset($products)) {{count($products)}} of {{$products->total()}}@endif @if(isset($startDate))<span>from {{date('d-m-y',strtotime($startDate))}}</span>@endif @if(isset($endDate))<span>to {{date('d-m-y',strtotime($endDate))}}</span>@endif</h4>
 							 </div>
 							 <div class="col-sm-2 cart-icon">
-								<a href="#" onclick="event.preventDefault();open_cart_window('chart-window')"> <span class="fa fa-shopping-cart"></span> <span class="badge badge-danger hidden count-cart-prods"></span></a>
+								<a href="#" onclick="event.preventDefault();open_cart_window('chart-window')"> <span class="fa fa-shopping-cart"></span> <span class="badge badge-danger @if(!$no_cart_items) hidden @endif count-cart-prods">{{$no_cart_items}}</span></a>
 							 </div>
 						 @endif
 
@@ -48,29 +57,80 @@
 							 <div class="table-responsive cart-items">
 								 <table id="cart-items" class="table table-condensed">
 								  <tbody>
-
-								  	<!--<tr id="cart-prod-2">
-								  		<td><span class="fa fa-times-circle" onclick="remove_cart_prod(2)"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{url('images/avatar-male.png')}})"></span> </td>
-											<td>Wsa</td>
-											<td><input type="number" min="1" max=""></td>
-											<td>KES 20000</td>
-								  	</tr>-->
+										<?php $sum = 0; ?>
+										@foreach( $cart_items as $cart_item )
+										<tr id="cart-prod-{{$cart_item['id']}}" data-id="{{$cart_item['id']}}">
+								  		<td class="prod-img-1" data-img="{{$cart_item['img']}}"><span class="fa fa-times-circle" onclick="remove_cart_prod('cart-prod-{{$cart_item['id']}}')"></span>&nbsp;&nbsp;&nbsp;<span class="cart-prod-img" style="background-image:url({{$cart_item['img']}})"></span> </td>
+											<td class="prod-name" data-name="{{$cart_item['name']}}">{{$cart_item['name']}}</td>
+											<td class="prod-qty"><input id="cart-prod-qty-{{$cart_item['id']}}" type="number" min="{{$cart_item['minQty']}}" max="{{$cart_item['maxQty']}}" value="{{$cart_item['qty']}}" onchange="get_cart_row_total( 'cart-prod-{{$cart_item['id']}}' );"></td>
+											<td class="prod-price" data-price="{{$cart_item['price']}}">KES {{number_format( $cart_item['price'] * $cart_item['qty'],2)}}</td>
+								  	</tr>
+										<?php $sum += ($cart_item['price'] * $cart_item['qty']) ?>
+										@endforeach
 
 								  </tbody>
 
 									<tfoot>
 										<tr>
 											<td class="text-right text-bold" colspan="3">Total</td>
-											<td id="cart-total">KES 50000</td>
+											<td id="cart-total">KES {{number_format($sum,2)}}</td>
 										</tr>
 									</tfoot>
 
 								</table>
 							 </div>
 
-							 <button class="btn btn-danger center-block" type="button" name="button"><span class="fa fa-shopping-cart"></span> Sell</button>
+
+
+							 <button class="btn btn-danger center-block" type="button" name="button" onclick="open_cart_window('cart-customer-details');close_cart_window('chart-window');get_cart_row_total()"><span class="fa fa-shopping-cart"></span> Sell</button>
 
 						 </div><!--end chat window-->
+
+						 <div id="cart-customer-details" class="chart-window">
+							 <span class="fa fa-times-circle close" onclick="close_cart_window('cart-customer-details')"></span>
+							 <h4 class="mb-2"><span class="fas fa-clipboard-check"></span> Customer details</h4>
+							<form id="booking-form" onsubmit="return()">
+							 <div class="supplier-details box-shdow-1 mb-2 text-center">
+								 <legend>Total Due</legend>
+								 <h3 class="text-danger text-bold cart-total">KES 0.00</h3>
+								 <strong class="hidden days-label">For <span class="booking-num-days"></span> day(s) </strong>
+							 </div>
+
+							 <div id="no-user-error" class="alert alert-danger alert-dismissible @if(!$errors->has('user_id'))hidden @endif" role="alert">
+								 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								 <h5>Please add a customer first</h5>
+							 </div>
+
+							 @component('components.cust-search-panel')@endcomponent
+							 @component('components.cust-reg-panel')@endcomponent
+							 @component('components.cust-details-panel')@endcomponent
+							 <div id="bookingAmountReceivedTitle" class="input-group input-group-md @if($errors->has('bookingAmountReceived')) has-error @endif">
+								 <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
+								 <input name="bookingAmountReceived" id="bookingAmountReceived" type="number" class="form-control numeric" value="@if(old('bookingAmountReceived')){{old('bookingAmountReceived')}}@elseif(isset($booking)) {{$booking->bookingAmountReceived}} @endif" placeholder="Amount Received" value="0" onblur="validate(this.id,{required:0,min:1,max:255},this.value)"  value="{{old('bookingAmountReceived')}}">
+							 </div>
+							 <div class="input-group input-group-md @if($errors->has('modeOfPayment')) has-error @endif">
+								 <span class="input-group-addon" id=""><i class="fas fa-info-circle"></i></span>
+								 <select class="form-control" name="modeOfPayment"  id="modeOfPayment">
+									 <option value="1" @if(old('modeOfPayment') == 1) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==1) selected @endif @endif>Paid in cash</option>
+									 <option value="2" @if(old('modeOfPayment') == 2) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==2) selected @endif @endif>Paid by cheque</option>
+									 <option value="3" @if(old('modeOfPayment') == 3) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==3) selected @endif @endif>Paid by bank transfer</option>
+									 <option value="4" @if(old('modeOfPayment') == 4) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==4) selected @endif @endif>Paid by MPESA</option>
+								 </select>
+							 </div>
+							 <div id="transactionCodeTitle" class="input-group input-group-md @if($errors->has('transactionCode')) has-error @endif">
+								 <span class="input-group-addon" id=""><i class="fas fa-money-check"></i></span>
+								 <input type="text" id="transactionCode" class="form-control" name="transactionCode" placeholder="E.g MPESA transaction code, cheque number etc" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('transactionCode')){{old('transactionCode')}}@elseif(isset($booking)) {{$booking->transactionCode}} @endif">
+							 </div>
+							 	<input type="hidden" name="user_id" value="">
+								<input class="cart-total" type="hidden" name="saleAmountDue" value="">
+								<input type="hidden" name="dept_id" value="@if(isset($dept)){{$dept->id}}@endif">
+							 </form>
+
+							 <button class="btn btn-default pull-left" type="button" name="button" onclick="close_cart_window('cart-customer-details');open_cart_window('chart-window');"><span class="fa fa-arrow-alt-circle-left"></span> Back</button>
+							 <button class="btn btn-success pull-right" type="button" name="button" onclick="dept_make_sale()"><span class="fa fa-money-bill"></span> Confirm Sale</button>
+
+
+						 </div><!--end cart customer window-->
 
 						 <div class="row">
  								<!--<div class="col-sm-6 mb-2">
@@ -172,5 +232,7 @@
 				</div>
 		<!-- //inner_content-->
 </div>
+
+
 
 @endsection
