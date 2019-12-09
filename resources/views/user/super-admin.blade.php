@@ -31,6 +31,8 @@
 						 <?php $count = 0; $colors=0;?>
 						 <?php $departmentsArr = []; ?>
 
+
+
 						 <div class="row">
 								 <ul class="ca-menu">
 									@foreach( $depts as $Dept )
@@ -58,8 +60,16 @@
 												 @else
 												 <i class="fa fa-tag" aria-hidden="true"></i>
 												 @endif
+
+												 <?php $bookings = 0 ?>
+												 @foreach ( $Dept->booking as $booking )
+												 	@if($booking->status == 1)
+														<?php $bookings += 1 ?>
+													@endif
+												 @endforeach
+
 												 <div class="ca-content">
-													 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{count($Dept->booking)}} @if(count($Dept->booking) == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
+													 <h4 class="ca-main @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{$bookings}} @if($bookings == 1)<small>booking</small>@else <small>bookings</small> @endif</h4>
 													 <h3 class="ca-sub @if($colors==1) one @elseif($colors==2) two @elseif($colors==3) three @endif text-capitalize">{{$Dept->name}}</h3>
 												 </div>
 											 </a>

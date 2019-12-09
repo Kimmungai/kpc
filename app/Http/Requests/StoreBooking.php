@@ -29,7 +29,7 @@ class StoreBooking extends FormRequest
           'bookingType' => 'required|numeric',
           'roomType' => 'nullable|numeric',
           'numPple' => 'required|numeric',
-          'dept_rooms_id' => 'required|numeric',
+          'dept_rooms_id' => 'nullable|numeric',
           'chkInDate' => 'required|date|max:255',
           'chkOutDate' => 'nullable|date|max:255',
           'bookingAmountDue' => 'nullable|numeric',

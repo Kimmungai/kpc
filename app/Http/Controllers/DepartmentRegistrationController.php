@@ -64,6 +64,7 @@ class DepartmentRegistrationController extends Controller
     {
       $dept = Dept::where('id',$id)->with(['booking' => function($query) {
         $query->whereMonth('created_at', Carbon::now()->month);
+        $query->where('status', 1);
       }])->with(['purchase' => function($query) {
         $query->whereMonth('created_at', Carbon::now()->month);
       }])->first();
@@ -154,6 +155,7 @@ class DepartmentRegistrationController extends Controller
             $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
           }])->with(['booking' => function($query) use ($dt){
             $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
+            $query->where('status',1);
           }])->with(['product' => function($query) use ($dt){
             $query->whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC');
           }])->first();
@@ -164,6 +166,7 @@ class DepartmentRegistrationController extends Controller
             $query->whereYear('created_at', $dt->year )->orderBy('created_at','DESC');
           }])->with(['booking' => function($query) use ($dt){
             $query->whereYear('created_at', $dt->year)->orderBy('created_at','DESC');
+            $query->where('status',1);
           }])->with(['product' => function($query) use ($dt){
             $query->whereYear('created_at', $dt->year)->orderBy('created_at','DESC');
           }])->first();
@@ -174,6 +177,7 @@ class DepartmentRegistrationController extends Controller
             $query->whereDay('created_at', $dt->day )->orderBy('created_at','DESC');
           }])->with(['booking' => function($query) use ($dt){
             $query->whereDay('created_at', $dt->day)->orderBy('created_at','DESC');
+            $query->where('status',1);
           }])->with(['product' => function($query) use ($dt){
             $query->whereDay('created_at', $dt->day)->orderBy('created_at','DESC');
           }])->first();
@@ -189,6 +193,7 @@ class DepartmentRegistrationController extends Controller
           $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
         }])->with(['booking' => function($query)  use ($request,$startDate,$endDate){
           $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
+          $query->where('status',1);
         }])->with(['product' => function($query)  use ($request,$startDate,$endDate) {
           $query->whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC');
         }])->first();
@@ -199,6 +204,7 @@ class DepartmentRegistrationController extends Controller
         $query->whereMonth('created_at', $dt->month )->orderBy('created_at','DESC');
       }])->with(['booking' => function($query) use ($dt) {
         $query->whereMonth('created_at', $dt->month)->orderBy('created_at','DESC');
+        $query->where('status',1);
       }])->with(['product' => function($query) use ($dt) {
         $query->whereMonth('created_at', $dt->month)->orderBy('created_at','DESC');
       }])->first();

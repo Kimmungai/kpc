@@ -19,7 +19,6 @@
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
-
 				<form id="booking-form" class="" action="{{route('bookings-registration.store')}}" method="post" >
 					@csrf
 					 <div class="row mt-2">
@@ -183,7 +182,7 @@
 																</span>
 															</td>
 															<input type="hidden" name="col_{{$x}}_7" value="{{old('col_'.$x.'_7')}}">
-															
+
 														@endfor
 													@elseif(isset($booking))
 													@endif
