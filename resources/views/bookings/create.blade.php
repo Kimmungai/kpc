@@ -182,7 +182,8 @@
 																	<input name="col_{{$x}}_6" type="text" class="form-control" placeholder="" min="" max="" value="{{old('col_'.$x.'_6')}}" onchange="assign_new_val(this.value,'col_{{$x}}_6',2)" onfocusout="toggleShow('col_{{$x}}_6_editor','col_{{$x}}_6',2)" >
 																</span>
 															</td>
-
+															<input type="hidden" name="col_{{$x}}_7" value="{{old('col_'.$x.'_7')}}">
+															
 														@endfor
 													@elseif(isset($booking))
 													@endif

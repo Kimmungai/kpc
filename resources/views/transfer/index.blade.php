@@ -23,6 +23,10 @@
            <div class="row">
 
             <h4 class="mb-2 text-bold">Transfer form</h4>
+						<div id="no-dept-error" class="alert alert-danger alert-dismissible @if(!$errors->has('toDept'))hidden @endif" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h5>Please select a destination department</h5>
+						</div>
 
              <div class="col-sm-4">
                <div class="agile_top_w3_grids">
@@ -46,11 +50,11 @@
                <p class="text-center text-success hidden-xs" style="font-size:50px;"><i class="fas fa-long-arrow-alt-right"></i></p>
                <p class="text-center text-success hidden-sm hidden-md hidden-lg hidden-xl" style="font-size:50px;"><i class="fas fa-long-arrow-alt-down"></i></p>
                <p>
-                 <select name="allDepts" id="allDepts" class="form-control mb-2" onchange="select_dept(this.value)">
+                 <select name="allDepts" id="allDepts" class="form-control mb-2" onchange="select_dept(this.value,this.id)">
                    <option disabled selected>destination dept</option>
                    @foreach( $allDepts as $singleDept )
                      <?php if( $singleDept->id == $dept->id ){continue;} ?>
-                     <option> {{$singleDept->name}} </option>
+                     <option data-id = "{{$singleDept->id}}"> {{$singleDept->name}} </option>
                    @endforeach
 
                  </select>
@@ -80,50 +84,15 @@
 
 							<div class="col-sm-7 mb-2">
 								<!--booking form-->
-								<div class="row">
+								<form id="booking-form" class="" action="{{route('transfer.store')}}" method="post">
+									@csrf
+								@component('components.prod-search-panel',['title' => 'Products to transfer', 'dept' => $dept])@endcomponent
 
-									<div class="col-sm-12 ">
-										<h4 class="mb-2 text-bold">Product to transfer</h4>
+								@component('components.prod-result-panel',['title' => 'Products to transfer'])@endcomponent
 
-										<div class="supplier-details box-shdow-4">
-											<div class="input-group">
-											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
-											  <input type="text" class="form-control" placeholder="Search by sku..." aria-describedby="basic-addon1">
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-
-									<div class="col-sm-12">
-										<div class="resp-table ">
-											<table  class="" >
-												<thead >
-													<tr>
-														<td style="background:#fff;">#</td>
-														<td style="background:#fff;">Image</td>
-														<td style="background:#fff;">SKU</td>
-														<td style="background:#fff;">Name</td>
-														<td style="background:#fff;">Quantity</td>
-														<td style="background:#fff;">Cost</td>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td data-label="#" style="background:#fff;"><span class="fas fa-times-circle"></span> &nbsp;&nbsp;&nbsp;1.</td>
-														<td data-label="Image" style="background:#fff;"> <img class="img-circle prod-img" src="{{url('images/avatar-male.png')}}" alt="" height="50" width="50"></td>
-														<td data-label="Name" style="background:#fff;">Nyau</td>
-														<td data-label="Email" style="background:#fff;">Nyau</td>
-														<td data-label="Phone" style="background:#fff;">Nyau</td>
-														<td data-label="Amount Owed" style="background:#fff;">Nyau</td>
-													</tr>
-												</tbody>
-											</table>
-									 </div>
-									</div>
-								</div>
-
+								<input type="hidden" name="fromDept" value="{{$dept->id}}">
+								<input type="hidden" name="toDept" >
+								<input type="hidden" name="no_products" >
 
 
 								<!--end booking form-->
@@ -142,16 +111,15 @@
 									<div class="row">
 										<div class="col-xs-12">
 
-											<textarea class="form-control" name="name" rows="8" cols="80" placeholder="Any comments?"></textarea>
+											<textarea class="form-control" name="comments" rows="8" cols="80" placeholder="Any comments?">{{old('comments')}}</textarea>
 
 										</div>
 
 									</div>
 
-
                 <div class="row">
 									<div class="col-sm-12 ">
-										<a href="#" class="btn btn-default  btn-block mt-1"><span class="fa fa-save"></span> Save</a>
+										<button type="button" class="btn btn-default  btn-block mt-1" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Transfer</button>
 
 									</div>
 
@@ -160,10 +128,12 @@
 
 							</div>
 						</div>
+					</form>
 
 
 				</div>
 		<!-- //inner_content-->
 </div>
+@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Transfer form', 'message' => 'Are you sure you want to sunmit transfer form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
 
 @endsection

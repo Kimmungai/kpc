@@ -89,6 +89,7 @@ Route::post('share-booking','BookingsAjaxController@share');
 //Transfers
 Route::post('save-transfer','TransfersAjaxController@save_transfer');
 Route::get('stock-transfer/{id}','TransferController@index')->name('transfer');
+Route::resource('transfer','TransferController');
 
 
 //Reports
