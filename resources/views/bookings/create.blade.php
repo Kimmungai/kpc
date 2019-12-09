@@ -182,7 +182,7 @@
 																</span>
 															</td>
 															<input type="hidden" name="col_{{$x}}_7" value="{{old('col_'.$x.'_7')}}">
-
+														</tr>
 														@endfor
 													@elseif(isset($booking))
 													@endif
@@ -403,7 +403,7 @@
 						<input type="hidden" name="bookingAmountDue" >
 						<input type="hidden" name="no_products" >
 						<input type="hidden" name="dept_id" value="@if(isset($dept)){{$dept->id}}@endif">
-						@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Booking form', 'message' => 'Are you sure you want to sunmit booking form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
+						@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Booking form', 'message' => 'Are you sure you want to submit booking form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
 
 </form>
 				</div>

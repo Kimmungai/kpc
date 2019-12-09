@@ -18,7 +18,7 @@ class BookingReportController extends Controller
     public function index()
     {
         $dt = Carbon::now();
-        $bookings= Booking::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereMonth('created_at', $dt->month)->where('status',1)->orderBy('created_at','DESC')->get();
         return view('Reports.booking-report',compact('bookings'));
     }
 
@@ -95,15 +95,15 @@ class BookingReportController extends Controller
       {
 
         if($request->duration_sort === 'thisWeek'){
-          $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+          $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->where('status',1)->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
           return view('Reports.booking-report',compact('bookings'));
         }
         if($request->duration_sort === 'thisYear') {
-          $bookings= Booking::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+          $bookings= Booking::whereYear('created_at', $dt->year)->where('status',1)->orderBy('created_at','DESC')->get();
           return view('Reports.booking-report',compact('bookings'));
         }
         if($request->duration_sort === 'today'){
-          $bookings= Booking::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+          $bookings= Booking::whereDay('created_at', $dt->day )->where('status',1)->orderBy('created_at','DESC')->get();
           return view('Reports.booking-report',compact('bookings'));
         }
       }
@@ -113,7 +113,7 @@ class BookingReportController extends Controller
         $endDate = Carbon::now();
         if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
 
-        $bookings= Booking::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDate('created_at','>=', $startDate)->where('status',1)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
         return view('Reports.booking-report',compact('bookings'));
       }
 
@@ -127,29 +127,29 @@ class BookingReportController extends Controller
       if($request->duration_sort === 'thisWeek'){
         $startDate =$dt->startOfWeek();
         $endDate = $dt->copy()->endOfWeek();
-        $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->where('status',1)->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
       }
       elseif($request->duration_sort === 'thisYear') {
         $startDate =$dt->startOfYear();
         $endDate = $dt->copy()->endOfYear();
-        $bookings= Booking::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereYear('created_at', $dt->year)->where('status',1)->orderBy('created_at','DESC')->get();
       }
       elseif($request->duration_sort === 'today'){
         $startDate =$dt->today();
         $endDate = $dt->copy()->today();
-        $bookings= Booking::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDay('created_at', $dt->day )->where('status',1)->orderBy('created_at','DESC')->get();
       }
       elseif($request->duration_sort === 'dates'){
         $startDate = Carbon::now()->startOfMonth();
         if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
         $endDate = Carbon::now();
         if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
-        $bookings= Booking::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDate('created_at','>=', $startDate)->where('status',1)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
       }
       else {
         $startDate =$dt->startOfMonth();
         $endDate = $dt->copy()->endOfMonth();
-        $bookings= Booking::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereMonth('created_at', $dt->month)->where('status',1)->orderBy('created_at','DESC')->get();
       }
 
 
@@ -187,29 +187,29 @@ class BookingReportController extends Controller
       if($duration_sort === 'thisWeek'){
         $startDate =$dt->startOfWeek();
         $endDate = $dt->copy()->endOfWeek();
-        $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDate('created_at','>=', $dt->startOfWeek())->where('status',1)->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
       }
       elseif($duration_sort === 'thisYear') {
         $startDate =$dt->startOfYear();
         $endDate = $dt->copy()->endOfYear();
-        $bookings= Booking::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereYear('created_at', $dt->year)->where('status',1)->orderBy('created_at','DESC')->get();
       }
       elseif($duration_sort === 'today'){
         $startDate =$dt->today();
         $endDate = $dt->copy()->today();
-        $bookings= Booking::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDay('created_at', $dt->day )->where('status',1)->orderBy('created_at','DESC')->get();
       }
       elseif($duration_sort === 'dates'){
         $startDate = Carbon::now()->startOfMonth();
         if($filter_from != ''){ $startDate = Carbon::create($filter_from);}
         $endDate = Carbon::now();
         if($filter_to != ''){ $endDate =Carbon::create($filter_to); }
-        $bookings= Booking::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereDate('created_at','>=', $startDate)->where('status',1)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
       }
       else {
         $startDate =$dt->startOfMonth();
         $endDate = $dt->copy()->endOfMonth();
-        $bookings= Booking::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+        $bookings= Booking::whereMonth('created_at', $dt->month)->where('status',1)->orderBy('created_at','DESC')->get();
       }
 
 

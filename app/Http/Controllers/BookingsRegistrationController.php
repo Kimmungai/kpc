@@ -175,9 +175,34 @@ class BookingsRegistrationController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request,$id)
     {
-        //
+        $bookingData = $this->booking_data( $request );
+        $booking = Booking::find( $id );
+        $booking->update($bookingData);
+
+       if( $booking->bookingAmountDue <= $booking->bookingAmountReceived )
+          $booking->update(['status'=>1]);//booking confirmed
+
+        //create revenue (booked products)
+        $this->save_other_booked_products( $request, $booking->id, 'update' );
+
+        //create booking menu
+        $this->create_booking_menu( $request, $booking->id, 'update' );
+
+        //create booking services (Other services booked)
+        $this->create_booking_services( $request, $booking->id, 'update' );
+
+        //notify Admin, Staff, super admin
+        $authorisedUsers = [-1,1,3];
+        $subscribedUsers = User::whereIn('type',$authorisedUsers)->where('id','<>',Auth::id())->where('receive_notifications',1)->get();
+        $dept = Dept::find($booking->dept_id);
+        $booker = Auth::user();
+        $this->send_notifications( $subscribedUsers, $booking, $dept, $booker );
+
+
+        Session::flash('message', env("SAVE_SUCCESS_MSG","Details updated successfully!"));
+        return back();
     }
 
     /**
@@ -190,6 +215,8 @@ class BookingsRegistrationController extends Controller
     {
       $booking = Booking::find($id);
       Revenue::where('booking_id',$id)->forceDelete();
+      BookingServices::where('booking_id',$id)->forceDelete();
+      BookingMenu::where('booking_id',$id)->forceDelete();
       $booking->forceDelete();
       Session::flash('message', env("DELETE_SUCCESS_MSG","Records removed succesfully!"));
       return redirect('/bookings-registration');
@@ -247,11 +274,16 @@ class BookingsRegistrationController extends Controller
     }
 
     //create menu selected in this booking
-    private function create_booking_menu( $request, $booking_id )
+    private function create_booking_menu( $request, $booking_id, $action='create' )
     {
-      if(!is_array($request->booking_menu))
-        return;
-      foreach ($request->booking_menu as $menu )
+      $booking_menu = $request->booking_menu;
+      if(!is_array($booking_menu))
+        $booking_menu = [];
+
+      if( $action == 'update' )//delete all menu first
+        BookingMenu::where('booking_id',$booking_id)->forceDelete();
+
+      foreach ($booking_menu as $menu )
       {
         $bookingMenu = new BookingMenu;
         $bookingMenu->dept_menus_id = $menu;
@@ -261,12 +293,17 @@ class BookingsRegistrationController extends Controller
     }
 
     //create services selected for this booking
-    private function create_booking_services( $request, $booking_id )
+    private function create_booking_services( $request, $booking_id, $action='create' )
     {
-      if(!is_array($request->other_services))
-        return;
+      $other_services = $request->other_services;
 
-      foreach ($request->other_services as $service )
+      if(!is_array($other_services))
+        $other_services = [];
+
+      if( $action == 'update' )//delete all menu first
+        BookingServices::where('booking_id',$booking_id)->forceDelete();
+
+      foreach ($other_services as $service )
       {
         $bookingService = new BookingServices;
         $bookingService->dept_services_id = $service;

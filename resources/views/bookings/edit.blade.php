@@ -13,511 +13,472 @@
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
 									<li><a href="/bookings-registration">Bookings</a> <span>«</span></li>
-                  <li>Booking-@if(isset($booking)){{$booking->id}} @endif</li>
+                  <li>New Booking</li>
 	              </ul>
 	            </div>
 	          </div>
 						<!-- /inner_content_w3_agile_info-->
 				 <div class="inner_content_w3_agile_info">
-
-
-
-
-					<div class="container" >
-						<div class="row">
-							@if( isset($dept) )
-							<h1 class="text-capitalize ">{{$dept->name}} Booking-@if(isset($booking)){{$booking->id}} @endif </h1>
+				<form id="booking-form" class="" action="{{route('bookings-registration.update',$booking->id)}}" method="post" >
+					@csrf
+					@method('PUT')
+					 <div class="row mt-2">
+				 		<div class="col-sm-12 ">
+							@if( Auth::user()->type == 3 || Auth::user()->type == -1)
+								<button type="button" class="btn btn-default btn-lg mb-1 pull-left" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</button>
 							@endif
-						</div>
+				 			<button type="button" class="btn btn-default btn-lg mb-1 pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</button>
+				 		</div>
+				 	</div>
 
-						<div class="row">
-              <!--booking reg form-->
-
-              <!--general form start-->
-              <div class="grid-1 graph-form agile_info_shadow" style="width:100%">
-
-                 <h3 class="w3_inner_tittle two">Basic Information </h3>
-                 <form class="form-horizontal">
-
-                   <div class="form-group">
-                     <label class="col-md-2 control-label">Booking type</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-gift"></i>
-                         </span>
-                         <select name="bookingType" id="bookingType" class="form-control" onchange="select_booking_type(this.value)">
-                           <option value="1" @if( old('bookingType') == 1 || ( isset($booking) && $booking->bookingType == 1 ) ) selected @endif> Food ordering </option>
-                           <option value="2" @if( old('bookingType') == 2 || ( isset($booking) && $booking->bookingType == 2 ) ) selected @endif> Room booking </option>
-                           <option value="3" @if( old('bookingType') == 3 || ( isset($booking) && $booking->bookingType == 3 ) ) selected @endif> Tent Hiring </option>
-                           <option value="4" @if( old('bookingType') == 4 || ( isset($booking) && $booking->bookingType == 4 ) ) selected @endif> Meeting hall booking </option>
-                           <option value="5" @if( old('bookingType') == 5 || ( isset($booking) && $booking->bookingType == 5 ) ) selected @endif> Compound booking </option>
-                         </select>
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text">
-                         @if ($errors->has('bookingType'))
-                           {{ $errors->first('bookingType') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div id="roomTypeSec" class="form-group @if(isset($booking)) @if(!$booking->roomType) hidden d-none @endif @endif">
-                     <label class="col-md-2 control-label">Room type</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-hotel"></i>
-                         </span>
-                         <select name="roomType" id="roomType" class="form-control">
-                           <option value="1" @if( old('roomType') == 1 || ( isset($booking) && $booking->roomType == 1 ) ) selected @endif> Single </option>
-                           <option value="2" @if( old('roomType') == 2 || ( isset($booking) && $booking->roomType == 2 ) ) selected @endif> Double </option>
-                           <option value="3" @if( old('roomType') == 3 || ( isset($booking) && $booking->roomType == 3 ) ) selected @endif> Delux </option>
-                         </select>
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text">
-                         @if ($errors->has('roomType'))
-                           {{ $errors->first('roomType') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="numPpleTitle">
-                     <label class="col-md-2 control-label">No of People <span class="text-danger">*</span></label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-users"></i>
-                         </span>
-                         <input name="numPple" id="numPple" type="text" class="form-control" value="@if( old('numPple') ) {{old('numPple')}} @elseif( isset($booking) ) {{$booking->numPple}} @endif" placeholder="Number of People" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="numPpleHelper">
-                         @if ($errors->has('numPple'))
-                           {{ $errors->first('numPple') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="chk_in_dateTitle">
-                     <label class="col-md-2 control-label chk_in_dateName">Check in <span class="text-danger">*</span></label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-calendar"></i>
-                         </span>
-                         <input name="chk_in_date" id="chk_in_date" type="text" class="form-control" value="@if( old('chk_in_date') ) {{old('chk_in_date')}} @elseif( isset($booking) ) {{$booking->chkInDate}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="chk_in_dateHelper">
-                         @if ($errors->has('chk_in_date'))
-                           {{ $errors->first('chk_in_date') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group @if(isset($booking)) @if(!$booking->chkOutDate) hidden d-none @endif @endif" id="chk_out_dateTitle">
-                     <label class="col-md-2 control-label chk_out_dateName">Check out <span class="text-danger">*</span></label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-calendar"></i>
-                         </span>
-                         <input name="chk_out_date" id="chk_out_date" type="text" class="form-control" value="@if( old('chk_out_date') ) {{old('chk_out_date')}} @elseif( isset($booking) ) {{$booking->chkOutDate}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="chk_out_dateHelper">
-                         @if ($errors->has('chk_out_date'))
-                           {{ $errors->first('chk_out_date') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="bookingAmountDueTitle">
-                     <label class="col-md-2 control-label">Amount due <span class="text-danger">*</span></label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-money"></i>
-                         </span>
-                         <input name="bookingAmountDue" id="bookingAmountDue" type="text"  class="form-control" value="@if( old('bookingAmountDue') ) {{old('bookingAmountDue')}} @elseif( isset($booking) ) {{$booking->bookingAmountDue}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="bookingAmountDueHelper">
-                         @if ($errors->has('bookingAmountDue'))
-                           {{ $errors->first('bookingAmountDue') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-
-                   <div class="form-group" id="modeOfPaymentTitle">
-                     <label class="col-md-2 control-label">Payment method</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-info"></i>
-                         </span>
-                         <select name="modeOfPayment" id="modeOfPayment"  class="form-control">
-                           <option value="1" @if( old('modeOfPayment') == 1 || ( isset($booking) && $booking->modeOfPayment == 1 ) ) selected @endif>Paid by cash</option>
-                           <option value="2" @if( old('modeOfPayment') == 2 || ( isset($booking) && $booking->modeOfPayment == 2 ) ) selected @endif>Paid by cheque</option>
-                           <option value="3" @if( old('modeOfPayment') == 3 || ( isset($booking) && $booking->modeOfPayment == 3 ) ) selected @endif>Paid by bank transfer</option>
-                           <option value="4" @if( old('modeOfPayment') == 4 || ( isset($booking) && $booking->modeOfPayment == 4 ) ) selected @endif>MPESA</option>
-                         </select>
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="modeOfPaymentHelper">
-                         @if ($errors->has('modeOfPayment'))
-                           {{ $errors->first('modeOfPayment') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="bookingAmountReceivedTitle">
-                     <label class="col-md-2 control-label">Amount Received <span class="text-danger">*</span></label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-money"></i>
-                         </span>
-                         <input name="bookingAmountReceived" id="bookingAmountReceived" type="text"  class="form-control" value="@if( old('bookingAmountReceived') ) {{old('bookingAmountReceived')}} @elseif( isset($booking) ) {{$booking->bookingAmountReceived}} @endif" placeholder="Enter a number" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="bookingAmountReceivedHelper">
-                         @if ($errors->has('bookingAmountReceived'))
-                           {{ $errors->first('bookingAmountReceived') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="paymentStatusTitle">
-                     <label class="col-md-2 control-label">Payment status</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-hourglass"></i>
-                         </span>
-                         <select name="paymentStatus" id="paymentStatus"  class="form-control">
-                           <option value="1" @if( old('paymentStatus') == 1 || ( isset($booking) && $booking->paymentStatus == 1 ) ) selected @endif>Paid</option>
-                           <option value="2" @if( old('paymentStatus') == 2 || ( isset($booking) && $booking->paymentStatus == 2 ) ) selected @endif>Pending</option>
-                         </select>
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="paymentStatusHelper">
-                         @if ($errors->has('paymentStatus'))
-                           {{ $errors->first('paymentStatus') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="paymentDueDateTitle">
-                     <label class="col-md-2 control-label">Payment Due Date</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fa fa-calendar"></i>
-                         </span>
-                         <input name="paymentDueDate" id="paymentDueDate" type="text" class="form-control" value="@if( old('paymentDueDate') ) {{old('paymentDueDate')}} @elseif( isset($booking) ) {{$booking->paymentDueDate}} @endif" placeholder="Choose a date" onchange="validate(this.id,{required:1,min:3,max:255},this.value)" />
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="paymentDueDateHelper">
-                         @if ($errors->has('paymentDueDate'))
-                           {{ $errors->first('paymentDueDate') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group">
-                     <label for="checkbox" class="col-sm-2 control-label">Board</label>
-                     <div class="col-sm-8">
-                       <div class="checkbox-inline"><label><input value="2" name="board" type="radio" @if( isset($booking) ) @if($booking->board == 2) checked @endif @endif> Full board</label></div>
-                       <div class="checkbox-inline"><label><input value="1" name="board" type="radio" @if( isset($booking) ) @if($booking->board == 1) checked @endif @endif> Half board</label></div>
-                     </div>
-                   </div>
-
-                   <div class="form-group">
-                     <label for="checkbox" class="col-sm-2 control-label">Menu</label>
-                     <div class="col-sm-8">
-                       <div class="checkbox-inline"><label><input value="1" name="menu" type="radio" @if( isset($booking) ) @if($booking->menu == 1) checked @endif @endif> Ordinary</label></div>
-                       <div class="checkbox-inline"><label><input value="2" name="menu" type="radio" @if( isset($booking) ) @if($booking->menu == 2) checked @endif @endif> Special</label></div>
-                     </div>
-                   </div>
-
-                   <div class="form-group" id="menuDetailsTitle">
-                     <label class="col-md-2 control-label">Menu details</label>
-                     <div class="col-md-8">
-                       <div class="input-group input-icon right">
-                         <span class="input-group-addon">
-                           <i class="fas fa-utensils"></i>
-                         </span>
-                         <textarea name="menuDetails" id="menuDetails" class="form-control" rows="5"  placeholder="Enter any details about the menu" onblur="validate(this.id,{required:0,min:3,max:255},this.value)">@if( old('menuDetails') ) {{old('menuDetails')}} @elseif( isset($booking) ) {{$booking->menuDetails}} @endif</textarea>
-                       </div>
-                     </div>
-                     <div class="col-sm-2">
-                       <p class="help-block red-text" id="menuDetailsHelper">
-                         @if ($errors->has('menuDetails'))
-                           {{ $errors->first('menuDetails') }}
-                         @endif
-                       </p>
-                     </div>
-                   </div>
-
-                   <div class="form-group">
-                     <label for="checkbox" class="col-sm-2 control-label">Other services</label>
-                     <div class="col-sm-8">
-                       <div class="checkbox-inline"><label><input value="1" name="meetingHall" id="meetingHall" type="checkbox" @if( isset($booking) ) @if($booking->meetingHall == 1) checked @endif @endif> Meeting hall</label></div>
-                       <div class="checkbox-inline"><label><input value="1" name="tent" id="tent" type="checkbox" @if( isset($booking) ) @if($booking->tent == 1) checked @endif @endif> Tent</label></div>
-                       <div class="checkbox-inline"><label><input value="1" name="paSystem" id="paSystem" type="checkbox" @if( isset($booking) ) @if($booking->paSystem == 1) checked @endif @endif> PA system</label></div>
-                       <div class="checkbox-inline"><label><input value="1" name="projector" id="projector" type="checkbox" @if( isset($booking) ) @if($booking->projector == 1) checked @endif @endif> Projector</label></div>
-                     </div>
-                   </div>
-
-
-
-                  </form>
-
-          </div><!--general form end-->
-
-          <!--/start goods-->
-          <div class="set-1_w3ls">
-              <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
-               <h3 class="w3_inner_tittle two">Other products booked  </h3>
-
-               <div class="input-group search-box">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                <div class="loading hidden d-none">
-                  <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
-                </div>
-                <input id="search-booked-product"  type="text" class="form-control search-box" name="search" placeholder="Search by name from records..." onkeyup="std_search_product(this.id,this.value,'booked-products-table')">
-               </div>
-               <div id="search-booked-product-results" class="search-box-results border-1 hidden d-none">
-
-               </div>
-
-
-                </div>
-               <div class="clearfix"> </div>
-          </div>
-          <!--end goods-->
-          <!-- tables -->
-
-          <div class="agile-tables">
-
-          <div class="w3l-table-info agile_info_shadow">
-            <table  class="two-axis">
-              <input id="purchasesID" type="hidden" name="purchasesID">
-            <thead>
-              <tr>
-              <th>SKU</th>
-              <th>Name</th>
-              <th>Quantity booked</th>
-              <th>Price</th>
-              </tr>
-            </thead>
-            <tbody id="booked-products-table">
-
-              @if( isset($booking) )
-                @foreach( $booking->revenue as $revenue)
-                <tr data-prod="{{$revenue->product->id}}" id="booked-products-table-prod-result-{{$revenue->product->id}}">
-                <td>{{$revenue->product->sku}}</td>
-                <td>{{$revenue->product->name}}</td>
-                <td class="text-info cursor" id="booked-products-table-booked-prod-qty-{{$revenue->product->id}}" onclick="std_update_amount_due(this.id,{{$revenue->product->quantity}})">{{$revenue->bookedQuantity}}</td>
-                <td id="'booked-products-table-booked-prod-price-{{$revenue->product->id}}" class="text-info cursor" onclick="std_update_amount_due(this.id)">{{$revenue->price}}</td>
-                </tr>
-                @endforeach
-              @endif
-
-            </tbody>
-            </table>
-
-
-          </div>
-       </div>
-      <!-- //tables -->
-          <!--goods table-->
-
-          <!--/start Customer-->
-          <div class="set-1_w3ls">
-              <div class="col-md-6 button_set_one two agile_info_shadow graph-form" style="width:100%">
-               <h3 class="w3_inner_tittle two">Customer details <span class="text-danger">*</span></h3>
-               <div id="booking-search-customer-container">
-                 <div class="input-group search-box" >
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                  <div class="loading hidden d-none">
-                    <img src="{{url('images/search-loading.gif')}}" alt="" height="10" width="50">
-                  </div>
-                  <input id="table-booking-contact-input"  type="text" class="form-control" name="search" placeholder="Search by name..." onkeyup="std_search_user(this.value,'table-booking-contact')">
-
-                 </div>
-                 <div id="table-booking-contact-results-box" class="search-box-results border-1 hidden d-none">
-
-                 </div>
-								 @if( isset($booking) )
-									 @if($booking->user)
-	                 <div class="form-group">
-	                   <button type="button" class="btn btn-warning btn-sm" name="button" onclick="toggleElements('booking-create-user-form-container','booking-search-customer-container')">Create new customer record instead <i class="fa fa-database"></i></button>
-	                 </div>
-									 @endif
-								@endif
-               </div>
-							 @if( isset($booking) )
-								 @if($booking->user)
-                    <div class="grid-1 hidden d-none" id="booking-create-user-form-container">
-                      <div class="form-body " >
-                        <div  data-example-id="simple-form-inline">
-                          <form id="booking-create-user-form" class="form-inline " onsubmit="std_create_user(this.id,'table-booking-contact')">
-
-                            <div class="form-group" >
-                                <div class="input-group input-icon right">
-                                  <span class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                  </span>
-                                  <input  name="firstName"  type="text" class="form-control" value="{{$booking->user->firstName}}" placeholder="Name..." required />
-                              </div>
-                            </div>
-
-                            <div class="form-group" >
-                                <div class="input-group input-icon right">
-                                  <span class="input-group-addon">
-                                    <i class="fa fa-envelope"></i>
-                                  </span>
-                                  <input name="email"  type="email"  class="form-control" value="{{$booking->user->email}}" placeholder="Email..." required/>
-                              </div>
-                            </div>
-
-                            <div class="form-group" >
-                                <div class="input-group input-icon right">
-                                  <span class="input-group-addon">
-                                    <i class="fa fa-phone"></i>
-                                  </span>
-                                  <input name="phoneNumber"  type="number" class="form-control" value="{{$booking->user->phoneNumber}}"  placeholder="Phone Number..." required />
-                              </div>
-                            </div>
-
-                            <div class="form-group" >
-                                <div class="input-group input-icon right">
-                                  <span class="input-group-addon">
-                                    <i class="fas fa-id-card"></i>
-                                  </span>
-                                  <input name="idNo" type="number" class="form-control" value="{{$booking->user->idNo}}" placeholder="ID No..." />
-                              </div>
-                            </div>
-
-                          <div class="form-group">
-                            <button type="submit" class="btn btn-default btn-sm" name="button" >Add</button>
-                          </div>
-
-
-                          </form>
-
-                        </div>
-
-                      </div>
-                      <div class="form-group">
-                        <button type="button" class="btn btn-default btn-sm mt-2" name="button" onclick="toggleElements('booking-search-customer-container','booking-create-user-form-container')">Search customer from records instead <i class="fa fa-database"></i></button>
-                      </div>
-                     </div>
-										 @endif
-									@endif
-
-
-                </div>
-               <div class="clearfix"> </div>
-        </div>
-        <!--end customer-->
-
-        <!--customer table-->
-        <!-- tables -->
-
-        <div class="agile-tables">
-
-        <div class="w3l-table-info agile_info_shadow">
-          <table   class="two-axis">
-          <thead>
-            <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>ID No.</th>
-            </tr>
-          </thead>
-          <tbody id="table-booking-contact">
-            @if( isset($booking) )
-              @if($booking->user)
-              <tr>
-              <td>{{$booking->user->firstName}}</td>
-              <td>{{$booking->user->email}}</td>
-              <td>{{$booking->user->phoneNumber}}</td>
-              <td>{{$booking->user->idNo}}</td>
-              </tr>
-              @endif
-            @endif
-          </tbody>
-          </table>
-
-
-        </div>
-     </div>
-    <!-- //tables -->
-    <input id="bookingDeptID" type="hidden" name="bookingDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
-		<input id="currentDeptID" type="hidden" name="currentDeptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
-    <input id="customerID" type="hidden" name="customerID" value="@if( isset($booking) )	@if($booking->user) {{$booking->user->id}} @endif @endif">
-		<input id="deptID" type="hidden" name="deptID" value="@if( isset($dept) ) {{$dept->id}} @endif">
-		<input type="hidden" name="bookingID" id="bookingID" value="@if( isset($booking) ) {{$booking->id}} @endif">
-        <!--end customer table-->
-
-          <!--//booking form-->
-
-            <!--end goods table-->
-            <div class="button" onclick="save_booking('booked-products-table',1)">
-             <p class="btnText">Update?</p>
-             <div class="btnTwo" style="background:green">
-               <p class="btnText2" >GO!</p>
-             </div>
-            </div>
-						@if( Auth::user()->type == 3 || Auth::user()->type == -1)
-            <div class="button" style="background:#d9534f;" data-toggle="modal" data-target="#deleteConfirmModal">
-             <p class="btnText">Delete?</p>
-             <div class="btnTwo">
-               <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
-             </div>
-            </div>
-						@endif
-              </div>
-              <!--booking reg form-->
-
-						</div>
-
+					<div class="alert alert-danger alert-dismissible @if(!count($errors)) hidden @endif" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h5>The form contains errors. Please correct them first!</h5>
 					</div>
 
+
+						<div class="row">
+
+							<div class="col-sm-7 mb-2">
+								<!--booking form-->
+								<h4 id="formTitle" class="mb-2 text-bold">Booking form</h4>
+
+								<div class="row">
+									<div class="col-sm-12 ">
+										<div class="input-group input-group-md @if($errors->has('bookingType')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-gift"></i></span>
+										  <select id="bookingType" class="form-control calc-costs-onchange" name="bookingType">
+												<option value="0" data-price="0" selected>Choose a booking type</option>
+												@if( isset($dept) )
+													@if( $dept->DeptBookingTypes )
+														@foreach( $dept->DeptBookingTypes as $type )
+															<option value="{{$type->id}}" data-price="{{$type->price}}" @if(old('bookingType') == $type->id) selected @elseif(isset($booking)) @if($booking->bookingType ==$type->id) selected @endif @endif > {{$type->type}} </option>
+														@endforeach
+													@endif
+												@endif
+										  </select>
+										</div>
+										<div id="numPpleTitle" class="input-group input-group-md @if($errors->has('numPple')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-users"></i> <i class="text-danger">*</i></span>
+										  <input name="numPple" id="numPple" type="text" class="form-control numeric calc-costs-onchange" value="@if(old('numPple')){{old('numPple')}}@elseif(isset($booking)) {{$booking->numPple}} @endif" placeholder="Number of people" onblur="validate(this.id,{required:1,min:1,max:255},this.value)" required>
+										</div>
+										@if( $dept->has_rooms == 1 )<!-- 1 has rooms, -1 no rooms -->
+										<div id="roomIdTitle" class="input-group input-group-md @if($errors->has('dept_rooms_id')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-bed"></i> </span>
+											<select id="roomId" class="form-control calc-costs-onchange" name="dept_rooms_id">
+												<option value="0" data-price="0" selected>Choose a room type</option>
+												@foreach( $dept->DeptRooms as $room )
+													<option value="{{$room->id}}" data-price="{{$room->price}}" @if(old('dept_rooms_id') == $room->id) selected @elseif(isset($booking)) @if($booking->dept_rooms_id ==$room->id) selected @endif @endif>{{$room->type}}</option>
+												@endforeach
+											</select>
+										</div>
+										@endif
+										<div id="chkInDateTitle" class="input-group input-group-md @if($errors->has('chkInDate')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i> <i class="text-danger">*</i></span>
+										  <input type="text" name="chkInDate" id="chkInDate" class="form-control calc-costs-onchange" placeholder="Start Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('chkInDate')){{old('chkInDate')}}@elseif(isset($booking)) {{$booking->chkInDate}} @endif" required>
+										</div>
+										<div id="chkOutDateTitle" class="input-group input-group-md @if($errors->has('chkOutDate')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
+										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control calc-costs-onchange" placeholder="End Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('chkOutDate')){{old('chkOutDate')}}@elseif(isset($booking)) {{$booking->chkOutDate}} @endif" >
+										</div>
+										<!--<div id="bookingAmountDueTitle" class="input-group input-group-md">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
+										  <input name="bookingAmountDue" id="bookingAmountDue" type="text" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Amount due" disabled>
+										</div>-->
+										<div class="input-group input-group-md @if($errors->has('modeOfPayment')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-info-circle"></i></span>
+											<select class="form-control" name="modeOfPayment"  id="modeOfPayment">
+												<option value="1" @if(old('modeOfPayment') == 1) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==1) selected @endif @endif>Paid in cash</option>
+												<option value="2" @if(old('modeOfPayment') == 2) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==2) selected @endif @endif>Paid by cheque</option>
+												<option value="3" @if(old('modeOfPayment') == 3) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==3) selected @endif @endif>Paid by bank transfer</option>
+												<option value="4" @if(old('modeOfPayment') == 4) selected @elseif(isset($booking)) @if($booking->modeOfPayment ==4) selected @endif @endif>Paid by MPESA</option>
+											</select>
+										</div>
+										<div id="transactionCodeTitle" class="input-group input-group-md @if($errors->has('transactionCode')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-check"></i></span>
+										  <input type="text" id="transactionCode" class="form-control" name="transactionCode" placeholder="E.g MPESA transaction code, cheque number etc" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('transactionCode')){{old('transactionCode')}}@elseif(isset($booking)) {{$booking->transactionCode}} @endif">
+										</div>
+										<div id="bookingAmountReceivedTitle" class="input-group input-group-md @if($errors->has('bookingAmountReceived')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
+										  <input name="bookingAmountReceived" id="bookingAmountReceived" type="text" class="form-control numeric" value="@if(old('bookingAmountReceived')){{old('bookingAmountReceived')}}@elseif(isset($booking)) {{$booking->bookingAmountReceived}} @endif" placeholder="Amount Received" value="0" onblur="validate(this.id,{required:0,min:1,max:255},this.value)"  value="{{old('bookingAmountReceived')}}">
+										</div>
+										<div id="paymentDueDateTitle" class="input-group input-group-md @if($errors->has('paymentDueDate')) has-error @endif">
+										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
+										  <input type="text" name="paymentDueDate" id="paymentDueDate" class="form-control" placeholder="Payment Due Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('paymentDueDate')){{old('paymentDueDate')}}@elseif(isset($booking)) {{$booking->paymentDueDate}} @endif">
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+
+									<div class="col-sm-12 ">
+										<h4 class="mb-2 text-bold">Other Booked products</h4>
+
+										<div id="booked-prods-error" class="alert alert-danger alert-dismissible hidden" role="alert">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h5>Please enter correct values for the fields in red.</h5>
+										</div>
+
+										<div class="supplier-details box-shdow-4">
+											<div class="input-group mb-0" >
+											  <span class="input-group-addon" id=""><span class="fa fa-search"></span></span>
+											  <input id="otherProductsSearch" type="text" class="form-control search-input" placeholder="Search by product name..." onkeyup="kpc_search(this.value,this.id,@if(isset($dept)){{$dept->id}}@endif,'product')">
+											</div>
+
+											<div id="otherProductsSearchPanel" class="search-panel-lg hidden">
+
+
+											</div>
+
+										</div>
+
+
+
+									</div>
+								</div>
+
+								<div class="row">
+
+									<div class="col-sm-12">
+										<div class="resp-table ">
+											<table id="otherProductsSearchTable" class="bg-white @if(!old('no_products') && !isset($booking) )  hidden @elseif(isset($booking)) @if(!$booking->no_products) hidden @endif @else hidden @endif" >
+												<thead>
+													<tr>
+														<td>#</td>
+														<td>Name</td>
+														<td>Description</td>
+														<td>Quantity</td>
+														<td>Selling price</td>
+														<td>Total</td>
+													</tr>
+												</thead>
+												<tbody>
+													<!---<input name="col__2" type="text" class="form-control" placeholder="" min="" max="" value="'+value+'" onchange="assign_new_val(this.value,\'col__2\',2)" onfocusout="toggleShow(\'col__2_editor\',\'col__2\',2)" onkeyup="max_field_input(this)"> FOR QUANTITY-->
+
+													@if(old('no_products'))
+														@for( $x = 1; $x <= old('no_products'); $x++ )
+														<tr id="booked-prods-row-{{$x}}" data-product="{{old('col_'.$x.'_7')}}">
+															<td id="col_{{$x}}_1" data-label="#"><span class="fas fa-times-circle" onclick="remove_row_hide_empty_table('booked-prods-row-{{$x}}', 'otherProductsSearchTable' )"></span> &nbsp;&nbsp;&nbsp;{{$x}}</td>
+															<td  data-label="Name"> <span id="col_{{$x}}_2"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{old('col_'.$x.'_2')}}</span>
+																<span id="col_{{$x}}_2_editor" class="hidden">
+																	<input name="col_{{$x}}_2" type="text" class="form-control" placeholder="" min="" max="" value="{{old('col_'.$x.'_2')}}" onchange="assign_new_val(this.value,'col_{{$x}}_2',2)" onfocusout="toggleShow('col_{{$x}}_2_editor','col_{{$x}}_2',2)" >
+																</span>
+															</td>
+															<td  data-label="Description"> <span id="col_{{$x}}_3"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{old('col_'.$x.'_3')}}</span>
+																<span id="col_{{$x}}_3_editor" class="hidden">
+																	<input name="col_{{$x}}_3" type="text" class="form-control" placeholder="" min="" max="" value="{{old('col_'.$x.'_3')}}" onchange="assign_new_val(this.value,'col_{{$x}}_3',2)" onfocusout="toggleShow('col_{{$x}}_3_editor','col_{{$x}}_3',2)" >
+																</span>
+															</td>
+															<td  data-label="Quantity"> <span id="col_{{$x}}_4"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{old('col_'.$x.'_4')}}</span>
+																<span id="col_{{$x}}_4_editor" class="hidden">
+																	<input name="col_{{$x}}_4" type="number" class="form-control numeric" placeholder="" min="1" max="{{old('col_'.$x.'_4_max')}}" value="{{old('col_'.$x.'_4')}}" onchange="assign_new_val(this.value,'col_{{$x}}_4',2)" onfocusout="toggleShow('col_{{$x}}_4_editor','col_{{$x}}_4',2)" onkeyup="max_field_input(this)">
+																	<input name="col_{{$x}}_4_max" type="hidden" value="{{old('col_'.$x.'_4_max')}}">
+																</span>
+															</td>
+															<td  data-label="Selling price"> <span id="col_{{$x}}_5"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{old('col_'.$x.'_5')}}</span>
+																<span id="col_{{$x}}_5_editor" class="hidden">
+																	<input name="col_{{$x}}_5" type="text" class="form-control" placeholder="" min="" max="" value="{{old('col_'.$x.'_5')}}" onchange="assign_new_val(this.value,'col_{{$x}}_5',2)" onfocusout="toggleShow('col_{{$x}}_5_editor','col_{{$x}}_5',2)" >
+																</span>
+															</td>
+															<td  data-label="Total"> <span id="col_{{$x}}_6"  onclick="toggleShow(this.id,this.id+'_editor',2)">KES {{number_format(old('col_'.$x.'_6'),2)}}</span>
+																<span id="col_{{$x}}_6_editor" class="hidden">
+																	<input name="col_{{$x}}_6" type="text" class="form-control" placeholder="" min="" max="" value="{{old('col_'.$x.'_6')}}" onchange="assign_new_val(this.value,'col_{{$x}}_6',2)" onfocusout="toggleShow('col_{{$x}}_6_editor','col_{{$x}}_6',2)" >
+																</span>
+															</td>
+															<input type="hidden" name="col_{{$x}}_7" value="{{old('col_'.$x.'_7')}}">
+														</tr>
+														@endfor
+													@elseif(isset($booking))
+													<?php $x = 1 ?>
+														@foreach( $booking->Revenue as $revenue )
+															@if( $revenue->product )
+																<tr id="booked-prods-row-{{$x}}" data-product="{{$revenue->product->id}}">
+																	<td id="col_{{$x}}_1" data-label="#"><span class="fas fa-times-circle" onclick="remove_row_hide_empty_table('booked-prods-row-{{$x}}', 'otherProductsSearchTable' )"></span> &nbsp;&nbsp;&nbsp;{{$x}}</td>
+																	<td  data-label="Name"> <span id="col_{{$x}}_2"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{$revenue->product->name}}</span>
+																		<span id="col_{{$x}}_2_editor" class="hidden">
+																			<input name="col_{{$x}}_2" type="text" class="form-control" placeholder="" min="" max="" value="{{$revenue->product->name}}" onchange="assign_new_val(this.value,'col_{{$x}}_2',2)" onfocusout="toggleShow('col_{{$x}}_2_editor','col_{{$x}}_2',2)" >
+																		</span>
+																	</td>
+																	<td  data-label="Description"> <span id="col_{{$x}}_3"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{$revenue->product->description}}</span>
+																		<span id="col_{{$x}}_3_editor" class="hidden">
+																			<input name="col_{{$x}}_3" type="text" class="form-control" placeholder="" min="" max="" value="{{$revenue->product->description}}" onchange="assign_new_val(this.value,'col_{{$x}}_3',2)" onfocusout="toggleShow('col_{{$x}}_3_editor','col_{{$x}}_3',2)" >
+																		</span>
+																	</td>
+																	<td  data-label="Quantity"> <span id="col_{{$x}}_4"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{$revenue->bookedQuantity}}</span>
+																		<span id="col_{{$x}}_4_editor" class="hidden">
+																			<input name="col_{{$x}}_4" type="number" class="form-control numeric" placeholder="" min="1" max="{{$revenue->product->quantity}}" value="{{$revenue->bookedQuantity}}" onchange="assign_new_val(this.value,'col_{{$x}}_4',2)" onfocusout="toggleShow('col_{{$x}}_4_editor','col_{{$x}}_4',2)" onkeyup="max_field_input(this)">
+																			<input name="col_{{$x}}_4_max" type="hidden" value="{{old('col_'.$x.'_4_max')}}">
+																		</span>
+																	</td>
+																	<td  data-label="Selling price"> <span id="col_{{$x}}_5"  onclick="toggleShow(this.id,this.id+'_editor',2)">{{$revenue->price}}</span>
+																		<span id="col_{{$x}}_5_editor" class="hidden">
+																			<input name="col_{{$x}}_5" type="text" class="form-control" placeholder="" min="" max="" value="{{$revenue->price}}" onchange="assign_new_val(this.value,'col_{{$x}}_5',2)" onfocusout="toggleShow('col_{{$x}}_5_editor','col_{{$x}}_5',2)" >
+																		</span>
+																	</td>
+																	<td  data-label="Total"> <span id="col_{{$x}}_6"  onclick="toggleShow(this.id,this.id+'_editor',2)">KES {{number_format($revenue->total,2)}}</span>
+																		<span id="col_{{$x}}_6_editor" class="hidden">
+																			<input name="col_{{$x}}_6" type="text" class="form-control" placeholder="" min="" max="" value="{{$revenue->total}}" onchange="assign_new_val(this.value,'col_{{$x}}_6',2)" onfocusout="toggleShow('col_{{$x}}_6_editor','col_{{$x}}_6',2)" >
+																		</span>
+																	</td>
+																	<input type="hidden" name="col_{{$x}}_7" value="{{$revenue->product->id}}">
+																</tr>
+															@endif
+															<?php $x++ ?>
+														@endforeach
+													@endif
+												</tbody>
+												<tfoot>
+													<tr>
+														<td colspan="4"></td>
+														<td>Grand Total</td>
+														<td id="booked_prods_grand_total" class="text-bold">@if(old('booked_prods_grand_total'))KES {{number_format(old('booked_prods_grand_total'),2)}}@elseif(isset($booking)) KES {{number_format($booking->booked_prods_grand_total,2)}} @endif</td>
+														<input type="hidden" id="booked_prods_grand_total" name="booked_prods_grand_total" value="@if(old('booked_prods_grand_total')){{old('booked_prods_grand_total')}}@elseif(isset($booking)) 0 @endif">
+													</tr>
+												</tfoot>
+											</table>
+									 </div>
+									</div>
+								</div>
+
+
+
+								<!--end booking form-->
+
+							</div>
+
+							<div class="col-sm-5">
+								<!--Customer details-->
+								<div class="supplier-details box-shdow-1 mb-2 text-center">
+									<legend>Total Due</legend>
+									<h3 id="booking-total-cost" class="text-danger text-bold">KES @if(!old('bookingAmountDue') && !isset($booking)) 0.00 @elseif(old('bookingAmountDue')) {{number_format(old('bookingAmountDue'),2)}} @elseif(isset($booking)) {{number_format($booking->bookingAmountDue,2)}} @endif</h3>
+									<strong class="hidden days-label">For <span class="booking-num-days"></span> day(s) </strong>
+								</div>
+
+								<div id="no-user-error" class="alert alert-danger alert-dismissible @if(!$errors->has('user_id'))hidden @endif" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h5>Please add a customer to the booking</h5>
+								</div>
+
+
+								<div id="bookingCustomerSearchPanel" class="supplier-details box-shdow-1 mb-2">
+									<legend>Search</legend>
+									<div  class="input-group mb-0">
+									  <span class="input-group-addon" ><span class="fa fa-search"></span></span>
+									  <input id="customerSearch" type="text" class="form-control search-input" placeholder="Search customer by name..." onkeyup="kpc_cust_search(this.value,this.id)">
+									</div>
+
+									<div id="customerSearchPanel" class="search-panel-lg hidden">
+
+
+									</div>
+									<br>
+									<a href="#"  onclick="event.preventDefault();toggleElements('bookingCustomerRegPanel','bookingCustomerSearchPanel')">Create new customer instead</a>
+								</div>
+
+								<div id="bookingCustomerRegPanel" class="supplier-details box-shdow-1 mb-2 hidden">
+									<legend>Customer Registration Form</legend>
+									<div class="alert alert-danger alert-dismissible cust-errors-list hidden" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h5>Please correct the following errors first</h5>
+										<p class="cust-name-error hidden">The name must be atleast 3 characters</p>
+										<p class="cust-phone-number-error hidden">The phone number must be numeric and atleast 10 digits</p>
+										<p class="cust-email-error hidden">The email must be valid</p>
+										<p class="cust-avatar-error hidden">The image must be 1MB or less. Only jpg bmp jpeg png formats allowed.</p>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div id="bookingCustomerNameTitle" class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-user-tag"></span> <i class="text-danger">*</i></span>
+											  <input id="bookingCustomerName" type="text" class="form-control" placeholder="Name" onblur="validate(this.id,{required:1,min:3,max:255},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerPhoneTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-phone"></span> <i class="text-danger">*</i></span>
+											  <input id="bookingCustomerPhone" type="text" class="form-control numeric" placeholder="Phone" onblur="validate(this.id,{required:1,min:10,max:255},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerEmailTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-envelope"></span> <i class="text-danger">*</i></span>
+											  <input id="bookingCustomerEmail" type="email" class="form-control" placeholder="Email" onblur="validate(this.id,{required:1,min:3,max:255,type:'email'},this.value)" >
+											</div>
+										</div>
+
+										<div id="bookingCustomerAvatarTitle" class="col-sm-6">
+											<div class="input-group">
+											  <span class="input-group-addon" ><span class="fa fa-image"></span></span>
+											  <input id="bookingCustomerAvatar" type="file" class="form-control search-input" onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" >
+											</div>
+										</div>
+
+
+									</div>
+
+									<button type="button" class="btn btn-default btn-block mb-1" onclick="booking_create_customer()">Submit details</button>
+
+
+									<a href="#" onclick="event.preventDefault();toggleElements('bookingCustomerSearchPanel','bookingCustomerRegPanel')" >Search customer instead</a>
+
+								</div>
+
+								<div id="bookingCustomerDetails" class="supplier-details box-shdow-1 @if(!old('user_id') && !isset($booking) )  hidden @elseif(isset($booking)) @if(!$booking->user_id) hidden @endif @else hidden @endif">
+
+									<div class="row">
+										<div class="col-xs-8">
+											<legend>Customer details</legend>
+											<ul class="pt-1">
+												<li><span class="fa fa-user"></span> <span id="bookingCustomerNameLabel">@if(isset($booking)) @if($booking->user) {{$booking->user->name}} @endif @endif</span></li>
+												<li><span class="fa fa-phone"></span> <span id="bookingCustomerPhoneLabel">@if(isset($booking)) @if($booking->user) {{$booking->user->phoneNumber}} @endif @endif</span></li>
+												<li><span class="fa fa-envelope"></span> <span id="bookingCustomerEmailLabel">@if(isset($booking)) @if($booking->user) {{$booking->user->email}} @endif @endif</span></li>
+											</ul>
+										</div>
+										<div class="col-xs-4">
+											<span class="fas fa-times-circle close" onclick="remove_booking_customer()"></span>
+											<div class="profile-img"><img  id="bookingCustomerAvatarLabel" src="@if(isset($booking)) @if($booking->user) {{$booking->user->avatar}} @endif @endif" alt="" ></div>
+										</div>
+									</div>
+
+								</div>
+								<!--End customer details-->
+								@if( isset($dept) )
+								@if( count($dept->DeptServices) )
+
+								<div class="supplier-details box-shdow-1 mb-2 mt-1">
+									<legend>Other services</legend>
+									<div class="row">
+
+										<?php $count = 0; ?>
+
+										<?php $other_services = []  ?>
+										@if(old('other_services'))
+											<?php $other_services = old('other_services') ?>
+										@elseif( isset($booking) )
+											@if( $booking->BookingServices )
+												@foreach( $booking->BookingServices as $bookingService )
+													<?php $other_services [] = $bookingService->dept_services_id ?>
+												@endforeach
+											@endif
+										@endif
+
+										<div class="col-xs-6">
+											<ul>
+
+												@foreach( $dept->DeptServices as $service )
+													@if( $count % 2 == 0 )
+														<li>
+															<input name="other_services[]" class="booking-service" type="checkbox" value="{{$service->id}}" data-price="{{$service->cost}}" @if(is_array($other_services)) @if(in_array($service->id,$other_services)) checked @endif @endif> {{$service->service}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+										<?php $count = 0; ?>
+										<div class="col-xs-6">
+											<ul>
+
+												@foreach( $dept->DeptServices as $service )
+													@if( $count % 2 != 0 )
+														<li>
+															<input name="other_services[]"  class="booking-service" type="checkbox" value="{{$service->id}}" data-price="{{$service->cost}}" @if(is_array($other_services)) @if(in_array($service->id,$other_services)) checked @endif @endif> {{$service->service}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+
+
+									</div>
+
+								</div>
+								@endif
+								@endif
+
+								@if( isset($dept) )
+								@if( count($dept->DeptMenu) )
+
+								<div class="supplier-details box-shdow-1 mb-2 mt-1">
+									<legend>Menu details</legend>
+									<div class="row">
+										<?php $count = 0; ?>
+
+										<?php $menuDetails = []  ?>
+										@if(old('booking_menu'))
+											<?php $menuDetails = old('booking_menu') ?>
+										@elseif( isset($booking) )
+											@if( $booking->BookingMenu )
+												@foreach( $booking->BookingMenu as $menuDetail )
+													<?php $menuDetails [] = $menuDetail->dept_menus_id ?>
+												@endforeach
+											@endif
+										@endif
+
+										<div class="col-xs-6">
+											<ul>
+												@foreach( $dept->DeptMenu as $menu )
+													@if( $count % 2 == 0 )
+														<li>
+															<input name="booking_menu[]" class="booking-service" type="checkbox" value="{{$menu->id}}" data-price="{{$menu->price}}" @if(is_array($menuDetails)) @if(in_array($menu->id,$menuDetails)) checked @endif @endif> {{$menu->name}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+										<?php $count = 0; ?>
+										<div class="col-xs-6">
+											<ul>
+												@foreach( $dept->DeptMenu as $menu )
+													@if( $count % 2 != 0 )
+														<li>
+															<input name="booking_menu[]" class="booking-service" type="checkbox" value="{{$menu->id}}" data-price="{{$menu->price}}" @if(is_array($menuDetails)) @if(in_array($menu->id,$menuDetails)) checked @endif @endif> {{$menu->name}}
+													  </li>
+													@endif
+													<?php $count++; ?>
+												@endforeach
+											</ul>
+										</div>
+
+
+									</div>
+
+								</div>
+								@endif
+								@endif
+
+
+
+							</div>
+						</div>
+
+						<div class="row mt-2">
+							<div class="col-sm-12 ">
+								@if( Auth::user()->type == 3 || Auth::user()->type == -1)
+									<button type="button" class="btn btn-default btn-lg mt-1 pull-left" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</button>
+								@endif
+								<button type="button" class="btn btn-default btn-lg mt-1 pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</button>
+							</div>
+						</div>
+
+						<input type="hidden" name="user_id" value="@if(isset($booking)) @if($booking->user) {{$booking->user->id}} @endif @endif" >
+						<input type="hidden" name="booking_num_days" value="@if(isset($booking))  {{$booking->booking_num_days}}  @endif" >
+						<input type="hidden" name="bookingAmountDue" value="@if(isset($booking))  {{$booking->bookingAmountDue}}  @endif" >
+						<input type="hidden" name="no_products" value="@if(isset($booking))  {{$booking->no_products}}  @endif" >
+						<input type="hidden" name="dept_id" value="@if(isset($booking)) {{$booking->dept_id}} @elseif(isset($dept)){{$dept->id}}@endif">
+						@component( 'components.confirm-modal',[ 'formId' => 'booking-form', 'heading' => 'Booking form', 'message' => 'Are you sure you want to update booking form?', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] )@endcomponent
+
+</form>
 				</div>
 		<!-- //inner_content-->
 </div>
 
 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
+@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] ) @endcomponent
 
-@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] ) @endcomponent
 
 <form class="d-none hidden" id="deleteBookingForm" action="{{route('bookings-registration.destroy',$booking->id)}}" method="post">
   @csrf

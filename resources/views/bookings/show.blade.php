@@ -78,7 +78,7 @@
 
 @if( Auth::user()->type == 3 || Auth::user()->type == -1)
 
-@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] ) @endcomponent
+@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] ) @endcomponent
 
 
 <form class="d-none hidden" id="deleteBookingForm" action="{{route('bookings-registration.destroy',$booking->id)}}" method="post">
