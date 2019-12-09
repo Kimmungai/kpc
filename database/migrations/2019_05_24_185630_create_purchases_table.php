@@ -17,6 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->integer('dept_id')->unsigned()->index()->nullable();
+            $table->integer('requisition_id')->unsigned()->index()->nullable();
             $table->double('amountPaid')->nullable();
             $table->double('amountDue')->nullable();
             $table->integer('paymentMethod')->nullable();

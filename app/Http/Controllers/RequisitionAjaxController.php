@@ -198,6 +198,7 @@ class RequisitionAjaxController extends Controller
     {
       $purchase = new Purchase;
       $purchase->dept_id = $requisition->dept_id;
+      $purchase->requisition_id = $requisition->id;
       $purchase->paymentMethod = 3;
       $purchase->amountDue = $requisition->req_grandtotal;
       $purchase->user_id = $supplier->id;
@@ -223,6 +224,7 @@ class RequisitionAjaxController extends Controller
         $product->description = $reqProd->description;
         $product->purchases_id = $purchase->id;
         $product->dept_id = $requisition->dept_id;
+        $product->unitsOfMeasure = $requisition->unitsOfMeasure;
         $product->save();
 
         $expense = new Expense;

@@ -43,6 +43,7 @@ class CreateProductsTable extends Migration
             $table->double('width')->nullable();
             $table->string('color')->nullable();
             $table->string('size')->nullable();
+            $table->string('unitsOfMeasure')->nullable();
             $table->double('weight')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

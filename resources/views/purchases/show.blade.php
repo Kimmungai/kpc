@@ -35,9 +35,11 @@
 
 						<!--buttons-->
 						<div class="row mt-2">
+							@if( isset($purchase->requisition_id) )
 							<div class="col-xs-3">
-								<a href="{{route('purchases-registration.edit',$purchase->id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
+								<a href="{{route('requisition.show',$purchase->requisition_id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
 							</div>
+							@endif
 							<div class="col-xs-3">
 								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_doc('/share-purchase',{{$purchase->id}})"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
@@ -58,9 +60,11 @@
 
 						<!--buttons-->
 						<div class="row mt-2">
+							@if( isset($purchase->requisition_id) )
 							<div class="col-xs-3">
-								<a href="{{route('purchases-registration.edit',$purchase->id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
+								<a href="{{route('requisition.show',$purchase->requisition_id)}}" class="btn btn-sm btn-default btn-block" title="Click to edit details"><span class="fa fa-edit"></span> Edit</a>
 							</div>
+							@endif
 							<div class="col-xs-3">
 								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_doc('/share-purchase',{{$purchase->id}})"><span class="fa fa-share-alt"></span> Share</a>
 							</div>

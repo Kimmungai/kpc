@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DeptSales extends Model
 {
   protected $guarded = ['id'];
-  
+
   public function Dept()
   {
     return $this->belongsTo('App\Dept');
@@ -16,5 +16,9 @@ class DeptSales extends Model
   public function Revenue()
   {
     return $this->hasMany('App\Revenue');
+  }
+  public function User()
+  {
+    return $this->hasOne('App\User','id','customerID');
   }
 }

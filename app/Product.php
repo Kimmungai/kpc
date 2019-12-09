@@ -29,4 +29,9 @@ class Product extends Model
     {
       return $this->belongsToMany('App\Report');
     }
+
+    public function Revenue()
+    {
+      return $this->belongsToMany('App\Revenue');
+    }
 }

@@ -96,6 +96,8 @@ Route::resource('transfer','TransferController');
 Route::resource('booking-report','BookingReportController');
 Route::resource('procurement-report','ProcurementReportController');
 Route::resource('inventory-report','InventoryReportController');
+Route::resource('sales-report','SalesReportController');
+
 Route::get('booking-filtered-report','BookingReportController@report');
 Route::get('download-booking-report','BookingReportController@download');
 Route::get('download-procurement-report','ProcurementReportController@download');

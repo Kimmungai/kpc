@@ -18,8 +18,9 @@ class Revenue extends Model
   {
     return $this->belongsTo('App\Report');
   }
+
   public function Product()
   {
-    return $this->belongsTo('App\Product');
+    return $this->hasOne('App\Product','id');
   }
 }
