@@ -19,7 +19,8 @@
       <ul>
         @if(count($sales))
         <li><strong>Period</strong></li>
-        <li>{{$StartDate}} <span class="fa fa-arrow-right"></span> {{$EndDate}}</li>
+
+          <li>{{$StartDate}} <span class="fa fa-arrow-right"></span> {{$EndDate}}</li>
         @endif
       </ul>
     </div>
@@ -32,18 +33,23 @@
     <table class="table">
     <thead class="purchase-thead">
         <tr>
+            <th>Sale #</th>
             <th>Customer</th>
             <th>Department</th>
             <th>Due</th>
             <th>Received</th>
-            <th>No. Goods Bought</th>
+            <th>Outstanding</th>
         </tr>
     </thead>
     <tbody>
-      <?php $total = 0; ?>
+      <?php $totalReceived = 0; ?>
+      <?php $amtDueTotal = 0; ?>
+      <?php $outstandingTotal = 0; ?>
+
       @foreach( $sales as $item )
-      <tr >
-      <td><a href="/profile/@if($item->user){{$item->user->id}}@endif">@if($item->user){{$item->user->name}}@endif</a></td>
+      <tr>
+      <td><a href="{{route('sale.show',$item->id)}}" title="View sale details">{{$item->id}}</a></td>
+      <td><a href="/profile/@if($item->user){{$item->user->id}}@endif" title="View customer details">@if($item->user){{$item->user->name}}@endif</a></td>
       @if( $item->dept )
       <td>{{$item->dept->name}}</td>
       @else
@@ -51,12 +57,25 @@
       @endif
       <td>KES {{number_format($item->saleAmountDue,2)}}</td>
       <td>KES {{number_format($item->saleAmountReceived,2)}}</td>
-      <td >{{count($item->revenue)}}</td>
+      <td >KES {{number_format(abs($item->saleAmountDue - $item->saleAmountReceived),2)}}</td>
       </tr>
+
+      <?php $totalReceived += $item->saleAmountReceived; ?>
+      <?php $amtDueTotal += $item->saleAmountDue; ?>
+      <?php $outstandingTotal += abs($item->saleAmountDue - $item->saleAmountReceived); ?>
+
       @endforeach
+
     </tbody>
 
-
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-right text-uppercase">Grand total:</td>
+        <td><strong>KES. {{number_format($amtDueTotal,2)}}</strong></td>
+        <td><strong>KES. {{number_format($totalReceived,2)}}</strong></td>
+        <td><strong>KES. {{number_format($outstandingTotal,2)}}</strong></td>
+      </tr>
+    </tfoot>
 </table>
 
   </div>

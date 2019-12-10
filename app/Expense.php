@@ -21,6 +21,6 @@ class Expense extends Model
 
     public function Product()
     {
-      return $this->belongsTo('App\Product');
+      return $this->hasOne('App\Product');
     }
 }

@@ -52,8 +52,8 @@
                     <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> P & L report</a></li>
                     <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Balance sheet report</a></li>
                     <li class="mini_list_w3"><a href="{{route('sales-report.index')}}"><i class="fas fa-chart-line" aria-hidden="true"></i> Sales report</a></li>
-                    <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-chart-bar" aria-hidden="true"></i> Total expenditure report</a></li>
-                    <li class="mini_list_w3"><a href="{{route('inventory-report.index')}}"><i class="fas fa-chart-pie" aria-hidden="true"></i> Total revenue report</a></li>
+                    <li class="mini_list_w3"><a href="{{route('expenditure-report.index')}}"><i class="fas fa-chart-bar" aria-hidden="true"></i> Total expenditure report</a></li>
+                    <li class="mini_list_w3"><a href="{{route('revenue-report.index')}}"><i class="fas fa-chart-pie" aria-hidden="true"></i> Total revenue report</a></li>
                   </ul>
                 </li>
                   @endif

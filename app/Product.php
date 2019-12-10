@@ -34,4 +34,9 @@ class Product extends Model
     {
       return $this->belongsToMany('App\Revenue');
     }
+
+    public function Expense()
+    {
+      return $this->belongsToMany('App\Expense');
+    }
 }

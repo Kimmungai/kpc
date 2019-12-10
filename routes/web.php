@@ -97,6 +97,8 @@ Route::resource('booking-report','BookingReportController');
 Route::resource('procurement-report','ProcurementReportController');
 Route::resource('inventory-report','InventoryReportController');
 Route::resource('sales-report','SalesReportController');
+Route::resource('expenditure-report','ExpenditureReportController');
+Route::resource('revenue-report','RevenueReportController');
 
 Route::get('booking-filtered-report','BookingReportController@report');
 Route::get('download-booking-report','BookingReportController@download');
@@ -120,3 +122,18 @@ Route::resource('requisition','RequisitionController');
 Route::post('requisition-approval','RequisitionAjaxController@requisition_approval');
 Route::post('requisition-goods-received','RequisitionAjaxController@requisition_goods_received');
 Route::get('nyau','RequisitionAjaxController@requisition_goods_received');
+
+//Sale
+Route::resource('sale','SaleController');
+Route::get('download-sales-report','SaleController@download');
+Route::post('share-sales-report','SaleController@share');
+
+//Expenditure
+Route::resource('expenditure','ExpenditureController');
+Route::get('download-expenditure-report','ExpenditureReportController@download');
+Route::post('share-expenditure-report','ExpenditureReportController@share');
+
+//Revenue
+Route::resource('revenue','RevenueController');
+Route::get('download-revenue-report','RevenueReportController@download');
+Route::post('share-revenue-report','RevenueReportController@share');

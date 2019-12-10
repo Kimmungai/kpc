@@ -140,6 +140,7 @@ class BookingsRegistrationController extends Controller
     {
       $dept ='';
       $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
+      
       if( Auth::check() ){
         $this->mark_notifications_read( Auth::user(), $booking );
       }

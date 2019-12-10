@@ -21,6 +21,10 @@ class Revenue extends Model
 
   public function Product()
   {
-    return $this->hasOne('App\Product','id');
+    return $this->hasOne('App\Product','id','product_id');
+  }
+  public function DeptSales()
+  {
+    return $this->belongsTo('App\DeptSales');
   }
 }

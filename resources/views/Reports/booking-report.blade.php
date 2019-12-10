@@ -9,7 +9,7 @@
 	            <div class="w3l_agileits_breadcrumbs_inner">
 	              <ul>
 	                <li><a href="/home">Home</a> <span>«</span></li>
-									<li><a href="/purchases-registration">Bookings report</a> </li>
+									<li>Bookings report</li>
 	              </ul>
 	            </div>
 	          </div>

@@ -187,7 +187,7 @@ class ProductsAjaxController extends Controller
           $revenue->product_id = $cartContent['id'];
           $revenue->bookedQuantity = $cartContent['qty'];
           $revenue->price = $cartContent['price'];
-          //$revenue->total = $cartContent['total'];
+          $revenue->total = $cartContent['total'];
           //reduce stock
           $this->reduceStock( $cartContent['id'], $cartContent['qty']);
           $revenue->save();

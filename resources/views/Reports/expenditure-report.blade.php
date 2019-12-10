@@ -9,7 +9,7 @@
 	            <div class="w3l_agileits_breadcrumbs_inner">
 	              <ul>
 	                <li><a href="/home">Home</a> <span>«</span></li>
-									<li><a href="/purchases-registration">Inventory report</a> </li>
+									<li>Expenditure report</li>
 	              </ul>
 	            </div>
 	          </div>
@@ -25,10 +25,10 @@
 						<div class="row mt-2">
 
 							<div class="col-xs-6">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-sales-report')"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-expenditure-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
-								<form id="download-form" class="hidden" action="/download-sales-report" method="get">
+								<form id="download-form" class="hidden" action="/download-expenditure-report" method="get">
 									<input type="hidden" name="duration_sort" value="@if(isset($_GET['duration_sort'])) {{$_GET['duration_sort']}} @endif">
 									<input type="hidden" name="filter_from" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif" >
 									<input type="hidden" name="filter_to"   value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif">
@@ -88,14 +88,14 @@
 							<?php $StartDate=date('d-M-Y',strtotime($dt->startOfMonth()));$EndDate=date('d-M-Y',strtotime($dt->endOfMonth())); ?>
 						@endif
 
-            @component('components.sales-report',['sales'=>$sales,'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
+            @component('components.expenditure-report',['expenses'=>$expenses,'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
 						<!--end purchase-show-->
 
 						<!--buttons-->
 						<div class="row mt-2">
 
 							<div class="col-xs-6">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-sales-report')"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-expenditure-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
 								<a href="#" onclick="event.preventDefault();document.getElementById('download-form').submit()" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>
