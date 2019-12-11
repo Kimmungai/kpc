@@ -111,9 +111,9 @@ text-transform: uppercase;
         <table class="table">
           <thead class="purchase-thead">
               <tr>
-                  <th>Expense #</th>
                   <th>Supplier</th>
                   <th>Department</th>
+                  <th>Product</th>
                   <th>Qty supplied</th>
                   <th>Cost</th>
               </tr>
@@ -123,13 +123,13 @@ text-transform: uppercase;
 
           @foreach( $docs as $item )
           <tr>
-          <td>{{$item->id}}</td>
           <td>@if($item->purchase)@if($item->purchase->user){{$item->purchase->user->name}}@endif @endif</td>
           @if($item->purchase)
           <td>@if($item->purchase->dept){{$item->purchase->dept->name}} @endif</td>
           @else
           <td>-</td>
           @endif
+          <td>@if($item->product){{$item->product->name}}@endif</td>
           <td>{{number_format($item->suppliedQuantity)}}</td>
           <td>KES {{number_format($item->cost,2)}}</td>
           </tr>

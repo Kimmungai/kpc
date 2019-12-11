@@ -111,9 +111,9 @@ text-transform: uppercase;
         <table class="table">
         <thead class="purchase-thead">
             <tr>
-                <th>Expense #</th>
                 <th>Customer</th>
                 <th>Department</th>
+                <th>Product</th>
                 <th>Qty</th>
                 <th>Price</th>
             </tr>
@@ -127,9 +127,9 @@ text-transform: uppercase;
 
             @if( $item->Booking->status )
             <tr>
-            <td><a href="{{route('revenue.show',$item->id)}}" title="View Expenditure details">{{$item->id}}</a></td>
             <td>@if($item->booking->user)<a href="/profile/{{$item->booking->user->id}}" title="View customer details">{{$item->booking->user->name}}</a> @endif</td>
             <td>@if($item->booking->dept)<a href="{{route('dept-registration.show',$item->booking->dept->id)}}" title="View Department details">{{$item->booking->dept->name}}</a>@endif</td>
+            <td>@if($item->product)<a href="{{route('product-registration.show',$item->product->id)}}" title="View Expenditure details">{{$item->product->name}}</a>@endif</td>
             <td>{{number_format($item->bookedQuantity)}}</td>
             <td>KES {{number_format($item->total,2)}}</td>
             </tr>
@@ -137,9 +137,9 @@ text-transform: uppercase;
 
           @elseif( $item->DeptSales )
           <tr>
-          <td><a href="{{route('revenue.show',$item->id)}}" title="View Expenditure details">{{$item->id}}</a></td>
           <td>@if($item->DeptSales->user)<a href="/profile/{{$item->DeptSales->user->id}}" title="View customer details">{{$item->DeptSales->user->name}} @endif</td>
           <td>@if($item->DeptSales->dept)<a href="{{route('dept-registration.show',$item->DeptSales->dept->id)}}" title="View Department details">{{$item->DeptSales->dept->name}}</a>@endif</td>
+          <td>@if($item->product)<a href="{{route('product-registration.show',$item->product->id)}}" title="View Expenditure details">{{$item->product->name}}</a>@endif</td>
           <td>{{number_format($item->bookedQuantity)}}</td>
           <td>KES {{number_format($item->total,2)}}</td>
           </tr>

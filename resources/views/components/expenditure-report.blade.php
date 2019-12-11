@@ -32,9 +32,9 @@
     <table class="table">
     <thead class="purchase-thead">
         <tr>
-            <th>Expense #</th>
             <th>Supplier</th>
             <th>Department</th>
+            <th>Product</th>
             <th>Qty supplied</th>
             <th>Cost</th>
         </tr>
@@ -44,13 +44,13 @@
 
       @foreach( $expenses as $item )
       <tr>
-      <td><a href="{{route('expenditure.show',$item->id)}}" title="View Expenditure details">{{$item->id}}</a></td>
       <td><a href="/profile/@if($item->purchase)@if($item->purchase->user){{$item->purchase->user->id}}@endif @endif" title="View supplier details">@if($item->purchase)@if($item->purchase->user){{$item->purchase->user->name}}@endif @endif</a></td>
       @if($item->purchase)
       <td>@if($item->purchase->dept)<a href="{{route('dept-registration.show',$item->purchase->id)}}" title="View Department details">{{$item->purchase->dept->name}}</a> @endif</td>
       @else
       <td>-</td>
       @endif
+      <td>@if($item->product)<a href="{{route('expenditure.show',$item->id)}}" title="View Expenditure details">{{$item->product->name}}</a>@endif</td>
       <td>{{number_format($item->suppliedQuantity)}}</td>
       <td>KES {{number_format($item->cost,2)}}</td>
       </tr>

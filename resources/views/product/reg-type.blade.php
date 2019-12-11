@@ -35,7 +35,7 @@
               <div class="col-sm-6">
                 <div class="prod-reg-type">
                   <h3>Register product in department</h3>
-                  <p>Use this option to register products produced within the department</p>
+                  <p>Use this option to register products produced within the @if(isset($dept)) {{$dept->name}} @endif department</p>
                   <a href="{{route('product-registration.create')}}" class="btn btn-default  center-block"> <span class="fa fa-check-circle"></span> Use this option</a>
                 </div>
               </div>

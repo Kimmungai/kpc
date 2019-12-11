@@ -14,7 +14,7 @@ class ProductRegistrationController extends Controller
   {
       $this->middleware('auth');
   }
-  
+
     /**
      * Display a listing of the resource.
      *
@@ -199,7 +199,16 @@ class ProductRegistrationController extends Controller
     */
     public function prod_reg_type()
     {
-      return view('product.reg-type');
+      if(Session('deptID') != null ){
+
+        $dept = Dept::find(Session('deptID'));
+        return view('product.reg-type',compact('dept'));
+
+      }else {
+
+        return view('product.reg-type');
+
     }
+  }
 
 }
