@@ -281,7 +281,9 @@
         <span class="input-group-addon">
           <i class="fa fa-image"></i>
         </span>
+        @if($user->avatar)
         <img src="@if( isset($user) ){{$user->avatar}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
+        @endif
         <input name="avatar" id="avatar" type="file"  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
       </div>
     </div>
@@ -313,7 +315,7 @@
   </div>
 </div>
 
-<div class="form-group" id="idImageTitle">
+<!--<div class="form-group" id="idImageTitle">
   <label class="col-md-2 control-label">ID Scan</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -331,7 +333,7 @@
       @endif
     </p>
   </div>
-</div>
+</div>-->
 
 <div class="form-group" id="passportTitle">
   <label class="col-md-2 control-label">Passport</label>
@@ -352,7 +354,7 @@
   </div>
 </div>
 
-<div class="form-group" id="passportImageTitle">
+<!--<div class="form-group" id="passportImageTitle">
   <label class="col-md-2 control-label">Passport Scan</label>
   <div class="col-md-8">
     <div class="input-group input-icon right">
@@ -367,6 +369,25 @@
     <p class="help-block red-text" id="passportImageHelper">
       @if ($errors->has('passportImage'))
         {{ $errors->first('passportImage') }}
+      @endif
+    </p>
+  </div>
+</div>-->
+
+<div class="form-group" id="biographyTitle">
+  <label class="col-md-2 control-label">About</label>
+  <div class="col-md-8">
+    <div class="input-group input-icon right">
+      <span class="input-group-addon">
+        <i class="fa fa-image"></i>
+      </span>
+      <textarea class="form-control" name="biography" id="biography" type="file" rows="6"   onchange="validate(this.id,{required:0,min:0},this.value)">@if( old('biography') ) {{old('biography')}} @elseif( isset($user) ) {{$user->biography}} @endif</textarea>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <p class="help-block red-text" id="biographyHelper">
+      @if ($errors->has('biography'))
+        {{ $errors->first('biography') }}
       @endif
     </p>
   </div>

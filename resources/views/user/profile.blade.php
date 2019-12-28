@@ -88,15 +88,12 @@
                                         <div class="col-md-4">
                                             <div class="profile-work">
                                                 <p class="mb-2">Basic info</p>
-                                                <a href="">Gender: </a><br/>
-                                                <a href="">DOB: </a><br/>
-                                                <a href="">Bootply Profile</a>
-                                                <p class="mb-2">SKILLS</p>
-                                                <a href="">Web Designer</a><br/>
-                                                <a href="">Web Developer</a><br/>
-                                                <a href="">WordPress</a><br/>
-                                                <a href="">WooCommerce</a><br/>
-                                                <a href="">PHP, .Net</a><br/>
+                                                <a href="">Gender: {{$user->gender}}</a><br/>
+                                                <a href="">DOB: {{$user->DOB}}</a><br/>
+                                                <a href="">Address: {{$user->address}}</a>
+                                                <p class="mb-2">Documents</p>
+                                                <a href="">ID: {{$user->idNo}}</a><br/>
+                                                <a href="">Passport: {{$user->passport}}</a><br/>
                                             </div>
 
                                         </div>

@@ -25,11 +25,11 @@
               @if( count($errors) )
                 <h4 class="w3_inner_tittle two red-text mb-2">There are some errors, please correct them first.</h4>
               @endif
-              @component( 'components.confirm-modal',[ 'formId' => 'newUserForm', 'heading' => 'New user datails', 'message' => 'Are you sure you want to save new user details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please save' ] )
+              @component( 'components.confirm-modal',[ 'formId' => 'newUserForm', 'heading' => 'New user datails', 'message' => 'Are you sure you want to save new user details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
 
               @endcomponent
 
-              @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteUserForm', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, delete parmanently' ] )
+              @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteUserForm', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
 
               @endcomponent
 
@@ -50,6 +50,17 @@
 
 
                              <form class="form-horizontal" id="newUserForm" action="{{route('user-registration.update',$user->id)}}" method="post" enctype="multipart/form-data">
+
+                               <div class="row mb-2">
+                                 <div class="col-sm-12">
+                                   @if( Auth::user()->type == -1 )
+                                    <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</a>
+                                   @endif
+
+                                   <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</a>
+                                 </div>
+                               </div>
+
                                @csrf
                                @method('PUT')
 
@@ -57,7 +68,7 @@
 
                                @endcomponent
 
-                               <div class="button" data-toggle="modal" data-target="#confirmModal">
+                               <!--<div class="button" data-toggle="modal" data-target="#confirmModal">
        													<p class="btnText">Update?</p>
        													<div class="btnTwo" style="background:green">
        													  <p class="btnText2">GO!</p>
@@ -69,7 +80,17 @@
       													<div class="btnTwo">
       													  <p class="btnText2"><i class="fa fa-exclamation-triangle"></i></p>
       													</div>
-      												 </div>
+                              </div>-->
+
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  @if( Auth::user()->type == -1 )
+                                   <a class="btn btn-default btn-lg" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-exclamation-triangle"></span> Delete</a>
+                                  @endif
+
+                                  <a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</a>
+                                </div>
+                              </div>
 
 
                              </form>
