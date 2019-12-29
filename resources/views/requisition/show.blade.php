@@ -155,7 +155,7 @@
            <main class="mt-3">
              <div class="resp-table">
                <button type="button" class="btn btn-default btn-xs" onclick="add_prod_table_row('products-table')"><span class="fa fa-plus-circle"></span> add row</button>
-               <table  id="products-table" >
+               <table  id="products-table">
                  <thead >
                    <tr>
                      <th></th>
@@ -164,6 +164,7 @@
                      <th>Sale price</th>
                      <th>Cost / unit</th>
                      <th>Quantity</th>
+                     <th>Measurement</th>
                      <th>Total Cost</th>
                    </tr>
                  </thead>
@@ -193,9 +194,13 @@
                        <span id="col-{{$count}}-5" data-col='{{$count}}.5'  onclick="toggleShow('col-{{$count}}-5','col-{{$count}}-5-edit')">{{$product->quantity}}</span>
                        @component( 'components.requisition-edit',['id1'=>'col-'.$count.'-5','id2'=>'col-'.$count.'-5-edit','name'=>'col-'.$count.'-5','placeholder'=>'Numbers only','value'=>$product->quantity,'hidden'=>true,'numeric'=>true] )@endcomponent
                      </td>
+                     <td data-label="Measurement" >
+                       <span id="col-{{$count}}-6" data-col='{{$count}}.6'  onclick="toggleShow('col-{{$count}}-6','col-{{$count}}-6-edit')">{{$product->unitsOfMeasure}}</span>
+                       @component( 'components.requisition-edit',['id1'=>'col-'.$count.'-6','id2'=>'col-'.$count.'-6-edit','name'=>'col-'.$count.'-6','placeholder'=>'','value'=>$product->unitsOfMeasure,'hidden'=>true,'numeric'=>false] )@endcomponent
+                     </td>
                      <td data-label="Total Cost" >
-                       <span id="col-{{$count}}-6" data-col='{{$count}}.6'  onclick="toggleShow('col-{{$count}}-6','col-{{$count}}-6-edit')">KES {{number_format($product->totalCost,2)}}</span>
-                       @component( 'components.requisition-edit',['id1'=>'col-'.$count.'-6','id2'=>'col-'.$count.'-6-edit','name'=>'col-'.$count.'-6','placeholder'=>'','value'=>$product->totalCost,'hidden'=>true,'numeric'=>true] )@endcomponent
+                       <span id="col-{{$count}}-7" data-col='{{$count}}.7'  onclick="toggleShow('col-{{$count}}-7','col-{{$count}}-7-edit')">KES {{number_format($product->totalCost,2)}}</span>
+                       @component( 'components.requisition-edit',['id1'=>'col-'.$count.'-7','id2'=>'col-'.$count.'-7-edit','name'=>'col-'.$count.'-7','placeholder'=>'','value'=>$product->totalCost,'hidden'=>true,'numeric'=>true] )@endcomponent
                      </td>
                    </tr>
 
@@ -206,13 +211,13 @@
                  </tbody>
                  <tfoot>
                    <tr>
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td>Sub total</td>
                      <td><span id="req_subtotal">KES {{number_format($requisition->req_subtotal,2)}}</span></td>
                      <input type="hidden" name="req_subtotal" value="{{$requisition->req_subtotal}}">
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td>Vat
                        <small id="req-vat-percent" onclick="toggleShow('rreq-vat-percent','req-vat-percent-edit')">{{$requisition->vat_percent}}</small><small>%</small>
                        @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>$requisition->vat_percent,'hidden'=>true] )@endcomponent
@@ -221,7 +226,7 @@
                      <input type="hidden" name="vat_total" value="{{$requisition->vat_total}}">
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td><strong>Total amount</strong></td>
                      <td><strong id="req_grandtotal">KES {{number_format($requisition->req_grandtotal,2)}}</strong></td>
                      <input type="hidden" name="req_grandtotal" value="{{$requisition->req_grandtotal}}">

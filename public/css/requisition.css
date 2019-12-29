@@ -90,3 +90,6 @@
   padding-top: 15px;
   padding-bottom: 0;
 }
+#products-table thead{
+  color: white;
+}

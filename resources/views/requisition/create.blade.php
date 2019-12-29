@@ -121,6 +121,7 @@
                      <th>Sale price</th>
                      <th>Cost / unit</th>
                      <th>Quantity</th>
+                     <th>Measurement</th>
                      <th>Total Cost</th>
                    </tr>
                  </thead>
@@ -148,22 +149,26 @@
                        <span id="col-1-5" data-col='1.5' class="hidden" onclick="toggleShow('col-1-5','col-1-5-edit')"></span>
                        @component( 'components.requisition-edit',['id1'=>'col-1-5','id2'=>'col-1-5-edit','name'=>'col-1-5','placeholder'=>'Numbers only','value'=>'0','hidden'=>false,'numeric'=>true] )@endcomponent
                      </td>
+                     <td data-label="Measurement" >
+                       <span id="col-1-6" data-col='1.6' class="hidden" onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'Units of measure','value'=>'','hidden'=>false,'numeric'=>false] )@endcomponent
+                     </td>
                      <td data-label="Total Cost" >
-                       <span id="col-1-6" data-col='1.6'  onclick="toggleShow('col-1-6','col-1-6-edit')"></span>
-                       @component( 'components.requisition-edit',['id1'=>'col-1-6','id2'=>'col-1-6-edit','name'=>'col-1-6','placeholder'=>'','value'=>'','hidden'=>true,'numeric'=>true] )@endcomponent
+                       <span id="col-1-7" data-col='1.7'  onclick="toggleShow('col-1-7','col-1-7-edit')"></span>
+                       @component( 'components.requisition-edit',['id1'=>'col-1-7','id2'=>'col-1-7-edit','name'=>'col-1-7','placeholder'=>'','value'=>'','hidden'=>true,'numeric'=>true] )@endcomponent
                      </td>
                    </tr>
 
                  </tbody>
                  <tfoot>
                    <tr>
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td>Sub total</td>
                      <td><span id="req_subtotal">KES 0</span></td>
                      <input type="hidden" name="req_subtotal" value="">
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td>Vat
                        <small id="req-vat-percent" onclick="toggleShow('rreq-vat-percent','req-vat-percent-edit')">16</small><small>%</small>
                        @component( 'components.requisition-edit',['id1'=>'req-vat-percent','id2'=>'req-vat-percent-edit','name'=>'vat_percent','placeholder'=>'Vat value','value'=>'16','hidden'=>true] )@endcomponent
@@ -172,7 +177,7 @@
                      <input type="hidden" name="vat_total" value="">
                    </tr>
                    <tr >
-                     <td class="tfoot-hidden-cell" colspan="5"></td>
+                     <td class="tfoot-hidden-cell" colspan="6"></td>
                      <td><strong>Total amount</strong></td>
                      <td><strong id="req_grandtotal">KES 0</strong></td>
                      <input type="hidden" name="req_grandtotal" value="">

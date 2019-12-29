@@ -34,7 +34,7 @@ class RequisitionController extends Controller
         {
           $requisitions = Requisition::where('approval_status','<>',null)->orderBy('created_at','DESC')->paginate( env('ITEMS_PER_PAGE',5) );
         }
-        
+
         foreach (Auth::user()->unreadNotifications as $notification)
         {
           if( $notification->type == 'App\Notifications\RequisitionApproved' || $notification->type == 'App\Notifications\RequisitionRejected' || $notification->type == 'App\Notifications\RequisitionRequest' )
@@ -201,7 +201,8 @@ class RequisitionController extends Controller
         $new_prod->price = $request['col-'.$i.'-3'];
         $new_prod->cost = $request['col-'.$i.'-4'];
         $new_prod->quantity = $request['col-'.$i.'-5'];
-        $new_prod->totalCost = $request['col-'.$i.'-6'];
+        $new_prod->unitsOfMeasure = $request['col-'.$i.'-6'];
+        $new_prod->totalCost = $request['col-'.$i.'-7'];
         $new_prod->save();
       }
 

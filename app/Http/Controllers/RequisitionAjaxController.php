@@ -224,7 +224,7 @@ class RequisitionAjaxController extends Controller
         $product->description = $reqProd->description;
         $product->purchases_id = $purchase->id;
         $product->dept_id = $requisition->dept_id;
-        $product->unitsOfMeasure = $requisition->unitsOfMeasure;
+        $product->unitsOfMeasure = $reqProd->unitsOfMeasure;
         $product->save();
 
         $expense = new Expense;

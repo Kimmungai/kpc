@@ -22,7 +22,7 @@ function add_prod_table_row( tableID )
 */
 function product_row( numRows )
 {
-  var cols = 6;
+  var cols = 7;
   var nextRow = numRows + 1;
 
   var row = '<tr id="row-'+nextRow+'" data-row="'+nextRow+'">';
@@ -43,13 +43,13 @@ function product_col( nextRow, col )
 {
   var hidden_last_col = 'hidden';
   var hidden_other_col = '';
-  if( col == 6 ){ hidden_last_col = ''; hidden_other_col = 'hidden';}
+  if( col == 7 ){ hidden_last_col = ''; hidden_other_col = 'hidden';}
 
   var numeric = '';
   var value = '';
   var placeholder = get_col_label( col );
 
-  if( col == 3 || col == 4 || col == 5 || col == 6 ){ numeric = 'numeric'; value = 0; placeholder = 'Numbers only';}
+  if( col == 3 || col == 4 || col == 5 || col == 7 ){ numeric = 'numeric'; value = 0; placeholder = 'Numbers only';}
 
   var td = '<td data-label="'+get_col_label( col )+'">';
         td += '<span id="col-'+nextRow+'-'+col+'" data-col=\''+nextRow+'.'+col+'\' class="'+hidden_last_col+'" onclick="toggleShow(\'col-'+nextRow+'-'+col+'\',\'col-'+nextRow+'-'+col+'-edit\')"></span>';
@@ -137,6 +137,10 @@ function get_col_label( col )
     break;
 
     case 6:
+      return 'Units of measure';
+    break;
+
+    case 7:
       return 'Total Cost';
     break;
 
@@ -238,6 +242,12 @@ function req_update_product_table( colID, parentID, row )
       $("#"+col_5+"-edit").addClass('hidden');
       $("#"+col_5).removeClass('hidden');
 
+      var col_6 = 'col-'+row+'-6';
+      assign_new_val( data.unitsOfMeasure, col_6 );
+      assign_new_val_to_input( data.unitsOfMeasure, col_6 );
+      $("#"+col_6+"-edit").addClass('hidden');
+      $("#"+col_6).removeClass('hidden');
+
     });
 
 }
@@ -259,8 +269,8 @@ function req_calculate_product_table_total( )
 
     sum = ( cost_field * quantity_field )
 
-    $('#col-'+row+'-6').text( kes_currency(sum,'KES') )
-    $('#requisitionForm input[name=col-'+row+'-6]').val(sum)
+    $('#col-'+row+'-7').text( kes_currency(sum,'KES') )
+    $('#requisitionForm input[name=col-'+row+'-7]').val(sum)
 
     subTotal += sum;
 
