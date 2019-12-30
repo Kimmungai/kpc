@@ -399,7 +399,7 @@ function requisition_goods_received( requisition_id )
       "_token": $('meta[name="csrf-token"]').attr('content'),
     },
     function(data,status){
-      alert("Update Succesful");
+      alert("Update Succesful"+data);
     });
 }
 /*

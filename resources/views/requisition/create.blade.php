@@ -95,14 +95,14 @@
                    <div>
                      <strong>Email:</strong>
                      <span id="req-supplier-email" class="th" onclick="toggleShow('req-supplier-email','req-supplier-email-edit')">info@supplier.com</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-email','id2'=>'req-supplier-email-edit','name'=>'supplier_email','placeholder'=>'Supplier email','value'=>'info@supplier.com','hidden'=>true] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-email','id2'=>'req-supplier-email-edit','name'=>'supplier_email','placeholder'=>'Supplier email','value'=>'','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
                    <div>
                      <strong>Phone:</strong>
                      <span id="req-supplier-phone" class="th" onclick="toggleShow('req-supplier-phone','req-supplier-phone-edit')">0790643963</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'0790643963','hidden'=>true] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>

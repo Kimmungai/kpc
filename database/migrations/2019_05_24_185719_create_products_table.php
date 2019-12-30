@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('dept_id')->unsigned()->index()->nullable();
             $table->integer('purchases_id')->unsigned()->index()->nullable();
             $table->integer('report_id')->unsigned()->index()->nullable();
+            $table->integer('requisition_prod_id')->unsigned()->index()->nullable();
             $table->string('name')->nullable();
             $table->string('sku')->nullable();
             $table->string('img1')->nullable();

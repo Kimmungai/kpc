@@ -46,9 +46,16 @@ class RequisitionAjaxController extends Controller
           'approved_by' => null,
           'doc_title' => 'Requisition form',
           'approved_by_name' => Auth::user()->name,
-          'approved_on' => Carbon::now(),
+          'approved_on' => null,
           'approval_status' => 0,
         ]);
+        //goods not received
+        $this->update_goods_received( $requisition->id, 0 );
+        //delete purchase
+        $this->delete_purchase( $requisition );
+        //remove requisition product qtys
+        $this->remove_req_products_qty( $requisition );
+
         $this->send_req_disapproved_notification( $subscribedUsers, $requisition );
       }
 
@@ -139,7 +146,7 @@ class RequisitionAjaxController extends Controller
     */
     public function requisition_goods_received( Request $request )
     {
-      $request->validate([
+     $request->validate([
         'requisition_id' => 'required|numeric',
       ]);
 
@@ -164,10 +171,10 @@ class RequisitionAjaxController extends Controller
     /*
     *update goods received
     */
-    private function update_goods_received( $id )
+    private function update_goods_received( $id, $status=1 )
     {
       Requisition::where('id',$id)->update([
-        'goods_received' => 1,
+        'goods_received' => $status,
       ]);
 
       return true;
@@ -239,6 +246,14 @@ class RequisitionAjaxController extends Controller
     }
 
     /*
+    *delete purchase
+    */
+    private function delete_purchase( $requisition )
+    {
+      return Purchase::where('requisition_id',$requisition->id)->delete();
+    }
+
+    /*
     *create products & expenses
     */
     private function create_products( $requisition, $purchase )
@@ -264,6 +279,7 @@ class RequisitionAjaxController extends Controller
         $product->description = $reqProd->description;
         $product->purchases_id = $purchase->id;
         $product->dept_id = $requisition->dept_id;
+        $product->requisition_prod_id = $reqProd->id;
         $product->unitsOfMeasure = $reqProd->unitsOfMeasure;
         $product->save();
 
@@ -296,6 +312,17 @@ class RequisitionAjaxController extends Controller
 
       return false;
 
+    }
+
+    /*
+    *Function to remove the quantities of products from a disapproved requisition
+    */
+    private function remove_req_products_qty( $requisition )
+    {
+      foreach ( $requisition->RequisitionProducts as $reqProd )
+      {
+        Product::where('requisition_prod_id',$reqProd->id)->decrement('quantity',$reqProd->quantity);
+      }
     }
 
 }

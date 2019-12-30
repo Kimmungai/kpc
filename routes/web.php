@@ -121,7 +121,6 @@ Route::resource('tasks','TasksController');
 Route::resource('requisition','RequisitionController');
 Route::post('requisition-approval','RequisitionAjaxController@requisition_approval');
 Route::post('requisition-goods-received','RequisitionAjaxController@requisition_goods_received');
-Route::get('nyau','RequisitionAjaxController@requisition_goods_received');
 
 //Sale
 Route::resource('sale','SaleController');
