@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('idImage')->nullable();
             $table->string('passport')->nullable();
             $table->string('passportImage')->nullable();
+            $table->string('org')->nullable();
             $table->tinyInteger('gender')->nullable();
             $table->string('DOB')->nullable();
             $table->timestamp('email_verified_at')->nullable();

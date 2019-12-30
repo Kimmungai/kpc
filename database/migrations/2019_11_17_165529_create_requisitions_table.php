@@ -29,6 +29,9 @@ class CreateRequisitionsTable extends Migration
             $table->string('supplier_name')->nullable();
             $table->string('requisition_number')->nullable();
             $table->string('supplier_addr')->nullable();
+            $table->string('supplier_email')->nullable();
+            $table->string('supplier_org')->nullable();
+            $table->integer('supplier_id')->nullable();
             $table->string('approved_by_name')->nullable();
             $table->timestamp('approved_on')->nullable();
             $table->string('supplier_phone')->nullable();

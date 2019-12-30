@@ -178,17 +178,48 @@ class RequisitionAjaxController extends Controller
     */
     private function create_supplier( $requisition )
     {
+
+      if( $requisition->supplier_id ){
+        $this->update_req_supplier( $requisition );
+        return User::find($requisition->supplier_id);
+      }
+
       $user = new User;
       $user->firstName = $requisition->supplier_name;
       $user->name = $requisition->supplier_name;
       $user->dept = $requisition->dept_id;
+      $user->org = $requisition->supplier_org;
+      $user->email = $requisition->supplier_email;
       $user->phoneNumber = $requisition->supplier_phone;
       $user->address = $requisition->supplier_addr;
       $user->type = 5;//supplier
       $user->password = Hash::make(env('DEFAULT_PASSWORD','password'));
       $user->save();
 
+      Requisition::where('id',$requisition->id)->update(['supplier_id' => $user->id]);
+
       return $user;
+    }
+
+    /*
+    *update supplier
+    */
+    private function update_req_supplier( $requisition )
+    {
+      $update = User::where('id',$requisition->supplier_id)->update([
+        'firstName' => $requisition->supplier_name,
+        'org' => $requisition->supplier_org,
+        'email' => $requisition->supplier_email,
+        'name' => $requisition->supplier_name,
+        'dept' => $requisition->dept_id,
+        'phoneNumber' => $requisition->supplier_phone,
+        'address' => $requisition->supplier_addr,
+      ]);
+
+      if( $update )
+        return true;
+
+      return false;
     }
 
     /*
@@ -215,6 +246,15 @@ class RequisitionAjaxController extends Controller
 
       foreach ( $requisition->RequisitionProducts as $reqProd )
       {
+        //check if the product already in // DB
+        $product = Product::where('name',$reqProd->name)->where('description',$reqProd->description)->where('unitsOfMeasure',$reqProd->unitsOfMeasure)->where('price',$reqProd->price)->where('cost',$reqProd->cost)->first();
+
+        if( $product )
+        {
+          $this->update_product_qty($product,$reqProd);
+
+        }else {
+
         $product = new Product;
         $product->sku = $reqProd->name;
         $product->name = $reqProd->name;
@@ -227,6 +267,8 @@ class RequisitionAjaxController extends Controller
         $product->unitsOfMeasure = $reqProd->unitsOfMeasure;
         $product->save();
 
+       }
+
         $expense = new Expense;
         $expense->purchase_id = $purchase->id;
         $expense->product_id = $product->id;
@@ -235,6 +277,24 @@ class RequisitionAjaxController extends Controller
         $expense->save();
       }
 
+
+    }
+
+    /*
+    *Update product
+    */
+    private function update_product_qty( $product,$reqProd )
+    {
+      $update = Product::where('id',$product->id)->update([
+
+        'quantity' => ($reqProd->quantity + $product->quantity),
+
+      ]);
+
+      if($update)
+        return true;
+
+      return false;
 
     }
 

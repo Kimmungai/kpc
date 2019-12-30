@@ -74,18 +74,35 @@
                <div class="row mt-1">
                  <div class="col-sm-6">
                    <div>
-                     <strong>Supplier name:</strong>
+                     <strong>Supplier:</strong>
 
                      <span id="req-supplier-name" class="th" onclick="toggleShow('req-supplier-name','req-supplier-name-edit')">name</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'name','hidden'=>true] )@endcomponent
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-name','id2'=>'req-supplier-name-edit','name'=>'supplier_name','placeholder'=>'Supplier name','value'=>'name','hidden'=>true,'keyup'=>true,'supplier_search'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
                    <div>
                      <strong>Requisition #:</strong>
 
-                     <span id="req-number" class="th" onclick="toggleShow('req-number','req-number-edit')">745468</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-number','id2'=>'req-number-edit','name'=>'requisition_number','placeholder'=>'Requisition number','value'=>'745468','hidden'=>true] )@endcomponent
+                     <span id="req-number" class="th" onclick="toggleShow('req-number','req-number-edit')">{{date('Ymd')}}</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-number','id2'=>'req-number-edit','name'=>'requisition_number','placeholder'=>'Requisition number','value'=>date('Ymd'),'hidden'=>true] )@endcomponent
+                   </div>
+                 </div>
+               </div>
+
+               <div class="row mt-1">
+                 <div class="col-sm-6">
+                   <div>
+                     <strong>Email:</strong>
+                     <span id="req-supplier-email" class="th" onclick="toggleShow('req-supplier-email','req-supplier-email-edit')">info@supplier.com</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-email','id2'=>'req-supplier-email-edit','name'=>'supplier_email','placeholder'=>'Supplier email','value'=>'info@supplier.com','hidden'=>true] )@endcomponent
+                   </div>
+                 </div>
+                 <div class="col-sm-6">
+                   <div>
+                     <strong>Phone:</strong>
+                     <span id="req-supplier-phone" class="th" onclick="toggleShow('req-supplier-phone','req-supplier-phone-edit')">0790643963</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'0790643963','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>
@@ -100,12 +117,14 @@
                  </div>
                  <div class="col-sm-6">
                    <div>
-                     <strong>Phone:</strong>
-                     <span id="req-supplier-phone" class="th" onclick="toggleShow('req-supplier-phone','req-supplier-phone-edit')">0790643963</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>'0790643963','hidden'=>true] )@endcomponent
+                     <strong>Organisation:</strong>
+                     <span id="req-supplier-org" class="th" onclick="toggleShow('req-supplier-org','req-supplier-org-edit')">Supplier org</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-org','id2'=>'req-supplier-org-edit','name'=>'supplier_org','placeholder'=>'Supplier org','value'=>'Supplier org','hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>
+
+               <input type="hidden" id="supplier_id" name="supplier_id" value="">
 
            </header>
 

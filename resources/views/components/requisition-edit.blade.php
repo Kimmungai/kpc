@@ -4,7 +4,7 @@
   <textarea name="{{$name}}" rows="3" class="form-control" placeholder="{{$placeholder}}" onchange="assign_new_val(this.value,'{{$id1}}')" onfocusout="toggleShow('{{$id2}}','{{$id1}}')">{{$value}}</textarea>
   @endif
  @else
- <input name="{{$name}}" type="text" class="form-control @if( isset($numeric) ) @if( $numeric )  numeric @endif @endif" placeholder="{{$placeholder}}" value="{{$value}}" onchange="assign_new_val(this.value,'{{$id1}}')" onfocusout="toggleShow('{{$id2}}','{{$id1}}')" @if( isset( $keyup ) ) @if( $keyup ) onkeydown="search_product(this.value,'{{$id1}}',1)" @endif @endif >
+ <input name="{{$name}}" type="text" class="form-control @if( isset($numeric) ) @if( $numeric )  numeric @endif @endif" placeholder="{{$placeholder}}" value="{{$value}}" onchange="assign_new_val(this.value,'{{$id1}}')" onfocusout="toggleShow('{{$id2}}','{{$id1}}')" @if( isset( $keyup ) ) @if( $keyup ) onkeydown="@if( isset( $supplier_search ) ) @if( $supplier_search ) search_supplier(this.value,'{{$id1}}') @endif @else search_product(this.value,'{{$id1}}',1) @endif" @endif @endif >
 
  @endif
 </span>

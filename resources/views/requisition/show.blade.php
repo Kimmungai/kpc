@@ -95,9 +95,9 @@
                <div class="row mt-1">
                  <div class="col-sm-6">
                    <div>
-                     <strong>Address:</strong>
-                     <span id="req-supplier-addr" class="th" onclick="toggleShow('req-supplier-addr','req-supplier-addr-edit')">{{$requisition->supplier_addr}}</span>
-                     @component( 'components.requisition-edit',['id1'=>'req-supplier-addr','id2'=>'req-supplier-addr-edit','name'=>'supplier_addr','placeholder'=>'Supplier address','value'=>$requisition->supplier_addr,'hidden'=>true] )@endcomponent
+                     <strong>Email:</strong>
+                     <span id="req-supplier-email" class="th" onclick="toggleShow('req-supplier-email','req-supplier-email-edit')">{{$requisition->supplier_email}}</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-email','id2'=>'req-supplier-email-edit','name'=>'supplier_email','placeholder'=>'Email address','value'=>$requisition->supplier_email,'hidden'=>true] )@endcomponent
                    </div>
                  </div>
                  <div class="col-sm-6">
@@ -105,6 +105,23 @@
                      <strong>Phone:</strong>
                      <span id="req-supplier-phone" class="th" onclick="toggleShow('req-supplier-phone','req-supplier-phone-edit')">{{$requisition->supplier_phone}}</span>
                      @component( 'components.requisition-edit',['id1'=>'req-supplier-phone','id2'=>'req-supplier-phone-edit','name'=>'supplier_phone','placeholder'=>'Supplier phone','value'=>$requisition->supplier_phone,'hidden'=>true] )@endcomponent
+                   </div>
+                 </div>
+               </div>
+
+               <div class="row mt-1">
+                 <div class="col-sm-6">
+                   <div>
+                     <strong>Address:</strong>
+                     <span id="req-supplier-addr" class="th" onclick="toggleShow('req-supplier-addr','req-supplier-addr-edit')">{{$requisition->supplier_addr}}</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-addr','id2'=>'req-supplier-addr-edit','name'=>'supplier_addr','placeholder'=>'Supplier address','value'=>$requisition->supplier_addr,'hidden'=>true] )@endcomponent
+                   </div>
+                 </div>
+                 <div class="col-sm-6">
+                   <div>
+                     <strong>Organisation:</strong>
+                     <span id="req-supplier-org" class="th" onclick="toggleShow('req-supplier-org','req-supplier-org-edit')">{{$requisition->supplier_org}}</span>
+                     @component( 'components.requisition-edit',['id1'=>'req-supplier-org','id2'=>'req-supplier-org-edit','name'=>'supplier_org','placeholder'=>'Organisation','value'=>$requisition->supplier_org,'hidden'=>true] )@endcomponent
                    </div>
                  </div>
                </div>
@@ -148,6 +165,7 @@
 
                </div>
 
+               <input type="hidden" id="supplier_id" name="supplier_id" value="{{$requisition->supplier_id}}">
 
 
            </header>

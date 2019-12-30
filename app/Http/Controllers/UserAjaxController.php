@@ -21,7 +21,7 @@ class UserAjaxController extends Controller
     public function search_user( Request $request,$type=5 )
     {
       $string = $request->string;
-      $users = User::where('firstName', 'LIKE',  $string . '%')->where('type',$type)->get();
+      $users = User::where('firstName', 'LIKE',  $string . '%')->where('name', 'LIKE',  $string . '%')->where('type',$type)->get();
       return $users;
     }
 
@@ -121,12 +121,12 @@ class UserAjaxController extends Controller
       if( $request->status == 1 ){
 
         $user->restore();
-        return "nyau";
+        return 0;
 
       }else {
 
         $user->delete();
-        return "mburi";
+        return 0;
 
       }
       return 1;

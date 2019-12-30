@@ -402,6 +402,96 @@ function requisition_goods_received( requisition_id )
       alert("Update Succesful");
     });
 }
+/*
+*Function to search for a supplier in requisition form
+*/
+function search_supplier( string, parentID )
+{
+  if( string.length < 3 ) //start searching when charaters are 3 or more
+    return
+
+    $.post("/search-user",
+      {
+        string:string,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+      },
+      function(data,status){
+        update_requisition_supplier_results ( data, parentID );
+      });
+
+    //unhide results box and clear any contents inside it
+    unhide_element( parentID+'-search-panel' );
+    clear_html( parentID+'-search-panel' );
+}
+
+/*
+*Function to update the supplier result panel in the requisition form
+*/
+function update_requisition_supplier_results ( data, parentID )
+{
+  if( data.length )
+  {
+    for ( var x=0;x<data.length;x++ )
+    {
+      if( !$("#req-supplier-result-"+data[x].id+parentID).length )
+      {
+        $("#"+parentID+'-search-panel').append('<a href="#" id="req-supplier-result-'+data[x].id+parentID+'" data-id="'+data[x].id+'" onclick="event.preventDefault();update_supplier_info('+data[x].id+',\''+parentID+'\')">'+data[x].name+'</a>');
+      }
+    }
+  }
+  else
+  {
+    hide_element( parentID+'-search-panel' );
+  }
+
+}
+
+
+/*
+*Function to update supplier info with selected supplier result
+*/
+function update_supplier_info( supplierID, parentID )
+{
+  hide_element( parentID+'-search-panel' );
+  //get product from server
+  $.post("/get-user",
+    {
+      userID:supplierID,
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+    },
+    function(data,status){
+      req_update_supplier_fields(data)
+    });
+
+}
+/*
+*Function to update supplier fields from the user object
+*/
+function req_update_supplier_fields(data)
+{
+  var name = data.name !=='' ? data.name : 'Null';
+  var email = data.email !=='' ? data.email : 'Null';
+  var phone = data.phoneNumber !=='' ? data.phoneNumber : 'Null';
+  var address = data.address !=='' ? data.address : 'Null';
+  var org = data.org !=='' ? data.org : 'Null';
+
+  $('#req-supplier-name').text(name);
+  $('#requisitionForm input[name=supplier_name]').val(name);
+
+  $('#req-supplier-email').text(email);
+  $('#requisitionForm input[name=supplier_email]').val(email);
+
+  $('#req-supplier-phone').text(phone);
+  $('#requisitionForm input[name=supplier_phone]').val(phone);
+
+  $('#req-supplier-addr').text(address);
+  $('#requisitionForm input[name=supplier_addr]').val(address);
+
+  $('#req-supplier-org').text(org);
+  $('#requisitionForm input[name=supplier_org]').val(org);
+
+  $("#supplier_id").val(data.id);
+}
 
 $(document).ajaxStop(function(){
 
