@@ -348,7 +348,7 @@ function validate_requisition_form( id )
 /*
 *Function to approve requisition form
 */
-function requisition_approval_change(requisition_id)
+function requisition_approval_change( requisition_id )
 {
   var status = $('#req-approval-' + requisition_id).is(":checked");
 
@@ -361,12 +361,48 @@ function requisition_approval_change(requisition_id)
       status:status,
       "_token": $('meta[name="csrf-token"]').attr('content'),
     },
-    function(data,status){
+    function(data,state){
       if( data == 1 )
+      {
+        requisition_change_doc_title(status,requisition_id);
         alert("Update succesfull!");
+      }
       else
         alert("Error!");
     });
+
+}
+
+/*
+*Function to change doc Title
+*/
+function requisition_change_doc_title(status,requisition_id)
+{
+  if( status )
+  {
+    $("#req-doc-title").text('LPO');
+    $('#requisitionForm input[name=doc_title]').val('LPO');
+    requisition_change_goods_received_btn_markup(requisition_id);
+  }
+  else
+  {
+    $("#req-doc-title").text('Requisition form');
+    $('#requisitionForm input[name=doc_title]').val('Requisition form');
+    requisition_change_goods_received_btn_markup(requisition_id, 'disabled' );
+  }
+}
+/*
+*Function to change goods_received mark up
+*/
+function requisition_change_goods_received_btn_markup(requisition_id, disabled='')
+{
+  var markup = '<strong>Goods received?</strong>';
+      markup += '<label class="switch-xs">';
+      markup +=   '<input id="req-goods-received-'+requisition_id+'" type="checkbox"   onchange="req_open_modal( \'receiveGoodsModal\' )" '+disabled+'>';
+      markup +=   '<span class="slider-xs round"></span>';
+      markup += '</label>';
+
+  $('#req-goods-supplied-html').html( markup );
 
 }
 
@@ -399,7 +435,7 @@ function requisition_goods_received( requisition_id )
       "_token": $('meta[name="csrf-token"]').attr('content'),
     },
     function(data,status){
-      alert("Update Succesful"+data);
+      alert("Update Succesful");
     });
 }
 /*

@@ -134,7 +134,7 @@
                      @if( !$requisition->goods_received )
                      <strong>Goods received?</strong>
                      <label class="switch-xs">
-                       <input id="req-goods-received-{{$requisition->id}}" type="checkbox"  @if( $requisition->goods_received ) checked @endif onchange="req_open_modal( 'receiveGoodsModal' )">
+                       <input id="req-goods-received-{{$requisition->id}}" type="checkbox"  @if( $requisition->goods_received ) checked @endif onchange="req_open_modal( 'receiveGoodsModal' )" @if( !$requisition->approval_status ) disabled @endif>
                        <span class="slider-xs round"></span>
 
                      </label>
