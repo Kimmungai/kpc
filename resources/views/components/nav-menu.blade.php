@@ -12,7 +12,7 @@
             <div class="gn-scroller scrollbar1">
               <ul class="gn-menu agile_menu_drop">
                 <li><a href="/"> <i class="fas fa-home"></i> Home</a></li>
-                <li><a href="/"> <i class="fas fa-wallet"></i> Bank</a></li>
+                <li><a href="{{route('bank.show',1)}}"> <i class="fas fa-wallet"></i> Bank</a></li>
                 <li>
                   <a href="/"><i class="fas fa-building" aria-hidden="true"></i> Departments <i class="fas fa-angle-down" aria-hidden="true"></i></a>
                   <ul class="gn-submenu">

@@ -136,3 +136,6 @@ Route::post('share-expenditure-report','ExpenditureReportController@share');
 Route::resource('revenue','RevenueController');
 Route::get('download-revenue-report','RevenueReportController@download');
 Route::post('share-revenue-report','RevenueReportController@share');
+
+//Bank
+Route::resource('bank','BankController');
