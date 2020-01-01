@@ -433,6 +433,10 @@ tfoot,tbody {
 .resp-table tfoot td {
     font-weight: 600;
 }
+.resp-table h5{
+  font-weight: 800;
+  margin:15px 0; 
+}
 .text-bold{
   font-weight: bold;
 }
@@ -786,4 +790,53 @@ input:checked + .slider-xs:before {
 .activated {
 	transform: translateX(0px);
 	opacity: 1;
+}
+/*BANK CSS*/
+.bank-logo{
+  height: 30px;
+}
+.bank-logo img{
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+}
+.bank-acc{
+
+}
+.bank-acc h3{
+  text-align: center;
+}
+.bal-btn{
+  width: 100%;
+  background: #007ee5;
+  height: 180px;
+  margin-top: 15px;
+  border-radius: 7px;
+  word-wrap: break-word;
+  padding: 0 15px;
+}
+.bal-btn h4{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  font-size: 28px;
+}
+.acc-edit-btn{
+  position: absolute;
+  bottom: 10px;
+}
+.bank-acc table td{
+  background: white;
+}
+.bank-acc table td a{
+  color: inherit;
+}
+.bank-acc table td a:hover{
+  text-decoration: underline;
 }

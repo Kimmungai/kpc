@@ -131,9 +131,21 @@ class PurchasesRegistrationController extends Controller
           'remarks' => 'nullable',
         ]);
 
-        if(!Purchase::where('id',$id)->update($validated)){
+        $purchase = Purchase::find($id);
+
+        $validated['amountPaid'] = $purchase->amountPaid + $request->amountPaid;
+
+        if(!$purchase->update($validated)){
           Session::flash('error', env("SAVE_SUCCESS_MSG","An error occured, please try again!"));
           return back();
+        }
+
+        $purchase = $purchase->refresh();
+
+        if( $purchase->amountDue <= $validated['amountPaid'] )
+        {
+          $purchase->update(['paid'=>1]);
+          Expense::where('purchase_id',$purchase->id)->update(['paid'=>1]);
         }
 
         Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));

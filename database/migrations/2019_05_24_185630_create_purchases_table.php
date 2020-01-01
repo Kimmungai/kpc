@@ -20,6 +20,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('requisition_id')->unsigned()->index()->nullable();
             $table->double('amountPaid')->nullable();
             $table->double('amountDue')->nullable();
+            $table->tinyInteger('paid')->nullable();
             $table->integer('paymentMethod')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamp('deleted_at')->nullable();

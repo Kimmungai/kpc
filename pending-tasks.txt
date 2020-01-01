@@ -1,0 +1,8 @@
+1. Payment receiving on the requisition form
+2. Profit and loss report
+3. balance sheet report
+4. Create expense on dept dashboard
+5. Create revenue on dept dashboard
+6. CRUD DeptSales
+7. Remove end date from booking form if dept has no rooms
+8. Make payment button on booking.show

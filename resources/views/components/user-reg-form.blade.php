@@ -281,8 +281,10 @@
         <span class="input-group-addon">
           <i class="fa fa-image"></i>
         </span>
-        @if($user->avatar)
-        <img src="@if( isset($user) ){{$user->avatar}} @endif" alt="@if( isset($user) ){{$user->name}} @endif" class="img-thumbnail" height="50px" width="50px">
+        @if( isset($user) )
+          @if($user->avatar)
+          <img src="{{$user->avatar}}" alt="{{$user->name}}" class="img-thumbnail" height="50px" width="50px">
+          @endif
         @endif
         <input name="avatar" id="avatar" type="file"  onchange="validate(this.id,{required:0,min:0,max:255,type:'image',size:1},this.value)" />
       </div>

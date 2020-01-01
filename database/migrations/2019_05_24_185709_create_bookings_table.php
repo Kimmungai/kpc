@@ -38,6 +38,7 @@ class CreateBookingsTable extends Migration
             $table->tinyInteger('paSystem')->nullable();
             $table->tinyInteger('projector')->nullable();
             $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('paid')->nullable();
             $table->float('booked_prods_grand_total')->nullable();
             $table->integer('no_products')->nullable();
             $table->timestamp('deleted_at')->nullable();

@@ -177,6 +177,9 @@ class ProductsAjaxController extends Controller
 
       $sale = DeptSales::create($request->all());
 
+      if( $request->saleAmountDue <= $request->saleAmountReceived )
+        $sale->update(['paid'=>1]);
+
       if( session('cart_contents') != null )
       {
         $cartContents = session('cart_contents');
@@ -188,6 +191,8 @@ class ProductsAjaxController extends Controller
           $revenue->bookedQuantity = $cartContent['qty'];
           $revenue->price = $cartContent['price'];
           $revenue->total = $cartContent['total'];
+          $revenue->user_id=$request->customerID;
+          $revenue->paid=$sale->paid;
           //reduce stock
           $this->reduceStock( $cartContent['id'], $cartContent['qty']);
           $revenue->save();

@@ -11,9 +11,9 @@
           @csrf
           @method('PUT')
           <div class="form-group">
-            <label for="amountPaid" class="col-sm-3 control-label">Amount Paid <span class="text-danger">*</span></label>
+            <label for="amountPaid" class="col-sm-3 control-label">Amount <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input name="amountPaid" type="text" class="form-control numeric" placeholder="Amount paid to supplier" value="@if(isset($purchase)) {{$purchase->amountDue}} @endif">
+              <input name="amountPaid" type="text" class="form-control numeric" placeholder="Amount paid to supplier" value="@if(isset($purchase)) @if( ($purchase->amountDue - $purchase->amountPaid) > 0 ) {{$purchase->amountDue - $purchase->amountPaid}} @endif @endif">
             </div>
           </div>
 

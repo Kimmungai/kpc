@@ -23,4 +23,8 @@ class Expense extends Model
     {
       return $this->hasOne('App\Product','id','product_id');
     }
+    public function User()
+    {
+      return $this->belongsTo('App\User');
+    }
 }

@@ -27,4 +27,8 @@ class Revenue extends Model
   {
     return $this->belongsTo('App\DeptSales');
   }
+  public function User()
+  {
+    return $this->belongsTo('App\User');
+  }
 }

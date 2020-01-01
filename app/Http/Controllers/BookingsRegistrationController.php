@@ -105,11 +105,11 @@ class BookingsRegistrationController extends Controller
         $booking = Booking::create( $bookingData );
         if( $booking->bookingAmountDue <= $booking->bookingAmountReceived )
         {
-          $booking->update(['status'=>1]);//booking confirmed
+          $booking->update(['status'=>1,'paid'=>1]);//booking confirmed
         }
 
         //create revenue (booked products)
-        $this->save_other_booked_products( $request, $booking->id );
+        $this->save_other_booked_products( $request, $booking );
 
         //create booking menu
         $this->create_booking_menu( $request, $booking->id );
@@ -140,7 +140,7 @@ class BookingsRegistrationController extends Controller
     {
       $dept ='';
       $booking = Booking::with(['user','revenue.product'])->where('id',$id)->first();
-      
+
       if( Auth::check() ){
         $this->mark_notifications_read( Auth::user(), $booking );
       }
@@ -183,10 +183,10 @@ class BookingsRegistrationController extends Controller
         $booking->update($bookingData);
 
        if( $booking->bookingAmountDue <= $booking->bookingAmountReceived )
-          $booking->update(['status'=>1]);//booking confirmed
+          $booking->update(['status'=>1,'paid'=>1]);//booking confirmed
 
         //create revenue (booked products)
-        $this->save_other_booked_products( $request, $booking->id, 'update' );
+        $this->save_other_booked_products( $request, $booking, 'update' );
 
         //create booking menu
         $this->create_booking_menu( $request, $booking->id, 'update' );
@@ -236,11 +236,11 @@ class BookingsRegistrationController extends Controller
     *@param $request
     *@return $success or $fail
     */
-    private function save_other_booked_products( $request, $booking_id, $action='create' )
+    private function save_other_booked_products( $request, $booking, $action='create' )
     {
       if( $action == 'update' )//delete all requisition products first
       {
-        Revenue::where('booking_id',$booking_id)->forceDelete();
+        Revenue::where('booking_id',$booking->id)->forceDelete();
       }
 
       $no_prods = $request->no_products;
@@ -250,7 +250,9 @@ class BookingsRegistrationController extends Controller
         if( !$request->has( 'col_'.$i.'_7' ) ){$no_prods++;continue;}
 
         $revenue = new Revenue;
-        $revenue->booking_id = $booking_id;
+        $revenue->booking_id = $booking->id;
+        $revenue->user_id=$booking->user_id;
+        $revenue->paid=$booking->paid;
         $revenue->product_id = $request['col_'.$i.'_7'];
         $revenue->bookedQuantity = $request['col_'.$i.'_4'];
         $revenue->price = $request['col_'.$i.'_5'];
