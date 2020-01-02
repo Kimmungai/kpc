@@ -100,6 +100,8 @@ Route::resource('inventory-report','InventoryReportController');
 Route::resource('sales-report','SalesReportController');
 Route::resource('expenditure-report','ExpenditureReportController');
 Route::resource('revenue-report','RevenueReportController');
+Route::resource('profit-loss-report','ProfitLossReportController');
+Route::resource('balance-sheet-report','BalanceSheetReportController');
 
 Route::get('booking-filtered-report','BookingReportController@report');
 Route::get('download-booking-report','BookingReportController@download');

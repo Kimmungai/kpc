@@ -87,6 +87,46 @@
                  </div>
 
                  <div class="col-sm-6">
+                   @if( isset($sales) )
+                   @if( count($sales) )
+
+                   <div class="resp-table "><!--Start Money in-->
+                     <h5><span class="fa fa-circle text-success"></span>  Money in <small>(sales)</small></h5>
+                     <table >
+                       <thead>
+                         <tr>
+                           <td>Amount</td>
+                           <td>Client</td>
+                           <td>Details</td>
+                           <td>Date</td>
+                         </tr>
+                       </thead>
+                       <tbody>
+
+                         @foreach( $sales as $sale )
+                           <tr>
+                             <td  data-label="Amount">KES {{number_format($sale->saleAmountReceived,2)}}</td>
+                             <td  data-label="Client"><a href="{{url('profile')}}/{{$sale->user_id}}">@if($sale->User){{$sale->User->name}}@endif</a></td>
+                             <td  data-label="Details">Money in </td>
+                             <td>{{ \Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                           </tr>
+                         @endforeach
+
+                       </tbody>
+                       @if(isset($totals['sales']))
+                       <tfoot>
+                         <td>KES {{number_format($totals['sales'],2)}}</td>
+                       </tfoot>
+                       @endif
+
+                     </table>
+                     {{$bookings->links()}}
+                  </div><!--End Money in-->
+                  @endif
+                  @endif
+                 </div>
+
+                 <div class="col-sm-6">
                    @if( isset($revenues) )
                    @if( count($revenues) )
 

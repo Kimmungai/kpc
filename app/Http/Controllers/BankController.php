@@ -7,6 +7,7 @@ use App\Expense;
 use App\Revenue;
 use App\Booking;
 use App\Purchase;
+use App\DeptSales;
 
 use Illuminate\Http\Request;
 
@@ -54,14 +55,17 @@ class BankController extends Controller
         $bankBal = $this->get_bank_bal();
         $purchases = Purchase::where('paid',1)->paginate(env('ITEMS_PER_PAGE',5),['*'], 'purchases');
         $bookings = Booking::where('paid',1)->paginate(env('ITEMS_PER_PAGE',5),['*'], 'bookings');
-        $revenues = Revenue::where('paid',1)->where('booking_id',null)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5),['*'], 'revenue');
+        $revenues = Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5),['*'], 'revenue');
         $expenses = Expense::where('paid',1)->where('purchase_id',null)->orderBy('created_at','DESC')->paginate(env('ITEMS_PER_PAGE',5),['*'], 'expense');
+        $sales = DeptSales::where('paid',1)->paginate(env('ITEMS_PER_PAGE',5),['*'], 'sales');
+
         $totals['booking'] = $this->get_total_revenue_received_from_bookings();
         $totals['revenue'] = $this->get_total_revenue();
         $totals['purchase'] = $this->get_total_paid_to_suppliers();
         $totals['expense'] = $this->get_total_expenses();
+        $totals['sales'] = $this->get_total_sales();
 
-        return view('bank.show',compact('bank','expenses','purchases','revenues','bookings','bankBal','totals'));
+        return view('bank.show',compact('bank','expenses','purchases','revenues','bookings','bankBal','totals','sales'));
     }
 
     /**
@@ -130,7 +134,7 @@ class BankController extends Controller
     */
     protected function get_total_revenue()
     {
-      return Revenue::where('paid',1)->where('booking_id',null)->get()->sum('total');
+      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
     }
 
     /*
@@ -139,5 +143,13 @@ class BankController extends Controller
     protected function get_total_revenue_received_from_bookings()
     {
       return Booking::where('paid',1)->get()->sum('bookingAmountReceived');
+    }
+
+    /*
+    *Function to get total revenue received from deprtment sales
+    */
+    protected function get_total_sales()
+    {
+      return DeptSales::where('paid',1)->get()->sum('saleAmountReceived');
     }
 }
