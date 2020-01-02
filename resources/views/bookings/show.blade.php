@@ -80,6 +80,7 @@
 
 @component( 'components.delete-confirm-modal',[ 'formId' => 'deleteBookingForm', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] ) @endcomponent
 
+@component( 'components.booking-payment',['booking'=>$booking]) @endcomponent
 
 <form class="d-none hidden" id="deleteBookingForm" action="{{route('bookings-registration.destroy',$booking->id)}}" method="post">
   @csrf

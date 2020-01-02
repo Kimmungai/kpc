@@ -14,7 +14,7 @@ class ExpenditureController extends Controller
      */
     public function index()
     {
-        //
+        return 'All expenses';
     }
 
     /**
@@ -24,7 +24,7 @@ class ExpenditureController extends Controller
      */
     public function create()
     {
-        //
+        return "create expenditure";
     }
 
     /**

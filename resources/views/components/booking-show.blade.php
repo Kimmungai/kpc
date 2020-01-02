@@ -17,7 +17,10 @@
 
     <div class="col-xs-4">
       <ul>
-        <li><strong>Customer @if( $booking->bookingAmountDue - $booking->bookingAmountReceived <= 0 ) <span class="fa fa-circle text-success"></span> @else <span class="fa fa-circle text-danger"></span> @endif</strong></li>
+        <li><strong>Customer @if( $booking->bookingAmountDue - $booking->bookingAmountReceived <= 0 ) <span class="fa fa-circle text-success"></span> @else <span class="fa fa-circle text-danger"></span> @endif @if(!$booking->paid)<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#bookingPaymentModal">Make payment</button>@endif</strong></li>
+        @if( ($booking->bookingAmountDue - $booking->bookingAmountReceived) > 0 )
+        <li><small>Amount Due: {{$booking->bookingAmountDue - $booking->bookingAmountReceived}}</small></li>
+        @endif
         <li><small>{{$booking->user->name}}</small></li>
         <li><small>{{$booking->user->email}}</small></li>
         <li><small>{{$booking->user->phoneNumber}}</small></li>

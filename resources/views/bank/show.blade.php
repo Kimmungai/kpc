@@ -75,7 +75,7 @@
                        </tbody>
                        @if(isset($totals['booking']))
                        <tfoot>
-                         <td>{{number_format($totals['booking'],2)}}</td>
+                         <td>KES {{number_format($totals['booking'],2)}}</td>
                        </tfoot>
                        @endif
 
@@ -116,7 +116,7 @@
 
                        @if(isset($totals['revenue']))
                        <tfoot>
-                         <td>{{number_format($totals['revenue'],2)}}</td>
+                         <td>KES {{number_format($totals['revenue'],2)}}</td>
                        </tfoot>
                        @endif
 
@@ -158,7 +158,7 @@
 
                        @if(isset($totals['purchase']))
                        <tfoot>
-                         <td>{{number_format($totals['purchase'],2)}}</td>
+                         <td>KES {{number_format($totals['purchase'],2)}}</td>
                        </tfoot>
                        @endif
 
@@ -198,7 +198,7 @@
 
                        @if(isset($totals['expense']))
                        <tfoot>
-                         <td>{{number_format($totals['expense'],2)}}</td>
+                         <td>KES {{number_format($totals['expense'],2)}}</td>
                        </tfoot>
                        @endif
 

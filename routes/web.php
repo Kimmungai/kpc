@@ -85,6 +85,7 @@ Route::get('sort-bookings','BookingsRegistrationController@index');
 Route::get('download-booking/{id}','BookingsRegistrationController@download');
 Route::resource('bookings-registration','BookingsRegistrationController');
 Route::post('share-booking','BookingsAjaxController@share');
+Route::put('booking-payment/{id}','BookingsRegistrationController@booking_payment')->name('booking-payment');
 
 //Transfers
 Route::post('save-transfer','TransfersAjaxController@save_transfer');

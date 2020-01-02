@@ -19,7 +19,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        return 'all sales';
     }
 
     /**

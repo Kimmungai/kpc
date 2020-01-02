@@ -102,6 +102,58 @@
 									</div>
 							</div>
 							@endif
+
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
+										<dl>
+											<dt>
+												<a href="{{route('expenditure.index')}}"><i class="fas fa-chevron-circle-down"></i></a>
+											</dt>
+											<dd>
+												<h3 class="mb-2"><a href="{{route('expenditure.index')}}">Expenses</a></h3>
+												<!--<p class="text-underline">This month</p>
+												<p>50 purchases</p>
+												<p>Ksh. 50,0000 made</p>-->
+												<!--<a href="#" class="btn btn-x-sm btn-default" data-toggle="modal" data-target="#recordTransfersModal">Transfer stock</a>-->
+												<a href="{{route('expenditure.create')}}" class="btn btn-x-sm btn-default" >New expense</a>
+
+											<dd>
+										</dl>
+									</div>
+							</div>
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
+										<dl>
+											<dt>
+												<a href="{{route('revenue.index')}}"><i class="fas fa-chevron-circle-up"></i></a>
+											</dt>
+											<dd>
+												<h3 class="mb-2"><a href="{{route('revenue.index')}}">Revenue</a></h3>
+												<!--<p class="text-underline">This month</p>
+												<p>50 purchases</p>
+												<p>Ksh. 50,0000 made</p>-->
+												<a href="{{route('revenue.create')}}" class="btn btn-x-sm btn-default">New revenue</a>
+											<dd>
+										</dl>
+									</div>
+							</div>
+							<div class="col-sm-4 mb-2 mt-2">
+								<div class="action-tab">
+										<dl>
+											<dt>
+												<a href="{{route('sale.index')}}"><i class="fas fa-chart-line"></i></a>
+											</dt>
+											<dd>
+												<h3 class="mb-2"><a href="{{route('sale.index')}}">Sales</a></h3>
+												<!--<p class="text-underline">This month</p>
+												<p>50 purchases</p>
+												<p>Ksh. 50,0000 made</p>-->
+												<a href="{{route('product-registration.index')}}" class="btn btn-x-sm btn-default">New sale</a>
+											<dd>
+										</dl>
+									</div>
+							</div>
+
 							<div class="col-sm-4 mb-2 mt-2">
 								<div class="action-tab">
 										<dl>
@@ -126,10 +178,10 @@
 								<div class="action-tab">
 										<dl>
 											<dt>
-												<a href="#" data-toggle="modal" data-target="#recordTransfersModal"><i class="fas fa-external-link-alt"></i></a>
+												<a href="{{route('transfer',$dept->id)}}" ><i class="fas fa-external-link-alt"></i></a>
 											</dt>
 											<dd>
-												<h3 class="mb-2"><a href="#" data-toggle="modal" data-target="#recordTransfersModal">Transfers</a></h3>
+												<h3 class="mb-2"><a href="{{route('transfer',$dept->id)}}" >Transfers</a></h3>
 												<!--<p class="text-underline">This month</p>
 												<p>50 purchases</p>
 												<p>Ksh. 50,0000 made</p>-->
@@ -159,6 +211,8 @@
 									</div>
 							</div>
 							@endif
+
+
 
 
 						</div>

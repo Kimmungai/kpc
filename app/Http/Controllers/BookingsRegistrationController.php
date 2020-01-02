@@ -391,4 +391,34 @@ class BookingsRegistrationController extends Controller
 
     }
 
+    /*
+    *Update booking payment details
+    */
+    public function booking_payment( Request $request, $id )
+    {
+      $validated = $request->validate([
+         'bookingAmountReceived' => 'required|numeric',
+         'modeOfPayment' => 'required|numeric',
+         'paymentRemarks' => 'nullable',
+         'transactionCode' => 'nullable',
+       ]);
+
+       $booking = Booking::find( $id );
+
+       $validated['bookingAmountReceived'] = $booking->bookingAmountReceived + $request->bookingAmountReceived;
+
+       if(!$booking->update($validated)){
+         Session::flash('error', env("SAVE_SUCCESS_MSG","An error occured, please try again!"));
+         return back();
+       }
+
+       $booking = $booking->refresh();
+
+       if( $booking->bookingAmountDue <= $validated['bookingAmountReceived'] )
+         $booking->update(['paid'=>1,'status'=>1,'paymentStatus'=>1]);
+
+       Session::flash('message', env("SAVE_SUCCESS_MSG","Details saved succesfully!"));
+       return back();
+    }
+
 }

@@ -77,10 +77,12 @@
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i> <i class="text-danger">*</i></span>
 										  <input type="text" name="chkInDate" id="chkInDate" class="form-control calc-costs-onchange" placeholder="Start Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('chkInDate')){{old('chkInDate')}}@elseif(isset($booking)) {{$booking->chkInDate}} @endif" required>
 										</div>
+										@if( $dept->has_rooms == 1 )
 										<div id="chkOutDateTitle" class="input-group input-group-md @if($errors->has('chkOutDate')) has-error @endif">
 										  <span class="input-group-addon" id=""><i class="fa fa-calendar-alt"></i></span>
 										  <input type="text" name="chkOutDate" id="chkOutDate" class="form-control calc-costs-onchange" placeholder="End Date" onblur="validate(this.id,{required:0,min:3,max:255},this.value)" value="@if(old('chkOutDate')){{old('chkOutDate')}}@elseif(isset($booking)) {{$booking->chkOutDate}} @endif" >
 										</div>
+										@endif
 										<!--<div id="bookingAmountDueTitle" class="input-group input-group-md">
 										  <span class="input-group-addon" id=""><i class="fas fa-money-bill"></i></span>
 										  <input name="bookingAmountDue" id="bookingAmountDue" type="text" class="form-control numeric" value="{{old('bookingAmountDue')}}" placeholder="Amount due" disabled>

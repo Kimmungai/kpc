@@ -14,7 +14,7 @@ class RevenueController extends Controller
      */
     public function index()
     {
-        //
+        return 'All revenue';
     }
 
     /**
@@ -24,7 +24,7 @@ class RevenueController extends Controller
      */
     public function create()
     {
-        //
+        return "create revenue";
     }
 
     /**
