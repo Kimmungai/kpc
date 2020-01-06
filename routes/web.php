@@ -115,6 +115,7 @@ Route::get('purchase-filtered-report','ProcurementReportController@report');
 Route::get('inventory-filtered-report','InventoryReportController@report');
 
 Route::get('profit-loss-filtered-report','ProfitLossReportController@report');
+Route::get('download-profit-loss-report','ProfitLossReportController@download');
 
 
 //Notifications

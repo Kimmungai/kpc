@@ -28,7 +28,7 @@
 								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-procurement-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
-								<form id="download-form" class="hidden" action="/download-procurement-report" method="get">
+								<form id="download-form" class="hidden" action="/download-profit-loss-report" method="get">
 									<input type="hidden" name="duration_sort" value="@if(isset($_GET['duration_sort'])) {{$_GET['duration_sort']}} @endif">
 									<input type="hidden" name="filter_from" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif" >
 									<input type="hidden" name="filter_to"   value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif">

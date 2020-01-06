@@ -180,8 +180,11 @@ class ProfitLossReportController extends Controller
       {
         if( $duration_sort == 'year' )
           return DeptSales::whereYear('created_at', $startDate)->where('paid',1)->get()->sum('saleAmountReceived');
-        else
+        elseif( $duration_sort == 'month' )
+          return DeptSales::whereMonth('created_at', $startDate)->where('paid',1)->get()->sum('saleAmountReceived');
+        elseif( $duration_sort == 'day' )
           return DeptSales::whereDay('created_at', $startDate )->where('paid',1)->get()->sum('saleAmountReceived');
+
       }
       return DeptSales::where('paid',1)->get()->sum('saleAmountReceived');
     }
@@ -239,5 +242,45 @@ class ProfitLossReportController extends Controller
       }
 
       return redirect(route('profit-loss-report.index'));
+    }
+    /*
+    *Download profit and loss report
+    */
+    public function download(Request $request)
+    {
+      $dt = Carbon::now();
+
+      if($request->duration_sort === 'thisWeek'){
+        $startDate =$dt->startOfWeek();
+        $endDate = $dt->copy()->endOfWeek();
+        $totals = $this->get_totals( $startDate, $endDate, 'dates' );
+      }
+      elseif($request->duration_sort === 'thisYear') {
+        $startDate =$dt->startOfYear();
+        $endDate = $dt->copy()->endOfYear();
+        $totals = $this->get_totals( $dt->year, '', 'year' );
+      }
+      elseif($request->duration_sort === 'today'){
+        $startDate =$dt->startOfDay();
+        $endDate = $dt->copy()->endOfDay();
+        $totals = $this->get_totals( $dt->day, '', 'day' );
+      }
+      elseif($request->duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($request->filter_from != ''){ $startDate = Carbon::create($request->filter_from);}
+        $endDate = Carbon::now();
+        if($request->filter_to != ''){ $endDate =Carbon::create($request->filter_to); }
+
+        $totals = $this->get_totals( $startDate, $endDate, 'dates' );
+      }
+      else {
+        $startDate =$dt->startOfMonth();
+        $endDate = $dt->copy()->endOfMonth();
+        $totals = $this->get_totals( $dt->month, '', 'dates' );
+      }
+
+      $docs = $totals;
+      $pdf = PDF::loadView('pdf.profit-loss-report',compact('docs','startDate','endDate'));
+      return $pdf->stream();
     }
 }
