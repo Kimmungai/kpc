@@ -13,7 +13,7 @@ class BalanceSheetReportController extends Controller
      */
     public function index()
     {
-        //
+        return view('Reports.balance-sheet-report');
     }
 
     /**
