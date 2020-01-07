@@ -1,5 +1,5 @@
 <div class="doc-container">
-  <h1>Profit & Loss</h1>
+  <h1>Balance Sheet</h1>
 
   <div class="row mt-2">
 
@@ -41,64 +41,89 @@
         <tbody>
 
           <tr>
-            <td data-label="Particulars"><strong>Revenue</strong></td>
+            <td data-label="Particulars"><strong>ASSETS</strong></td>
             <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
-            <td data-label="Particulars">Dapartment Sales</td>
-            <td data-label="Debit amount (000')">{{number_format($totals['sales'],2)}}</td>
+            <td data-label="Particulars"><u>Non-current assets</u></td>
+            <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
             <td data-label="Particulars">Bookings</td>
-            <td data-label="Debit amount (000')">{{number_format($totals['booking'],2)}}</td>
+            <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
             <td data-label="Particulars">Other revenue</td>
-            <td data-label="Debit amount (000')">{{number_format($totals['revenue'],2)}}</td>
-            <td data-label="Credit amount (000')"></td>
-          </tr>
-
-          <tr>
-            <td data-label="Particulars"><strong>Total revenues</strong></td>
-            <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')">{{number_format($totals['totalRevenue'],2)}}</td>
-          </tr>
-
-          <tr>
-            <td data-label="Particulars"><strong>Expenses</strong></td>
             <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
-            <td data-label="Particulars">Purchases</td>
-            <td data-label="Debit amount (000')">{{number_format($totals['purchase'],2)}}</td>
+            <td data-label="Particulars"><u>Current assets</u></td>
+            <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
-            <td data-label="Particulars">Miscellaneous expenses</td>
-            <td data-label="Debit amount (000')">{{number_format($totals['expense'],2)}}</td>
+            <td data-label="Particulars"><strong>TOTAL ASSETS</strong></td>
+            <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
-            <td data-label="Particulars"><strong>Total expenses</strong></td>
+            <td data-label="Particulars"><strong>EQUITY AND LIABILITIES</strong></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')">({{number_format($totals['totalExpense'],2)}})</td>
+            <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
-            <td data-label="Particulars"><strong>Net income</strong></td>
+            <td data-label="Particulars"><u>Owner's equity</u></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"><strong>{{number_format($totals['netIncome'],2)}}</strong></td>
+            <td data-label="Credit amount (000')"></td>
           </tr>
+
+          <tr>
+            <td data-label="Particulars">Capital</td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars"><u>Non-current Liabilities</u></td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars">10% Loan</td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars"><u>Current Liabilities</u></td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars">Creditors / payables</td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars"><strong>TOTAL EQUITY AND LIABILITIES</strong></td>
+            <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
 
         </tbody>
       </table>

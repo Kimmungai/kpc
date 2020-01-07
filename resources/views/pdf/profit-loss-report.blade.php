@@ -112,8 +112,8 @@ text-transform: uppercase;
           <thead>
             <tr>
               <th>Particulars</th>
-              <th>Debit amount (000')</th>
-              <th>Credit amount (000')</th>
+              <th>Debit amount (Ksh.)</th>
+              <th>Credit amount (Ksh.)</th>
             </tr>
           </thead>
           <tbody>
@@ -126,26 +126,26 @@ text-transform: uppercase;
 
             <tr>
               <td data-label="Particulars">Dapartment Sales</td>
-              <td data-label="Debit amount (000')">Ksh. {{number_format($docs['sales'],2)}}</td>
+              <td data-label="Debit amount (000')">{{number_format($docs['sales'],2)}}</td>
               <td data-label="Credit amount (000')"></td>
             </tr>
 
             <tr>
               <td data-label="Particulars">Bookings</td>
-              <td data-label="Debit amount (000')">Ksh. {{number_format($docs['booking'],2)}}</td>
+              <td data-label="Debit amount (000')">{{number_format($docs['booking'],2)}}</td>
               <td data-label="Credit amount (000')"></td>
             </tr>
 
             <tr>
               <td data-label="Particulars">Other revenue</td>
-              <td data-label="Debit amount (000')">Ksh. {{number_format($docs['revenue'],2)}}</td>
+              <td data-label="Debit amount (000')">{{number_format($docs['revenue'],2)}}</td>
               <td data-label="Credit amount (000')"></td>
             </tr>
 
             <tr>
               <td data-label="Particulars"><strong>Total revenues</strong></td>
               <td data-label="Debit amount (000')"></td>
-              <td data-label="Credit amount (000')">Ksh. {{number_format($docs['totalRevenue'],2)}}</td>
+              <td data-label="Credit amount (000')">{{number_format($docs['totalRevenue'],2)}}</td>
             </tr>
 
             <tr>
@@ -156,26 +156,26 @@ text-transform: uppercase;
 
             <tr>
               <td data-label="Particulars">Purchases</td>
-              <td data-label="Debit amount (000')">Ksh. {{number_format($docs['purchase'],2)}}</td>
+              <td data-label="Debit amount (000')">{{number_format($docs['purchase'],2)}}</td>
               <td data-label="Credit amount (000')"></td>
             </tr>
 
             <tr>
               <td data-label="Particulars">Miscellaneous expenses</td>
-              <td data-label="Debit amount (000')">Ksh. {{number_format($docs['expense'],2)}}</td>
+              <td data-label="Debit amount (000')">{{number_format($docs['expense'],2)}}</td>
               <td data-label="Credit amount (000')"></td>
             </tr>
 
             <tr>
               <td data-label="Particulars"><strong>Total expenses</strong></td>
               <td data-label="Debit amount (000')"></td>
-              <td data-label="Credit amount (000')">(Ksh. {{number_format($docs['totalExpense'],2)}})</td>
+              <td data-label="Credit amount (000')">({{number_format($docs['totalExpense'],2)}})</td>
             </tr>
 
             <tr>
               <td data-label="Particulars"><strong>Net income</strong></td>
               <td data-label="Debit amount (000')"></td>
-              <td data-label="Credit amount (000')"><strong>Ksh. {{number_format($docs['netIncome'],2)}}</strong></td>
+              <td data-label="Credit amount (000')"><strong>{{number_format($docs['netIncome'],2)}}</strong></td>
             </tr>
 
           </tbody>
