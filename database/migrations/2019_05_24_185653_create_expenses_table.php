@@ -19,7 +19,7 @@ class CreateExpensesTable extends Migration
             $table->integer('report_id')->unsigned()->index()->nullable();
             $table->integer('product_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->tinyInteger('paid')->nullable();
+            $table->tinyInteger('paid')->default(0);
             $table->text('description')->nullable();
             $table->float('cost')->default(0.00);
             $table->integer('suppliedQuantity')->default(0);

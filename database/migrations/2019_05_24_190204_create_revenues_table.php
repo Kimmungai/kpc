@@ -20,7 +20,7 @@ class CreateRevenuesTable extends Migration
             $table->integer('report_id')->unsigned()->index()->nullable();
             $table->integer('product_id')->unsigned()->index()->nullable();
             $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->tinyInteger('paid')->nullable();
+            $table->tinyInteger('paid')->default(0);
             $table->text('description')->nullable();
             $table->integer('bookedQuantity')->default(0);
             $table->float('price')->default(0.00);

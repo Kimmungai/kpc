@@ -25,10 +25,10 @@
 						<div class="row mt-2">
 
 							<div class="col-xs-6">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-profit-loss-report')"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-balance-sheet-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
-								<form id="download-form" class="hidden" action="/download-profit-loss-report" method="get">
+								<form id="download-form" class="hidden" action="/download-balance-sheet-report" method="get">
 									<input type="hidden" name="duration_sort" value="@if(isset($_GET['duration_sort'])) {{$_GET['duration_sort']}} @endif">
 									<input type="hidden" name="filter_from" value="@if(isset($_GET['filter_from'])) {{$_GET['filter_from']}} @endif" >
 									<input type="hidden" name="filter_to"   value="@if(isset($_GET['filter_to'])) {{$_GET['filter_to']}} @endif">
@@ -39,8 +39,8 @@
 						</div>
 						<!--end buttons-->
 						<!--sorting-->
-							<div class="row mt-2">
-								<form class="" action="/profit-loss-filtered-report" method="get">
+							<!--<div class="row mt-2">
+								<form class="" action="/balance-sheet-report-filter" method="get">
 								<div class="col-xs-2">
 									<p style="line-height:40px">Sort:</p>
 								</div>
@@ -68,7 +68,7 @@
 									<button type="submit" class="btn btn-xs btn-dark"><i class="fas fa-sort-amount-down"></i> Filter</button>
 								</div>
 								</form>
-							</div>
+							</div>-->
 						<!--end sorting-->
 						<!--start purchase-show-->
 						<?php $StartDate=''; $EndDate='';?>
@@ -86,14 +86,14 @@
 						@else
 							<?php $StartDate=date('d-M-Y',strtotime($dt->startOfMonth()));$EndDate=date('d-M-Y',strtotime($dt->endOfMonth())); ?>
 						@endif
-            @component('components.balance-sheet-report',['totals'=>[],'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
+            @component('components.balance-sheet-report',['data'=>$data,'StartDate'=>$StartDate,'EndDate'=>$EndDate])@endcomponent
 						<!--end purchase-show-->
 
 						<!--buttons-->
 						<div class="row mt-2">
 
 							<div class="col-xs-6">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-procurement-report')"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-balance-sheet-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
 								<a href="#" onclick="event.preventDefault();document.getElementById('download-form').submit()" class="btn btn-sm btn-default btn-block" title="Click to save document to your computer"><span class="fa fa-download"></span> Download</a>

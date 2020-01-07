@@ -118,6 +118,11 @@ Route::get('profit-loss-filtered-report','ProfitLossReportController@report');
 Route::get('download-profit-loss-report','ProfitLossReportController@download');
 Route::post('share-profit-loss-report','ProfitLossReportController@share');
 
+Route::get('balance-sheet-filtered-report','BalanceSheetReportController@report');
+Route::get('download-balance-sheet-report','BalanceSheetReportController@download');
+Route::post('share-balance-sheet-report','BalanceSheetReportController@share');
+Route::get('nyau','BalanceSheetReportController@share');
+
 
 //Notifications
 Route::resource('notifications','NotificationsController');

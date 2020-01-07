@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('img3')->nullable();
             $table->string('img4')->nullable();
             $table->string('img5')->nullable();
-            $table->tinyInteger('type')->nullable();
+            $table->tinyInteger('type')->default(2);
             $table->tinyInteger('virtualProduct')->nullable();
             $table->float('price')->default(0.00);
             $table->float('cost')->default(0.00);

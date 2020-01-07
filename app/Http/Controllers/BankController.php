@@ -108,7 +108,7 @@ class BankController extends Controller
     private function get_bank_bal()
     {
       $totalExpenses = $this->get_total_expenses() + $this->get_total_paid_to_suppliers();
-      $totalRevenue = $this->get_total_revenue() + $this->get_total_revenue_received_from_bookings();
+      $totalRevenue = $this->get_total_revenue() + $this->get_total_revenue_received_from_bookings() + $this->get_total_sales();
 
 
       return $bankBal = $totalRevenue - $totalExpenses;

@@ -10,16 +10,15 @@
         <li>All departments</li>
       </ul>
 
-      <ul class="mt-2">
+      <!--<ul class="mt-2">
         <li>Date: {{date('d-M-Y',time())}}</li>
-      </ul>
+      </ul>-->
     </div>
 
     <div class="col-xs-4">
       <ul>
-        @if(count($totals))
-        <li><strong>Period</strong></li>
-        <li>{{$StartDate}} <span class="fa fa-arrow-right"></span> {{$EndDate}} </li>
+        @if(count($data))
+        <li><strong>As of: {{date('d-M-Y',time())}}</strong></li>
         @endif
       </ul>
     </div>
@@ -34,8 +33,8 @@
         <thead>
           <tr>
             <th>Particulars</th>
-            <th>Debit amount (Ksh.)</th>
-            <th>Credit amount (Ksh.)</th>
+            <th>KES</th>
+            <th>KES</th>
           </tr>
         </thead>
         <tbody>
@@ -49,31 +48,43 @@
           <tr>
             <td data-label="Particulars"><u>Non-current assets</u></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
+            <td data-label="Credit amount (000')"><strong>{{number_format($data['totalFixedAssets'],2)}}</strong></td>
           </tr>
-
+          @foreach( $data['fixedAssets'] as $fixedAsset )
           <tr>
-            <td data-label="Particulars">Bookings</td>
-            <td data-label="Debit amount (000')"></td>
+            <td data-label="Particulars">{{$fixedAsset->name}}</td>
+            <td data-label="Debit amount (000')">{{number_format($fixedAsset->cost,2)}}</td>
             <td data-label="Credit amount (000')"></td>
           </tr>
-
-          <tr>
-            <td data-label="Particulars">Other revenue</td>
-            <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
-          </tr>
-
+          @endforeach
           <tr>
             <td data-label="Particulars"><u>Current assets</u></td>
             <td data-label="Debit amount (000')"></td>
+            <td data-label="Credit amount (000')"><strong>{{number_format($data['currentAssetsTotal'],2)}}</strong></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars">Inventory</td>
+            <td data-label="Debit amount (000')">{{number_format($data['inventory'],2)}}</td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars">Debtors / Receivables</td>
+            <td data-label="Debit amount (000')">{{number_format($data['debtors'],2)}}</td>
+            <td data-label="Credit amount (000')"></td>
+          </tr>
+
+          <tr>
+            <td data-label="Particulars">Cash at Bank</td>
+            <td data-label="Debit amount (000')">{{number_format($data['bankBal'],2)}}</td>
             <td data-label="Credit amount (000')"></td>
           </tr>
 
           <tr>
             <td data-label="Particulars"><strong>TOTAL ASSETS</strong></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
+            <td data-label="Credit amount (000')"><strong>{{number_format($data['totalAssets'],2)}}</strong></td>
           </tr>
 
           <tr>
@@ -101,7 +112,7 @@
           </tr>
 
           <tr>
-            <td data-label="Particulars">10% Loan</td>
+            <td data-label="Particulars">Loan</td>
             <td data-label="Debit amount (000')"></td>
             <td data-label="Credit amount (000')"></td>
           </tr>
@@ -109,19 +120,19 @@
           <tr>
             <td data-label="Particulars"><u>Current Liabilities</u></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
+            <td data-label="Credit amount (000')"><strong>{{number_format($data['currentLiabilitiesTotal'],2)}}</strong></td>
           </tr>
 
           <tr>
             <td data-label="Particulars">Creditors / payables</td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
+            <td data-label="Credit amount (000')">{{number_format($data['payables'],2)}}</td>
           </tr>
 
           <tr>
             <td data-label="Particulars"><strong>TOTAL EQUITY AND LIABILITIES</strong></td>
             <td data-label="Debit amount (000')"></td>
-            <td data-label="Credit amount (000')"></td>
+            <td data-label="Credit amount (000')"><strong>{{number_format($data['totalEquityLiabilities'],2)}}</strong></td>
           </tr>
 
 
