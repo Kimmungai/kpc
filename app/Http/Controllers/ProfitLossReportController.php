@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\ProfitLossReport;
 use App\Expense;
 use App\Revenue;
 use App\Booking;
@@ -104,7 +107,9 @@ class ProfitLossReportController extends Controller
       {
         if( $duration_sort == 'year' )
           return Booking::whereYear('created_at', $startDate)->where('paid',1)->get()->sum('bookingAmountReceived');
-        else
+        elseif( $duration_sort == 'month' )
+          return Booking::whereMonth('created_at', $startDate )->where('paid',1)->get()->sum('bookingAmountReceived');
+        elseif( $duration_sort == 'day' )
           return Booking::whereDay('created_at', $startDate )->where('paid',1)->get()->sum('bookingAmountReceived');
       }
       return Booking::where('paid',1)->get()->sum('bookingAmountReceived');
@@ -123,7 +128,9 @@ class ProfitLossReportController extends Controller
       {
         if( $duration_sort == 'year' )
           return Revenue::whereYear('created_at', $startDate)->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
-        else
+        elseif( $duration_sort == 'month' )
+          return Revenue::whereMonth('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+        elseif( $duration_sort == 'day' )
           return Revenue::whereDay('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
       }
       return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
@@ -142,7 +149,9 @@ class ProfitLossReportController extends Controller
       {
         if( $duration_sort == 'year' )
           return Purchase::whereYear('created_at', $startDate)->where('paid',1)->get()->sum('amountPaid');
-        else
+        elseif( $duration_sort == 'month' )
+          return Purchase::whereMonth('created_at', $startDate )->where('paid',1)->get()->sum('amountPaid');
+        elseif( $duration_sort == 'day' )
           return Purchase::whereDay('created_at', $startDate )->where('paid',1)->get()->sum('amountPaid');
       }
       return Purchase::where('paid',1)->get()->sum('amountPaid');
@@ -161,8 +170,10 @@ class ProfitLossReportController extends Controller
       {
         if( $duration_sort == 'year' )
           return Expense::whereYear('created_at', $startDate)->where('paid',1)->where('purchase_id',null)->get()->sum('total');
-        else
+        elseif( $duration_sort == 'day' )
           return Expense::whereDay('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('total');
+        elseif( $duration_sort == 'month' )
+          return Expense::whereMonth('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('total');
       }
       return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('total');
     }
@@ -281,6 +292,74 @@ class ProfitLossReportController extends Controller
 
       $docs = $totals;
       $pdf = PDF::loadView('pdf.profit-loss-report',compact('docs','startDate','endDate'));
-      return $pdf->stream();
+      return $pdf->download();
+    }
+
+    /*
+    *Share profit & loss report
+    */
+    public function share(Request $request)
+    {
+      $request->validate([
+        'email' => 'required|email|max:255',
+        'duration_sort' => 'required|max:255',
+        'filter_from' => 'nullable|max:255',
+        'filter_to' => 'nullable|max:255',
+      ]);
+
+      $email = $request->email;
+      $duration_sort =$request->duration_sort;
+      $filter_from =$request->filter_from;
+      $filter_to = $request->filter_to;
+
+      //send email
+      $pathToPDF = $this->tmp_pdf_path($duration_sort,$filter_from,$filter_to);
+      Mail::to($email)->send(new ProfitLossReport($pathToPDF));
+      unlink($pathToPDF);
+    }
+
+    public function tmp_pdf_path($duration_sort,$filter_from,$filter_to)
+    {
+      $dt = Carbon::now();
+
+      if($duration_sort === 'thisWeek'){
+        $startDate =$dt->startOfWeek();
+        $endDate = $dt->copy()->endOfWeek();
+        $totals = $this->get_totals( $startDate, $endDate, 'dates' );
+        //$purchases= Purchase::whereDate('created_at','>=', $dt->startOfWeek())->whereDate('created_at','<=', $dt->endOfWeek())->orderBy('created_at','DESC')->get();
+      }
+      elseif($duration_sort === 'thisYear') {
+        $startDate =$dt->startOfYear();
+        $endDate = $dt->copy()->endOfYear();
+        $totals = $this->get_totals( $dt->year, '', 'year' );
+        //$purchases= Purchase::whereYear('created_at', $dt->year)->orderBy('created_at','DESC')->get();
+      }
+      elseif($duration_sort === 'today'){
+        $startDate =$dt->today();
+        $endDate = $dt->copy()->today();
+        $totals = $this->get_totals( $dt->day, '', 'day' );
+        //$purchases= Purchase::whereDay('created_at', $dt->day )->orderBy('created_at','DESC')->get();
+      }
+      elseif($duration_sort === 'dates'){
+        $startDate = Carbon::now()->startOfMonth();
+        if($filter_from != ''){ $startDate = Carbon::create($filter_from);}
+        $endDate = Carbon::now();
+        if($filter_to != ''){ $endDate =Carbon::create($filter_to); }
+        $totals = $this->get_totals( $startDate, $endDate, 'dates' );
+        //$purchases= Purchase::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->orderBy('created_at','DESC')->get();
+      }
+      else {
+        $startDate =$dt->startOfMonth();
+        $endDate = $dt->copy()->endOfMonth();
+        $totals = $this->get_totals( $dt->month, '', 'dates' );
+        //$purchases= Purchase::whereMonth('created_at', $dt->month)->orderBy('created_at','DESC')->get();
+      }
+
+
+      $docs = $totals;
+      $pdf = PDF::loadView('pdf.profit-loss-report',compact('docs','startDate','endDate'));
+      $pathToPDF = 'doc-'.$dt.'.pdf';
+      $pdf->save($pathToPDF);
+      return $pathToPDF;
     }
 }

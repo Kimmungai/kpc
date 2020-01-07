@@ -54,7 +54,7 @@ function share_report(route)
     function(data,status){
       //show result box
     });
-    
+
     alert("The document is being sent. It can take a few minutes to get to recipient.");
 
 }

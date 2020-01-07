@@ -58,7 +58,7 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                              Revenue Report
+                              Profit & Loss Report
                             </a>
                         </td>
                     </tr>
@@ -77,7 +77,7 @@ $style = [
                                         <!-- Intro -->
 
                                             <p style="{{ $style['paragraph'] }}">
-                                                Please find attached revenue report.
+                                                Please find attached Profit report.
                                             </p>
 
 

@@ -116,6 +116,7 @@ Route::get('inventory-filtered-report','InventoryReportController@report');
 
 Route::get('profit-loss-filtered-report','ProfitLossReportController@report');
 Route::get('download-profit-loss-report','ProfitLossReportController@download');
+Route::post('share-profit-loss-report','ProfitLossReportController@share');
 
 
 //Notifications

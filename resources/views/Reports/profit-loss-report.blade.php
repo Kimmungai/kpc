@@ -25,7 +25,7 @@
 						<div class="row mt-2">
 
 							<div class="col-xs-6">
-								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-procurement-report')"><span class="fa fa-share-alt"></span> Share</a>
+								<a href="#" class="btn btn-sm btn-default btn-block" title="Click to share document via email" onclick="share_report('/share-profit-loss-report')"><span class="fa fa-share-alt"></span> Share</a>
 							</div>
 							<div class="col-xs-6">
 								<form id="download-form" class="hidden" action="/download-profit-loss-report" method="get">
