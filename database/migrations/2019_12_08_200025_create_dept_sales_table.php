@@ -21,6 +21,7 @@ class CreateDeptSalesTable extends Migration
             $table->double('saleAmountDue')->nullable();
             $table->integer('modeOfPayment')->nullable();
             $table->string('transactionCode')->nullable();
+            $table->text('remarks')->nullable();
             $table->tinyInteger('paid')->nullable();
             $table->timestamps();
         });

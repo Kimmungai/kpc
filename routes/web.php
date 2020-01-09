@@ -136,6 +136,7 @@ Route::post('requisition-approval','RequisitionAjaxController@requisition_approv
 Route::post('requisition-goods-received','RequisitionAjaxController@requisition_goods_received');
 
 //Sale
+Route::get('sort-sales','SaleController@index');
 Route::resource('sale','SaleController');
 Route::get('download-sales-report','SaleController@download');
 Route::post('share-sales-report','SaleController@share');

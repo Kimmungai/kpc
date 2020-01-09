@@ -840,3 +840,6 @@ input:checked + .slider-xs:before {
 .bank-acc table td a:hover{
   text-decoration: underline;
 }
+.show-sale-table table thead th{
+  color: #424242;
+}
