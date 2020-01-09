@@ -216,5 +216,5 @@ function empty_cart( tableID='cart-items',formId = 'booking-form' )
   $('#'+formId+' select[name=modeOfPayment]').val('');
   $('#'+formId+' input[name=transactionCode]').val('');
   $('#'+formId+' input[name=saleAmountDue]').val('');
-  
+
 }

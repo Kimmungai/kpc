@@ -24,6 +24,9 @@ class CreateExpensesTable extends Migration
             $table->float('cost')->default(0.00);
             $table->integer('suppliedQuantity')->default(0);
             $table->float('total')->default(0.00);
+            $table->float('amountDue')->default(0.00);
+            $table->float('amountReceived')->default(0.00);
+            $table->float('balance')->default(0.00);
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

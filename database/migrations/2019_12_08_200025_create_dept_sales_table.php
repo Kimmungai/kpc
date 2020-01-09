@@ -22,7 +22,7 @@ class CreateDeptSalesTable extends Migration
             $table->integer('modeOfPayment')->nullable();
             $table->string('transactionCode')->nullable();
             $table->text('remarks')->nullable();
-            $table->tinyInteger('paid')->nullable();
+            $table->tinyInteger('paid')->default(0);
             $table->timestamps();
         });
     }

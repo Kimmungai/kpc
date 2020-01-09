@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Revenue extends Model
 {
   use SoftDeletes;
-
+  protected $guarded = ['id'];
+  
   public function Booking()
   {
     return $this->belongsTo('App\Booking');
