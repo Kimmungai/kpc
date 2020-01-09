@@ -18,7 +18,7 @@
 
 					<div class="inner_content_w3_agile_info two_in">
 					 <!-- <h4 class="w3_inner_tittle text-bold text-capitalize mb-2">Department registration</h4>-->
-            @component( 'components.confirm-modal',[ 'formId' => 'newDeptForm', 'heading' => 'New Department datails', 'message' => 'Are you sure you want to save new department details?', 'closeBtn' => 'No, please cancel ', 'saveBtn' => 'Yes, please save' ] )
+            @component( 'components.confirm-modal',[ 'formId' => 'newDeptForm', 'heading' => 'New Department datails', 'message' => 'Are you sure you want to save new department details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
 
             @endcomponent
 						<!--/forms-->
@@ -45,7 +45,7 @@
 														 <div class="row mt-2 dept-details">
 							                    @component( 'components.dept-reg-form' )@endcomponent
 							                </div>
-							               
+
 
 
 														<div class="row">

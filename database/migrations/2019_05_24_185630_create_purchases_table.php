@@ -23,6 +23,7 @@ class CreatePurchasesTable extends Migration
             $table->tinyInteger('paid')->default(0);
             $table->integer('paymentMethod')->nullable();
             $table->text('remarks')->nullable();
+            $table->string('paymentDueDate')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

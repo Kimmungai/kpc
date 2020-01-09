@@ -150,6 +150,7 @@ Route::post('share-expenditure-report','ExpenditureReportController@share');
 Route::resource('revenue','RevenueController');
 Route::get('download-revenue-report','RevenueReportController@download');
 Route::post('share-revenue-report','RevenueReportController@share');
+Route::put('revenue-payment/{revenue}','RevenueController@revenue_payment')->name('revenue.payment');
 
 //Bank
 Route::resource('bank','BankController');

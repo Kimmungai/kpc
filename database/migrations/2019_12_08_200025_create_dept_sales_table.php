@@ -23,6 +23,7 @@ class CreateDeptSalesTable extends Migration
             $table->string('transactionCode')->nullable();
             $table->text('remarks')->nullable();
             $table->tinyInteger('paid')->default(0);
+            $table->string('paymentDueDate')->nullable();
             $table->timestamps();
         });
     }
