@@ -27,7 +27,7 @@ class CreateExpensesTable extends Migration
             $table->integer('suppliedQuantity')->default(0);
             $table->float('total')->default(0.00);
             $table->float('amountDue')->default(0.00);
-            $table->float('amountReceived')->default(0.00);
+            $table->float('amountPaid')->default(0.00);
             $table->float('balance')->default(0.00);
             $table->tinyInteger('modeOfPayment')->nullable();
             $table->string('transactionCode')->nullable();

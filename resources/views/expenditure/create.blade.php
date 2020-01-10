@@ -10,16 +10,16 @@
 							<div class="w3l_agileits_breadcrumbs_inner">
 								<ul>
 									<li><a href="/home">Home</a><span>«</span></li>
-                  <li><a href="/users">All revenue</a><span>«</span></li>
-									<li>New revenue</li>
+                  <li><a href="/users">All expenses</a><span>«</span></li>
+									<li>New expenditure</li>
 								</ul>
 							</div>
 						</div>
 					<!-- //breadcrumbs -->
 
 					<div class="inner_content_w3_agile_info two_in">
-					  <h2 class="w3_inner_tittle">New Revenue</h2>
-            @component( 'components.confirm-modal',[ 'formId' => 'newRevenueForm', 'heading' => 'New revenue datails', 'message' => 'Are you sure you want to save new revenue details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
+					  <h2 class="w3_inner_tittle">New Expenditure</h2>
+            @component( 'components.confirm-modal',[ 'formId' => 'newExpenditureForm', 'heading' => 'New expenditure datails', 'message' => 'Are you sure you want to save new expenditure details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
 
             @endcomponent
 
@@ -41,10 +41,10 @@
 
 
 
-	                           <form class="form-horizontal" id="newRevenueForm" action="{{route('revenue.store')}}" method="post" enctype="multipart/form-data">
+	                           <form class="form-horizontal" id="newExpenditureForm" action="{{route('expenditure.store')}}" method="post" enctype="multipart/form-data">
 	                             @csrf
 
-	                             @component( 'components.revenue-reg-form' )
+	                             @component( 'components.expense-reg-form' )
 
 	                             @endcomponent
 

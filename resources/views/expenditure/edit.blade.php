@@ -10,16 +10,16 @@
 							<div class="w3l_agileits_breadcrumbs_inner">
 								<ul>
 									<li><a href="/home">Home</a><span>«</span></li>
-                  <li><a href="/users">All revenue</a><span>«</span></li>
-									<li>New revenue</li>
+                  <li><a href="{{route('expenditure.index')}}">All expenses</a><span>«</span></li>
+									<li>Expenditure-{{$expense->id}}</li>
 								</ul>
 							</div>
 						</div>
 					<!-- //breadcrumbs -->
 
 					<div class="inner_content_w3_agile_info two_in">
-					  <h2 class="w3_inner_tittle">New Revenue</h2>
-            @component( 'components.confirm-modal',[ 'formId' => 'newRevenueForm', 'heading' => 'New revenue datails', 'message' => 'Are you sure you want to save new revenue details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
+					  <h2 class="w3_inner_tittle">Edit Expenditure-{{$expense->id}}</h2>
+            @component( 'components.confirm-modal',[ 'formId' => 'editExpenditureForm', 'heading' => 'Edit expense-'.$expense->id.' datails', 'message' => 'Are you sure you want to update expense-'.$expense->id.' details?', 'closeBtn' => 'No', 'saveBtn' => 'Yes' ] )
 
             @endcomponent
 
@@ -41,10 +41,11 @@
 
 
 
-	                           <form class="form-horizontal" id="newRevenueForm" action="{{route('revenue.store')}}" method="post" enctype="multipart/form-data">
+	                           <form class="form-horizontal" id="editExpenditureForm" action="{{route('expenditure.update',$expense->id)}}" method="post" enctype="multipart/form-data">
 	                             @csrf
+															 @method('PUT')
 
-	                             @component( 'components.revenue-reg-form' )
+	                             @component( 'components.expense-reg-form',['expense'=>$expense] )
 
 	                             @endcomponent
 
@@ -68,7 +69,9 @@
 
 										 <div class="row">
 												<div class="col-sm-12">
-													<a class="btn btn-default btn-lg center-block" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Save</a>
+													<a class="btn btn-default btn-lg" title="Click to permanently delete record" data-toggle="modal" data-target="#deleteConfirmModal"><span class="fa fa-warning"></span> Delete</a>
+
+													<a class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#confirmModal"><span class="fa fa-save"></span> Update</a>
 												</div>
 											</div>
 
@@ -85,4 +88,11 @@
 					<!-- //inner_content_w3_agile_info-->
 				</div>
 		<!-- //inner_content-->
+		@if( Auth::user()->type == 3 || Auth::user()->type == -1)
+		@component( 'components.delete-confirm-modal',[ 'formId' => 'deleteExpenseForm', 'closeBtn' => 'No ', 'saveBtn' => 'Yes' ] ) @endcomponent
+		<form class="d-none hidden" id="deleteExpenseForm" action="{{route('expenditure.destroy',$expense->id)}}" method="post">
+		  @csrf
+		  @method('DELETE')
+		</form>
+		@endif
 @endsection

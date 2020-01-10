@@ -145,6 +145,7 @@ Route::post('share-sales-report','SaleController@share');
 Route::resource('expenditure','ExpenditureController');
 Route::get('download-expenditure-report','ExpenditureReportController@download');
 Route::post('share-expenditure-report','ExpenditureReportController@share');
+Route::put('expenditure-payment/{expense}','ExpenditureController@expense_payment')->name('expenditure.payment');
 
 //Revenue
 Route::resource('revenue','RevenueController');
