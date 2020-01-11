@@ -51,6 +51,8 @@
 <link href="{{ asset('css/requisition.css') }}" rel="stylesheet">
 <script src="{{ asset('js/requisition.js') }}" defer></script>
 @endif
+<link href="{{ asset('css/algolia.css') }}" rel="stylesheet">
+
 <!-- font-awesome-icons -->
 <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
 <!--<link href="{{url('site-theme/css/font-awesome.css') }}" rel="stylesheet">-->
@@ -337,6 +339,12 @@ var chart = AmCharts.makeChart("chartdiv", {
     });
 </script>
 @endif
+
+<!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+<script src="{{ asset('js/algolia.js') }}"></script>
+
 <div class="loading-square hidden d-none" >
 	<img src="{{asset('images/loading.gif')}}" alt="">
 </div>
