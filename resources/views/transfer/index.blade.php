@@ -12,8 +12,7 @@
                   @if( isset($dept) )
                   <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
                   @endif
-									<li><a href="/bookings-registration">Bookings</a> <span>«</span></li>
-                  <li>New Booking</li>
+                  <li>Transfer</li>
 	              </ul>
 	            </div>
 	          </div>

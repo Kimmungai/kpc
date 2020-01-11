@@ -136,7 +136,7 @@
                        <thead>
                          <tr>
                            <td>Amount</td>
-                           <td>Client</td>
+                           <td>Title</td>
                            <td>Details</td>
                            <td>Date</td>
                          </tr>
@@ -145,8 +145,8 @@
 
                          @foreach( $revenues as $revenue )
                            <tr>
-                             <td  data-label="Amount">KES {{number_format($revenue->total,2)}}</td>
-                             <td  data-label="Client"><a href="{{url('profile')}}/{{$revenue->user_id}}">@if($revenue->User){{$revenue->User->name}}@endif</a></td>
+                             <td  data-label="Amount">KES {{number_format($revenue->amountReceived,2)}}</td>
+                             <td  data-label="Title"><a href="{{route('revenue.show',$revenue->id)}}">{{$revenue->title}}</a></td>
                              <td  data-label="Details">Money in </td>
                              <td>{{ \Carbon\Carbon::parse($revenue->created_at)->diffForHumans() }}</td>
                            </tr>
@@ -218,7 +218,7 @@
                        <thead>
                          <tr>
                            <td>Amount</td>
-                           <td>Client</td>
+                           <td>Title</td>
                            <td>Details</td>
                            <td>Date</td>
                          </tr>
@@ -227,8 +227,8 @@
 
                          @foreach( $expenses as $expense )
                            <tr>
-                             <td  data-label="Amount">KES {{number_format($expense->total,2)}}</td>
-                             <td  data-label="Client"><a href="{{url('profile')}}/{{$expense->user_id}}">@if($expense->User){{$expense->User->name}}@endif</a></td>
+                             <td  data-label="Amount">KES {{number_format($expense->amountPaid,2)}}</td>
+                             <td  data-label="Title"><a href="{{route('expenditure.show',$expense->id)}}">{{$expense->title}}</a></td>
                              <td  data-label="Details">Money out </td>
                              <td>{{ \Carbon\Carbon::parse($expense->created_at)->diffForHumans() }}</td>
                            </tr>

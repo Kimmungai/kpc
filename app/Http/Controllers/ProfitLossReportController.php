@@ -122,18 +122,18 @@ class ProfitLossReportController extends Controller
     {
       if($startDate && $endDate && $duration_sort)
       {
-        return Revenue::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+        return Revenue::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
       }
       elseif( $startDate && $duration_sort )
       {
         if( $duration_sort == 'year' )
-          return Revenue::whereYear('created_at', $startDate)->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+          return Revenue::whereYear('created_at', $startDate)->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
         elseif( $duration_sort == 'month' )
-          return Revenue::whereMonth('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+          return Revenue::whereMonth('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
         elseif( $duration_sort == 'day' )
-          return Revenue::whereDay('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+          return Revenue::whereDay('created_at', $startDate )->where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
       }
-      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
     }
 
     /*
@@ -164,18 +164,18 @@ class ProfitLossReportController extends Controller
     {
       if($startDate && $endDate && $duration_sort)
       {
-        return Expense::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->where('paid',1)->where('purchase_id',null)->get()->sum('total');
+        return Expense::whereDate('created_at','>=', $startDate)->whereDate('created_at','<=', $endDate)->where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
       }
       elseif( $startDate && $duration_sort )
       {
         if( $duration_sort == 'year' )
-          return Expense::whereYear('created_at', $startDate)->where('paid',1)->where('purchase_id',null)->get()->sum('total');
+          return Expense::whereYear('created_at', $startDate)->where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
         elseif( $duration_sort == 'day' )
-          return Expense::whereDay('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('total');
+          return Expense::whereDay('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
         elseif( $duration_sort == 'month' )
-          return Expense::whereMonth('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('total');
+          return Expense::whereMonth('created_at', $startDate )->where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
       }
-      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('total');
+      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
     }
 
     /*

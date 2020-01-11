@@ -96,7 +96,7 @@
       <span class="input-group-addon">
         <i class="fas fa-calendar-alt"></i>
       </span>
-      <input name="paymentDueDate" id="paymentDueDate" type="text" class="form-control numeric" value="@if( old('paymentDueDate') ) {{old('paymentDueDate')}} @elseif( isset($revenue) ) {{$revenue->paymentDueDate}} @endif" placeholder="Enter digits only..." onblur="validate(this.id,{required:0,min:1},this.value)"/>
+      <input name="paymentDueDate" id="paymentDueDate" type="text" class="form-control numeric" value="@if( old('paymentDueDate') ) {{old('paymentDueDate')}} @elseif( isset($revenue) ) {{$revenue->paymentDueDate}} @endif" placeholder="Choose a date..." onblur="validate(this.id,{required:0,min:1},this.value)"/>
     </div>
   </div>
   <div class="col-sm-2">

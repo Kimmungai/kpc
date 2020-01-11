@@ -161,7 +161,7 @@
 												<a href="/product-registration/"><i class="fa fa-database"></i></a>
 											</dt>
 											<dd>
-												<h3 @if( Auth::user()->type != 1  ) class="mb-2" @endif><a href="/dept-registration/{{$dept->id}}/edit">Stock</a></h3>
+												<h3 @if( Auth::user()->type != 1  ) class="mb-2" @endif><a href="/product-registration/">Stock</a></h3>
 												@if( Auth::user()->type == 1  )
 												<p class="text-underline">Click to view</p>
 												<p>Available stock</p>

@@ -290,7 +290,8 @@ class RequisitionAjaxController extends Controller
         $expense->product_id = $product->id;
         $expense->cost = $reqProd->cost;
         $expense->user_id=$purchase->user_id;
-        $expense->paid=$purchase->paid;
+        if( $purchase->paid )
+          $expense->paid=$purchase->paid;
         $expense->suppliedQuantity = $reqProd->quantity;
         $expense->total = ($reqProd->cost * $reqProd->quantity);
         $expense->save();

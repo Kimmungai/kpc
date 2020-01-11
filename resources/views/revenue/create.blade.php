@@ -10,7 +10,10 @@
 							<div class="w3l_agileits_breadcrumbs_inner">
 								<ul>
 									<li><a href="/home">Home</a><span>«</span></li>
-                  <li><a href="/users">All revenue</a><span>«</span></li>
+									@if( isset($dept) )
+                  <li class="text-capitalize"><a href="/dept-registration/{{$dept->id}}">{{$dept->name}}</a> <span>«</span></li>
+                  @endif
+                  <li><a href="{{route('revenue.index')}}">All revenue</a><span>«</span></li>
 									<li>New revenue</li>
 								</ul>
 							</div>

@@ -126,7 +126,7 @@ class BankController extends Controller
     */
     protected function get_total_expenses()
     {
-      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('total');
+      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
     }
 
     /*
@@ -134,7 +134,7 @@ class BankController extends Controller
     */
     protected function get_total_revenue()
     {
-      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
     }
 
     /*

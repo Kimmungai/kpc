@@ -120,7 +120,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_fixed_assets()
     {
-      return Product::where('type',2)->get();
+      return Product::where('type',1)->get();
     }
 
     /*
@@ -128,7 +128,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_value_of_fixed_assets()
     {
-      return Product::where('type',2)->sum('cost');
+      return Product::where('type',1)->sum('cost');
     }
 
     /*
@@ -136,7 +136,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_current_assets()
     {
-      return Product::where('type',1)->get();
+      return Product::where('type',2)->get();
     }
 
     /*
@@ -144,7 +144,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_value_of_current_assets()
     {
-      return Product::where('type',1)->sum('cost');
+      return Product::where('type',2)->sum('cost');
     }
 
     /*
@@ -170,7 +170,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_total_expenses()
     {
-      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('total');
+      return Expense::where('paid',1)->where('purchase_id',null)->get()->sum('amountPaid');
     }
 
     /*
@@ -178,7 +178,7 @@ class BalanceSheetReportController extends Controller
     */
     protected function get_total_revenue()
     {
-      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('total');
+      return Revenue::where('paid',1)->where('booking_id',null)->where('dept_sales_id',null)->get()->sum('amountReceived');
     }
 
     /*
