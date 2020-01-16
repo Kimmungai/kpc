@@ -172,7 +172,7 @@ class InventoryReportController extends Controller
 
       //send email
       $pathToPDF = $this->tmp_pdf_path($duration_sort,$filter_from,$filter_to);
-      Mail::to($email)->send(new InventoryReport($pathToPDF));
+      Mail::to($email)->queue(new InventoryReport($pathToPDF));
       unlink($pathToPDF);
     }
 

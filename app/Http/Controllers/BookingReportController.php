@@ -175,7 +175,7 @@ class BookingReportController extends Controller
 
       //send email
       $pathToPDF = $this->tmp_pdf_path($duration_sort,$filter_from,$filter_to);
-      Mail::to($email)->send(new BookingReport($pathToPDF));
+      Mail::to($email)->queue(new BookingReport($pathToPDF));
       unlink($pathToPDF);
       return 1;
     }

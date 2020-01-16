@@ -77,7 +77,6 @@ Route::resource('product-registration','ProductRegistrationController');
 Route::post('find-product','ProductsAjaxController@find_product');
 Route::post('save-cart','ProductsAjaxController@save_cart');
 Route::post('make-sale','ProductsAjaxController@make_sale');
-Route::get('nyau','RequisitionAjaxController@requisition_goods_received');
 
 //Bookings
 Route::post('save-booking','BookingsAjaxController@save_booking');

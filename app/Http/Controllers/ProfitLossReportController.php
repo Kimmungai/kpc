@@ -314,7 +314,7 @@ class ProfitLossReportController extends Controller
 
       //send email
       $pathToPDF = $this->tmp_pdf_path($duration_sort,$filter_from,$filter_to);
-      Mail::to($email)->send(new ProfitLossReport($pathToPDF));
+      Mail::to($email)->queue(new ProfitLossReport($pathToPDF));
       unlink($pathToPDF);
     }
 

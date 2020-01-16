@@ -101,6 +101,7 @@ class BookingsRegistrationController extends Controller
     public function store(StoreBooking $request)
     {
         $bookingData = $this->booking_data( $request );
+        $bookingData['paid'] = 0; //booking not yet paid
         //create booking
         $booking = Booking::create( $bookingData );
         if( $booking->bookingAmountDue <= $booking->bookingAmountReceived )

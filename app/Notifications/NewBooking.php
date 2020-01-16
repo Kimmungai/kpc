@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewBooking extends Notification
+class NewBooking extends Notification implements ShouldQueue
 {
     use Queueable;
     private $details;

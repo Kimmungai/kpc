@@ -115,7 +115,7 @@ class PurchasesAjaxController extends Controller
       $pdf = PDF::loadView('pdf.purchase-report',compact('doc'));
       $pathToPDF = 'doc-'.$doc->id.'.pdf';
       $pdf->save($pathToPDF);
-      Mail::to($email)->send(new PurchaseMail($pathToPDF));
+      Mail::to($email)->queue(new PurchaseMail($pathToPDF));
       unlink($pathToPDF);
       return 1;
     }

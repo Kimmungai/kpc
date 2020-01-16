@@ -51,7 +51,7 @@ class BookingsAjaxController extends Controller
         $pdf = PDF::loadView('pdf.booking-report',compact('doc'));
         $pathToPDF = 'doc-'.$doc->id.'.pdf';
         $pdf->save($pathToPDF);
-        Mail::to(env('ADMIN_EMAIL','kimpita9@gmail.com'))->send(new BookingMail($pathToPDF));
+        Mail::to(env('ADMIN_EMAIL','kimpita9@gmail.com'))->queue(new BookingMail($pathToPDF));
         unlink($pathToPDF);
         return 1;
       }
@@ -119,12 +119,12 @@ class BookingsAjaxController extends Controller
       $email = $request->email;
       $booking = Booking::find($request->id);
 
-      //send email
+      //queue email
       $doc = $booking;
       $pdf = PDF::loadView('pdf.booking-report',compact('doc'));
       $pathToPDF = 'doc-'.$doc->id.'.pdf';
       $pdf->save($pathToPDF);
-      Mail::to($email)->send(new BookingMail($pathToPDF));
+      Mail::to($email)->queue(new BookingMail($pathToPDF));
       unlink($pathToPDF);
       return 1;
     }

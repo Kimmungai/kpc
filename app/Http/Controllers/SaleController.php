@@ -215,7 +215,7 @@ class SaleController extends Controller
 
       //send email
       $pathToPDF = $this->tmp_pdf_path($duration_sort,$filter_from,$filter_to);
-      Mail::to($email)->send(new SalesReport($pathToPDF));
+      Mail::to($email)->queue(new SalesReport($pathToPDF));
       unlink($pathToPDF);
       return 1;
     }
