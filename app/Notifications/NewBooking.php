@@ -6,11 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class NewBooking extends Notification implements ShouldQueue
 {
     use Queueable;
-    private $details;
+    public $details;
     /**
      * Create a new notification instance.
      *
@@ -29,7 +30,7 @@ class NewBooking extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database','broadcast'];
     }
 
     /**
@@ -64,4 +65,21 @@ class NewBooking extends Notification implements ShouldQueue
           'booker_avatar' => $this->details['booker_avatar'],
       ];
     }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toBroadcast($notifiable)
+    {
+      return new BroadcastMessage([
+          'booking_id' => $this->details['booking_id'],
+          'dept_name' => $this->details['dept_name'],
+          'booker_name' => $this->details['booker_name'],
+          'booker_avatar' => $this->details['booker_avatar'],
+      ]);
+    }
+
 }

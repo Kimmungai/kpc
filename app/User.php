@@ -65,4 +65,11 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\Requisition', 'request_by');
     }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'App.User.'.$this->id;
+    }
+
+
 }

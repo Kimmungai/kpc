@@ -1,6 +1,6 @@
 <!-- /w3_agileits_top_nav-->
 <!-- /nav-->
-<div class="w3_agileits_top_nav">
+<div  class="w3_agileits_top_nav">
 
   <ul id="gn-menu" class="gn-nav-menu-main">
     <div class="row">
@@ -109,16 +109,19 @@
                   <?php $notificationCount++ ?>
                 @endif
               @endforeach
-									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="Notifications"><i class="fa fa-bell" aria-hidden="true"></i> @if($notificationCount) <span class="badge blue">{{$notificationCount}}</span> @endif</a>
-										<ul class="dropdown-menu">
+									<li id="app" class="dropdown head-dpdn">
+										<notification-component :id="{{Auth::id()}}" :unreads="{{Auth::user()->unreadNotifications}}"></notification-component>
+										<ul id="bookings-notification-dropdown" class="dropdown-menu">
 											<li>
 												<div class="notification_header">
 													<h3>You have {{$notificationCount}} new bookings notifications</h3>
 												</div>
 											</li>
+                      <?php $count = 0 ?>
                       @foreach( Auth::user()->unreadNotifications as $notification )
+
                         @if( $notification->type == 'App\Notifications\NewBooking' )
+                        <?php $count++ ?>
     											<li><a href="{{route('bookings-registration.show',$notification->data['booking_id'])}}">
     												<div class="user_img"><img src="{{url('/images/avatar-male.png')}}" alt=""></div>
     											   <div class="notification_desc">
@@ -129,6 +132,7 @@
     											  <div class="clearfix"></div>
     											 </a></li>
                           @endif
+                          <?php if($count > 2){break;} ?>
                         @endforeach
 
 
@@ -149,7 +153,7 @@
 
     @if(Auth::check())
       @if( Auth::user()->type == -1 || Auth::user()->type == 3 || Auth::user()->type == 1 )
-    <div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
+    <!--<div class="col-xs-3 col-sm-1" style="padding-bottom:5px;">
       <li class="second top_bell_nav">
          <ul class="top_dp_agile ">
            <?php $notificationCount = 0 ?>
@@ -192,7 +196,7 @@
 
           </ul>
       </li>
-    </div>
+    </div>-->
     @endif
   @endif
 

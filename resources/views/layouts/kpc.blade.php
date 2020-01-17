@@ -8,7 +8,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Scripts -->
-<!--<script src="{{ asset('js/app.js') }}" defer></script>-->
+<script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/kpc-validator.js') }}" defer></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}" defer></script>
 <script src="{{ asset('js/kpc-datepicker.js') }}" defer></script>
@@ -41,9 +41,9 @@
 <link href="{{url('site-theme/css/style_grid.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{url('site-theme/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
 <!-- custom Styles -->
-<!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
-<link href="{{ asset('css/kpc-extras.css') }}" rel="stylesheet">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/kpc-extras.css') }}" rel="stylesheet">
+<link href="{{ asset('css/master.css') }}" rel="stylesheet">
 <link href="{{ asset('css/purchase.show.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
@@ -87,6 +87,7 @@
 			</div>
 		@endif
 
+		
 
 		@yield('content')
 
@@ -292,7 +293,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 			});
 		});
 		</script>
-		<script src="{{url('site-theme/js/flipclock.js') }}"></script>
+		<!--<script src="{{url('site-theme/js/flipclock.js') }}"></script>
 
 	<script type="text/javascript">
 		var clock;
@@ -303,7 +304,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 		        clockFace: 'HourlyCounter'
 		    });
 		});
-	</script>
+	</script>-->
 <script src="{{url('site-theme/js/bars.js') }}"></script>
 <script src="{{url('site-theme/js/jquery.nicescroll.js') }}"></script>
 <script src="{{url('site-theme/js/scripts.js') }}"></script>
@@ -347,6 +348,9 @@ var chart = AmCharts.makeChart("chartdiv", {
 
 <div class="loading-square hidden d-none" >
 	<img src="{{asset('images/loading.gif')}}" alt="">
+
 </div>
+
+
 </body>
 </html>

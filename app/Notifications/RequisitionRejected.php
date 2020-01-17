@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class RequisitionRejected extends Notification implements ShouldQueue
 {
@@ -29,7 +30,7 @@ class RequisitionRejected extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail','database','broadcast'];
     }
 
     /**
@@ -64,5 +65,22 @@ class RequisitionRejected extends Notification implements ShouldQueue
           'approver_avatar' => $this->details['approver_avatar'],
           'requisition_number' => $this->details['requisition_number'],
       ];
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toBroadcast($notifiable)
+    {
+      return new BroadcastMessage([
+          'requisition_id' => $this->details['requisition_id'],
+          'dept_name' => $this->details['dept_name'],
+          'approver_name' => $this->details['approver_name'],
+          'approver_avatar' => $this->details['approver_avatar'],
+          'requisition_number' => $this->details['requisition_number'],
+      ]);
     }
 }
