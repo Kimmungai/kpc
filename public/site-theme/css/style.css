@@ -9,6 +9,9 @@ body{
 	padding:0;
 	background:#fff;
 	font-family: 'Open Sans', sans-serif;
+	/*Remove horizontal scroll*/
+	max-width: 100%;
+	/*End remove horizontal scroll*/
  }
 h1,h2,h3,h4,h5,h6{
 	margin:0;
@@ -1919,7 +1922,7 @@ margin: 0.5em 0 1.5em 0;
 }
 .copyrights_agile {
     text-align: center;
-      margin-top: 9em;
+    margin-top: 9em;
 }
 .copyrights_agile p {
     color: #fff;
@@ -2402,6 +2405,12 @@ li.second.logo.admin {
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     background: #000;
+		/*footer bottom*/
+		position:fixed;
+    bottom:0;
+		width: 100%;
+		z-index: 100000000000;
+		/*end footer bottom*/
 }
 .copyrights p {
     font-size: 1em;
